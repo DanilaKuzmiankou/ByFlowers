@@ -40,7 +40,7 @@ const ResponsiveAppBar = () => {
 
 
     return (
-        <AppBar sx={{p:0, m:0}} position="static" color='lilac'>
+        <AppBar sx={{p:0, m:0}} position="static" color='neutral'>
             <Container maxWidth="xl" className='navbar'>
                 <Toolbar disableGutters>
 
@@ -51,14 +51,6 @@ const ResponsiveAppBar = () => {
                         alt="The house from the offer."
                         src={require("../../assets/images/flowersEmblem3.png")}
                     />
-                    <div
-                        style={{
-                            backgroundImage: `url(${require("../../assets/images/moovingGrass.gif")})`,
-                            backgroundSize: '100% 30px',
-                            backgroundRepeat:'no-repeat',
-                            backgroundPosition:'bottom'
-                    }}
-                    >
                     <Typography
                         variant="h6"
                         noWrap
@@ -69,18 +61,16 @@ const ResponsiveAppBar = () => {
                             display: { xs: 'none', md: 'flex' },
                             textAlign: 'right',
                             fontFamily: 'CursiveFonts',
-                            fontWeight: 100,
-                            fontSize: '25px',
-                            letterSpacing: '.2rem',
-                            lineHeight: '0.99',
+                            fontWeight: 700,
+                            transition: 'background-color 200ms ease',
+                            fontSize: '1.25rem',
+                            letterSpacing: '.3rem',
                             color: 'inherit',
-                            textDecoration: 'none',
-                            whiteSpace: 'pre-line'
+                            textDecoration: 'none'
                         }}
                     >
-                        FlowersDelivery{'\n'}bel
+                        FlowersDelivery{'\n'}
                     </Typography>
-                    </div>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent:'flex-end'}}>
                         <IconButton
                             size="large"
@@ -127,7 +117,6 @@ const ResponsiveAppBar = () => {
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
@@ -141,7 +130,7 @@ const ResponsiveAppBar = () => {
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, mx:0.5, color: 'white', display: 'block' }}
+                                sx={{ my: 2, mx:0.5, color: 'white', display: 'block', fontFamily: 'CursiveFonts' }}
                             >
                                 {page}
                             </Button>

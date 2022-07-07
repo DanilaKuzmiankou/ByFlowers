@@ -54,7 +54,7 @@ export const theme = createTheme({
             darker: '#053e85',
         },
         neutral: {
-            main: '#64748B',
+            main: '#1B1A27',
             contrastText: '#fff',
         },
         green: {

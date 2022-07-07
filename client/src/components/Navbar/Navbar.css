@@ -1,6 +1,11 @@
 @font-face {
     font-family: 'CursiveFonts';
-    src: local('CursiveFont'), url(./../../assets/fonts/GreatVibesRegular.ttf), url(./../../assets/fonts/ShellaHerascript.ttf);
+    src: local('CursiveFont'), url(./../../assets/fonts/IntroCondBlack.otf), url(./../../assets/fonts/GreatVibesRegular.ttf), url(./../../assets/fonts/ShellaHerascript.ttf);
     /* other formats include: 'woff2', 'truetype, 'opentype',
                               'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+    font-family: 'DefaultFonts';
+    src: local('DefaultFont'), url(./../../assets/fonts/IntroCondLight.otf)
 }
