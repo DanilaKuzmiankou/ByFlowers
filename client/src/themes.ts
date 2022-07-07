@@ -7,6 +7,7 @@ declare module '@mui/material/AppBar' {
     interface AppBarPropsColorOverrides {
         neutral: true;
         green:true;
+        lilac:true;
     }
 }
 
@@ -20,10 +21,12 @@ declare module '@mui/material/styles' {
     interface Palette {
         neutral: Palette['primary'];
         green: Palette['primary'];
+        lilac: Palette['primary'];
     }
     interface PaletteOptions {
         neutral: PaletteOptions['primary'];
         green: PaletteOptions['primary'];
+        lilac: PaletteOptions['primary'];
     }
 
     interface PaletteColor {
@@ -56,6 +59,9 @@ export const theme = createTheme({
         },
         green: {
             main: '#36ef8a'
+        },
+        lilac: {
+            main: '#C8A2C8'
         }
     },
 });

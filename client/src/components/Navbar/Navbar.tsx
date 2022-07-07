@@ -12,7 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
+import './Navbar.css'
+import flowerEmblem from '../../assets/images/flowersEmblem.png';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -39,10 +40,25 @@ const ResponsiveAppBar = () => {
 
 
     return (
-        <AppBar position="static" color='green'>
+        <AppBar sx={{p:0, m:0}} position="static" color='lilac'>
             <Container maxWidth="xl" className='navbar'>
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+
+                    <Box
+                        component="img"
+                        sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, height: 55,
+                            width: 75}}
+                        alt="The house from the offer."
+                        src={require("../../assets/images/flowersEmblem3.png")}
+                    />
+                    <div
+                        style={{
+                            backgroundImage: `url(${require("../../assets/images/moovingGrass.gif")})`,
+                            backgroundSize: '100% 30px',
+                            backgroundRepeat:'no-repeat',
+                            backgroundPosition:'bottom'
+                    }}
+                    >
                     <Typography
                         variant="h6"
                         noWrap
@@ -51,16 +67,20 @@ const ResponsiveAppBar = () => {
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
+                            textAlign: 'right',
+                            fontFamily: 'CursiveFonts',
+                            fontWeight: 100,
+                            fontSize: '25px',
+                            letterSpacing: '.2rem',
+                            lineHeight: '0.99',
                             color: 'inherit',
                             textDecoration: 'none',
+                            whiteSpace: 'pre-line'
                         }}
                     >
-                        LOGO
+                        FlowersDelivery{'\n'}bel
                     </Typography>
-
+                    </div>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent:'flex-end'}}>
                         <IconButton
                             size="large"
