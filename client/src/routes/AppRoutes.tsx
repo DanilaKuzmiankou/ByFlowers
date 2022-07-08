@@ -1,16 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import {
-    AdminPage,
-    NotFoundPage,
-    ProfilePage,
-    RecommendationsPage,
-    SearchPage,
+    Blog,
+    BestChoice,
+    AboutUs,
+    NotFound
 } from '../pages/index.pages';
 import React from 'react';
 
 export const AppRoutes = () => (
     <Routes>
-        <Route path='/' element={<RecommendationsPage />} />
-        <Route path='*' element={<NotFoundPage />} />
+        <Route path='/' element={<AboutUs />} />
+        <Route path='*' element={<NotFound />} />
+        <Route path='/blog' element={<Blog />} />
+        <Route path='/bestChoice' element={<BestChoice />} />
     </Routes>
 );
