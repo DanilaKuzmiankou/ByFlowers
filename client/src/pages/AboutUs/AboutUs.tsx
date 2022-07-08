@@ -1,11 +1,9 @@
 import React from 'react';
 
-const MainPage = () => {
+export const AboutUs = () => {
     return (
         <div>
             
         </div>
     );
 };
-
-export default MainPage;
