@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import './Navbar.css'
 import flowerEmblem from '../../assets/images/flowersEmblem.png';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Blog', 'Categories', 'About us'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
@@ -125,12 +125,28 @@ const ResponsiveAppBar = () => {
                     >
                         LOGO
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'end' }}>
+                    <Box  sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'end' }}>
                         {pages.map((page) => (
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, mx:0.5, color: 'white', display: 'block', fontFamily: 'DefaultFonts' }}
+                                sx={{
+                                    my: 2,
+                                    mx:0.5,
+                                    fontFamily: 'DefaultFonts',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    borderRadius: '999px',
+                                    backgroundColor: 'hsla(0, 0%, 100%, 0.06)',
+                                    transition: 'background-color 200ms ease',
+                                    color: '#fff',
+                                    fontSize: '1.25rem',
+                                    lineHeight: 1,
+                                    fontWeight: 700,
+                                    paddingTop: '14px',
+                                    paddingBottom: '14px',
+                            }}
                             >
                                 {page}
                             </Button>
