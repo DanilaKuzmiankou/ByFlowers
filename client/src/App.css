@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'DefaultFonts';
+    src: local('DefaultFont'), url(./assets/fonts/IntroCondLight.otf)
+}
+
+* {
+    font-family: DefaultFonts, sans-serif;
+}

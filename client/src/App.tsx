@@ -1,10 +1,18 @@
 import React from 'react';
+import {Button, ThemeProvider} from "@mui/material";
+import Navbar from "./components/Navbar/Navbar";
+import {theme} from "./themes";
+import './App.css'
 
 const App = () => {
+
     return (
-        <div>
-          Test
-        </div>
+        <ThemeProvider theme={theme}>
+            <Navbar />
+            <div >
+                LOOOL
+                </div>
+        </ThemeProvider>
     );
 };
 

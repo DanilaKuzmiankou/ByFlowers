@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'CursiveFonts';
+    src: local('CursiveFont'),
+    url(./../../assets/fonts/GilroyHeavyItalic.woff),
+    url(./../../assets/fonts/IntroCondBlack.otf)
+}
+
+@font-face {
+    font-family: 'DefaultFonts';
+    src: local('DefaultFont'), url(./../../assets/fonts/IntroCondBlack.otf)
+}
+
+
+.nav_dropdown-arrow {
+    margin-top: -6px;
+    margin-left: 10px;
+}
+
+.w-embed:before, .w-embed:after {
+    content: " ";
+    display: table;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-column-end: 2;
+    grid-row-end: 2;
+}
+
+.w-embed:after {
+    clear: both;
+}
+
