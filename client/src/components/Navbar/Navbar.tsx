@@ -23,7 +23,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const navbarButtonsStyle = {
     my: 2,
     mx:0.5,
-    fontFamily: 'DefaultFonts',
+    fontFamily: 'IntroCondBlack',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -82,7 +82,7 @@ const ResponsiveAppBar = () => {
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
                             textAlign: 'right',
-                            fontFamily: 'CursiveFonts',
+                            fontFamily: 'GilroyHeavyItalic',
                             fontWeight: 700,
                             transition: 'background-color 200ms ease',
                             fontSize: '1.25rem',

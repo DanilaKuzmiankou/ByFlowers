@@ -1,13 +1,13 @@
 @font-face {
-    font-family: 'CursiveFonts';
-    src: local('CursiveFont'),
+    font-family: 'GilroyHeavyItalic';
+    src: local('GilroyHeavyItalic'),
     url(./../../assets/fonts/GilroyHeavyItalic.woff),
     url(./../../assets/fonts/IntroCondBlack.otf)
 }
 
 @font-face {
-    font-family: 'DefaultFonts';
-    src: local('DefaultFont'), url(./../../assets/fonts/IntroCondBlack.otf)
+    font-family: 'IntroCondBlack';
+    src: local('IntroCondBlack'), url(./../../assets/fonts/IntroCondBlack.otf)
 }
 
 
