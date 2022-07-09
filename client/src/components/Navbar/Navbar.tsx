@@ -11,14 +11,15 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import './Navbar.css'
-import flowerEmblem from '../../assets/images/flowersEmblem.png';
+import {useNavigate} from "react-router-dom";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Categories'];
+const pagesLinks = ['blog', '', 'bestChoice'];
 const pages2 = ['Blog', 'About us'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const categories = ['Anutina eyes', 'orchidea', 'roses']
 
 const navbarButtonsStyle = {
     my: 2,
@@ -41,14 +42,22 @@ const navbarButtonsStyle = {
 }
 
 const ResponsiveAppBar = () => {
+    const navigate = useNavigate();
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const [anchorElCategories, setAnchorElCategories] = React.useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
+
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
+    };
+
+    const handleOpenCategoriesMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElCategories(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
@@ -59,15 +68,29 @@ const ResponsiveAppBar = () => {
         setAnchorElUser(null);
     };
 
+    const handleCloseCategoriesMenu = () => {
+        setAnchorElCategories(null);
+    };
 
+
+    const switchPage = (linkName:string):void => {
+        handleCloseNavMenu()
+        navigate(linkName, { replace : true})
+    }
+
+
+    const lol = (e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log('hover')
+        handleOpenCategoriesMenu(e)
+    };
 
     return (
         <AppBar sx={{p:0, m:0}} position="static" color='neutral'>
             <Container maxWidth="xl" className='navbar'>
                 <Toolbar disableGutters>
-
                     <Box
                         component="img"
+                        onClick={() => switchPage(pagesLinks[1])}
                         sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, height: 55,
                             width: 75}}
                         alt="The house from the offer."
@@ -77,7 +100,7 @@ const ResponsiveAppBar = () => {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="/"
+                        onClick={() => switchPage(pagesLinks[1])}
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -104,6 +127,7 @@ const ResponsiveAppBar = () => {
                         >
                             <MenuIcon />
                         </IconButton>
+                        {/*Mobile navbar links*/}
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
@@ -122,13 +146,15 @@ const ResponsiveAppBar = () => {
                                 display: { xs: 'flex', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                            {pages.map((page, id) => (
+                                <MenuItem key={page}  onClick={() => switchPage(pagesLinks[id])}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
+
+                    {/*Mobile Logo image*/}
                     <Box
                         component="img"
                         sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, height: 55,
@@ -136,6 +162,7 @@ const ResponsiveAppBar = () => {
                         alt="The house from the offer."
                         src={require("../../assets/images/flowersEmblem3.png")}
                     />
+                    {/*Mobile Logo*/}
                     <Typography
                         variant="h5"
                         noWrap
@@ -153,21 +180,23 @@ const ResponsiveAppBar = () => {
                     >
                         {siteLogo}
                     </Typography>
-
                     <Box/>
+
                     <Box  sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'end' }}>
-                        {pages2.map((page) => (
+                        {pages2.map((page, id) => (
                             <Button
                                 key={page}
-                                onClick={handleCloseNavMenu}
+                                onClick={() => switchPage(pagesLinks[id])}
                                 sx={navbarButtonsStyle}
                             >
                                 {page}
                             </Button>
                         ))}
+
                         <Button
                             key='Categories'
-                            onClick={handleCloseNavMenu}
+                            onClick={() => switchPage(pagesLinks[2])}
+                            onMouseEnter={handleOpenCategoriesMenu}
                             sx={navbarButtonsStyle}
                         >
                             Categories
@@ -180,8 +209,31 @@ const ResponsiveAppBar = () => {
                                 </svg>
                             </div>
                         </Button>
+                        <Box sx={{ flexGrow: 0, pl: '10px' }}>
+                            <Menu
+                                id="menu-categories"
+                                anchorEl={anchorElCategories}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                MenuListProps={{ onMouseLeave: handleCloseCategoriesMenu }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                open={Boolean(anchorElCategories)}
+                                onClose={handleCloseCategoriesMenu}
+                            >
+                                {categories.map((category, id) => (
+                                    <MenuItem key={category} >
+                                        <Typography textAlign="center">{category}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </Box>
                     </Box>
-
                     <Box sx={{ flexGrow: 0, pl: '10px' }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
