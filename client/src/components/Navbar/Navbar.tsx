@@ -131,6 +131,7 @@ const ResponsiveAppBar = () => {
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
+                            disableScrollLock={true}
                             anchorOrigin={{
                                 vertical: 'bottom',
                                 horizontal: 'left',
@@ -213,6 +214,7 @@ const ResponsiveAppBar = () => {
                             <Menu
                                 id="menu-categories"
                                 anchorEl={anchorElCategories}
+                                disableScrollLock={true}
                                 anchorOrigin={{
                                     vertical: 'bottom',
                                     horizontal: 'left',
@@ -244,6 +246,7 @@ const ResponsiveAppBar = () => {
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
+                            disableScrollLock={true}
                             anchorOrigin={{
                                 vertical: 'top',
                                 horizontal: 'right',
