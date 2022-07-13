@@ -1,15 +1,3 @@
-@font-face {
-    font-family: 'GilroyHeavyItalic';
-    src: local('GilroyHeavyItalic'),
-    url(./../../assets/fonts/GilroyHeavyItalic.woff),
-    url(./../../assets/fonts/IntroCondBlack.otf)
-}
-
-@font-face {
-    font-family: 'IntroCondBlack';
-    src: local('IntroCondBlack'), url(./../../assets/fonts/IntroCondBlack.otf)
-}
-
 
 .nav_dropdown-arrow {
     margin-top: -6px;
