@@ -19,7 +19,8 @@ const pages = ['Blog', 'About us', 'Categories'];
 const pagesLinks = ['blog', '', 'bestChoice'];
 const pages2 = ['Blog', 'About us'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const categories = ['Anutina eyes', 'orchidea', 'roses']
+const homeFlowers = ['Сactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
+const prodFlowers = ['Anutina eyes', 'Orchidea', 'Roses', 'Lilies']
 
 const navbarButtonsStyle = {
     my: 2,
@@ -193,7 +194,7 @@ export const Navbar = () => {
                                 {page}
                             </Button>
                         ))}
-
+                        <Box className='categories-container' display='inline-block' onMouseLeave={handleCloseCategoriesMenu}>
                         <Button
                             key='Categories'
                             onClick={() => switchPage(pagesLinks[2])}
@@ -212,7 +213,7 @@ export const Navbar = () => {
                         </Button>
                         <Box sx={{ flexGrow: 0, pl: '10px' }}>
                             <Menu
-                                id="menu-categories"
+                                className="menu-categories"
                                 anchorEl={anchorElCategories}
                                 disableScrollLock={true}
                                 anchorOrigin={{
@@ -228,13 +229,27 @@ export const Navbar = () => {
                                 open={Boolean(anchorElCategories)}
                                 onClose={handleCloseCategoriesMenu}
                             >
-                                {categories.map((category, id) => (
-                                    <MenuItem key={category} >
-                                        <Typography textAlign="center">{category}</Typography>
+                                <Box className='menu-flowers'>
+                                    <div >
+                                        <h3>Plants</h3>
+                                {homeFlowers.map((homeFlower, id) => (
+                                    <MenuItem key={homeFlower} >
+                                        <Typography textAlign="center">{homeFlower}</Typography>
                                     </MenuItem>
                                 ))}
+                                    </div>
+                                    <div >
+                                        <h3>Flowers</h3>
+                                        {prodFlowers.map((prodFlower, id) => (
+                                            <MenuItem key={prodFlower} >
+                                                <Typography textAlign="center">{prodFlower}</Typography>
+                                            </MenuItem>
+                                        ))}
+                                    </div>
+                                </Box>
                             </Menu>
                         </Box>
+                    </Box>
                     </Box>
                     <Box sx={{ flexGrow: 0, pl: '10px' }}>
                         <Tooltip title="Open settings">
