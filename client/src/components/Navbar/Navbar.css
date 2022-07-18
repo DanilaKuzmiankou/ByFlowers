@@ -17,3 +17,21 @@
     clear: both;
 }
 
+.menu-flowers {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 450px;
+    padding: 5px;
+}
+
+.menu-flowers div {
+    text-align: start;
+    display: inline-block;
+}
+
+.menu-flowers h3 {
+    display: inline;
+    margin-left: 20px;
+    color: gray;
+}
