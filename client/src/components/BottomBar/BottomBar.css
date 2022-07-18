@@ -9,9 +9,8 @@
 
 .bottom-trademarks {
     display: inline-block;
-    padding: 30px 30px 30px 200px;
     text-align: left;
-
+    padding-left: 7%;
 }
 
 .bottom-brand {
@@ -19,8 +18,14 @@
     font-family: IntroCondBlack;
 }
 
+@media screen and (max-width: 640px) {
+    .bottom-brand {
+        font-size: 1rem;
+    }
+}
+
 .bottom-icons {
     margin-left: auto;
-    margin-right: 200px;
     display: inline-block;
+    padding-right: 7%;
 }
