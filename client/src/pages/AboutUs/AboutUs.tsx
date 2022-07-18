@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import './AboutUs.css'
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Autoplay, EffectFade, Navigation, Pagination, Parallax} from "swiper";
+import {Autoplay, EffectFade, Navigation, Pagination} from "swiper";
 import {Grid} from "@mui/material";
 
 export const AboutUs = () => {
@@ -91,44 +91,62 @@ export const AboutUs = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={4}>
                         <div className='comment-container'>
-                        <div className='comment'>
-                            <p>
-                                I just bought 3 bouquets of roses and u now? I liked them! I will buy flowers
-                                only in this shop for the rest of my goddamn life man
-                            </p>
-                            <h2>
-                                KELLY LEVEQUE
-                            </h2>
+                            <div  data-aos="zoom-in-right" className='comment'>
+                                <p>
+                                    I just bought 3 bouquets of roses and u now? I liked them! I will buy flowers
+                                    only in this shop for the rest of my goddamn life man
+                                </p>
+                                <p>
+                                    Kelly Leveaue
+                                </p>
 
-                            <div className="comment-image-container">
-                                <img
-                                    style={{borderRadius: '100%'}}
-                                    alt="Olympian Priscilla Frederick-Loomis" className="loaded"
-                                     src="https://magicspoon.imgix.net/files/IMG_0697_a1df8eac-3061-4761-8399-94505e8afbbc_compact.jpg?v=1630356930&amp;amp;auto=format,compress"
-                                     data-ll-status="loaded"
-                                />
+                                <div className="comment-image-container">
+                                    <Box
+                                        data-aos="fade-up"
+                                        component="img"
+                                        className='comment-image'
+                                        src={require("../../assets/images/human1.jpg")}
+                                    />
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <div className='comment'>
+                        <div data-aos="zoom-in-up"  className='comment'>
                             <p>
                                 True man
                             </p>
                             <p>
                                 Vin Diesel
                             </p>
+                            <div className="comment-image-container">
+                                <Box
+                                    data-aos="fade-up"
+                                    component="img"
+                                    className='comment-image'
+                                    src={require("../../assets/images/human2.jpg")}
+                                />
+                            </div>
                         </div>
+
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <div className='comment'>
+                        <div data-aos="zoom-in-left" className='comment'>
                             <p>
                                 Of course dude
                             </p>
                             <p>
                                 Arnold Schwarzenegger
                             </p>
+                            <div className="comment-image-container">
+
+                                <Box
+                                    data-aos="fade-up"
+                                    component="img"
+                                    className='comment-image'
+                                    src={require("../../assets/images/human3.jpg")}
+                                />
+                            </div>
                         </div>
                     </Grid>
                 </Grid>
