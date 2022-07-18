@@ -131,7 +131,7 @@ export const AboutUs = () => {
 
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <div data-aos="zoom-in-left" className='comment'>
+                        <div data-aos="zoom-in-up" className='comment'>
                             <p>
                                 Of course dude
                             </p>

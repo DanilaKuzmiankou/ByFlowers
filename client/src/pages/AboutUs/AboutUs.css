@@ -36,7 +36,7 @@
     background: mistyrose;
     display: flex;
     align-items: center;
-    padding: 90px 90px 200px;
+    padding: 10px 10px 50px;
 }
 
 @media screen and (min-height: 1024px){
@@ -44,20 +44,29 @@
         min-height: 80vh;
     }
 }
-
+@media screen and (min-width: 768px){
+    .comments {
+        padding: 90px 90px 200px;
+    }
+}
 .comment{
     height: 85%;
     font-family: MabryPro, sans-serif;
     background-color: lightpink;
     text-align: center;
     color: #3f0791;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment p:first-of-type {
+    min-height: 425px;
+    padding: 100px 40px;
 }
 
 .comment p {
     font-size: 2rem;
-    display: block;
-    height: 175px;
-    padding: 100px 40px 40px;
+
 }
 
 .comment p:first-child::before {
@@ -66,12 +75,6 @@
 
 .comment p:first-child::after {
     content: close-quote;
-}
-
-
-.comment-image-container {
-    padding-top: 70px;
-    overflow: hidden;
 }
 
 .comment-container {
