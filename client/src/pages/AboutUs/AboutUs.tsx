@@ -93,8 +93,8 @@ export const AboutUs = () => {
                         <div className='comment-container'>
                         <div className='comment'>
                             <p>
-                                I just ate delicious cereal for dinner and the last time I did that was my sophomore
-                                year in college!
+                                I just bought 3 bouquets of roses and u now? I liked them! I will buy flowers
+                                only in this shop for the rest of my goddamn life man
                             </p>
                             <h2>
                                 KELLY LEVEQUE
@@ -114,52 +114,26 @@ export const AboutUs = () => {
                     <Grid item xs={12} md={4}>
                         <div className='comment'>
                             <p>
-                                And another one
+                                True man
                             </p>
                             <p>
-                                And another one
+                                Vin Diesel
                             </p>
                         </div>
                     </Grid>
                     <Grid item xs={12} md={4}>
                         <div className='comment'>
                             <p>
-                                And another one
+                                Of course dude
                             </p>
                             <p>
-                                And another one
+                                Arnold Schwarzenegger
                             </p>
                         </div>
                     </Grid>
                 </Grid>
             </div>
-            <div className='bottom-bar'>
-                <div className='bottom-trademarks'>
-                    <div className='bottom-brand'>
-                        FlowersMarket
-                    </div>
-                    <div>
-                        &copy; All rights reserved
-                    </div>
-                    <div>
-                        2020-2022
-                    </div>
-                </div>
-                <div className='bottom-icons'>
-                    <Box
-                        component="img"
-                        sx={{ height: 45,
-                            width: 45, marginRight: '7px'}}
-                        src={require("../../assets/images/instagramIcon.png")}
-                    />
-                    <Box
-                        component="img"
-                        sx={{ height: 45,
-                            width: 45}}
-                        src={require("../../assets/images/facebookIcon.png")}
-                    />
-                </div>
-            </div>
+
         </>
 
     );

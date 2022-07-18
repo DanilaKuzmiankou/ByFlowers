@@ -33,7 +33,7 @@
 }
 
 .comments {
-    background: linear-gradient(to bottom,#5B01ED 0%,#5B01ED 65%,#c8eefd 100%);
+    background: mistyrose;
     display: flex;
     align-items: center;
     padding: 90px 90px 200px;
@@ -48,7 +48,7 @@
 .comment{
     height: 85%;
     font-family: MabryPro;
-    background-color: white;
+    background-color: lightpink;
     text-align: center;
     color: #3f0791;
 }
@@ -60,11 +60,11 @@
     padding: 100px 40px 40px;
 }
 
-.comment p::before {
+.comment p:first-child::before {
     content: open-quote;
 }
 
-.comment p::after {
+.comment p:first-child::after {
     content: close-quote;
 }
 
@@ -91,7 +91,7 @@
     display: flex;
     align-items: center;
     height: 15vh;
-    background-color: black;
+    background-color: #282727;
     color: white;
 }
 
