@@ -86,29 +86,3 @@
     height: 100%;
     width: 100%;
 }
-
-.bottom-bar {
-    display: flex;
-    align-items: center;
-    height: 15vh;
-    background-color: #282727;
-    color: white;
-}
-
-.bottom-trademarks {
-    display: inline-block;
-    padding: 30px 30px 30px 200px;
-    text-align: left;
-
-}
-
-.bottom-brand {
-    font-size: 2rem;
-    font-family: IntroCondBlack;
-}
-
-.bottom-icons {
-    margin-left: auto;
-    margin-right: 200px;
-    display: inline-block;
-}
