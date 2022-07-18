@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, ThemeProvider} from "@mui/material";
-import Navbar from "./components/Navbar/Navbar";
+import {Navbar, BottomBar} from "./components/index.components";
 import {theme} from "./themes";
 import './App.css'
 import {BrowserRouter} from "react-router-dom";
@@ -13,6 +13,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <Navbar />
             <AppRoutes />
+            <BottomBar />
         </ThemeProvider>
         </BrowserRouter>
     );

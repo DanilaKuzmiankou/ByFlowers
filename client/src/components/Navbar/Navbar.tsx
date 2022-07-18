@@ -41,7 +41,7 @@ const navbarButtonsStyle = {
     paddingLeft: '13px'
 }
 
-const ResponsiveAppBar = () => {
+export const Navbar = () => {
     const navigate = useNavigate();
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -271,4 +271,3 @@ const ResponsiveAppBar = () => {
         </AppBar>
     );
 };
-export default ResponsiveAppBar;
