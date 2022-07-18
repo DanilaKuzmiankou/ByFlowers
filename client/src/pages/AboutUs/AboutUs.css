@@ -33,28 +33,82 @@
 }
 
 .comments {
-    height: 80vh;
-    background-color: #d9d9f2;;
+    background: linear-gradient(to bottom,#5B01ED 0%,#5B01ED 65%,#c8eefd 100%);
     display: flex;
-    justify-content: center;
     align-items: center;
+    padding: 90px 90px 200px;
 }
 
-.comments div{
-    font-family: DefaultFonts;
-    font-weight: bold;
-    height: 300px;
+@media screen and (min-height: 1024px){
+    .comments {
+        min-height: 80vh;
+    }
+}
+
+.comment{
+    height: 85%;
+    font-family: MabryPro;
     background-color: white;
-    width: 500px;
-    border-radius: 20%;
     text-align: center;
+    color: #3f0791;
 }
 
-.comment1 {
-    margin: auto auto 60px 30px;
+.comment p {
+    font-size: 2rem;
+    display: block;
+    height: 175px;
+    padding: 100px 40px 40px;
 }
 
-.comment2 {
-    margin: 60px 30px auto auto;
+.comment p::before {
+    content: open-quote;
+}
 
+.comment p::after {
+    content: close-quote;
+}
+
+.comment h2 {
+    margin: auto;
+    padding-top: 120px;
+    height: 20px;
+
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.comment-image-container {
+    padding-top: 70px;
+    overflow: hidden;
+}
+
+.comment-container {
+    height: 100%;
+    width: 100%;
+}
+
+.bottom-bar {
+    display: flex;
+    align-items: center;
+    height: 15vh;
+    background-color: black;
+    color: white;
+}
+
+.bottom-trademarks {
+    display: inline-block;
+    padding: 30px 30px 30px 200px;
+    text-align: left;
+
+}
+
+.bottom-brand {
+    font-size: 2rem;
+    font-family: IntroCondBlack;
+}
+
+.bottom-icons {
+    margin-left: auto;
+    margin-right: 200px;
+    display: inline-block;
 }

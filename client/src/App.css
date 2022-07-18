@@ -21,6 +21,13 @@
 }
 
 
+@font-face {
+    font-family: 'MabryPro';
+    src: local('MabryPro'), url(./assets/fonts/MabryPro-Medium.ttf)
+}
+
+
+
 
 html{
     min-height:100%;/* make sure it is at least as tall as the viewport */
@@ -39,4 +46,10 @@ body{
     user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 
+}
+
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }

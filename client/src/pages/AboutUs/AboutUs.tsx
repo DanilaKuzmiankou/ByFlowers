@@ -7,6 +7,7 @@ import "swiper/css/effect-fade";
 import './AboutUs.css'
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Autoplay, EffectFade, Navigation, Pagination, Parallax} from "swiper";
+import {Grid} from "@mui/material";
 
 export const AboutUs = () => {
 
@@ -36,11 +37,11 @@ export const AboutUs = () => {
                             backgroundImage: 'url(' + require("../../assets/images/carouselFlowers.jpg") + ')'
                         }}
                     >
-                    <div className="text" >
-                        <p>
-                            Best shop ever
-                        </p>
-                    </div>
+                        <div className="text">
+                            <p>
+                                Best shop ever
+                            </p>
+                        </div>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -50,7 +51,7 @@ export const AboutUs = () => {
                             backgroundImage: 'url(' + require("../../assets/images/carouselFlowers2.jpg") + ')'
                         }}
                     >
-                        <div className="text" >
+                        <div className="text">
                             <p>
                                 Cool text
                             </p>
@@ -64,7 +65,7 @@ export const AboutUs = () => {
                             backgroundImage: 'url(' + require("../../assets/images/carouselFlowers3.jpg") + ')'
                         }}
                     >
-                        <div className="text" >
+                        <div className="text">
                             <p>
                                 Another interesting text
                             </p>
@@ -78,7 +79,7 @@ export const AboutUs = () => {
                             backgroundImage: 'url(' + require("../../assets/images/carouselFlowers4.jpg") + ')'
                         }}
                     >
-                        <div className="text" >
+                        <div className="text">
                             <p>
                                 And another one
                             </p>
@@ -87,21 +88,76 @@ export const AboutUs = () => {
                 </SwiperSlide>
             </Swiper>
             <div className='comments'>
-                <div className='comment1'>
-                    <p>
-                        And another one
-                    </p>
-                    <p>
-                        And another one
-                    </p>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={4}>
+                        <div className='comment-container'>
+                        <div className='comment'>
+                            <p>
+                                I just ate delicious cereal for dinner and the last time I did that was my sophomore
+                                year in college!
+                            </p>
+                            <h2>
+                                KELLY LEVEQUE
+                            </h2>
+
+                            <div className="comment-image-container">
+                                <img
+                                    style={{borderRadius: '100%'}}
+                                    alt="Olympian Priscilla Frederick-Loomis" className="loaded"
+                                     src="https://magicspoon.imgix.net/files/IMG_0697_a1df8eac-3061-4761-8399-94505e8afbbc_compact.jpg?v=1630356930&amp;amp;auto=format,compress"
+                                     data-ll-status="loaded"
+                                />
+                            </div>
+                        </div>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <div className='comment'>
+                            <p>
+                                And another one
+                            </p>
+                            <p>
+                                And another one
+                            </p>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <div className='comment'>
+                            <p>
+                                And another one
+                            </p>
+                            <p>
+                                And another one
+                            </p>
+                        </div>
+                    </Grid>
+                </Grid>
+            </div>
+            <div className='bottom-bar'>
+                <div className='bottom-trademarks'>
+                    <div className='bottom-brand'>
+                        FlowersMarket
+                    </div>
+                    <div>
+                        &copy; All rights reserved
+                    </div>
+                    <div>
+                        2020-2022
+                    </div>
                 </div>
-                <div className='comment2'>
-                    <p>
-                        And another one
-                    </p>
-                    <p>
-                        And another one
-                    </p>
+                <div className='bottom-icons'>
+                    <Box
+                        component="img"
+                        sx={{ height: 45,
+                            width: 45, marginRight: '7px'}}
+                        src={require("../../assets/images/instagramIcon.png")}
+                    />
+                    <Box
+                        component="img"
+                        sx={{ height: 45,
+                            width: 45}}
+                        src={require("../../assets/images/facebookIcon.png")}
+                    />
                 </div>
             </div>
         </>
