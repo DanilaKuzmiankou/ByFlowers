@@ -63,7 +63,10 @@ BasketFlower.belongsTo(Basket);
 BasketFlower.hasMany(Flower)
 Flower.belongsTo(BasketFlower);
 
-Flower.hasMany(FlowerPicture)
+Flower.hasMany(FlowerPicture, {
+    as: { singular: "picture", plural: "pictures" },
+    onDelete: "CASCADE",
+})
 FlowerPicture.belongsTo(Flower)
 
 Flower.hasOne(FlowerType)
@@ -72,8 +75,9 @@ FlowerType.belongsTo(Flower)
 
 module.exports = {
     User,
-    Rating,
-    Review,
-    ReviewImage,
-    Tags,
+    Basket,
+    BasketFlower,
+    Flower,
+    FlowerType,
+    FlowerPicture
 };

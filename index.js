@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const router = require("./routes/Routes");
+const models = require("./models/Models")
 const sequelize = require("./DB");
 
 const PORT = process.env.PORT || 5000;
@@ -17,7 +19,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(cors({ origin: true }));
 app.use(express.json());
-//app.use("/api", router);
+app.use("/api", router);
 
 const start = async () => {
     try {
