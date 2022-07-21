@@ -15,8 +15,8 @@ import './Navbar.css'
 import {useNavigate} from "react-router-dom";
 
 const siteLogo = 'FlowersDelivery'
-const pages = ['Blog', 'About us', 'Categories'];
-const pagesLinks = ['blog', '', 'bestChoice'];
+const pages = ['Blog', 'About us', 'Products'];
+const pagesLinks = ['blog', 'aboutUs', 'products'];
 const pages2 = ['Blog', 'About us'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const homeFlowers = ['Сactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
@@ -47,7 +47,7 @@ export const Navbar = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-    const [anchorElCategories, setAnchorElCategories] = React.useState<null | HTMLElement>(null);
+    const [anchorElProducts, setAnchorElProducts] = React.useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -57,8 +57,8 @@ export const Navbar = () => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleOpenCategoriesMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElCategories(event.currentTarget);
+    const handleOpenProductsMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElProducts(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
@@ -69,21 +69,15 @@ export const Navbar = () => {
         setAnchorElUser(null);
     };
 
-    const handleCloseCategoriesMenu = () => {
-        setAnchorElCategories(null);
+    const handleCloseProductsMenu = () => {
+        setAnchorElProducts(null);
     };
 
-
-    const switchPage = (linkName:string):void => {
+    const switchPage = (linkName:string, productType?:string):void => {
         handleCloseNavMenu()
-        navigate(linkName, { replace : true})
+        handleCloseProductsMenu()
+        navigate(linkName, { replace : true, state: { productType }})
     }
-
-
-    const lol = (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log('hover')
-        handleOpenCategoriesMenu(e)
-    };
 
     return (
         <AppBar sx={{p:0, m:0}} position="static" color='neutral'>
@@ -155,18 +149,16 @@ export const Navbar = () => {
                             ))}
                         </Menu>
                     </Box>
-
                     {/*Mobile Logo image*/}
                     <Box
                         component="img"
-                        sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, height: 55,
-                            width: 75}}
+                        sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, height: 30,
+                            width: 42}}
                         alt="The house from the offer."
                         src={require("../../assets/images/flowersEmblem3.png")}
                     />
                     {/*Mobile Logo*/}
                     <Typography
-                        variant="h5"
                         noWrap
                         component="a"
                         href=""
@@ -175,7 +167,8 @@ export const Navbar = () => {
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
                             fontWeight: 700,
-                            letterSpacing: '.3rem',
+                            fontSize: '.9rem',
+                            letterSpacing: '.1rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
@@ -183,7 +176,6 @@ export const Navbar = () => {
                         {siteLogo}
                     </Typography>
                     <Box/>
-
                     <Box  sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'end' }}>
                         {pages2.map((page, id) => (
                             <Button
@@ -194,14 +186,13 @@ export const Navbar = () => {
                                 {page}
                             </Button>
                         ))}
-                        <Box className='categories-container' display='inline-block' onMouseLeave={handleCloseCategoriesMenu}>
+                        <Box display='inline-block' onMouseLeave={handleCloseProductsMenu}>
                         <Button
-                            key='Categories'
-                            onClick={() => switchPage(pagesLinks[2])}
-                            onMouseEnter={handleOpenCategoriesMenu}
+                            key='Products'
+                            onMouseEnter={handleOpenProductsMenu}
                             sx={navbarButtonsStyle}
                         >
-                            Categories
+                            Products
                             <div className="nav_dropdown-arrow w-embed">
                                 <svg width="14" height="6" viewBox="0 0 14 6" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -213,27 +204,26 @@ export const Navbar = () => {
                         </Button>
                         <Box sx={{ flexGrow: 0, pl: '10px' }}>
                             <Menu
-                                className="menu-categories"
-                                anchorEl={anchorElCategories}
+                                anchorEl={anchorElProducts}
                                 disableScrollLock={true}
                                 anchorOrigin={{
                                     vertical: 'bottom',
                                     horizontal: 'left',
                                 }}
-                                MenuListProps={{ onMouseLeave: handleCloseCategoriesMenu }}
+                                MenuListProps={{ onMouseLeave: handleCloseProductsMenu }}
                                 keepMounted
                                 transformOrigin={{
                                     vertical: 'top',
                                     horizontal: 'left',
                                 }}
-                                open={Boolean(anchorElCategories)}
-                                onClose={handleCloseCategoriesMenu}
+                                open={Boolean(anchorElProducts)}
+                                onClose={handleCloseProductsMenu}
                             >
                                 <Box className='menu-flowers'>
                                     <div >
                                         <h3>Plants</h3>
                                 {homeFlowers.map((homeFlower, id) => (
-                                    <MenuItem key={homeFlower} >
+                                    <MenuItem key={homeFlower} onClick={() => switchPage(pagesLinks[2], homeFlower)}>
                                         <Typography textAlign="center">{homeFlower}</Typography>
                                     </MenuItem>
                                 ))}
@@ -241,7 +231,7 @@ export const Navbar = () => {
                                     <div >
                                         <h3>Flowers</h3>
                                         {prodFlowers.map((prodFlower, id) => (
-                                            <MenuItem key={prodFlower} >
+                                            <MenuItem key={prodFlower} onClick={() => switchPage(pagesLinks[2], prodFlower)}>
                                                 <Typography textAlign="center">{prodFlower}</Typography>
                                             </MenuItem>
                                         ))}
