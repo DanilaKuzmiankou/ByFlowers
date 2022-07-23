@@ -11,73 +11,92 @@ const User = sequelize.define(
         phone: { type: DataTypes.STRING, allowNull: false },
         role: { type: DataTypes.STRING, defaultValue: "user" }
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+        freezeTableName: true
+    }
 );
 
 
 const Basket = sequelize.define("basket", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+        freezeTableName: true
+    }
 );
 
-const BasketFlower = sequelize.define("basket_flower", {
+const BasketProduct = sequelize.define("basket_product", {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     },
-    { timestamps: false }
+    {
+        timestamps: false,
+        freezeTableName: true
+    }
 );
 
-const Flower = sequelize.define(
-    "flower",
+const Product = sequelize.define(
+    "product",
     {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
         name: { type: DataTypes.STRING, allowNull: false },
         description: { type: DataTypes.TEXT, allowNull: false },
         count: { type: DataTypes.SMALLINT, allowNull: false },
-        price: { type: DataTypes.SMALLINT, allowNull: false }
+        price: { type: DataTypes.SMALLINT, allowNull: false },
+        isFlower: { type: DataTypes.BOOLEAN, allowNull: false }
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+        freezeTableName: true
+    }
 );
 
-const FlowerType = sequelize.define("flower_type", {
+const ProductType = sequelize.define("product_type", {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
         name: { type: DataTypes.STRING, allowNull: false }
     },
-    { timestamps: false }
+    {
+        timestamps: false,
+        freezeTableName: true
+    }
 );
 
-const FlowerPicture = sequelize.define("flower_picture", {
+const ProductPicture = sequelize.define("product_picture", {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
         picture: { type: DataTypes.TEXT, allowNull: false }
     },
-    { timestamps: false }
+    {
+        timestamps: false,
+        freezeTableName: true
+    }
 );
 
 
 User.hasOne(Basket)
 Basket.belongsTo(User);
 
-Basket.hasMany(BasketFlower);
-BasketFlower.belongsTo(Basket);
+Basket.hasMany(BasketProduct);
+BasketProduct.belongsTo(Basket);
 
-BasketFlower.hasMany(Flower)
-Flower.belongsTo(BasketFlower);
+BasketProduct.hasMany(Product)
+Product.belongsTo(BasketProduct);
 
-Flower.hasMany(FlowerPicture, {
+Product.hasMany(ProductPicture, {
     as: { singular: "picture", plural: "pictures" },
     onDelete: "CASCADE",
 })
-FlowerPicture.belongsTo(Flower)
+ProductPicture.belongsTo(Product)
 
-Flower.hasOne(FlowerType)
-FlowerType.belongsTo(Flower)
+Product.hasOne(ProductType)
+ProductType.belongsTo(Product)
 
 
 module.exports = {
     User,
     Basket,
-    BasketFlower,
-    Flower,
-    FlowerType,
-    FlowerPicture
+    BasketProduct,
+    Product,
+    ProductType,
+    ProductPicture
 };
