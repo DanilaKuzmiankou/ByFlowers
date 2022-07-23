@@ -1,4 +1,4 @@
-const { Product, ProductPicture} = require("../models/Models");
+const { Product, ProductPicture, ProductType} = require("../models/Models");
 const ApiError = require("../error/ApiError");
 
 let productController = this;
@@ -8,23 +8,57 @@ class ProductController {
         productController = this;
     }
 
-    async getFlowers(req, res, next) {
-        let {name, email, password, phone} = req.body;
-
+    async getFlowersTypes(req, res, next) {
         return res
             .status(200)
-            .json({ message: "hi!" });
+            .json(await productController.getProduct(true));
+    }
+
+    async getPlantsTypes(req, res, next) {
+        return res
+            .status(200)
+            .json(await productController.getProduct(false));
+    }
+
+    async getProduct(isFlower) {
+            return ProductType.findAll({
+                attributes: [ 'name' ],
+                include: [
+                    {
+                        model: Product,
+                        as: "product",
+                        attributes: [],
+                        where: { isFlower }
+                    }
+                ]
+            });
+    }
+
+    async getProductsWithType(req, res, next) {
+        let { types } = req.query
+        types = types.split(',')
+        return Product.findAll({
+            include: [
+                {
+                    model: ProductType,
+                    as: "productType",
+                    attributes: [],
+                    where: { name: types }
+                }
+            ]
+        });
     }
 
 
     async createProduct(req, res, next){
-        const {name, description, count, price, pictures, isFlower} = req.body
+        const {name, description, productType, count, price, pictures, isFlower} = req.body
         const product = await Product.findOne({ where: { name } });
         let createdProduct;
         if(product){
             return next(ApiError.badRequest("This product is already created!"));
         }
         createdProduct = await Product.create({ name, description, count, price, isFlower });
+        await ProductType.create( {name: productType, productId: createdProduct.id })
         const picturesDB = [];
         for (let picture of pictures) {
             if (picture) {
