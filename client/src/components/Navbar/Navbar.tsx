@@ -188,11 +188,11 @@ export const Navbar = () => {
                         ))}
                         <Box display='inline-block' onMouseLeave={handleCloseProductsMenu}>
                         <Button
-                            key='Products'
+                            key='Plants'
                             onMouseEnter={handleOpenProductsMenu}
                             sx={navbarButtonsStyle}
                         >
-                            Products
+                            Plants
                             <div className="nav_dropdown-arrow w-embed">
                                 <svg width="14" height="6" viewBox="0 0 14 6" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">

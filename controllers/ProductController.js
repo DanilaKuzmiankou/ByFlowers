@@ -36,17 +36,18 @@ class ProductController {
 
     async getProductsWithType(req, res, next) {
         let { types } = req.query
+        console.log(types)
         types = types.split(',')
-        return Product.findAll({
+        console.log(types)
+        return res.json(await Product.findAll({
             include: [
                 {
                     model: ProductType,
-                    as: "productType",
                     attributes: [],
                     where: { name: types }
                 }
             ]
-        });
+        }));
     }
 
 

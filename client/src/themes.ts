@@ -42,8 +42,6 @@ declare module '@mui/material/styles' {
     }
 }
 
-
-
 export const theme = createTheme({
     status: {
         danger: '#e53e3e',
@@ -65,4 +63,25 @@ export const theme = createTheme({
         }
     },
 });
+
+export const productStyles = {
+    customBoldFont: {
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: '0.94rem',
+        fontWeight: '600 !important',
+        letterSpacing: '0 !important',
+    },
+    customNormalFont: {
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: '0.94rem',
+        fontWeight: '0 !important',
+        letterSpacing: '0 !important',
+    },
+    filtersTypography: {
+        margin: '5px 0'
+    },
+    checkboxGroup: {
+        marginLeft: '10px'
+    }
+}
 
