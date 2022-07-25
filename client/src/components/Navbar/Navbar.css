@@ -17,21 +17,37 @@
     clear: both;
 }
 
-.menu-flowers {
+.menu-products {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    width: 450px;
+    align-items: center;
+    width: 270px;
     padding: 5px;
+
 }
 
-.menu-flowers div {
+.menu-flowers {
+    width: 150px;
+}
+
+.MuiMenu-paper .MuiMenuItem-root span {
+    transition: opacity 1200ms ease;
+    opacity: 0;
+}
+
+
+.MuiMenu-paper .MuiMenuItem-root:hover span {
+    content: '';
+    flex: auto;
+    margin-left: 1rem;
+    border-bottom: 1px solid #000;
+    opacity: 1;
+}
+
+.MuiMenu-paper .MuiMenuItem-root:hover {
+    background-color: white;
+}
+
+.menu-products div {
     text-align: start;
     display: inline-block;
-}
-
-.menu-flowers h3 {
-    display: inline;
-    margin-left: 20px;
-    color: gray;
 }
