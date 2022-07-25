@@ -13,8 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import './Navbar.css'
 import {useNavigate} from "react-router-dom";
-import {PlantsMenu} from "./PlantsMenu";
-import {FlowersMenu} from "./FlowersMenu";
+import {CustomMuiMenu} from "../index.components";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
@@ -92,13 +91,12 @@ export const Navbar = () => {
     };
 
     const switchPage = (linkName:string, productType?:string):void => {
+        console.log(productType)
         handleCloseNavMenu()
         handleCloseFlowersMenu()
         handleClosePlantsMenu()
         navigate(linkName, { replace : true, state: { productType }})
     }
-
-
 
     return (
         <AppBar sx={{p:0, m:0}} position="static" color='neutral'>
@@ -207,23 +205,25 @@ export const Navbar = () => {
                                 {page}
                             </Button>
                         ))}
-                        <PlantsMenu
-                            handleClosePlantsMenu={handleClosePlantsMenu}
-                            handleOpenPlantsMenu={handleOpenPlantsMenu}
-                            navbarButtonsStyle={navbarButtonsStyle}
-                            anchorElPlants={anchorElPlants}
-                            plants={plants}
-                            switchPage={switchPage}
-                            plantsMenuOpen={plantsMenuOpen}
+                        <CustomMuiMenu
+                            menuName='Plants'
+                            closeMenu={handleClosePlantsMenu}
+                            openMenu={handleOpenPlantsMenu}
+                            buttonStyle={navbarButtonsStyle}
+                            anchorEl={anchorElPlants}
+                            menuItemsNames={plants}
+                            onMenuItemClick={(plantName:string) => switchPage('plants', plantName)}
+                            isMenuOpen={plantsMenuOpen}
                         />
-                        <FlowersMenu
-                            handleCloseFlowersMenu={handleCloseFlowersMenu}
-                            handleOpenFlowersMenu={handleOpenFlowersMenu}
-                            navbarButtonsStyle={navbarButtonsStyle}
-                            anchorElFlowers={anchorElFlowers}
-                            flowers={flowers}
-                            switchPage={switchPage}
-                            flowersMenuOpen={flowersMenuOpen}
+                        <CustomMuiMenu
+                            menuName='Flowers'
+                            closeMenu={handleCloseFlowersMenu}
+                            openMenu={handleOpenFlowersMenu}
+                            buttonStyle={navbarButtonsStyle}
+                            anchorEl={anchorElFlowers}
+                            menuItemsNames={flowers}
+                            onMenuItemClick={(flowerName:string) => switchPage('flowers', flowerName)}
+                            isMenuOpen={flowersMenuOpen}
                         />
                     </Box>
                     <Box sx={{ flexGrow: 0, pl: '10px' }}>

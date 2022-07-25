@@ -1,30 +1,33 @@
-import React, {FC, MouseEventHandler} from 'react';
+import React, {FC, MouseEventHandler, useRef} from 'react';
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import "./CustomMuiMenu.css"
 
-interface FlowersProps {
-    handleCloseFlowersMenu: MouseEventHandler,
-    handleOpenFlowersMenu: MouseEventHandler,
-    navbarButtonsStyle: Object,
-    anchorElFlowers: null | HTMLElement,
-    flowers: string[],
-    switchPage: Function,
-    flowersMenuOpen: boolean
+interface MenuProps {
+    menuName: string,
+    closeMenu: MouseEventHandler,
+    openMenu: MouseEventHandler,
+    buttonStyle: Object,
+    anchorEl: null | HTMLElement,
+    menuItemsNames: string[],
+    onMenuItemClick: Function,
+    isMenuOpen: boolean
 }
 
-export const FlowersMenu:FC<FlowersProps> = ({handleCloseFlowersMenu, handleOpenFlowersMenu,
-                                               navbarButtonsStyle, anchorElFlowers, flowers, switchPage, flowersMenuOpen}) => {
+export const CustomMuiMenu:FC<MenuProps> = ({menuName, closeMenu, openMenu,
+                                               buttonStyle, anchorEl,
+                                                  menuItemsNames, onMenuItemClick, isMenuOpen}) => {
+
     return (
-        <Box display='inline-block' onMouseLeave={handleCloseFlowersMenu}>
+        <Box display='inline-block' onMouseLeave={closeMenu}>
             <Button
-                key='Flowers'
-                onMouseOver={handleOpenFlowersMenu}
-                sx={navbarButtonsStyle}
+                onMouseOver={openMenu}
+                sx={buttonStyle}
             >
-                Flowers
+                {menuName}
                 <div className="nav_dropdown-arrow w-embed">
                     <svg width="14" height="6" viewBox="0 0 14 6" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -36,26 +39,26 @@ export const FlowersMenu:FC<FlowersProps> = ({handleCloseFlowersMenu, handleOpen
             </Button>
             <Box sx={{ flexGrow: 0, pl: '10px' }}>
                 <Menu
-                    anchorEl={anchorElFlowers}
+                    anchorEl={anchorEl}
                     disableScrollLock={true}
                     anchorOrigin={{
                         vertical: 'bottom',
                         horizontal: 'left',
                     }}
-                    MenuListProps={{ onMouseLeave: handleCloseFlowersMenu }}
+                    MenuListProps={{ onMouseLeave: closeMenu }}
                     keepMounted
                     transformOrigin={{
                         vertical: 'top',
                         horizontal: 'left',
                     }}
-                    open={flowersMenuOpen}
-                    onClose={handleCloseFlowersMenu}
+                    open={isMenuOpen}
+                    onClose={closeMenu}
                 >
-                    <Box className='menu-products menu-flowers'>
+                    <Box className='menu-products'>
                         <div >
-                            {flowers.map((flower) => (
-                                <MenuItem key={flower} onClick={() => switchPage('flowers', flower)}>
-                                    <Typography textAlign="center">{flower}</Typography>
+                            {menuItemsNames.map((itemName) => (
+                                <MenuItem key={itemName} onClick={() => onMenuItemClick(itemName)}>
+                                    <Typography textAlign="center">{itemName}</Typography>
                                 </MenuItem>
                             ))}
                         </div>
