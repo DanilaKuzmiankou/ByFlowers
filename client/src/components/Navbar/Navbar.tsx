@@ -13,14 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import './Navbar.css'
 import {useNavigate} from "react-router-dom";
+import {CustomMuiMenu} from "../index.components";
 
 const siteLogo = 'FlowersDelivery'
-const pages = ['Blog', 'About us', 'Products'];
-const pagesLinks = ['blog', 'aboutUs', 'products'];
+const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
+const pagesLinks = ['blog', 'aboutUs', 'flowers', 'plants'];
 const pages2 = ['Blog', 'About us'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const homeFlowers = ['Сactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
-const prodFlowers = ['Anutina eyes', 'Orchidea', 'Roses', 'Lilies']
+const plants = ['Сactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
+const flowers = ['Anutina eyes', 'Orchidea', 'Roses', 'Lilies']
 
 const navbarButtonsStyle = {
     my: 2,
@@ -45,9 +46,14 @@ const navbarButtonsStyle = {
 export const Navbar = () => {
     const navigate = useNavigate();
 
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-    const [anchorElProducts, setAnchorElProducts] = React.useState<null | HTMLElement>(null);
+    const [anchorElPlants, setAnchorElPlants] = React.useState<null | HTMLElement>(null);
+    const [plantsMenuOpen, setPlantsMenuOpen] = React.useState<boolean>(false);
+    const [flowersMenuOpen, setFlowersMenuOpen] = React.useState<boolean>(false);
+    const [anchorElFlowers, setAnchorElFlowers] = React.useState<null | HTMLElement>(null);
+
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -57,8 +63,14 @@ export const Navbar = () => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleOpenProductsMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElProducts(event.currentTarget);
+    const handleOpenPlantsMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setPlantsMenuOpen(true)
+        setAnchorElPlants(event.currentTarget);
+    };
+
+    const handleOpenFlowersMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setFlowersMenuOpen(true)
+        setAnchorElFlowers(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
@@ -69,19 +81,26 @@ export const Navbar = () => {
         setAnchorElUser(null);
     };
 
-    const handleCloseProductsMenu = () => {
-        setAnchorElProducts(null);
+
+    const handleClosePlantsMenu = () => {
+        setPlantsMenuOpen(false)
+    };
+
+    const handleCloseFlowersMenu = () => {
+        setFlowersMenuOpen(false)
     };
 
     const switchPage = (linkName:string, productType?:string):void => {
+        console.log(productType)
         handleCloseNavMenu()
-        handleCloseProductsMenu()
+        handleCloseFlowersMenu()
+        handleClosePlantsMenu()
         navigate(linkName, { replace : true, state: { productType }})
     }
 
     return (
         <AppBar sx={{p:0, m:0}} position="static" color='neutral'>
-            <Container maxWidth="xl" className='navbar'>
+            <Container sx={{zIndex: 1500}} maxWidth="xl" className='navbar'>
                 <Toolbar disableGutters>
                     <Box
                         component="img"
@@ -186,60 +205,26 @@ export const Navbar = () => {
                                 {page}
                             </Button>
                         ))}
-                        <Box display='inline-block' onMouseLeave={handleCloseProductsMenu}>
-                        <Button
-                            key='Plants'
-                            onMouseEnter={handleOpenProductsMenu}
-                            sx={navbarButtonsStyle}
-                        >
-                            Plants
-                            <div className="nav_dropdown-arrow w-embed">
-                                <svg width="14" height="6" viewBox="0 0 14 6" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M12.0063 0.310204C12.348 0.0606614 12.902 0.0606614 13.2437 0.310204C13.5854 0.559746 13.5854 0.964334 13.2437 1.21388L7.61872 5.32169C7.27701 5.57123 6.72299 5.57123 6.38128 5.32169L0.756282 1.21388C0.414573 0.964334 0.414573 0.559746 0.756282 0.310204C1.09799 0.0606614 1.65201 0.0606614 1.99372 0.310204L7 3.96618L12.0063 0.310204Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                            </div>
-                        </Button>
-                        <Box sx={{ flexGrow: 0, pl: '10px' }}>
-                            <Menu
-                                anchorEl={anchorElProducts}
-                                disableScrollLock={true}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                MenuListProps={{ onMouseLeave: handleCloseProductsMenu }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElProducts)}
-                                onClose={handleCloseProductsMenu}
-                            >
-                                <Box className='menu-flowers'>
-                                    <div >
-                                        <h3>Plants</h3>
-                                {homeFlowers.map((homeFlower, id) => (
-                                    <MenuItem key={homeFlower} onClick={() => switchPage(pagesLinks[2], homeFlower)}>
-                                        <Typography textAlign="center">{homeFlower}</Typography>
-                                    </MenuItem>
-                                ))}
-                                    </div>
-                                    <div >
-                                        <h3>Flowers</h3>
-                                        {prodFlowers.map((prodFlower, id) => (
-                                            <MenuItem key={prodFlower} onClick={() => switchPage(pagesLinks[2], prodFlower)}>
-                                                <Typography textAlign="center">{prodFlower}</Typography>
-                                            </MenuItem>
-                                        ))}
-                                    </div>
-                                </Box>
-                            </Menu>
-                        </Box>
-                    </Box>
+                        <CustomMuiMenu
+                            menuName='Plants'
+                            closeMenu={handleClosePlantsMenu}
+                            openMenu={handleOpenPlantsMenu}
+                            buttonStyle={navbarButtonsStyle}
+                            anchorEl={anchorElPlants}
+                            menuItemsNames={plants}
+                            onMenuItemClick={(plantName:string) => switchPage('plants', plantName)}
+                            isMenuOpen={plantsMenuOpen}
+                        />
+                        <CustomMuiMenu
+                            menuName='Flowers'
+                            closeMenu={handleCloseFlowersMenu}
+                            openMenu={handleOpenFlowersMenu}
+                            buttonStyle={navbarButtonsStyle}
+                            anchorEl={anchorElFlowers}
+                            menuItemsNames={flowers}
+                            onMenuItemClick={(flowerName:string) => switchPage('flowers', flowerName)}
+                            isMenuOpen={flowersMenuOpen}
+                        />
                     </Box>
                     <Box sx={{ flexGrow: 0, pl: '10px' }}>
                         <Tooltip title="Open settings">

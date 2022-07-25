@@ -74,6 +74,7 @@ export const Plants = () => {
               <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersTypography}} >
               Type
               </Typography>
+              <FormControlLabel
                   label={<Typography sx={productStyles.customNormalFont}>Plants</Typography>}
                   control={
                       <Checkbox
@@ -82,7 +83,7 @@ export const Plants = () => {
                           onChange={handlePlantChange}
                       />
                   }
-
+              />
               <FormGroup>
                   {plants.map((plant, index) => (
                       <FormControlLabel

@@ -17,7 +17,7 @@ export const Flowers = () => {
 
     const location = useLocation();
 
-    const { productType } = location.state as LocationState;
+    const {productType} = location.state as LocationState;
 
 
     const [flowersChecked, setFlowersChecked] = useState<boolean[]>([]);
@@ -29,17 +29,19 @@ export const Flowers = () => {
 
     useEffect(() => {
         const checkedFlowers = getCheckedItems(flowersChecked, flowers)
+
         async function fetchData() {
             let result = await getProducts(checkedFlowers)
             console.log(result)
         }
+
         fetchData()
     }, [flowersChecked])
 
 
     const initCheckboxes = () => {
         const flowersCheckboxes = flowers.map((element) => {
-            if(element === productType){
+            if (element === productType) {
                 setFlowerChecked([false, true])
                 return true
             }
@@ -49,7 +51,7 @@ export const Flowers = () => {
     }
 
 
-    const handleFlowersChange = (event: ChangeEvent<HTMLInputElement>, checkedIndex:number):void => {
+    const handleFlowersChange = (event: ChangeEvent<HTMLInputElement>, checkedIndex: number): void => {
         const newChecked = [...flowersChecked]
         newChecked[checkedIndex] = event.target.checked
         setFlowersChecked(newChecked);
@@ -57,7 +59,7 @@ export const Flowers = () => {
         setFlowerChecked([allSame && !newChecked.includes(false), !allSame])
     }
 
-    const handleFlowerChange = (event: ChangeEvent<HTMLInputElement>):void => {
+    const handleFlowerChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const newChecked = [...flowersChecked].map(() => event.target.checked)
         setFlowersChecked(newChecked);
         setFlowerChecked([event.target.checked, false])
@@ -66,44 +68,44 @@ export const Flowers = () => {
     return (
         <>
             <div className='filters-container'>
-        <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersTypography}} >
-    Price
-    </Typography>
-    <TextField className="filters-input" size='small' type='number' label="from" variant="outlined" />
-    <TextField className="filters-input" size='small' type='number' label="to" variant="outlined" />
-    <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersTypography}} >
-    Type
-    </Typography>
-    <FormControlLabel
-    label={<Typography sx={productStyles.customNormalFont}>Flowers</Typography>}
-    control={
-        <Checkbox
-    checked={flowerChecked[0]}
-    indeterminate={flowerChecked[1]}
-    onChange={handleFlowerChange}
-    />
-}
-    />
-    <FormGroup>
-    {flowers.map((flower, index) => (
-            <FormControlLabel
-                key={index}
-        sx={productStyles.checkboxGroup}
-        control={
-        <Checkbox
-        checked={flowersChecked[index] || false}
-        onChange={(event) => handleFlowersChange(event, index)}
-    />}
-    label={<Typography sx={productStyles.customNormalFont}>{flower}</Typography>}
-    />
-))}
-    </FormGroup>
+                <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersTypography}}>
+                    Price
+                </Typography>
+                <TextField className="filters-input" size='small' type='number' label="from" variant="outlined"/>
+                <TextField className="filters-input" size='small' type='number' label="to" variant="outlined"/>
+                <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersTypography}}>
+                    Type
+                </Typography>
+                <FormControlLabel
+                    label={<Typography sx={productStyles.customNormalFont}>Flowers</Typography>}
+                    control={
+                        <Checkbox
+                            checked={flowerChecked[0]}
+                            indeterminate={flowerChecked[1]}
+                            onChange={handleFlowerChange}
+                        />
+                    }
+                />
+                <FormGroup>
+                    {flowers.map((flower, index) => (
+                        <FormControlLabel
+                            key={index}
+                            sx={productStyles.checkboxGroup}
+                            control={
+                                <Checkbox
+                                    checked={flowersChecked[index] || false}
+                                    onChange={(event) => handleFlowersChange(event, index)}
+                                />}
+                            label={<Typography sx={productStyles.customNormalFont}>{flower}</Typography>}
+                        />
+                    ))}
+                </FormGroup>
 
-    </div>
-    <div className='products-container'>
-        Avenir
-        </div>
+            </div>
+            <div className='products-container'>
+                Avenir
+            </div>
         </>
-);
+    );
 };
 
