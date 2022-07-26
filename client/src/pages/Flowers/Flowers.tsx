@@ -28,7 +28,7 @@ export const Flowers = () => {
     return (
         <>
             <ProductsFilter
-                products={flowers}
+                productsList={flowers}
                 productType={productType}
                 mainCheckboxName='Flowers'
             />

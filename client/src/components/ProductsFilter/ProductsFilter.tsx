@@ -4,17 +4,20 @@ import {ChangeEvent, FC, useEffect, useState} from "react";
 import {checkForOne, getCheckedItems} from "../../utils/Utilst";
 import {productStyles} from "../../themes";
 import {getProducts} from "../../api/store/Product";
+import {observer} from "mobx-react-lite";
+import productsStore from "../../store/Products";
+import {toJS} from "mobx";
 
 interface ProductsProps {
-    products: string[],
+    productsList: string[],
     productType: string,
     mainCheckboxName: string
 }
 
 
-export const ProductsFilter: FC<ProductsProps> = ({
-                                                      products, productType, mainCheckboxName
-                                                  }) => {
+export const ProductsFilter = observer<ProductsProps>(({
+                                                           productsList, productType, mainCheckboxName
+                                                       }) => {
 
     const [subCheckboxes, setSubCheckboxes] = useState<boolean[]>([]);
     const [mainCheckbox, setMainCheckbox] = useState<boolean[]>([false, false]);
@@ -25,16 +28,22 @@ export const ProductsFilter: FC<ProductsProps> = ({
 
 
     useEffect(() => {
-        const checkedPlants = getCheckedItems(subCheckboxes, products)
+        const checkedPlants = getCheckedItems(subCheckboxes, productsList)
         async function fetchData() {
-            let result = await getProducts(checkedPlants)
-            console.log(result)
+           await productsStore.fetchProducts(checkedPlants)
         }
         fetchData()
+        console.log('mobx:',toJS(productsStore.products))
     }, [subCheckboxes])
 
+    
+    useEffect(() => {
+
+        console.log('mobx:',toJS(productsStore.products))
+    }, [productsStore.products])
+
     const initCheckboxes = () => {
-        const productsCheckboxes = products.map((element) => {
+        const productsCheckboxes = productsList.map((element) => {
             if (element === productType) {
                 setMainCheckbox([false, true])
                 return true
@@ -80,7 +89,7 @@ export const ProductsFilter: FC<ProductsProps> = ({
                     }
                 />
                 <FormGroup>
-                    {products.map((product, index) => (
+                    {productsList.map((product, index) => (
                         <FormControlLabel
                             key={index}
                             sx={productStyles.checkboxGroup}
@@ -96,5 +105,5 @@ export const ProductsFilter: FC<ProductsProps> = ({
             </div>
         </>
     );
-};
+})
 
