@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import './Navbar.css'
 import {useNavigate} from "react-router-dom";
 import {CustomMuiMenu} from "../index.components";
+import productsStore from "../../store/ProductsStore";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
@@ -91,11 +92,13 @@ export const Navbar = () => {
     };
 
     const switchPage = (linkName:string, productType?:string):void => {
-        console.log(productType)
         handleCloseNavMenu()
         handleCloseFlowersMenu()
         handleClosePlantsMenu()
-        navigate(linkName, { replace : true, state: { productType }})
+        if(productType) {
+            productsStore.setSelectedNavbarProduct(productType)
+        }
+        navigate(linkName, { replace : true})
     }
 
     return (
