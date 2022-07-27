@@ -3,9 +3,8 @@ import './ProductsFilter.css'
 import {ChangeEvent, FC, useEffect, useState} from "react";
 import {checkForOne, getCheckedItems} from "../../utils/Utilst";
 import {productStyles} from "../../themes";
-import {getProducts} from "../../api/store/Product";
 import {observer} from "mobx-react-lite";
-import productsStore from "../../store/Products";
+import productsStore from "../../store/ProductsStore";
 import {toJS} from "mobx";
 
 interface ProductsProps {
@@ -24,27 +23,32 @@ export const ProductsFilter = observer<ProductsProps>(({
 
     useEffect(() => {
         initCheckboxes()
+        return function cleanup() {
+            productsStore.setProducts([])
+            productsStore.setSelectedProductsName('')
+        };
     }, [])
 
 
     useEffect(() => {
         const checkedPlants = getCheckedItems(subCheckboxes, productsList)
         async function fetchData() {
-           await productsStore.fetchProducts(checkedPlants)
+            if(checkedPlants && checkedPlants.length>0) {
+                await productsStore.fetchProducts(checkedPlants)
+                checkedPlants.length > 3 ?
+                    productsStore.setSelectedProductsName(checkedPlants.slice(0, 3).join(', ')+ '...') :
+                    productsStore.setSelectedProductsName(checkedPlants.join(', ') )
+            }
         }
+
         fetchData()
-        console.log('mobx:',toJS(productsStore.products))
     }, [subCheckboxes])
 
-    
-    useEffect(() => {
-
-        console.log('mobx:',toJS(productsStore.products))
-    }, [productsStore.products])
 
     const initCheckboxes = () => {
         const productsCheckboxes = productsList.map((element) => {
             if (element === productType) {
+                console.log('aha')
                 setMainCheckbox([false, true])
                 return true
             }

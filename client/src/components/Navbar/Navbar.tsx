@@ -20,7 +20,7 @@ const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
 const pagesLinks = ['blog', 'aboutUs', 'flowers', 'plants'];
 const pages2 = ['Blog', 'About us'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const plants = ['Сactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
+const plants = ['Cactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
 const flowers = ['Anutina eyes', 'Orchidea', 'Roses', 'Lilies']
 
 const navbarButtonsStyle = {
