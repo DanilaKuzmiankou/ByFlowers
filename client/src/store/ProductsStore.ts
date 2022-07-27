@@ -5,6 +5,7 @@ import {Product} from "../types/Product";
 class ProductsStore {
     products:Product[] = []
     selectedProductsName:string = ''
+    selectedNavbarProduct:string = ''
     constructor() {
         makeAutoObservable(this)
     }
@@ -20,6 +21,10 @@ class ProductsStore {
 
     setSelectedProductsName(selectedProductsName:string) {
         this.selectedProductsName = selectedProductsName
+    }
+
+    setSelectedNavbarProduct(selectedNavbarProduct:string) {
+        this.selectedNavbarProduct = selectedNavbarProduct
     }
 
 

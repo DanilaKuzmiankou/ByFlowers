@@ -34,7 +34,6 @@ export const Plants = observer(() => {
             <div>
                 <ProductsFilter
                     productsList={plants}
-                    productType={productType}
                     mainCheckboxName='Plants'
                 />
             </div>

@@ -9,13 +9,12 @@ import {toJS} from "mobx";
 
 interface ProductsProps {
     productsList: string[],
-    productType: string,
     mainCheckboxName: string
 }
 
 
 export const ProductsFilter = observer<ProductsProps>(({
-                                                           productsList, productType, mainCheckboxName
+                                                           productsList, mainCheckboxName
                                                        }) => {
 
     const [subCheckboxes, setSubCheckboxes] = useState<boolean[]>([]);
@@ -47,7 +46,7 @@ export const ProductsFilter = observer<ProductsProps>(({
 
     const initCheckboxes = () => {
         const productsCheckboxes = productsList.map((element) => {
-            if (element === productType) {
+            if (element === productsStore.selectedNavbarProduct) {
                 console.log('aha')
                 setMainCheckbox([false, true])
                 return true

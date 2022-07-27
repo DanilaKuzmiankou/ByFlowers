@@ -29,7 +29,6 @@ export const Flowers = () => {
         <>
             <ProductsFilter
                 productsList={flowers}
-                productType={productType}
                 mainCheckboxName='Flowers'
             />
             <div className='products-container'>
