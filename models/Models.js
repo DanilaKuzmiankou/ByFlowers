@@ -40,7 +40,7 @@ const Product = sequelize.define(
     "product",
     {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        name: { type: DataTypes.STRING, allowNull: false },
+        name: { type: DataTypes.STRING, allowNull: false, unique: true },
         description: { type: DataTypes.TEXT, allowNull: false },
         count: { type: DataTypes.SMALLINT, allowNull: false },
         price: { type: DataTypes.SMALLINT, allowNull: false },
@@ -54,7 +54,7 @@ const Product = sequelize.define(
 
 const ProductType = sequelize.define("product_type", {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        name: { type: DataTypes.STRING, allowNull: false }
+        name: { type: DataTypes.STRING, allowNull: false, unique: true }
     },
     {
         timestamps: false,
@@ -79,8 +79,8 @@ Basket.belongsTo(User);
 Basket.hasMany(BasketProduct);
 BasketProduct.belongsTo(Basket);
 
-BasketProduct.hasMany(Product)
-Product.belongsTo(BasketProduct);
+Product.hasMany(BasketProduct)
+BasketProduct.belongsTo(Product);
 
 Product.hasMany(ProductPicture, {
     as: { singular: "picture", plural: "pictures" },
@@ -88,8 +88,11 @@ Product.hasMany(ProductPicture, {
 })
 ProductPicture.belongsTo(Product)
 
-Product.hasOne(ProductType)
-ProductType.belongsTo(Product)
+ProductType.hasOne(Product)
+Product.belongsTo(ProductType, {
+    as: "productType",
+    onDelete: "CASCADE",
+})
 
 
 module.exports = {
