@@ -9,9 +9,6 @@ import {toJS} from "mobx";
 import {productStyles} from "../../themes";
 import {ProductItem} from "../../components/ProductItem/ProductItem";
 
-interface LocationState {
-    productType: string
-}
 
 export const Plants = observer(() => {
 
@@ -25,9 +22,6 @@ export const Plants = observer(() => {
 
     const plants = ['Cactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
 
-    const location = useLocation();
-
-    const {productType} = location.state as LocationState;
 
     return (
         <div style={{display: 'flex'}} >

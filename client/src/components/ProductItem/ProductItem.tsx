@@ -89,10 +89,6 @@ export const ProductItem:FC<ProductProps> = ({productName, productImage, product
         setButtonStyle(buttonDefaultStyle)
     }
 
-    useEffect(() => {
-        console.log(toJS(productImage))
-    }, [])
-
     return (
         <div className='container' onMouseOver={onItemHover} onMouseLeave={onItemNotHover}>
             <Typography

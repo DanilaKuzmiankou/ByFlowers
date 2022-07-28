@@ -1,8 +1,12 @@
 .filters-container {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    display: block;
+    left: 0;
     font-family: Avenir, sans-serif;
     padding: 80px 40px 0 35px;
-    display: inline-block;
     min-height: 100vh;
+    height: 100%;
     background-color: rgba(217, 217, 217, 0.54);
 }
 

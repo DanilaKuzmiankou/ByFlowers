@@ -11,6 +11,7 @@ class ProductsStore {
     }
 
     async fetchProducts(productsNames:string[]) {
+        console.log('names:', productsNames)
         console.log(await getProducts(productsNames))
         this.products = await getProducts(productsNames)
     }

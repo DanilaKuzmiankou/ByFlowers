@@ -3,7 +3,7 @@ import './Flowers.css'
 import {ChangeEvent, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {getProducts} from "../../api/store/Product";
-import {checkForOne, getCheckedItems} from "../../utils/Utilst";
+import {checkForOne, getCheckedItems} from "../../utils/Utils";
 import {productStyles} from "../../themes";
 import {ProductsFilter} from "../../components/ProductsFilter/ProductsFilter";
 
