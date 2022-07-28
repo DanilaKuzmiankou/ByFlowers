@@ -42,7 +42,35 @@ declare module '@mui/material/styles' {
     }
 }
 
+declare module '@mui/material/styles' {
+    interface BreakpointOverrides {
+        xs: true; // removes the `xs` breakpoint
+        sm: true;
+        md: true;
+        lg: true;
+        xl: true;
+        xxl: true;
+        xxxl: true
+    }
+}
+
 export const theme = createTheme({
+    breakpoints: {
+        // Define custom breakpoint values.
+        // These will apply to Material-UI components that use responsive
+        // breakpoints, such as `Grid` and `Hidden`. You can also use the
+        // theme breakpoint functions `up`, `down`, and `between` to create
+        // media queries for these breakpoints
+        values: {
+            xs: 0,
+            sm: 700,
+            md: 900,
+            lg: 1200,
+            xl: 1500,
+            xxl: 2000,
+            xxxl: 2300
+        }
+    },
     status: {
         danger: '#e53e3e',
     },
@@ -67,17 +95,39 @@ export const theme = createTheme({
 export const productStyles = {
     customBoldFont: {
         fontFamily: 'Avenir, sans-serif',
-        fontSize: '0.94rem',
+        fontSize: {
+            xl: '2rem',
+            xxxl: '2.3rem',
+        },
         fontWeight: '600 !important',
         letterSpacing: '0 !important',
     },
     customNormalFont: {
         fontFamily: 'Avenir, sans-serif',
-        fontSize: '0.94rem',
+        fontSize: {
+            xl: '1.8rem',
+            xxxl: '2.7rem',
+            sm: '1.3rem'
+        },
         fontWeight: '0 !important',
         letterSpacing: '0 !important',
     },
-    filtersTypography: {
+     headerTypographyStyle : {
+        fontSize: {
+            lg: '1.5rem',
+            md: '2rem',
+            sm:'2rem',
+            xl: '3rem'
+        },
+        whiteSpace: 'nowrap',
+    },
+    filtersHeaderTypography: {
+        fontSize: {
+            xxxl: '2.8rem',
+          xl: '2rem',
+            sm:'1.5rem'
+
+        },
         margin: '5px 0'
     },
     checkboxGroup: {

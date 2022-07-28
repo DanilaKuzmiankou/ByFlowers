@@ -35,7 +35,7 @@ const navbarButtonsStyle = {
     backgroundColor: 'hsla(0, 0%, 100%, 0.06)',
     transition: 'background-color 200ms ease',
     color: '#fff',
-    fontSize: '1.10rem',
+    fontSize: '1.70rem',
     lineHeight: 1,
     fontWeight: 700,
     paddingTop: '14px',
@@ -125,7 +125,7 @@ export const Navbar = () => {
                             fontFamily: 'GilroyHeavyItalic',
                             fontWeight: 700,
                             transition: 'background-color 200ms ease',
-                            fontSize: '1.25rem',
+                            fontSize: '1.95rem',
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none'

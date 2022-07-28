@@ -1,12 +1,29 @@
 .products-container {
     font-family: Avenir, sans-serif;
     font-weight: 1000;
+    display: inline-block;
     width: 100%;
 }
 
 .header-container {
-    display: block;
     align-items: start;
     justify-content: start;
     padding: 20px;
+}
+
+.pagination-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filters-container {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: Avenir, sans-serif;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    padding: 30px 20px 20px;
 }

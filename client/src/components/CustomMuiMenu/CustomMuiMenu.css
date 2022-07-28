@@ -1,5 +1,7 @@
 .nav_dropdown-arrow {
-    margin-top: -6px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
     margin-left: 10px;
 }
 

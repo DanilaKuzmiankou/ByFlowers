@@ -1,4 +1,4 @@
-import {Checkbox, FormControlLabel, FormGroup, TextField, Typography} from '@mui/material';
+import {Checkbox, FormControlLabel, FormGroup, TextField, Typography, useMediaQuery, useTheme} from '@mui/material';
 import './ProductsFilter.css'
 import {ChangeEvent, FC, useEffect, useState} from "react";
 import {checkForOne, getCheckedItems} from "../../utils/Utils";
@@ -17,9 +17,16 @@ export const ProductsFilter = observer<ProductsProps>(({
                                                            productsList, mainCheckboxName
                                                        }) => {
 
+    const theme = useTheme();
+    const greaterThanXXL = useMediaQuery(theme.breakpoints.up("xxl"));
+    const greaterThanXL = useMediaQuery(theme.breakpoints.up("xl"));
+
+
+
     const [subCheckboxes, setSubCheckboxes] = useState<boolean[]>([]);
     const [mainCheckbox, setMainCheckbox] = useState<boolean[]>([false, false]);
-    const [priceRange, setPriceRange] = useState<(number|undefined)[]>([undefined, undefined])
+
+
 
     useEffect(() => {
         return function cleanup() {
@@ -33,10 +40,8 @@ export const ProductsFilter = observer<ProductsProps>(({
     }, [productsStore.selectedNavbarProduct])
 
 
-
-
     const initCheckboxes = () => {
-        if(productsStore.selectedNavbarProduct) {
+        if (productsStore.selectedNavbarProduct) {
             const productsCheckboxes = productsList.map((element) => {
                 if (element === productsStore.selectedNavbarProduct) {
                     setMainCheckbox([false, true])
@@ -49,7 +54,7 @@ export const ProductsFilter = observer<ProductsProps>(({
         }
     }
 
-    const handleSubCheckboxes =  (event: ChangeEvent<HTMLInputElement>, checkedIndex: number) => {
+    const handleSubCheckboxes = (event: ChangeEvent<HTMLInputElement>, checkedIndex: number) => {
         const newChecked = [...subCheckboxes]
         newChecked[checkedIndex] = event.target.checked
         setSubCheckboxes(newChecked);
@@ -69,7 +74,7 @@ export const ProductsFilter = observer<ProductsProps>(({
         }
     }
 
-    const handleMainCheckbox =  (event: ChangeEvent<HTMLInputElement>) => {
+    const handleMainCheckbox = (event: ChangeEvent<HTMLInputElement>) => {
         const newChecked = [...subCheckboxes].map(() => event.target.checked)
         setSubCheckboxes(newChecked);
         setMainCheckbox([event.target.checked, false])
@@ -77,25 +82,59 @@ export const ProductsFilter = observer<ProductsProps>(({
 
     }
 
-    const updateProductsPrice = (event: React.ChangeEvent<HTMLInputElement>) =>{
+    const updateProductsPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
         const price = Number(event.target.value)
-        event.target.id==='minPrice'
+        event.target.id === 'minPrice'
             ?
-           productsStore.setMinProductPrice(price)
+            productsStore.setMinProductPrice(price)
             :
             productsStore.setMaxProductPrice(price)
         updateProducts(subCheckboxes)
     }
 
+    const calcInputFontSize = ():string => {
+        if(greaterThanXXL) return '2.3rem'
+        if(greaterThanXL) return '1.6rem'
+        return '1.3rem'
+    }
+
+    const calcPlaceHolderFontSize = ():string => {
+        if(greaterThanXXL) return '2.2rem'
+        if(greaterThanXL) return '1.6rem'
+
+        return '1.3rem'
+    }
+
     return (
         <>
-            <div className='filters-container'>
-                <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersTypography}}>
+            <div>
+                <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersHeaderTypography}}>
                     Price
                 </Typography>
-                <TextField id='minPrice' className="filters-input" size='small' type='number' label="from" variant="outlined" onChange={updateProductsPrice}/>
-                <TextField id='maxPrice' className="filters-input" size='small' type='number' label="to" variant="outlined" onChange={updateProductsPrice}/>
-                <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersTypography}}>
+                <div className='filters-inputs-container'>
+                    <TextField
+                        id='minPrice'
+                        className="filters-input"
+                        size={greaterThanXL ? 'medium' : 'small'}
+                        inputProps={{style: {fontSize: calcInputFontSize()}}} // font size of input text
+                        InputLabelProps={{style: {fontSize: calcPlaceHolderFontSize()}}} // font size of input label
+                        type='number'
+                        label="from"
+                        variant="outlined"
+                        onChange={updateProductsPrice}
+                    />
+                    <TextField
+                        id='maxPrice'
+                        className="filters-input"
+                        size={greaterThanXL ? 'medium' : 'small'}
+                        inputProps={{style: {fontSize: calcInputFontSize()}}} // font size of input text
+                        InputLabelProps={{style: {fontSize: calcPlaceHolderFontSize()}}} // font size of input label
+                        type='number'
+                        label="to"
+                        variant="outlined"
+                        onChange={updateProductsPrice}/>
+                </div>
+                <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersHeaderTypography}}>
                     Type
                 </Typography>
                 <FormControlLabel

@@ -5,6 +5,7 @@ import "./ProductItem.css"
 import {toJS} from "mobx";
 import Button from "@mui/material/Button";
 import {keyframes} from "@emotion/react";
+import {useMediaQuery, useTheme} from "@mui/material";
 
 interface ProductProps {
     productName: string,
@@ -14,6 +15,8 @@ interface ProductProps {
 
 export const ProductItem:FC<ProductProps> = ({productName, productImage, productPrice}) => {
 
+    const theme = useTheme();
+    const greaterThanLarge = useMediaQuery(theme.breakpoints.up("lg"));
 
     const slidebg = keyframes`
       0% {
@@ -26,15 +29,21 @@ export const ProductItem:FC<ProductProps> = ({productName, productImage, product
     const typographyStyle = {
         fontFamily: 'Avenir',
         position: 'absolute',
+        fontSize: {
+            xl: '2.0rem',
+            lg: '1.6rem',
+            md: '2rem',
+            sm: '1.6rem'
+        },
         top: "0px",
         left: "20px",
         right: "20px",
         textAlign: 'center',
-        fontWeight: 700,
+        fontWeight: 500,
         textDecoration: 'none',
         color: 'black',
         backgroundColor: 'transparent',
-    } as React.CSSProperties
+    }
 
     const buttonDefaultStyle = {
         display: 'none'
@@ -43,7 +52,7 @@ export const ProductItem:FC<ProductProps> = ({productName, productImage, product
     const buttonHoverStyle = {
         height: '45px',
         zIndex: 2,
-        fontSize: "1.54em",
+        fontSize: "1.59rem",
         lineHeight: 2.4,
         position: "absolute",
         bottom: "10px",
@@ -72,10 +81,48 @@ export const ProductItem:FC<ProductProps> = ({productName, productImage, product
     const imageStyle = {
         position: "absolute",
         bottom: 0,
-        left: "20px",
-        right: "20px",
-        height: '80%',
-        width: '90%'
+        backgroundSize: 'cover',
+        height: {
+            xxxl: '75%',
+            xxl: '75%',
+            xl: '75%',
+            lg: '75%',
+            md: '75%',
+            sm: '75%',
+            xs: '75%'
+        },
+        width: {
+            xxxl: '90%',
+            xl: '90%',
+            lg: '90%',
+            md: '90%',
+            sm: '90%',
+            xs: '90%'
+        }
+    }
+
+    const container = {
+        boxSizing: "border-box",
+        height: {
+            xxxl: "400px",
+            xxl: '300px',
+            xl: '400px',
+            lg: '400px',
+            md: '300px',
+            sm: '300px',
+            xs: '400px'
+        },
+        width: {xs: '70%', sm: "100%"},
+        display: "flex",
+        justifyContent: "center",
+        cursor: "pointer",
+        position: "relative",
+        //border: "1px solid #cddfe0"
+        border: { xs: "0.01em solid #000000", sm: 'none'},
+        '&:hover': {
+            border: "0.01em solid #000000",
+            borderRadius: '3%'
+        }
     }
 
     const [buttonStyle, setButtonStyle] = useState<React.CSSProperties>(buttonDefaultStyle)
@@ -90,7 +137,7 @@ export const ProductItem:FC<ProductProps> = ({productName, productImage, product
     }
 
     return (
-        <div className='container' onMouseOver={onItemHover} onMouseLeave={onItemNotHover}>
+        <Box sx={container} onMouseOver={onItemHover} onMouseLeave={onItemNotHover}>
             <Typography
                 variant="h6"
                 noWrap
@@ -101,7 +148,7 @@ export const ProductItem:FC<ProductProps> = ({productName, productImage, product
             <Typography
                 variant="h6"
                 noWrap
-                sx={{...typographyStyle, ...{ top: '25px', zIndex: 3 }}}
+                sx={{...typographyStyle, ...{ top: '10%', zIndex: 3, fontWeight: 700 }}}
             >
                 {productPrice}$
             </Typography>
@@ -115,6 +162,6 @@ export const ProductItem:FC<ProductProps> = ({productName, productImage, product
             >
                 Buy!
             </Button>
-        </div>
+        </Box>
     );
 };
