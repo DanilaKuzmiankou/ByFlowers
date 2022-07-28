@@ -60,7 +60,8 @@ import { getRequest } from '../index.network';
 //   return await postRequest('/api/review/addImage', body);
 // }
 
-export async function getProducts(types:string[]) {
+export async function getProducts(types:string[], minPrice:number, maxPrice:number) {
     const typesStr = types.join(',')
-    return await getRequest(`/api/product/getProducts?types=${encodeURIComponent(typesStr)}`);
+    console.log('min:', minPrice, 'max:', maxPrice, 'url:', encodeURIComponent(minPrice))
+    return await getRequest(`/api/product/getProducts?types=${encodeURIComponent(typesStr)}&minPrice=${encodeURIComponent(minPrice)}&maxPrice=${encodeURIComponent(maxPrice)}`);
 }

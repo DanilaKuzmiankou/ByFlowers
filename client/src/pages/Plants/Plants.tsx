@@ -40,7 +40,7 @@ export const Plants = observer(() => {
                 <div style={{display: 'block'}}>
                     <Grid container spacing={3} sx={{padding: '20px'}}>
                         {productsStore.products.map((product) => (
-                            <Grid item xs={6} lg={3} key={product.id}>
+                            <Grid item xs={6} lg={3} key={product.id} data-aos="zoom-in">
                                 <ProductItem productName={product.name} productImage={product.pictures[0].picture} productPrice={product.price} />
                             </Grid>
                         ))}

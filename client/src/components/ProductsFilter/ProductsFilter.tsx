@@ -19,6 +19,7 @@ export const ProductsFilter = observer<ProductsProps>(({
 
     const [subCheckboxes, setSubCheckboxes] = useState<boolean[]>([]);
     const [mainCheckbox, setMainCheckbox] = useState<boolean[]>([false, false]);
+    const [priceRange, setPriceRange] = useState<(number|undefined)[]>([undefined, undefined])
 
     useEffect(() => {
         return function cleanup() {
@@ -76,14 +77,24 @@ export const ProductsFilter = observer<ProductsProps>(({
 
     }
 
+    const updateProductsPrice = (event: React.ChangeEvent<HTMLInputElement>) =>{
+        const price = Number(event.target.value)
+        event.target.id==='minPrice'
+            ?
+           productsStore.setMinProductPrice(price)
+            :
+            productsStore.setMaxProductPrice(price)
+        updateProducts(subCheckboxes)
+    }
+
     return (
         <>
             <div className='filters-container'>
                 <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersTypography}}>
                     Price
                 </Typography>
-                <TextField className="filters-input" size='small' type='number' label="from" variant="outlined"/>
-                <TextField className="filters-input" size='small' type='number' label="to" variant="outlined"/>
+                <TextField id='minPrice' className="filters-input" size='small' type='number' label="from" variant="outlined" onChange={updateProductsPrice}/>
+                <TextField id='maxPrice' className="filters-input" size='small' type='number' label="to" variant="outlined" onChange={updateProductsPrice}/>
                 <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersTypography}}>
                     Type
                 </Typography>
