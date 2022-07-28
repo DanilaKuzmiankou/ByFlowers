@@ -1,5 +1,6 @@
 const { Product, ProductPicture, ProductType} = require("../models/Models");
 const ApiError = require("../error/ApiError");
+const {Sequelize} = require("sequelize");
 
 
 let productController = this;
@@ -22,32 +23,45 @@ class ProductController {
     }
 
     async getProduct(isFlower) {
-            return ProductType.findAll({
-                attributes: [ 'name' ],
-                include: [
-                    {
-                        model: Product,
-                        as: "product",
-                        attributes: [],
-                        where: { isFlower }
-                    }
-                ]
-            });
+        return ProductType.findAll({
+            attributes: [ 'name' ],
+            include: [
+                {
+                    model: Product,
+                    as: "product",
+                    attributes: [],
+                    where: { isFlower }
+                }
+            ]
+        });
     }
 
     async getProductsWithType(req, res, next) {
         let { types } = req.query
         types = types.split(',')
-        return Product.findAll({
+        let filterExpression=''
+        for(let type of types){
+            if(types[0]===type) filterExpression+=`name='${type}'`
+            filterExpression+=`, "productType".name='${type}'`
+        }
+        return res.json(await Product.findAll({
             include: [
                 {
                     model: ProductType,
-                    as: "productType",
+                    as: 'productType',
                     attributes: [],
-                    where: { name: types }
+                    where: { name: types },
+
+                },
+                {
+                    model: ProductPicture,
+                    as: 'pictures',
+                    attributes: ['picture']
                 }
-            ]
-        });
+            ],
+            order:[[{ model: ProductType, as: 'productType' } , Sequelize.literal(filterExpression)]]
+
+        }));
     }
 
 
