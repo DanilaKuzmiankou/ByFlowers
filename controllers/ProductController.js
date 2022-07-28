@@ -23,17 +23,17 @@ class ProductController {
     }
 
     async getProduct(isFlower) {
-            return ProductType.findAll({
-                attributes: [ 'name' ],
-                include: [
-                    {
-                        model: Product,
-                        as: "product",
-                        attributes: [],
-                        where: { isFlower }
-                    }
-                ]
-            });
+        return ProductType.findAll({
+            attributes: [ 'name' ],
+            include: [
+                {
+                    model: Product,
+                    as: "product",
+                    attributes: [],
+                    where: { isFlower }
+                }
+            ]
+        });
     }
 
     async getProductsWithType(req, res, next) {
@@ -42,12 +42,13 @@ class ProductController {
         let filterExpression=''
         for(let type of types){
             if(types[0]===type) filterExpression+=`name='${type}'`
-            filterExpression+=`, product_type.name='${type}'`
+            filterExpression+=`, "productType".name='${type}'`
         }
         return res.json(await Product.findAll({
             include: [
                 {
                     model: ProductType,
+                    as: 'productType',
                     attributes: [],
                     where: { name: types },
 
@@ -58,9 +59,7 @@ class ProductController {
                     attributes: ['picture']
                 }
             ],
-            order: [
-                [ProductType ,Sequelize.literal(filterExpression)],
-            ]
+            order:[[{ model: ProductType, as: 'productType' } , Sequelize.literal(filterExpression)]]
 
         }));
     }
