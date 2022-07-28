@@ -1,19 +1,26 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import {getProducts} from "../api/store/Product";
 import {Product} from "../types/Product";
 
 class ProductsStore {
+
     products:Product[] = []
     selectedProductsName:string = ''
     selectedNavbarProduct:string = ''
+    minProductPrice:number = -1
+    maxProductPrice:number = -1
+
     constructor() {
         makeAutoObservable(this)
     }
 
     async fetchProducts(productsNames:string[]) {
         console.log('names:', productsNames)
-        console.log(await getProducts(productsNames))
-        this.products = await getProducts(productsNames)
+        const products = await getProducts(productsNames, this.minProductPrice, this.maxProductPrice)
+        console.log(products)
+        runInAction(() => {
+            this.products = products
+        })
     }
 
     setProducts(products:Product[]){
@@ -26,6 +33,14 @@ class ProductsStore {
 
     setSelectedNavbarProduct(selectedNavbarProduct:string) {
         this.selectedNavbarProduct = selectedNavbarProduct
+    }
+
+    setMinProductPrice(minProductPrice:number){
+        this.minProductPrice = minProductPrice
+    }
+
+    setMaxProductPrice(maxProductPrice:number){
+        this.maxProductPrice = maxProductPrice
     }
 
 
