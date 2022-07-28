@@ -1,7 +1,7 @@
 const { Product, ProductPicture, ProductType} = require("../models/Models");
 const ApiError = require("../error/ApiError");
 const {Sequelize} = require("sequelize");
-
+const { Op } = require("sequelize");
 
 let productController = this;
 
@@ -37,14 +37,23 @@ class ProductController {
     }
 
     async getProductsWithType(req, res, next) {
-        let { types } = req.query
+        let { types, minPrice, maxPrice } = req.query
+        minPrice = Number(minPrice)
+        maxPrice = Number(maxPrice)
         types = types.split(',')
+        const whereExpression = {
+            price: {
+                [Op.gte]: minPrice!==-1 ? minPrice : 0,
+                [Op.lte]: maxPrice!==-1 ? maxPrice : Number.MAX_VALUE
+            }
+        }
         let filterExpression=''
         for(let type of types){
             if(types[0]===type) filterExpression+=`name='${type}'`
             filterExpression+=`, "productType".name='${type}'`
         }
         return res.json(await Product.findAll({
+            where: whereExpression,
             include: [
                 {
                     model: ProductType,
