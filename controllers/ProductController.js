@@ -2,6 +2,7 @@ const { Product, ProductPicture, ProductType} = require("../models/Models");
 const ApiError = require("../error/ApiError");
 const {Sequelize} = require("sequelize");
 
+
 let productController = this;
 
 class ProductController {
@@ -67,13 +68,16 @@ class ProductController {
 
     async createProduct(req, res, next){
         const {name, description, productType, count, price, pictures, isFlower} = req.body
-        const product = await Product.findOne({ where: { name } });
-        let createdProduct;
-        if(product){
+        let createdProduct
+        let productTypeDb
+        try {
+            createdProduct = await Product.create({ name, description, count, price, isFlower });
+        } catch (e) {
+            console.log('e:', e)
             return next(ApiError.badRequest("This product is already created!"));
         }
-        createdProduct = await Product.create({ name, description, count, price, isFlower });
-        await ProductType.create( {name: productType, productId: createdProduct.id })
+        productTypeDb = await ProductType.findOne({where: {name: productType}})
+        if(!productTypeDb) productTypeDb = await ProductType.create( {name: productType})
         const picturesDB = [];
         for (let picture of pictures) {
             if (picture) {
@@ -82,6 +86,7 @@ class ProductController {
             }
         }
         await createdProduct.setPictures(picturesDB);
+        await createdProduct.setProductType(productTypeDb)
         return res.json(createdProduct)
     }
 
