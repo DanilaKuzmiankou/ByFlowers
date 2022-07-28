@@ -1,5 +1,6 @@
 const { Product, ProductPicture, ProductType} = require("../models/Models");
 const ApiError = require("../error/ApiError");
+const {Sequelize} = require("sequelize");
 
 let productController = this;
 
@@ -37,19 +38,29 @@ class ProductController {
     async getProductsWithType(req, res, next) {
         let { types } = req.query
         types = types.split(',')
+        let filterExpression=''
+        for(let type of types){
+            if(types[0]===type) filterExpression+=`name='${type}'`
+            filterExpression+=`, product_type.name='${type}'`
+        }
         return res.json(await Product.findAll({
             include: [
                 {
                     model: ProductType,
                     attributes: [],
-                    where: { name: types }
+                    where: { name: types },
+
                 },
                 {
                     model: ProductPicture,
                     as: 'pictures',
                     attributes: ['picture']
                 }
+            ],
+            order: [
+                [ProductType ,Sequelize.literal(filterExpression)],
             ]
+
         }));
     }
 
