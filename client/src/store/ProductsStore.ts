@@ -10,18 +10,31 @@ class ProductsStore {
     minProductPrice:number = -1
     maxProductPrice:number = -1
     drawerIsOpen:boolean = false
-
+    itemsLimit:number = 10
+    itemsOffset:number = 0
+    productsNames: string[] = []
+    productsCount: number = 0
     constructor() {
         makeAutoObservable(this)
     }
 
-    async fetchProducts(productsNames:string[]) {
-        console.log('names:', productsNames)
-        const products = await getProducts(productsNames, this.minProductPrice, this.maxProductPrice)
-        console.log(products)
+    async fetchNewProducts(productsNames:string[]) {
+        this.productsNames = productsNames
+       await this.fetchProducts()
+    }
+
+    async fetchProducts() {
+        const response = await getProducts(this.productsNames, this.minProductPrice,
+            this.maxProductPrice, this.itemsLimit, this.itemsOffset)
+        const products = response[0]
+        this.productsCount = response[1]
         runInAction(() => {
             this.products = products
         })
+    }
+
+    async fetchSameProducts() {
+       await this.fetchProducts()
     }
 
     setProducts(products:Product[]){
@@ -46,6 +59,14 @@ class ProductsStore {
 
     setDrawerIsOpen(open:boolean){
         this.drawerIsOpen = open
+    }
+
+    setItemsLimit(itemsLimit:number){
+        this.itemsLimit = itemsLimit
+    }
+
+    setItemsOffset(itemsOffset:number){
+        this.itemsOffset = itemsOffset
     }
 
 

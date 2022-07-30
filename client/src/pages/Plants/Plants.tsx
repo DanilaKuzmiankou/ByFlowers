@@ -1,4 +1,13 @@
-import {Checkbox, FormControlLabel, FormGroup, Grid, Pagination, TextField, Typography} from '@mui/material';
+import {
+    Checkbox,
+    FormControlLabel,
+    FormGroup,
+    Grid,
+    Pagination,
+    TextField,
+    Typography,
+    useMediaQuery, useTheme
+} from '@mui/material';
 import './Plants.css'
 import {ChangeEvent, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
@@ -15,13 +24,43 @@ import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProduc
 
 export const Plants = observer(() => {
 
+    const theme = useTheme();
 
     const plants = ['Cactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
 
+    let itemsLimit:number = 12
+
+    const sm = useMediaQuery(theme.breakpoints.between("xs", "md"));
+    const md = useMediaQuery(theme.breakpoints.between("sm", "lg"));
+    const lgAndXl = useMediaQuery(theme.breakpoints.between("md", "xxxl"));
+    const xxxl = useMediaQuery(theme.breakpoints.up("xxl"))
+
+    useEffect(()=> {
+        getItemsCountPerPage()
+        //<Grid item xs={12} sm={6} md={4} lg={3} xl={3} xxl={2} key={product.id} data-aos="zoom-in"
+
+    }, [])
+
 
     const openDrawer = () => {
-        console.log('hi')
         productsStore.setDrawerIsOpen(true)
+    }
+
+    const getItemsCountPerPage = () => {
+        if (md) {
+            productsStore.setItemsLimit(12)
+        } else if (lgAndXl) {
+            productsStore.setItemsLimit(16)
+        }
+        else if(xxxl) {
+            productsStore.setItemsLimit(24)
+        }
+
+    }
+
+    const handleChangePage = (event: React.ChangeEvent<unknown>, page: number) => {
+        productsStore.setItemsOffset(page*productsStore.itemsLimit-productsStore.itemsLimit)
+        productsStore.fetchSameProducts()
     }
 
     return (
@@ -84,7 +123,7 @@ export const Plants = observer(() => {
                     <div >
                         <Grid container spacing={{xs: 3, sm: 3}} sx={{padding: {sm: '20px', xs: '0 7px'}, width: '100%'}}>
                             {productsStore.products.map((product) => (
-                                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} xxl={2} key={product.id} data-aos="zoom-in"
+                                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} xxxl={2} key={product.id} data-aos="zoom-in"
                                       sx={{display: 'flex', justifyContent: 'center'}}
                                 >
                                     <ProductItem productName={product.name} productImage={product.pictures[0].picture}
@@ -98,7 +137,12 @@ export const Plants = observer(() => {
 
         </Grid>
     <div className='pagination-container'>
-        <Pagination sx={{paddingBottom: '10px', fontSize: '30rem'}} count={10} variant="outlined" size="large"/>
+        <Pagination sx={{paddingBottom: '10px', fontSize: '30rem'}}
+                    count={Math.ceil(productsStore.productsCount/productsStore.itemsLimit)}
+                    variant="outlined"
+                    size="large"
+                    onChange={handleChangePage}
+        />
     </div>
         </>
     );

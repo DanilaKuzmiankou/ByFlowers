@@ -54,7 +54,7 @@ export const ProductsFilter = observer<ProductsProps>(({
         }
         else {
             productsCheckboxes = productsList.map(() => true)
-            console.log(productsCheckboxes)
+            setMainCheckbox([true, false])
         }
         setSubCheckboxes(productsCheckboxes)
         updateProducts(productsCheckboxes)
@@ -66,14 +66,13 @@ export const ProductsFilter = observer<ProductsProps>(({
         setSubCheckboxes(newChecked);
         const allSame = checkForOne(newChecked)
         setMainCheckbox([allSame && !newChecked.includes(false), !allSame])
-
         updateProducts(newChecked)
     }
 
     const updateProducts = async (newChecked: boolean[]) => {
         const checkedPlants = getCheckedItems(newChecked, productsList, productsStore.selectedProductsName.split(', '))
         if (checkedPlants) {
-            await productsStore.fetchProducts(checkedPlants)
+            await productsStore.fetchNewProducts(checkedPlants)
             checkedPlants.length > 3 ?
                 productsStore.setSelectedProductsName(checkedPlants.slice(0, 3).join(', ') + '...') :
                 productsStore.setSelectedProductsName(checkedPlants.join(', '))
@@ -160,8 +159,7 @@ export const ProductsFilter = observer<ProductsProps>(({
                             checked={mainCheckbox[0]}
                             indeterminate={mainCheckbox[1]}
                             onChange={handleMainCheckbox}
-                            icon={<CircleUnchecked />}
-                            checkedIcon={<CircleChecked />}
+                            color="success"
                         />
                     }
                 />
@@ -174,6 +172,7 @@ export const ProductsFilter = observer<ProductsProps>(({
                                 <Checkbox
                                     checked={subCheckboxes[index] || false}
                                     onChange={(event) => handleSubCheckboxes(event, index)}
+                                    color="success"
                                 />}
                             label={<Typography sx={productStyles.customNormalFont}>{product}</Typography>}
                         />

@@ -181,6 +181,7 @@ export const catalogProductItem = {
         fontFamily: 'Avenir',
         position: 'absolute',
         fontSize: {
+            xxl: '2rem',
             xl: '2.0rem',
             lg: '1.6rem',
             md: '2rem',
