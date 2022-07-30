@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/DanilaKuzmiankou/FlowersBel#readme",
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@mui/icons-material": "^5.8.4",
     "concurrently": "^7.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",

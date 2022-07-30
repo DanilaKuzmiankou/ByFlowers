@@ -13,16 +13,15 @@
     padding-left: 7%;
 }
 
-.bottom-brand {
-    font-size: 2rem;
-    font-family: IntroCondBlack;
+.bottom-rights {
+    font-size: 1.5rem;
 }
 
-@media screen and (max-width: 640px) {
-    .bottom-brand {
-        font-size: 1rem;
-    }
+.bottom-brand {
+    font-size: 2.2rem;
+    font-family: IntroCondBlack, sans-serif;
 }
+
 
 .bottom-icons {
     margin-left: auto;

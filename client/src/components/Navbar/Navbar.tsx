@@ -103,7 +103,7 @@ export const Navbar = () => {
 
     return (
         <AppBar sx={{p:0, m:0}} position="static" color='neutral'>
-            <Container sx={{zIndex: 1500}} maxWidth="xl" className='navbar'>
+            <Container sx={{zIndex: 10}} maxWidth="xl" className='navbar'>
                 <Toolbar disableGutters>
                     <Box
                         component="img"
@@ -161,12 +161,20 @@ export const Navbar = () => {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'flex', md: 'none' },
+                                display: { xs: 'flex', md: 'none' }
                             }}
                         >
                             {pages.map((page, id) => (
                                 <MenuItem key={page}  onClick={() => switchPage(pagesLinks[id])}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                    <Typography
+                                        sx={{
+                                        fontWeight: 500,
+                                        fontSize: '1.9rem',
+                                        }}
+                                        textAlign="center"
+                                    >
+                                        {page}
+                                    </Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -189,7 +197,7 @@ export const Navbar = () => {
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
                             fontWeight: 700,
-                            fontSize: '.9rem',
+                            fontSize: '1.9rem',
                             letterSpacing: '.1rem',
                             color: 'inherit',
                             textDecoration: 'none',

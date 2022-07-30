@@ -5,9 +5,10 @@ import {checkForOne, getCheckedItems} from "../../utils/Utils";
 import {productStyles} from "../../themes";
 import {observer} from "mobx-react-lite";
 import productsStore from "../../store/ProductsStore";
-import {toJS} from "mobx";
+import CircleChecked from '@mui/icons-material//CheckCircleOutline';
+import CircleUnchecked from '@mui/icons-material/RadioButtonUnchecked';
 
-interface ProductsProps {
+export interface ProductsProps {
     productsList: string[],
     mainCheckboxName: string
 }
@@ -41,17 +42,22 @@ export const ProductsFilter = observer<ProductsProps>(({
 
 
     const initCheckboxes = () => {
+        let productsCheckboxes:boolean[]
         if (productsStore.selectedNavbarProduct) {
-            const productsCheckboxes = productsList.map((element) => {
+            productsCheckboxes = productsList.map((element) => {
                 if (element === productsStore.selectedNavbarProduct) {
                     setMainCheckbox([false, true])
                     return true
                 }
                 return false
             })
-            setSubCheckboxes(productsCheckboxes)
-            updateProducts(productsCheckboxes)
         }
+        else {
+            productsCheckboxes = productsList.map(() => true)
+            console.log(productsCheckboxes)
+        }
+        setSubCheckboxes(productsCheckboxes)
+        updateProducts(productsCheckboxes)
     }
 
     const handleSubCheckboxes = (event: ChangeEvent<HTMLInputElement>, checkedIndex: number) => {
@@ -115,7 +121,12 @@ export const ProductsFilter = observer<ProductsProps>(({
                     <TextField
                         id='minPrice'
                         className="filters-input"
-                        size={greaterThanXL ? 'medium' : 'small'}
+                        sx={{
+                            "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                                borderRadius: '7% 0 0 7%'
+                            }
+                        }}
+                        size={greaterThanXXL ? 'medium' : 'small'}
                         inputProps={{style: {fontSize: calcInputFontSize()}}} // font size of input text
                         InputLabelProps={{style: {fontSize: calcPlaceHolderFontSize()}}} // font size of input label
                         type='number'
@@ -126,8 +137,13 @@ export const ProductsFilter = observer<ProductsProps>(({
                     <TextField
                         id='maxPrice'
                         className="filters-input"
-                        size={greaterThanXL ? 'medium' : 'small'}
-                        inputProps={{style: {fontSize: calcInputFontSize()}}} // font size of input text
+                        sx={{
+                            "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                                borderRadius: '0 7% 7% 0'
+                            }
+                        }}
+                        size={greaterThanXXL ? 'medium' : 'small'}
+                        inputProps={{style: {fontSize: calcInputFontSize(), borderColor: "red"}}} // font size of input text
                         InputLabelProps={{style: {fontSize: calcPlaceHolderFontSize()}}} // font size of input label
                         type='number'
                         label="to"
@@ -144,6 +160,8 @@ export const ProductsFilter = observer<ProductsProps>(({
                             checked={mainCheckbox[0]}
                             indeterminate={mainCheckbox[1]}
                             onChange={handleMainCheckbox}
+                            icon={<CircleUnchecked />}
+                            checkedIcon={<CircleChecked />}
                         />
                     }
                 />

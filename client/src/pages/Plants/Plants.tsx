@@ -8,7 +8,10 @@ import productsStore from "../../store/ProductsStore";
 import {toJS} from "mobx";
 import {productStyles} from "../../themes";
 import {ProductItem} from "../../components/ProductItem/ProductItem";
-
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
+import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProductsFilter";
 
 export const Plants = observer(() => {
 
@@ -16,9 +19,14 @@ export const Plants = observer(() => {
     const plants = ['Cactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
 
 
+    const openDrawer = () => {
+        console.log('hi')
+        productsStore.setDrawerIsOpen(true)
+    }
+
     return (
         <>
-        <Grid columns={16} container style={{width: '100%'}}>
+        <Grid columns={16} container style={{width: '100%', minHeight: '100vh'}}>
             <Grid item
                   xs={0}
                   sm={4}
@@ -44,14 +52,37 @@ export const Plants = observer(() => {
                   lg={14}
                   xl={13}>
                 <div className='products-container'>
-                    <div className='header-container'>
+                    <Box sx={{
+                        position: 'relative',
+                        alignItems: 'start',
+                        justifyContent: 'start',
+                        padding: {
+                            sm: '20px',
+                            xs: '10px 6px'
+                        }
+                    }}>
                         <Typography
                             sx={{...productStyles.customBoldFont, ...productStyles.headerTypographyStyle}}>
                             {productsStore.selectedProductsName}
                         </Typography>
-                    </div>
-                    <div style={{width: '100%'}}>
-                        <Grid container spacing={3} sx={{padding: '20px', width: '100%'}}>
+                        <Box
+                            onClick={openDrawer}
+                            sx={{
+                                display: { xs: 'inline-block', sm: 'none'}
+                            }}
+                        >
+                            <IconButton sx={{position: 'absolute', right: '10px', top: '3px'}} >
+                                <TuneTwoToneIcon fontSize={'large'} />
+                            </IconButton>
+                        </Box>
+                    </Box>
+
+                    <MobileProductsFilter
+                        productsList={plants}
+                        mainCheckboxName='Plants'
+                    />
+                    <div >
+                        <Grid container spacing={{xs: 3, sm: 3}} sx={{padding: {sm: '20px', xs: '0 7px'}, width: '100%'}}>
                             {productsStore.products.map((product) => (
                                 <Grid item xs={12} sm={6} md={4} lg={3} xl={3} xxl={2} key={product.id} data-aos="zoom-in"
                                       sx={{display: 'flex', justifyContent: 'center'}}

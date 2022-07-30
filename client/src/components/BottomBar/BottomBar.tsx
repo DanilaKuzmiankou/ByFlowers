@@ -9,10 +9,10 @@ export const BottomBar = () => {
                 <div className='bottom-brand'>
                     FlowersMarket
                 </div>
-                <div>
+                <div className='bottom-rights'>
                     &copy; All rights reserved
                 </div>
-                <div>
+                <div className='bottom-rights'>
                     2020-2022
                 </div>
             </div>

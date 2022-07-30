@@ -5,6 +5,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import "./CustomMuiMenu.css"
+import {productStyles} from "../../themes";
 
 interface MenuProps {
     menuName: string,
@@ -58,7 +59,7 @@ export const CustomMuiMenu:FC<MenuProps> = ({menuName, closeMenu, openMenu,
                         <div >
                             {menuItemsNames.map((itemName) => (
                                 <MenuItem key={itemName} onClick={() => onMenuItemClick(itemName)}>
-                                    <Typography textAlign="center">{itemName}</Typography>
+                                    <Typography sx={productStyles.customNormalFont} textAlign="center">{itemName}</Typography>
                                 </MenuItem>
                             ))}
                         </div>

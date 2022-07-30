@@ -9,6 +9,7 @@ class ProductsStore {
     selectedNavbarProduct:string = ''
     minProductPrice:number = -1
     maxProductPrice:number = -1
+    drawerIsOpen:boolean = false
 
     constructor() {
         makeAutoObservable(this)
@@ -41,6 +42,10 @@ class ProductsStore {
 
     setMaxProductPrice(maxProductPrice:number){
         this.maxProductPrice = maxProductPrice
+    }
+
+    setDrawerIsOpen(open:boolean){
+        this.drawerIsOpen = open
     }
 
 
