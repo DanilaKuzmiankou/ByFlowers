@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "heroku-prebuild": "cd client && npm install -legacy-peer-deps && npm run build",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm start --prefix client",
     "server": "nodemon index.js",
