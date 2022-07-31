@@ -6,7 +6,6 @@ import './App.css'
 import {BrowserRouter} from "react-router-dom";
 import {AppRoutes} from "./routes/AppRoutes";
 import AOS from 'aos';
-import 'aos/dist/aos.css';
 
 const App = () => {
     AOS.init();
