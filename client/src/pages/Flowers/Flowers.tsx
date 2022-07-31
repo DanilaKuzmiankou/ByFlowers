@@ -16,9 +16,6 @@ export const Flowers = () => {
 
     const flowers = ['Anutina eyes', 'Orchidea', 'Roses', 'Lilies']
 
-    const location = useLocation();
-
-    const {productType} = location.state as LocationState;
 
     useEffect(() => {
 
