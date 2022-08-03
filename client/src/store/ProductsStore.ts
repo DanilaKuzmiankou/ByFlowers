@@ -1,10 +1,10 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {getProducts} from "../api/store/Product";
-import {Product} from "../types/Product";
+import {ProductModel} from "../types/ProductModel";
 
 class ProductsStore {
 
-    products:Product[] = []
+    products:ProductModel[] = []
     selectedProductsName:string = ''
     selectedNavbarProduct:string = ''
     minProductPrice:number = -1
@@ -37,7 +37,7 @@ class ProductsStore {
        await this.fetchProducts()
     }
 
-    setProducts(products:Product[]){
+    setProducts(products:ProductModel[]){
         this.products = products
     }
 

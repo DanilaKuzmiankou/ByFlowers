@@ -1,4 +1,4 @@
-export type Product = {
+export type ProductModel = {
     id: number,
     name: string,
     description: string,
@@ -7,7 +7,7 @@ export type Product = {
     pictures: Picture[]
 }
 
-type Picture = {
+export type Picture = {
     id? : number,
     productId? : number,
     picture: string

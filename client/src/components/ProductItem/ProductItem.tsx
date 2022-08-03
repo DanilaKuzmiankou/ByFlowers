@@ -4,37 +4,44 @@ import Typography from "@mui/material/Typography";
 import "./ProductItem.css"
 import Button from "@mui/material/Button";
 import {useMediaQuery, useTheme} from "@mui/material";
-import {catalogProductItem, productStyles} from "../../themes";
+import {buyButtonDefaultStyle, buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
 import {useNavigate} from "react-router-dom";
+import {ProductModel} from "../../types/ProductModel";
 
 
 interface ProductProps {
-    id: number,
-    name: string,
-    image: string,
-    price: number
+    product: ProductModel
 }
 
-export const ProductItem:FC<ProductProps> = ({id, name, image, price}) => {
+export const ProductItem:FC<ProductProps> = ({product}) => {
 
     const theme = useTheme();
     const greaterThanLarge = useMediaQuery(theme.breakpoints.up("lg"));
     const navigate = useNavigate()
 
+    const buyButtonOverElementsStyle = {
+        position: "absolute",
+        bottom: "10px",
+        left: "20px",
+        right: "20px",
+    } as React.CSSProperties
 
-    const [buttonStyle, setButtonStyle] = useState<React.CSSProperties>(catalogProductItem.buttonDefaultStyle)
+    const [buttonStyle, setButtonStyle] = useState<React.CSSProperties>(buyButtonDefaultStyle)
 
 
     const onItemHover = (event: React.MouseEvent<HTMLDivElement>) => {
-        setButtonStyle(catalogProductItem.buttonHoverStyle)
+        setButtonStyle({...buyButtonHoverStyle, ...buyButtonOverElementsStyle})
     }
 
     const onItemNotHover = (event: React.MouseEvent<HTMLDivElement>) => {
-        setButtonStyle(catalogProductItem.buttonDefaultStyle)
+        setButtonStyle({...buyButtonDefaultStyle, ...buyButtonOverElementsStyle})
     }
 
     const goToItemPage = () => {
-        navigate('product', { state: { id: id } })
+        console.log('prd', product)
+        navigate('../product', { state: {
+            productJson: JSON.stringify(product)
+        } })
     }
 
     return (
@@ -44,19 +51,19 @@ export const ProductItem:FC<ProductProps> = ({id, name, image, price}) => {
                 noWrap
                 sx={catalogProductItem.typographyStyle}
             >
-                {name}
+                {product.name}
             </Typography>
             <Typography
                 variant="h6"
                 noWrap
                 sx={{...catalogProductItem.typographyStyle, ...{ top: '10%', zIndex: 3, fontWeight: 700 }}}
             >
-                {price}$
+                {product.price}$
             </Typography>
             <Box
                 component="img"
                 sx={catalogProductItem.pictureStyle}
-                src={image}
+                src={product.pictures[0].picture}
             />
             <Button
                 sx={buttonStyle}

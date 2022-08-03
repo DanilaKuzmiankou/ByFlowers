@@ -82,7 +82,7 @@ class ProductController {
     }
 
 
-    getProducts(whereExpression, includeExpression, orderExpression, limit, offset) {
+     getProducts(whereExpression, includeExpression, orderExpression, limit, offset) {
         return Product.findAll({
             where: whereExpression,
             limit: limit,

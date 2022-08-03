@@ -116,10 +116,7 @@ export const Plants = observer(() => {
                                           sx={{display: 'flex', justifyContent: 'center'}}
                                     >
                                         <ProductItem
-                                            id={product.id}
-                                            name={product.name}
-                                            image={product.pictures[0].picture}
-                                            price={product.price}
+                                            product={product}
                                         />
                                     </Grid>
                                 ))}
