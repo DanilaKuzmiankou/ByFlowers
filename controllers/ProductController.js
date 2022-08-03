@@ -93,6 +93,23 @@ class ProductController {
         })
     }
 
+    async getRecommendationProducts(req, res, next) {
+        const {limit} = req.query
+        return res.json(await productController.getProducts(
+            {},
+            [
+                {
+                model: ProductPicture,
+                as: 'pictures',
+                attributes: ['picture']
+                }
+                ],
+            Sequelize.literal('random()'),
+            Number(limit),
+            0
+        ))
+    }
+
 
     async createProduct(req, res, next) {
         const {name, description, productType, count, price, pictures, isFlower} = req.body
