@@ -115,9 +115,12 @@ export const Plants = observer(() => {
                                           data-aos="zoom-in"
                                           sx={{display: 'flex', justifyContent: 'center'}}
                                     >
-                                        <ProductItem productName={product.name}
-                                                     productImage={product.pictures[0].picture}
-                                                     productPrice={product.price}/>
+                                        <ProductItem
+                                            id={product.id}
+                                            name={product.name}
+                                            image={product.pictures[0].picture}
+                                            price={product.price}
+                                        />
                                     </Grid>
                                 ))}
                             </Grid>

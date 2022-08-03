@@ -5,19 +5,21 @@ import "./ProductItem.css"
 import Button from "@mui/material/Button";
 import {useMediaQuery, useTheme} from "@mui/material";
 import {catalogProductItem, productStyles} from "../../themes";
+import {useNavigate} from "react-router-dom";
 
 
 interface ProductProps {
-    productName: string,
-    productImage: string,
-    productPrice: number
+    id: number,
+    name: string,
+    image: string,
+    price: number
 }
 
-export const ProductItem:FC<ProductProps> = ({productName, productImage, productPrice}) => {
+export const ProductItem:FC<ProductProps> = ({id, name, image, price}) => {
 
     const theme = useTheme();
     const greaterThanLarge = useMediaQuery(theme.breakpoints.up("lg"));
-
+    const navigate = useNavigate()
 
 
     const [buttonStyle, setButtonStyle] = useState<React.CSSProperties>(catalogProductItem.buttonDefaultStyle)
@@ -31,26 +33,30 @@ export const ProductItem:FC<ProductProps> = ({productName, productImage, product
         setButtonStyle(catalogProductItem.buttonDefaultStyle)
     }
 
+    const goToItemPage = () => {
+        navigate('product', { state: { id: id } })
+    }
+
     return (
-        <Box sx={catalogProductItem.container} onMouseOver={onItemHover} onMouseLeave={onItemNotHover}>
+        <Box sx={catalogProductItem.container} onMouseOver={onItemHover} onMouseLeave={onItemNotHover} onClick={goToItemPage}>
             <Typography
                 variant="h6"
                 noWrap
                 sx={catalogProductItem.typographyStyle}
             >
-                {productName}
+                {name}
             </Typography>
             <Typography
                 variant="h6"
                 noWrap
                 sx={{...catalogProductItem.typographyStyle, ...{ top: '10%', zIndex: 3, fontWeight: 700 }}}
             >
-                {productPrice}$
+                {price}$
             </Typography>
             <Box
                 component="img"
                 sx={catalogProductItem.pictureStyle}
-                src={productImage}
+                src={image}
             />
             <Button
                 sx={buttonStyle}
