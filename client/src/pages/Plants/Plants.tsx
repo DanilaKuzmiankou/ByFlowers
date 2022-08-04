@@ -115,6 +115,7 @@ export const Plants = observer(() => {
                                           data-aos="zoom-in"
                                           sx={{display: 'flex', justifyContent: 'center'}}
                                     >
+
                                         <ProductItem
                                             product={product}
                                         />

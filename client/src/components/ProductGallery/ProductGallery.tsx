@@ -27,7 +27,7 @@ export const ProductGallery:FC<ProductGalleryProps> = ({pictures}) => {
                 className="mySwiper2"
             >
                 {pictures.map((picture, index) => (
-                    <SwiperSlide key={picture.id} style={{height: '100%'}}>
+                    <SwiperSlide key={index} style={{height: '100%'}}>
                         <Box
                             sx={{ height: '550px', width: '500px'}}
                             component="img"
@@ -46,7 +46,7 @@ export const ProductGallery:FC<ProductGalleryProps> = ({pictures}) => {
                 className="mySwiper"
             >
                 {pictures.map((picture, index) => (
-                    <SwiperSlide key={picture.id + '1000'}>
+                    <SwiperSlide key={index+200} >
                         <Box
                             sx={{ height: '200px', width: '190px'}}
                             component="img"

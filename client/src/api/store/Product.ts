@@ -62,7 +62,6 @@ import { getRequest } from '../index.network';
 
 export async function getProducts(types:string[], minPrice:number, maxPrice:number, limit:number, offset:number) {
     const typesStr = types.join(',')
-    console.log('li', limit)
     return await getRequest(
         `/api/product/getProducts`+
         `?types=${encodeURIComponent(typesStr)}` +
@@ -70,4 +69,10 @@ export async function getProducts(types:string[], minPrice:number, maxPrice:numb
         `&maxPrice=${encodeURIComponent(maxPrice)}` +
         `&limit=${encodeURIComponent(limit)}` +
         `&offset=${encodeURIComponent(offset)}`);
+}
+
+export async function getRecommendationProducts(limit:number) {
+    return await getRequest(
+        `/api/product/recommendationProducts`+
+        `?limit=${encodeURIComponent(limit)}`);
 }

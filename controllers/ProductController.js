@@ -95,6 +95,7 @@ class ProductController {
 
     async getRecommendationProducts(req, res, next) {
         const {limit} = req.query
+        console.log('got')
         return res.json(await productController.getProducts(
             {},
             [

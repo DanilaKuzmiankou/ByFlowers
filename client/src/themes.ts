@@ -227,7 +227,7 @@ export const catalogProductItem = {
         textAlign: 'center',
         fontWeight: 500,
         textDecoration: 'none',
-        color: 'black',
+        color: 'inherit',
         backgroundColor: 'transparent',
     },
     container: {
@@ -249,7 +249,8 @@ export const catalogProductItem = {
         //border: "1px solid #cddfe0"
         border: {xs: "0.01em solid #000000", sm: 'none'},
         '&:hover': {
-            border: "0.01em solid #000000",
+            border: "0.01em solid",
+            borderColor: 'inherit',
             borderRadius: '3%',
             boxShadow:
                 "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px"

@@ -38,13 +38,13 @@ export const ProductItem:FC<ProductProps> = ({product}) => {
     }
 
     const goToItemPage = () => {
-        console.log('prd', product)
         navigate('../product', { state: {
             productJson: JSON.stringify(product)
         } })
     }
 
     return (
+
         <Box sx={catalogProductItem.container} onMouseOver={onItemHover} onMouseLeave={onItemNotHover} onClick={goToItemPage}>
             <Typography
                 variant="h6"
