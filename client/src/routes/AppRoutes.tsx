@@ -3,7 +3,7 @@ import {
     Blog,
     BestChoice,
     AboutUs,
-    NotFound, Plants, Flowers, Product
+    NotFound, Plants, Flowers, Product, Login
 } from '../pages/index.pages';
 import React from 'react';
 
@@ -16,7 +16,7 @@ export const AppRoutes = () => (
         <Route path='/aboutUs' element={<AboutUs />} />
         <Route path='/blog' element={<Blog />} />
         <Route path='/bestChoice' element={<BestChoice />} />
-        <Route path='/product' element={<Product />} >
-        </Route>
+        <Route path='/product' element={<Product />} />
+        <Route path='/login' element={<Login />} />
     </Routes>
 );

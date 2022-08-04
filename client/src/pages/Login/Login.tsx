@@ -1,0 +1,135 @@
+import React, {useState} from 'react';
+import './Login.css'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleUser, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import {faAt} from '@fortawesome/free-solid-svg-icons';
+import {faLock} from '@fortawesome/free-solid-svg-icons';
+import {faEye} from '@fortawesome/free-solid-svg-icons';
+import {faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import {ErrorMessage, Field, Form, Formik, FieldProps} from "formik";
+import * as Yup from 'yup';
+import YupPassword from 'yup-password';
+import userStore from "../../store/UserStore";
+import Button from "@mui/material/Button";
+import {Link} from "react-router-dom";
+YupPassword(Yup);
+
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+const userSchema = Yup.object({
+    name: Yup.string().max(100, 'must_be_100_characters_or_less').required('required'),
+    email: Yup.string().nullable().email().required('required'),
+    password: Yup.string().required('required')
+        .minLowercase(1, 'password must contain at least 1 lower case letter')
+        .minUppercase(1, 'password must contain at least 1 upper case letter')
+        .minNumbers(1, 'password must contain at least 1 number')
+        .minSymbols(1, 'password must contain at least 1 special character'),
+    phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+})
+
+export const Login = () => {
+
+    const [passwordIsVisible, setPasswordIsVisible] = useState<boolean>(false)
+    const [currentIcon, setCurrentIcon] = useState<IconDefinition>(faEyeSlash)
+
+    const changePasswordVisibility = () => {
+        setPasswordIsVisible(!passwordIsVisible)
+        setCurrentIcon(currentIcon===faEye?faEyeSlash:faEye)
+    }
+
+    return (
+        <div className="container">
+            <div className="form-box">
+                <div className="header-form">
+                    <FontAwesomeIcon
+                        size='5x'
+                        icon={faCircleUser}
+                        color='#3A9AB9'
+                    />
+                </div>
+                <Formik
+                    initialValues={{
+                        name: userStore.user.name || '',
+                        email: userStore.user.email || '',
+                        password: userStore.user.password || '',
+                        phone: userStore.user.phone || ''
+                    }}
+                    onSubmit={(values, {resetForm}) => {
+                        return new Promise(async (resolve, reject) => {
+                            resetForm();
+                            //await formSubmit(values, resolve);
+                        });
+                    }}
+                >
+                    {({errors, touched}) => (
+                        <Form className='loginForm'>
+                            <div className={`${touched.email && errors.email ? 'error-icon' : null} formik-field-container`}>
+                            <FontAwesomeIcon
+                                width='40px'
+                                icon={faAt}
+                                color='#3A9AB9'
+                            />
+                            <Field
+                                placeholder='Enter your email'
+                                name='email'
+                                type='email'
+                                className={`${touched.email && errors.email ? 'error-field' : null} formik-field`}
+                            />
+                            </div>
+                            <ErrorMessage component='div' className='custom-error-message' name='email'/>
+
+                            <div className={`${touched.password && errors.password ? 'error-icon' : null} formik-field-container`}>
+                                <FontAwesomeIcon
+                                    width='40px'
+                                    icon={faLock}
+                                    color='#3A9AB9'
+                                />
+                                <Field
+                                    name='password'
+                                    className={`${touched.password && errors.password ? 'error-field' : null} formik-field`}
+                                >
+                                    {({ field, form, meta }:FieldProps) => (
+                                        <div className='password-container'>
+                                            <input
+                                                {...field}
+                                                type={`${passwordIsVisible ? 'text' : 'password'}`}
+                                                placeholder='Enter your password'
+                                                className={`${meta.touched && meta.error ? 'error-field' : null} password-input`}
+                                            />
+                                            <FontAwesomeIcon
+                                                onClick={changePasswordVisibility}
+                                                className='password-image'
+                                                width='15px'
+                                                icon={currentIcon}
+                                                color='#446244'
+                                            />
+                                        </div>
+
+                                    )}
+                                </Field>
+                            </div>
+                            <ErrorMessage component='div' className='custom-error-message' name='password'/>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                sx={{
+                                    fontFamily: 'Avenir, sans-serif',
+                                    fontSize: '1.5rem',
+                                    height: '38px',
+                                    marginTop:'20px',
+                                    width: '100%'
+                                }}
+                            >
+                                Log in!
+                            </Button>
+                            <div className='signin-link-container'>
+                            <Link to='s' className='signin-link'>Have not account yet? Sign in!</Link>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+        </div>
+    );
+};
+

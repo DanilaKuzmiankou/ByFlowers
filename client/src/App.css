@@ -3,6 +3,8 @@
     src: local('DefaultFont'), url(./assets/fonts/IntroCondLight.otf)
 }
 
+
+
 @font-face {
     font-family: 'GilroyHeavyItalic';
     src: local('GilroyHeavyItalic'),
