@@ -54,6 +54,7 @@ export const Login = () => {
                         password: userStore.user.password || '',
                         phone: userStore.user.phone || ''
                     }}
+                    validationSchema={userSchema}
                     onSubmit={(values, {resetForm}) => {
                         return new Promise(async (resolve, reject) => {
                             resetForm();
