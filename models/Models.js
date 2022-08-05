@@ -85,8 +85,12 @@ const RefreshToken = sequelize.define("refresh_token", {
 User.hasOne(Basket)
 Basket.belongsTo(User);
 
-User.hasOne(RefreshToken)
-RefreshToken.belongsTo(User)
+
+RefreshToken.hasOne(User)
+User.belongsTo(RefreshToken, {
+    as: "refreshToken",
+    onDelete: "CASCADE",
+})
 
 Basket.hasMany(BasketProduct);
 BasketProduct.belongsTo(Basket);

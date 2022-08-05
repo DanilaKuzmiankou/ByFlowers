@@ -119,7 +119,7 @@ class ProductController {
         try {
             createdProduct = await Product.create({name, description, count, price, isFlower});
         } catch (e) {
-            return next(ApiError.badRequest("This product is already created!"));
+            return ApiError.badRequest("This product is already created!");
         }
         productTypeDb = await ProductType.findOne({where: {name: productType}})
         if (!productTypeDb) productTypeDb = await ProductType.create({name: productType})
