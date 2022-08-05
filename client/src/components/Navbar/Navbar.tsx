@@ -15,6 +15,8 @@ import './Navbar.css'
 import {useNavigate} from "react-router-dom";
 import {CustomMuiMenu} from "../index.components";
 import productsStore from "../../store/ProductsStore";
+import userStore from "../../store/UserStore";
+import {observer} from "mobx-react-lite";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
@@ -44,7 +46,28 @@ const navbarButtonsStyle = {
     paddingLeft: '13px'
 }
 
-export const Navbar = () => {
+
+const navbarLoginButtonStyle = {
+    my: 2,
+    mx:0.5,
+    fontFamily: 'IntroCondBlack',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '999px',
+    transition: 'background-color 200ms ease',
+    color: '#fff',
+    fontSize: '1.70rem',
+    lineHeight: 1,
+    fontWeight: 700,
+    marginLeft: '20px',
+    paddingTop: '14px',
+    paddingBottom: '14px',
+    paddingRight: '13px',
+    paddingLeft: '13px'
+}
+
+export const Navbar = observer(() => {
     const navigate = useNavigate();
 
 
@@ -237,38 +260,20 @@ export const Navbar = () => {
                             isMenuOpen={flowersMenuOpen}
                         />
                     </Box>
-                    <Box sx={{ flexGrow: 0, pl: '10px' }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            disableScrollLock={true}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
+                    {userStore.loggedIn ?
+                        <></>
+                        :
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            sx={navbarLoginButtonStyle}
+                            onClick={() => switchPage('login')}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+                            Login
+                        </Button>
+                    }
                 </Toolbar>
             </Container>
         </AppBar>
     );
-};
+});

@@ -1,6 +1,17 @@
-import { postRequest } from '../index.network';
+import {postRequest, postSecretRequest} from '../index.network';
+import {User} from "../../types/UserModel";
 
-export async function registerNewUser() {
-  const body = JSON.stringify({  });
- // return await postRequest(token, '/api/user/registration', body);
+export async function registration(user: User, token:any) {
+  const body = JSON.stringify({ name: user.name, email: user.email, password: user.password, phone: user.phone });
+ return await postSecretRequest(token, '/api/user/registration', body);
+}
+
+export async function login(user: User, token:any) {
+    const body = JSON.stringify({email: user.email, password: user.password});
+    return await postSecretRequest(token, '/api/user/login', body);
+}
+
+export async function auth(user: User, token:any) {
+    const body = JSON.stringify({ email: user.email, password: user.password });
+    return await postSecretRequest(token, '/api/user/registration', body);
 }

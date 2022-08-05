@@ -5,6 +5,10 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@fortawesome/fontawesome-common-types": "^6.1.2",
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
     "@testing-library/jest-dom": "^5.16.4",
@@ -14,17 +18,22 @@
     "@types/node": "^16.11.43",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "@types/react-fontawesome": "^1.6.5",
     "aos": "^2.3.4",
     "axios": "^0.27.2",
+    "formik": "^2.2.9",
     "mobx": "^6.6.1",
     "mobx-react-lite": "^3.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-input-mask": "^3.0.0-alpha.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "swiper": "^8.3.0",
     "typescript": "^4.7.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11",
+    "yup-password": "^0.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,6 +60,7 @@
     ]
   },
   "devDependencies": {
-    "@types/aos": "^3.0.4"
+    "@types/aos": "^3.0.4",
+    "@types/react-input-mask": "^3.0.1"
   }
 }
