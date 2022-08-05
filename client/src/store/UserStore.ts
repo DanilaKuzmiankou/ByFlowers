@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {User} from "../types/UserModel";
-import {registration} from "../api/store/User";
+import {registration, login} from "../api/store/User";
 
 
 class UserStore {
@@ -15,6 +15,11 @@ class UserStore {
     async register(user: User){
         const response = await registration(user, 'fsdfsd')
         console.log('resp: ', response)
+    }
+
+    async login(user: User){
+        const response = await login(user, 'fsdfsd')
+        console.log('resp login: ', response)
     }
 
     setUser(user: User){

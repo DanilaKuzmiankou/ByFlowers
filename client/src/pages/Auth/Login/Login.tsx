@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import userStore from "../../../store/UserStore";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
+import {User} from "../../../types/UserModel";
 
 
 const userSchema = Yup.object({
@@ -45,8 +46,14 @@ export const Login = () => {
                     }}
                     validationSchema={userSchema}
                     onSubmit={async (values, {resetForm}) => {
-                            await new Promise((r) => setTimeout(r, 500));
-                            alert(JSON.stringify(values, null, 2));
+                        const user:User = {
+                            password:values.password,
+                            email:values.email,
+                        }
+                        await new Promise(() => {
+                            userStore.login(user)
+                            //resetForm()
+                        });
                     }}
                 >
                     {({errors, touched}) => (

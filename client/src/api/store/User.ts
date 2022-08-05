@@ -6,6 +6,11 @@ export async function registration(user: User, token:any) {
  return await postSecretRequest(token, '/api/user/registration', body);
 }
 
+export async function login(user: User, token:any) {
+    const body = JSON.stringify({email: user.email, password: user.password});
+    return await postSecretRequest(token, '/api/user/login', body);
+}
+
 export async function auth(user: User, token:any) {
     const body = JSON.stringify({ email: user.email, password: user.password });
     return await postSecretRequest(token, '/api/user/registration', body);
