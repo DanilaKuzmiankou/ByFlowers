@@ -9,7 +9,7 @@ export function getRequest(url:string) {
   return promise.then((response) => response.data);
 }
 
-export function postRequest(url:string, body:object) {
+export function postRequest(url:string, body:string) {
   const promise = axios.post(`${process.env.REACT_APP_SERVER_URL}${url}`, body, {
     headers: {
       'Content-Type': 'application/json',
@@ -18,11 +18,21 @@ export function postRequest(url:string, body:object) {
   return promise.then((response) => response.data);
 }
 
-export function rawPostRequest(url:string, body:object) {
+export function rawPostRequest(url:string, body:string) {
   const promise = axios.post(`${process.env.REACT_APP_SERVER_URL}${url}`, body, {
     headers: {
       'Content-Type': 'application/json',
     },
   });
   return promise.then((response) => response);
+}
+
+export function postSecretRequest(bearer:string, url:string, body:string) {
+  const promise = axios.post(`${process.env.REACT_APP_SERVER_URL}${url}`, body, {
+    headers: {
+      Authorization: `Bearer ${bearer}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  return promise.then((response) => response.data);
 }

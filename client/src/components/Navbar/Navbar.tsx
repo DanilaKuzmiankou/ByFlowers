@@ -16,6 +16,7 @@ import {useNavigate} from "react-router-dom";
 import {CustomMuiMenu} from "../index.components";
 import productsStore from "../../store/ProductsStore";
 import userStore from "../../store/UserStore";
+import {observer} from "mobx-react-lite";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
@@ -59,14 +60,14 @@ const navbarLoginButtonStyle = {
     fontSize: '1.70rem',
     lineHeight: 1,
     fontWeight: 700,
-    marginLeft: '40px',
+    marginLeft: '20px',
     paddingTop: '14px',
     paddingBottom: '14px',
     paddingRight: '13px',
     paddingLeft: '13px'
 }
 
-export const Navbar = () => {
+export const Navbar = observer(() => {
     const navigate = useNavigate();
 
 
@@ -264,7 +265,7 @@ export const Navbar = () => {
                         :
                         <Button
                             variant="contained"
-                            color="success"
+                            color="primary"
                             sx={navbarLoginButtonStyle}
                             onClick={() => switchPage('login')}
                         >
@@ -275,4 +276,4 @@ export const Navbar = () => {
             </Container>
         </AppBar>
     );
-};
+});

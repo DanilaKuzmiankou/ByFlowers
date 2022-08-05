@@ -5,4 +5,5 @@ export { NotFound } from './NotFound/NotFound';
 export { Plants} from './Plants/Plants'
 export { Flowers } from './Flowers/Flowers'
 export { Product } from './Product/Product'
-export { Login } from './Login/Login'
+export { Login } from './Auth/Login/Login'
+export { Signin } from './Auth/Signin/SignIn'
