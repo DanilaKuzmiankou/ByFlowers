@@ -5,10 +5,14 @@ const path = require("path");
 const router = require("./routes/Routes");
 const models = require("./models/Models")
 const sequelize = require("./DB");
+const cookieParser = require('cookie-parser')
+
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+
+
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
@@ -19,6 +23,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(cors({ origin: true }));
 app.use(express.json());
+app.use(cookieParser())
 app.use("/api", router);
 
 const start = async () => {

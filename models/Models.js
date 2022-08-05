@@ -72,9 +72,21 @@ const ProductPicture = sequelize.define("product_picture", {
     }
 );
 
+const RefreshToken = sequelize.define("refresh_token", {
+        id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+        refreshToken: { type: DataTypes.TEXT, allowNull: false, required: true }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
+    }
+);
 
 User.hasOne(Basket)
 Basket.belongsTo(User);
+
+User.hasOne(RefreshToken)
+RefreshToken.belongsTo(User)
 
 Basket.hasMany(BasketProduct);
 BasketProduct.belongsTo(Basket);
@@ -95,8 +107,10 @@ Product.belongsTo(ProductType, {
 })
 
 
+
 module.exports = {
     User,
+    RefreshToken,
     Basket,
     BasketProduct,
     Product,
