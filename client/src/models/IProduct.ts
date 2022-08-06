@@ -1,14 +1,19 @@
-export type ProductModel = {
+export interface IProduct {
     id: number,
     name: string,
     description: string,
     count: number,
     price: number,
-    pictures: Picture[]
+    pictures: IPicture[]
 }
 
-export type Picture = {
+export interface IPicture {
     id? : number,
     productId? : number,
     picture: string
+}
+
+export interface ProductsResponse {
+    products: IProduct[],
+    count: number
 }

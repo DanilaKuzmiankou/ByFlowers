@@ -15,7 +15,7 @@ import YupPassword from 'yup-password';
 import userStore from "../../../store/UserStore";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
-import {User} from "../../../types/UserModel";
+import {IUser} from "../../../models/IUser";
 
 YupPassword(Yup);
 
@@ -54,21 +54,15 @@ export const Signin = () => {
                 </div>
                 <Formik
                     initialValues={{
-                        name: userStore.user.name || '',
-                        email: userStore.user.email || '',
-                        password: userStore.user.password || '',
-                        phone: userStore.user.phone || ''
+                        name: '',
+                        email: '',
+                        password: '',
+                        phone: ''
                     }}
                     validationSchema={userSchema}
                     onSubmit={async (values, {resetForm}) => {
-                        const user:User = {
-                            name:values.name,
-                            password:values.password,
-                            email:values.email,
-                            phone:values.phone,
-                        }
                         await new Promise(() => {
-                            userStore.register(user)
+                            userStore.registration(values.name, values.password, values.email, values.phone)
                             //resetForm()
                         });
                     }}

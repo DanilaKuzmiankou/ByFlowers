@@ -5,12 +5,12 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import {Picture} from "../../types/ProductModel";
+import {IPicture} from "../../models/IProduct";
 import {Swiper, SwiperSlide} from "swiper/react";
 import './ProductGallery.css'
 
 interface ProductGalleryProps {
-    pictures: Picture[]
+    pictures: IPicture[]
 }
 
 export const ProductGallery:FC<ProductGalleryProps> = ({pictures}) => {

@@ -1,78 +1,24 @@
-import { postRequest } from '../index.network';
-import { getRequest } from '../index.network';
-// import { generateRandomString } from '../../utils/Utils';
-// import firebase from '../../utils/Firebase';
-//
-//
-//
-// export async function uploadImagesToFirebaseCloud(images) {
-//   const imagesUrl = [];
-//   let file;
-//   let fileRef;
-//   let downloadUrl;
-//   let uploadTaskSnapshot;
-//   let fileName;
-//   const storageRef = firebase.storage().ref();
-//   for (let i = 0; i < images.length; i++) {
-//     file = images[i];
-//     if (file.preview) {
-//       fileName = generateRandomString();
-//       try {
-//         fileRef = storageRef.child('reviews_images/' + fileName);
-//         uploadTaskSnapshot = await fileRef.put(file);
-//         downloadUrl = await uploadTaskSnapshot.ref.getDownloadURL();
-//         imagesUrl[i] = downloadUrl;
-//       } catch (error) {
-//         console.log('ERR ===', error);
-//       }
-//     }
-//   }
-//   return imagesUrl;
-// }
-//
-// export async function deleteImagesFromFirebaseCloud(pictures) {
-//   if (pictures && pictures.length) {
-//     const storage = firebase.storage();
-//     for (let i = 0; i < pictures?.length; i++) {
-//       try {
-//         const url = pictures[i].imageLink;
-//         const imageRef = storage.refFromURL(url);
-//         await imageRef.delete();
-//         await deleteImageFromDatabase(url);
-//       } catch (error) {
-//         console.log('ERR ===', error);
-//       }
-//     }
-//   }
-// }
-//
-// export async function addImagesToDatabase(picturesUrl, reviewId) {
-//   picturesUrl?.forEach((pictureUrl) => addImageToDatabase(pictureUrl, reviewId));
-// }
-//
-// async function deleteImageFromDatabase(url) {
-//   const body = JSON.stringify({ url });
-//   return await postRequest('/api/review/deleteImage', body);
-// }
-//
-// async function addImageToDatabase(url, reviewId) {
-//   const body = JSON.stringify({ url, reviewId });
-//   return await postRequest('/api/review/addImage', body);
-// }
+import axios, {AxiosResponse} from "axios";
+import {IProduct, ProductsResponse} from "../../models/IProduct";
 
-export async function getProducts(types:string[], minPrice:number, maxPrice:number, limit:number, offset:number) {
+
+export async function getProducts(types:string[], minPrice:number, maxPrice:number, limit:number, offset:number):Promise<AxiosResponse<ProductsResponse>> {
     const typesStr = types.join(',')
-    return await getRequest(
-        `/api/product/getProducts`+
-        `?types=${encodeURIComponent(typesStr)}` +
-        `&minPrice=${encodeURIComponent(minPrice)}` +
-        `&maxPrice=${encodeURIComponent(maxPrice)}` +
-        `&limit=${encodeURIComponent(limit)}` +
-        `&offset=${encodeURIComponent(offset)}`);
+    return axios.get<ProductsResponse>(`${process.env.REACT_APP_SERVER_URL}/product/products`, {
+        params: {
+            types: typesStr,
+            minPrice,
+            maxPrice,
+            limit,
+            offset
+        }
+    })
 }
 
-export async function getRecommendationProducts(limit:number) {
-    return await getRequest(
-        `/api/product/recommendationProducts`+
-        `?limit=${encodeURIComponent(limit)}`);
+export async function getRecommendationProducts(limit:number):Promise<AxiosResponse<IProduct[]>> {
+    return axios.get<IProduct[]>(`${process.env.REACT_APP_SERVER_URL}/product/recommendationProducts`, {
+        params: {
+            limit
+        }
+    })
 }

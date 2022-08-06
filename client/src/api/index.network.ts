@@ -1,38 +1,13 @@
 import axios from 'axios';
 
-export function getRequest(url:string) {
-  const promise = axios.get(`${process.env.REACT_APP_SERVER_URL}${url}`,  {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return promise.then((response) => response.data);
-}
+const $api = axios.create({
+  withCredentials: true,
+  baseURL: process.env.REACT_APP_SERVER_URL
+})
 
-export function postRequest(url:string, body:string) {
-  const promise = axios.post(`${process.env.REACT_APP_SERVER_URL}${url}`, body, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return promise.then((response) => response.data);
-}
+$api.interceptors.request.use( (config ) => {
+  config.headers!.Authorization = `Bearer ${localStorage.getItem('token')}`
+  return config
+})
 
-export function rawPostRequest(url:string, body:string) {
-  const promise = axios.post(`${process.env.REACT_APP_SERVER_URL}${url}`, body, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return promise.then((response) => response);
-}
-
-export function postSecretRequest(bearer:string, url:string, body:string) {
-  const promise = axios.post(`${process.env.REACT_APP_SERVER_URL}${url}`, body, {
-    headers: {
-      Authorization: `Bearer ${bearer}`,
-      'Content-Type': 'application/json',
-    },
-  });
-  return promise.then((response) => response.data);
-}
+export default $api

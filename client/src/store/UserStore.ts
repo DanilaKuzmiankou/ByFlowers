@@ -1,33 +1,76 @@
 import {makeAutoObservable} from "mobx";
-import {User} from "../types/UserModel";
-import {registration, login} from "../api/store/User";
+import {IUser} from "../models/IUser";
+import {registration, login, logout, checkAuth} from "../api/store/User";
 
 
 class UserStore {
 
-    user:User = {}
-    loggedIn:boolean = false
+    user = {} as IUser
+
+    isAuth:boolean = false
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    async register(user: User){
-        const response = await registration(user, 'fsdfsd')
-        console.log('resp: ', response)
+    setIsAuth(isAuth:boolean){
+        this.isAuth = isAuth
     }
 
-    async login(user: User){
-        const response = await login(user, 'fsdfsd')
-        console.log('resp login: ', response)
+    setUser(user: IUser){
+        this.user = user
     }
 
-    setUser(user: User){
-        if(user){
-            this.user = user
-            this.loggedIn = true
+    async login(email: string, password: string){
+        try {
+            const response = await login(email, password)
+            localStorage.setItem('token', response.data.accessToken)
+            this.setIsAuth(true)
+            this.setUser(response.data.user)
+        } catch (e: any) {
+            console.log(e.response?.data?.message)
         }
     }
+
+    async registration(email:string, password:string, phone: string, name: string){
+        try {
+            const response = await registration(email, password, phone, name)
+            localStorage.setItem('token', response.data.accessToken)
+            this.setIsAuth(true)
+            this.setUser(response.data.user)
+        } catch (e: any) {
+            console.log(e.response?.data?.message)
+        }
+    }
+
+    async logout(){
+        try {
+            const response = await logout()
+            localStorage.removeItem('token')
+            this.setIsAuth(false)
+            this.setUser({} as IUser)
+        } catch (e:any) {
+            console.log(e.response?.data?.message)
+
+        }
+    }
+
+    async checkIsUserAuth() {
+        try{
+        const response = await checkAuth()
+        console.log(response)
+        localStorage.setItem('token', response.data.accessToken)
+        this.setIsAuth(true)
+        this.setUser(response.data.user)
+        } catch (e: any) {
+            console.log(e.response?.data?.message)
+        } finally {
+            //this.setLoading(false)
+        }
+    }
+
+
+
 
 }
 

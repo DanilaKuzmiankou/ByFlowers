@@ -6,11 +6,11 @@ import Button from "@mui/material/Button";
 import {useMediaQuery, useTheme} from "@mui/material";
 import {buyButtonDefaultStyle, buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
 import {useNavigate} from "react-router-dom";
-import {ProductModel} from "../../types/ProductModel";
+import {IProduct} from "../../models/IProduct";
 
 
 interface ProductProps {
-    product: ProductModel
+    product: IProduct
 }
 
 export const ProductItem:FC<ProductProps> = ({product}) => {

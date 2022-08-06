@@ -1,10 +1,10 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {getProducts} from "../api/store/Product";
-import {ProductModel} from "../types/ProductModel";
+import {IProduct} from "../models/IProduct";
 
 class ProductsStore {
 
-    products:ProductModel[] = []
+    products:IProduct[] = []
     selectedProductsName:string = ''
     selectedNavbarProduct:string = ''
     minProductPrice:number = -1
@@ -26,8 +26,8 @@ class ProductsStore {
     async fetchProducts() {
         const response = await getProducts(this.productsNames, this.minProductPrice,
             this.maxProductPrice, this.itemsLimit, this.itemsOffset)
-        const products = response[0]
-        this.productsCount = response[1]
+        const products = response.data.products
+        this.productsCount = response.data.count
         runInAction(() => {
             this.products = products
         })
@@ -37,7 +37,7 @@ class ProductsStore {
        await this.fetchProducts()
     }
 
-    setProducts(products:ProductModel[]){
+    setProducts(products:IProduct[]){
         this.products = products
     }
 

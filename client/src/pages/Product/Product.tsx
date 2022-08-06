@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {ProductModel} from "../../types/ProductModel";
+import {IProduct} from "../../models/IProduct";
 import {Grid, TextField, Typography} from "@mui/material";
 import {buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
 import productsStore from "../../store/ProductsStore";
@@ -21,11 +21,11 @@ export const Product = () => {
 
     const location = useLocation();
     let {productJson} = location.state as LocationState;
-    let product = JSON.parse(productJson) as ProductModel
+    let product = JSON.parse(productJson) as IProduct
 
     const navigate = useNavigate()
     const [count, setCount] = useState<number>(1)
-    const [recommendationsProducts, setRecommendationsProducts] = useState<ProductModel[]>()
+    const [recommendationsProducts, setRecommendationsProducts] = useState<IProduct[]>()
 
     useEffect(() => {
         console.log('id', product)
@@ -35,7 +35,7 @@ export const Product = () => {
 
     async function fetchRecommendationsProducts() {
         const recommendationsProductsFromApi = await getRecommendationProducts(3)
-        setRecommendationsProducts(recommendationsProductsFromApi)
+        setRecommendationsProducts(recommendationsProductsFromApi.data)
         console.log('rec', recommendationsProductsFromApi)
     }
 
@@ -99,7 +99,7 @@ export const Product = () => {
     }
 
 
-    const goToItemPage = (product: ProductModel) => {
+    const goToItemPage = (product: IProduct) => {
         navigate('../product', { state: {
                 productJson: JSON.stringify(product)
             } })

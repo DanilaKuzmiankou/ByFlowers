@@ -125,6 +125,10 @@ export const Navbar = observer(() => {
     }
 
     return (
+        <>
+            <div style={{ height: '50px', backgroundColor: '#A4B0FF'}}>
+                fasf
+            </div>
         <AppBar sx={{p:0, m:0}} position="static" color='neutral'>
             <Container sx={{zIndex: 10}} maxWidth="xl" className='navbar'>
                 <Toolbar disableGutters>
@@ -260,8 +264,15 @@ export const Navbar = observer(() => {
                             isMenuOpen={flowersMenuOpen}
                         />
                     </Box>
-                    {userStore.loggedIn ?
-                        <></>
+                    {userStore.isAuth ?
+                        <><Button
+                            variant="contained"
+                            color="primary"
+                            sx={navbarLoginButtonStyle}
+                            onClick={() => switchPage('login')}
+                        >
+                            Login
+                        </Button></>
                         :
                         <Button
                             variant="contained"
@@ -275,5 +286,7 @@ export const Navbar = observer(() => {
                 </Toolbar>
             </Container>
         </AppBar>
+        </>
+
     );
 });
