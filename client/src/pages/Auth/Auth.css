@@ -13,10 +13,10 @@
     /* Created with https://www.css-gradient.com */
     /* Created with https://www.css-gradient.com */
     /* Created with https://www.css-gradient.com */
-    background: #D62FC2;
-    background: -webkit-linear-gradient(top right, #D62FC2, #D78109);
-    background: -moz-linear-gradient(top right, #D62FC2, #D78109);
-    background: linear-gradient(to bottom left, #D62FC2, #D78109);
+    /* Created with https://www.css-gradient.com */
+    background: #6BB273;
+
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSI+CjxyZWN0IHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgZmlsbD0iIzRmNjM4ZCI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAxNUw3LjUgMEwxNSAxNVoiIGZpbGw9IiMzMDMzNTUiPjwvcGF0aD4KPC9zdmc+");
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -25,7 +25,7 @@
 
 .form-box{
     width:380px;
-    background-color: #AFD5EB;
+    background-color: #D2E4FD;
     padding:20px;
     display:flex;
     flex-direction:column;
