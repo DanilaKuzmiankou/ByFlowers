@@ -11,6 +11,7 @@ import {ProductGallery} from "../../components/ProductGallery/ProductGallery";
 import Button from "@mui/material/Button";
 import {getRecommendationProducts} from "../../api/store/Product";
 import {ProductItem} from "../../components/ProductItem/ProductItem";
+import basketStore from "../../store/BasketStore";
 
 
 interface LocationState {
@@ -107,6 +108,10 @@ export const Product = () => {
         window.scrollTo(0, 0)
     }
 
+    const addProductsToBasket = () =>{
+        basketStore.setBasketProducts(basketStore.basketProducts + count)
+    }
+
     return (
         <>
             {product ?
@@ -195,6 +200,7 @@ export const Product = () => {
                                     Total count: {product.count}
                                 </Typography>
                                 <Button
+                                    onClick={addProductsToBasket}
                                     sx={{...buyButtonHoverStyle, ...addToCartButtonStyle}}
                                 >
                                     Add to cart!

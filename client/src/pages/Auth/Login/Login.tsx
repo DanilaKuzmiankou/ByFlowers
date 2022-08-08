@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import '../Auth.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleUser, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {faAt} from '@fortawesome/free-solid-svg-icons';
-import {faLock} from '@fortawesome/free-solid-svg-icons';
-import {faEye} from '@fortawesome/free-solid-svg-icons';
-import {faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import {faEyeSlash, faEye, faLock, faAt, faCircleUser, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {ErrorMessage, Field, Form, Formik, FieldProps} from "formik";
 import * as Yup from 'yup';
 import userStore from "../../../store/UserStore";

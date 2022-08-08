@@ -7,6 +7,7 @@ import {useMediaQuery, useTheme} from "@mui/material";
 import {buyButtonDefaultStyle, buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
 import {useNavigate} from "react-router-dom";
 import {IProduct} from "../../models/IProduct";
+import basketStore from "../../store/BasketStore";
 
 
 interface ProductProps {
@@ -42,6 +43,7 @@ export const ProductItem:FC<ProductProps> = ({product}) => {
             productJson: JSON.stringify(product)
         } })
     }
+
 
     return (
 

@@ -17,6 +17,16 @@ import {CustomMuiMenu} from "../index.components";
 import productsStore from "../../store/ProductsStore";
 import userStore from "../../store/UserStore";
 import {observer} from "mobx-react-lite";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faShoppingBasket, faCircleUser, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import { IconContext } from 'react-icons';
+import {AiOutlineUser} from "react-icons/ai";
+import {GrBasket} from "react-icons/gr";
+import {Badge, BadgeProps} from "@mui/material";
+import {BsFillBasket2Fill} from "react-icons/bs";
+import {RiShoppingBasket2Line} from "react-icons/ri";
+import {styled} from "@mui/material/styles";
+import basketStore from "../../store/BasketStore";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
@@ -57,14 +67,13 @@ const navbarLoginButtonStyle = {
     borderRadius: '999px',
     transition: 'background-color 200ms ease',
     color: '#fff',
-    fontSize: '1.70rem',
+    fontSize: '1.20rem',
     lineHeight: 1,
     fontWeight: 700,
-    marginLeft: '20px',
-    paddingTop: '14px',
-    paddingBottom: '14px',
-    paddingRight: '13px',
-    paddingLeft: '13px'
+    paddingTop: '7px',
+    paddingBottom: '7px',
+    paddingRight: '8px',
+    paddingLeft: '8px'
 }
 
 export const Navbar = observer(() => {
@@ -72,11 +81,12 @@ export const Navbar = observer(() => {
 
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const [anchorElPlants, setAnchorElPlants] = React.useState<null | HTMLElement>(null);
     const [plantsMenuOpen, setPlantsMenuOpen] = React.useState<boolean>(false);
     const [flowersMenuOpen, setFlowersMenuOpen] = React.useState<boolean>(false);
     const [anchorElFlowers, setAnchorElFlowers] = React.useState<null | HTMLElement>(null);
+    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
 
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -124,10 +134,83 @@ export const Navbar = observer(() => {
         navigate(linkName, { replace : true})
     }
 
+
+    const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+        '& .MuiBadge-badge': {
+            height: '15px',
+            minWidth: '15px',
+            width: '15px',
+            right: 3,
+            top: 4,
+            padding: '0 4px',
+        },
+    }));
+
+    const upperNavbarButtonsStyle = {
+        margin: '3px',
+        padding: 0
+    }
+
+
     return (
         <>
-            <div style={{ height: '50px', backgroundColor: '#A4B0FF'}}>
-                fasf
+            <div style={{position: "static", height: '35px', backgroundColor: '#2c2b39', display: 'flex', justifyContent: 'end', alignItems: 'center', padding: '0 3%'}}>
+                {userStore.isAuth ?
+                    <>
+                        <IconButton
+                            sx={upperNavbarButtonsStyle}
+                            size="large"
+                            aria-label="account of current user"
+                            aria-haspopup="true"
+                            onClick={handleOpenUserMenu}
+                            color="inherit"
+                        >
+
+                            <IconContext.Provider value={{ color: 'white', size: '23'}}>
+                                <AiOutlineUser />
+                            </IconContext.Provider>
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar-user"
+                            anchorEl={anchorElUser}
+                            disableScrollLock={true}
+                            keepMounted
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+
+                        >
+                            {pages.map((page, id) => (
+                                <MenuItem key={page}  onClick={() => switchPage(pagesLinks[id])}>
+                                    <Typography
+                                        sx={{
+                                            fontWeight: 500,
+                                            fontSize: '1.9rem',
+                                        }}
+                                        textAlign="center"
+                                    >
+                                        {page}
+                                    </Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </>
+                    :
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={navbarLoginButtonStyle}
+                        onClick={() => switchPage('login')}
+                    >
+                        Login
+                    </Button>
+                }
+                <IconButton sx={upperNavbarButtonsStyle} aria-label="cart">
+                    <StyledBadge badgeContent={basketStore.basketProducts} color="success">
+                        <IconContext.Provider value={{ color: 'white', size: '23'}}>
+                            <RiShoppingBasket2Line  />
+                        </IconContext.Provider>
+                    </StyledBadge>
+                </IconButton>
             </div>
         <AppBar sx={{p:0, m:0}} position="static" color='neutral'>
             <Container sx={{zIndex: 10}} maxWidth="xl" className='navbar'>
@@ -264,25 +347,6 @@ export const Navbar = observer(() => {
                             isMenuOpen={flowersMenuOpen}
                         />
                     </Box>
-                    {userStore.isAuth ?
-                        <><Button
-                            variant="contained"
-                            color="primary"
-                            sx={navbarLoginButtonStyle}
-                            onClick={() => switchPage('login')}
-                        >
-                            Login
-                        </Button></>
-                        :
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            sx={navbarLoginButtonStyle}
-                            onClick={() => switchPage('login')}
-                        >
-                            Login
-                        </Button>
-                    }
                 </Toolbar>
             </Container>
         </AppBar>
