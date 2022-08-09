@@ -6,7 +6,7 @@ import {ErrorMessage, Field, Form, Formik, FieldProps} from "formik";
 import * as Yup from 'yup';
 import userStore from "../../../store/UserStore";
 import Button from "@mui/material/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {IUser} from "../../../models/IUser";
 
 
@@ -19,6 +19,8 @@ export const Login = () => {
 
     const [passwordIsVisible, setPasswordIsVisible] = useState<boolean>(false)
     const [currentIcon, setCurrentIcon] = useState<IconDefinition>(faEyeSlash)
+
+    const navigate = useNavigate();
 
     const changePasswordVisibility = () => {
         setPasswordIsVisible(!passwordIsVisible)
@@ -41,11 +43,13 @@ export const Login = () => {
                         password: '',
                     }}
                     validationSchema={userSchema}
-                    onSubmit={async (values, {resetForm}) => {
-                        await new Promise(() => {
-                            userStore.login(values.email, values.password)
-                            //resetForm()
-                        });
+                    onSubmit={async (values, {resetForm, setErrors}) => {
+                        const response = await userStore.login(values.email, values.password)
+                        if(!response.message) {
+                            resetForm()
+                            navigate(-1)
+                        }
+                        setErrors( { [response.errors.field]: response.message })
                     }}
                 >
                     {({errors, touched}) => (

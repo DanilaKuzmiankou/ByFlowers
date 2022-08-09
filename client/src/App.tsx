@@ -16,6 +16,7 @@ const App = () => {
     useEffect(() => {
         if(localStorage.getItem('token')){
             console.log('aha')
+            console.log('hi')
             userStore.checkIsUserAuth()
         }
     }, [])

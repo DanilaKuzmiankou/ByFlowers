@@ -1,6 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {IUser} from "../models/IUser";
 import {registration, login, logout, checkAuth} from "../api/store/User";
+import {response} from "express";
 
 
 class UserStore {
@@ -22,14 +23,17 @@ class UserStore {
     }
 
     async login(email: string, password: string){
+        let response
         try {
-            const response = await login(email, password)
+            response = await login(email, password)
             localStorage.setItem('token', response.data.accessToken)
             this.setIsAuth(true)
             this.setUser(response.data.user)
         } catch (e: any) {
             console.log(e.response?.data?.message)
+            response = e.response?.data
         }
+        return response
     }
 
     async registration(email:string, password:string, phone: string, name: string){

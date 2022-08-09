@@ -85,7 +85,7 @@ export const Navbar = observer(() => {
         if(productType) {
             productsStore.setSelectedNavbarProduct(productType)
         }
-        navigate(linkName, { replace : true})
+        navigate(linkName)
     }
 
     const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
@@ -108,9 +108,7 @@ export const Navbar = observer(() => {
         <>
             <div style={{position: "static", height: '35px', backgroundColor: '#2c2b39', display: 'flex', justifyContent: 'end', alignItems: 'center', padding: '0 3%'}}>
                 {userStore.isAuth ?
-                    <>
                         <CustomClickMenu buttonStyle={upperNavbarButtonsStyle} />
-                    </>
                     :
                     <Button
                         variant="contained"
