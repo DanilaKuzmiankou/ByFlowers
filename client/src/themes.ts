@@ -138,15 +138,18 @@ export const productStyles = {
         fontFamily: 'Avenir, sans-serif',
         fontSize: {
             xl: '2rem',
+            xxl: '2rem',
             xxxl: '2.3rem',
         },
         fontWeight: '600 !important',
         letterSpacing: '0 !important',
     },
     customNormalFont: {
+        color: 'black',
         fontFamily: 'Avenir, sans-serif',
         fontSize: {
             xl: '1.8rem',
+            xxl: '1.8rem',
             xxxl: '2.7rem',
             sm: '1.3rem',
             xs: '1.8rem'

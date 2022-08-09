@@ -7,32 +7,24 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import './Navbar.css'
 import {useNavigate} from "react-router-dom";
-import {CustomMuiMenu} from "../index.components";
+import {CustomHoverMenu} from "../index.components";
 import productsStore from "../../store/ProductsStore";
 import userStore from "../../store/UserStore";
 import {observer} from "mobx-react-lite";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faShoppingBasket, faCircleUser, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import { IconContext } from 'react-icons';
-import {AiOutlineUser} from "react-icons/ai";
-import {GrBasket} from "react-icons/gr";
 import {Badge, BadgeProps} from "@mui/material";
-import {BsFillBasket2Fill} from "react-icons/bs";
 import {RiShoppingBasket2Line} from "react-icons/ri";
 import {styled} from "@mui/material/styles";
 import basketStore from "../../store/BasketStore";
+import {CustomClickMenu} from "../CustomMenu/CustomClickMenu";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
 const pagesLinks = ['blog', 'aboutUs', 'flowers', 'plants'];
 const pages2 = ['Blog', 'About us'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const plants = ['Cactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
 const flowers = ['Anutina eyes', 'Orchidea', 'Roses', 'Lilies']
 
@@ -56,7 +48,6 @@ const navbarButtonsStyle = {
     paddingLeft: '13px'
 }
 
-
 const navbarLoginButtonStyle = {
     my: 2,
     mx:0.5,
@@ -79,61 +70,23 @@ const navbarLoginButtonStyle = {
 export const Navbar = observer(() => {
     const navigate = useNavigate();
 
-
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElPlants, setAnchorElPlants] = React.useState<null | HTMLElement>(null);
-    const [plantsMenuOpen, setPlantsMenuOpen] = React.useState<boolean>(false);
-    const [flowersMenuOpen, setFlowersMenuOpen] = React.useState<boolean>(false);
-    const [anchorElFlowers, setAnchorElFlowers] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
-    };
-
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleOpenPlantsMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setPlantsMenuOpen(true)
-        setAnchorElPlants(event.currentTarget);
-    };
-
-    const handleOpenFlowersMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setFlowersMenuOpen(true)
-        setAnchorElFlowers(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
-
-    const handleClosePlantsMenu = () => {
-        setPlantsMenuOpen(false)
-    };
-
-    const handleCloseFlowersMenu = () => {
-        setFlowersMenuOpen(false)
-    };
-
     const switchPage = (linkName:string, productType?:string):void => {
         handleCloseNavMenu()
-        handleCloseFlowersMenu()
-        handleClosePlantsMenu()
         if(productType) {
             productsStore.setSelectedNavbarProduct(productType)
         }
         navigate(linkName, { replace : true})
     }
-
 
     const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -151,48 +104,12 @@ export const Navbar = observer(() => {
         padding: 0
     }
 
-
     return (
         <>
             <div style={{position: "static", height: '35px', backgroundColor: '#2c2b39', display: 'flex', justifyContent: 'end', alignItems: 'center', padding: '0 3%'}}>
                 {userStore.isAuth ?
                     <>
-                        <IconButton
-                            sx={upperNavbarButtonsStyle}
-                            size="large"
-                            aria-label="account of current user"
-                            aria-haspopup="true"
-                            onClick={handleOpenUserMenu}
-                            color="inherit"
-                        >
-
-                            <IconContext.Provider value={{ color: 'white', size: '23'}}>
-                                <AiOutlineUser />
-                            </IconContext.Provider>
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar-user"
-                            anchorEl={anchorElUser}
-                            disableScrollLock={true}
-                            keepMounted
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-
-                        >
-                            {pages.map((page, id) => (
-                                <MenuItem key={page}  onClick={() => switchPage(pagesLinks[id])}>
-                                    <Typography
-                                        sx={{
-                                            fontWeight: 500,
-                                            fontSize: '1.9rem',
-                                        }}
-                                        textAlign="center"
-                                    >
-                                        {page}
-                                    </Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
+                        <CustomClickMenu buttonStyle={upperNavbarButtonsStyle} />
                     </>
                     :
                     <Button
@@ -212,7 +129,7 @@ export const Navbar = observer(() => {
                     </StyledBadge>
                 </IconButton>
             </div>
-        <AppBar sx={{p:0, m:0}} position="static" color='neutral'>
+        <AppBar sx={{p:0, m:0}} position="static" color='neutral' >
             <Container sx={{zIndex: 10}} maxWidth="xl" className='navbar'>
                 <Toolbar disableGutters>
                     <Box
@@ -326,25 +243,17 @@ export const Navbar = observer(() => {
                                 {page}
                             </Button>
                         ))}
-                        <CustomMuiMenu
+                        <CustomHoverMenu
                             menuName='Plants'
-                            closeMenu={handleClosePlantsMenu}
-                            openMenu={handleOpenPlantsMenu}
                             buttonStyle={navbarButtonsStyle}
-                            anchorEl={anchorElPlants}
                             menuItemsNames={plants}
                             onMenuItemClick={(plantName:string) => switchPage('plants', plantName)}
-                            isMenuOpen={plantsMenuOpen}
                         />
-                        <CustomMuiMenu
+                        <CustomHoverMenu
                             menuName='Flowers'
-                            closeMenu={handleCloseFlowersMenu}
-                            openMenu={handleOpenFlowersMenu}
                             buttonStyle={navbarButtonsStyle}
-                            anchorEl={anchorElFlowers}
                             menuItemsNames={flowers}
                             onMenuItemClick={(flowerName:string) => switchPage('flowers', flowerName)}
-                            isMenuOpen={flowersMenuOpen}
                         />
                     </Box>
                 </Toolbar>

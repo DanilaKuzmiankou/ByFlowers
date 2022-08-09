@@ -1,7 +1,6 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import "./ProductItem.css"
 import Button from "@mui/material/Button";
 import {useMediaQuery, useTheme} from "@mui/material";
 import {buyButtonDefaultStyle, buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
