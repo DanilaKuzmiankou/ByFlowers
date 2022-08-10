@@ -37,14 +37,17 @@ class UserStore {
     }
 
     async registration(email:string, password:string, phone: string, name: string){
+        let response
         try {
-            const response = await registration(email, password, phone, name)
+            response = await registration(email, password, phone, name)
             localStorage.setItem('token', response.data.accessToken)
             this.setIsAuth(true)
             this.setUser(response.data.user)
         } catch (e: any) {
             console.log(e.response?.data?.message)
+            response = e.response?.data
         }
+        return response
     }
 
     async logout(){
@@ -55,7 +58,6 @@ class UserStore {
             this.setUser({} as IUser)
         } catch (e:any) {
             console.log(e.response?.data?.message)
-
         }
     }
 

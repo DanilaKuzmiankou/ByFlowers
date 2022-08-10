@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import YupPassword from 'yup-password';
 import userStore from "../../../store/UserStore";
 import Button from "@mui/material/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {IUser} from "../../../models/IUser";
 
 YupPassword(Yup);
@@ -36,6 +36,7 @@ export const Signin = () => {
 
     const [passwordIsVisible, setPasswordIsVisible] = useState<boolean>(false)
     const [currentIcon, setCurrentIcon] = useState<IconDefinition>(faEyeSlash)
+    const navigate = useNavigate();
 
     const changePasswordVisibility = () => {
         setPasswordIsVisible(!passwordIsVisible)
@@ -60,11 +61,13 @@ export const Signin = () => {
                         phone: ''
                     }}
                     validationSchema={userSchema}
-                    onSubmit={async (values, {resetForm}) => {
-                        await new Promise(() => {
-                            userStore.registration(values.name, values.password, values.email, values.phone)
-                            //resetForm()
-                        });
+                    onSubmit={async (values, {resetForm, setErrors}) => {
+                        const response = await userStore.registration(values.email, values.password, values.phone, values.name)
+                        if(!response.message) {
+                            resetForm()
+                            navigate(-2)
+                        }
+                        setErrors( { [response.errors.field]: response.message })
                     }}
                 >
                     {({errors, touched, handleBlur, handleChange}) => (
