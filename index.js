@@ -20,8 +20,12 @@ if (process.env.NODE_ENV === "production") {
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });
 }
-
-app.use(cors({ origin: true }));
+const corsOptions = {
+    origin:process.env.CLIENT_URL,
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser())
 app.use("/api", router);

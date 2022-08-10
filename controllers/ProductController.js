@@ -78,7 +78,7 @@ class ProductController {
             include: includeExpression
         });
         const products = await productController.getProducts(whereExpression, includeExpression, orderExpression, limit, offset)
-        return res.json([products, count]);
+        return res.json({products, count});
     }
 
 

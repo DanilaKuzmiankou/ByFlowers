@@ -17,7 +17,7 @@ class UserService {
     async registration(name, email, password, phone) {
         const candidate = await User.findOne({where: {email}});
         if (candidate) {
-            throw ApiError.badRequest(`User with ${email} email is already exist!`);
+            throw ApiError.badRequest(`User with ${email} email is already exist!`, { field: 'email' });
         }
         const hashedPassword = await bcrypt.hash(password, 10)
         const user = await User.create({
@@ -37,11 +37,11 @@ class UserService {
     async login(email, password){
         const candidate = await User.findOne( {where: {email}} )
         if(!candidate){
-            throw ApiError.badRequest(`User with ${email} email doesn't already exist!`)
+            throw ApiError.badRequest(`User with ${email} email doesn't exist!`, {field: 'email'})
         }
         const isPasswordsEquals = await bcrypt.compare(password, candidate.password);
         if(!isPasswordsEquals) {
-            return ApiError.badRequest('Password is incorrect!')
+            throw ApiError.badRequest('Password is incorrect!', {field: 'password'})
         }
         const userDto = new UserDto(candidate);
         const tokens = tokenService.generateTokens( {...userDto});
@@ -56,11 +56,15 @@ class UserService {
 
     async refresh(refreshToken) {
         if(!refreshToken){
+            console.log('no refresh')
             throw ApiError.unauthorizedError()
         }
+        console.log('refresh:', refreshToken)
+
         const userData = tokenService.validateRefreshToken(refreshToken)
         const tokenFromDb = tokenService.findRefreshToken(refreshToken)
         if(!userData || !tokenFromDb){
+            console.log('no userData or no refresh tokena in db')
             throw ApiError.unauthorizedError()
         }
         const candidate = await User.findOne( {where: {email: userData.email}} )
