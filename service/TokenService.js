@@ -15,7 +15,6 @@ class TokenService {
 
     async saveToken(user, refreshToken){
         const tokenData = await user.getRefreshToken()
-        console.log('token data:', tokenData)
         if(tokenData){
             tokenData.refreshToken = refreshToken;
             return await tokenData.save();
@@ -40,6 +39,7 @@ class TokenService {
 
     validateRefreshToken(refreshToken){
         try {
+            console.log('refresh: ', refreshToken)
             const userData = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET)
             return userData
         } catch (e) {
