@@ -70,7 +70,7 @@ class ProductService {
             where: whereExpression,
             include: includeExpression
         });
-        const products = productService.getProducts(whereExpression, includeExpression, orderExpression, limit, offset)
+        const products = await productService.getProducts(whereExpression, includeExpression, orderExpression, limit, offset)
         return {products, count}
     }
 
