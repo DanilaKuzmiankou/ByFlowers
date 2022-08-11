@@ -28,6 +28,7 @@ class ProductsStore {
         const response = await getProducts(this.productsNames, this.minProductPrice,
             this.maxProductPrice, this.itemsLimit, this.itemsOffset)
         const products = response.data.products
+        console.log('prod:', response)
         this.productsCount = response.data.count
         runInAction(() => {
             this.products = products
