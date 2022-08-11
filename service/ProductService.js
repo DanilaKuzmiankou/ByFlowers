@@ -70,13 +70,13 @@ class ProductService {
             where: whereExpression,
             include: includeExpression
         });
-        const products = await productController.getProducts(whereExpression, includeExpression, orderExpression, limit, offset)
+        const products = productService.getProducts(whereExpression, includeExpression, orderExpression, limit, offset)
         return {products, count}
     }
 
 
     async getRecommendationProducts(limit) {
-        return await productService.getProducts(
+        return productService.getProducts(
             {},
             [
                 {
@@ -92,8 +92,8 @@ class ProductService {
     }
 
 
-    getProducts(whereExpression, includeExpression, orderExpression, limit, offset) {
-        return Product.findAll({
+    async getProducts(whereExpression, includeExpression, orderExpression, limit, offset) {
+        const products = await Product.findAll({
             where: whereExpression,
             limit: limit,
             offset: offset,
@@ -101,10 +101,11 @@ class ProductService {
             include: includeExpression,
             order: orderExpression
         })
+        return products
     }
 
     async getProductsTypes(isFlower) {
-        return await ProductType.findAll({
+        const productsTypes = await ProductType.findAll({
             attributes: ['name'],
             include: [
                 {
@@ -115,6 +116,7 @@ class ProductService {
                 }
             ]
         });
+        return productsTypes
     }
 }
 
