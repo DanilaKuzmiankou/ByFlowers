@@ -140,6 +140,10 @@ export const productStyles = {
             xl: '2rem',
             xxl: '2rem',
             xxxl: '2.3rem',
+            lg: '1.7rem',
+            md: '1.7rem',
+            sm: '1.7rem',
+            xs: '1.6rem'
         },
         fontWeight: '600 !important',
         letterSpacing: '0 !important',
@@ -152,14 +156,15 @@ export const productStyles = {
             xxl: '1.8rem',
             xxxl: '2.7rem',
             sm: '1.3rem',
-            xs: '1.8rem'
+            xs: '1.8rem',
+            lg: '1.8rem'
         },
         fontWeight: '0 !important',
         letterSpacing: '0 !important',
     },
     headerTypographyStyle: {
         fontSize: {
-            lg: '1.5rem',
+            lg: '2.5rem',
             md: '2rem',
             sm: '2rem',
             xl: '3rem',
