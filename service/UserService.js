@@ -28,7 +28,6 @@ class UserService {
         });
         const userDto = new UserDto(user)
         const tokens = tokenService.generateTokens({...userDto})
-        console.log('token:', tokens)
         await tokenService.saveToken(user, tokens.refreshToken)
         return {...tokens, user: userDto}
     }
@@ -56,15 +55,11 @@ class UserService {
 
     async refresh(refreshToken) {
         if(!refreshToken){
-            console.log('no refresh')
             throw ApiError.unauthorizedError()
         }
-        console.log('refresh:', refreshToken)
-
         const userData = tokenService.validateRefreshToken(refreshToken)
         const tokenFromDb = tokenService.findRefreshToken(refreshToken)
         if(!userData || !tokenFromDb){
-            console.log('no userData or no refresh tokena in db')
             throw ApiError.unauthorizedError()
         }
         const candidate = await User.findOne( {where: {email: userData.email}} )
@@ -72,6 +67,11 @@ class UserService {
         const tokens = tokenService.generateTokens( {...userDto});
         await tokenService.saveToken(candidate, tokens.refreshToken);
         return {...tokens, user: userDto}
+    }
+
+    async getUser(email)
+    {
+        return await User.findOne({ where: {email} })
     }
 
 }
