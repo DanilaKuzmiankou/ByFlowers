@@ -10,7 +10,7 @@ class ProductController {
     async getProductsTypes(req, res, next) {
         try {
             const {isFlower} = req.query
-            const types = productService.getProductsTypes(isFlower)
+            const types = await productService.getProductsTypes(isFlower)
             return res.json(types)
         } catch (e) {
             next(e)
@@ -25,7 +25,7 @@ async getProductsWithType(req, res, next) {
             limit = Number(limit)
             offset = Number(offset)
             types = types.split(',')
-            const products = productService.getProductsWithType(types, minPrice, maxPrice, limit, offset)
+            const products = await productService.getProductsWithType(types, minPrice, maxPrice, limit, offset)
             return res.json(products);
         } catch (e) {
             next(e)
@@ -35,7 +35,8 @@ async getProductsWithType(req, res, next) {
     async getRecommendationProducts(req, res, next) {
         try {
             const {limit} = req.query
-            const products = productService.getRecommendationProducts(limit)
+            const products = await productService.getRecommendationProducts(limit)
+            console.log(products)
             return res.json(products);
         } catch (e) {
             next(e)
@@ -45,7 +46,7 @@ async getProductsWithType(req, res, next) {
     async createProduct(req, res, next) {
         try {
             const {name, description, productType, count, price, pictures, isFlower} = req.body
-            const product = productService.createProduct(name, description, productType, count, price, pictures, isFlower)
+            const product = await productService.createProduct(name, description, productType, count, price, pictures, isFlower)
             return res.json(product)
         } catch (e) {
             next(e)
