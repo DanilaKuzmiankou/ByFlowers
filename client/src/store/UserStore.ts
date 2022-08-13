@@ -62,9 +62,9 @@ class UserStore {
     }
 
     async checkIsUserAuth() {
-        try{
+        try {
         const response = await checkAuth()
-        console.log(response)
+        console.log('user:', response.data.user)
         localStorage.setItem('token', response.data.accessToken)
         this.setIsAuth(true)
         this.setUser(response.data.user)
