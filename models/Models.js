@@ -17,18 +17,9 @@ const User = sequelize.define(
     }
 );
 
-
-const Basket = sequelize.define("basket", {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    },
-    {
-        timestamps: true,
-        freezeTableName: true
-    }
-);
-
 const BasketProduct = sequelize.define("basket_product", {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+        count: { type: DataTypes.SMALLINT, allowNull: false }
     },
     {
         timestamps: false,
@@ -82,18 +73,25 @@ const RefreshToken = sequelize.define("refresh_token", {
     }
 );
 
-User.hasOne(Basket)
-Basket.belongsTo(User);
-
-
 RefreshToken.hasOne(User)
 User.belongsTo(RefreshToken, {
     as: "refreshToken",
     onDelete: "CASCADE",
 })
 
-Basket.hasMany(BasketProduct);
-BasketProduct.belongsTo(Basket);
+User.hasMany(BasketProduct, {
+    as: "basketProduct",
+    onDelete: "CASCADE",
+});
+BasketProduct.belongsTo(User, {
+    as: "user",
+    onDelete: "CASCADE",
+});
+
+BasketProduct.hasOne(Product, {
+    as: 'product'
+})
+Product.belongsTo(BasketProduct)
 
 Product.hasMany(BasketProduct)
 BasketProduct.belongsTo(Product);
@@ -115,7 +113,6 @@ Product.belongsTo(ProductType, {
 module.exports = {
     User,
     RefreshToken,
-    Basket,
     BasketProduct,
     Product,
     ProductType,

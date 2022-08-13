@@ -4,5 +4,6 @@ const basketController = require("../controllers/BasketController");
 
 //router.get("/flowersTypes", productController.getFlowersTypes);
 router.post("/add", basketController.addProduct)
+router.get("/count", basketController.getBasketProductCount)
 
 module.exports = router;
