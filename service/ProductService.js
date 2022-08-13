@@ -1,4 +1,4 @@
-const {ProductType, ProductPicture, Product} = require("../models/Models");
+const {ProductType, ProductPicture, Product, User} = require("../models/Models");
 const ApiError = require("../error/ApiError");
 const {Op, Sequelize} = require("sequelize");
 
@@ -118,6 +118,11 @@ class ProductService {
         });
         return productsTypes
     }
+
+    async getProductById(id) {
+        return await Product.findOne({ where: {id} })
+    }
+
 }
 
 module.exports = new ProductService()

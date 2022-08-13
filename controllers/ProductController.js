@@ -36,7 +36,6 @@ async getProductsWithType(req, res, next) {
         try {
             const {limit} = req.query
             const products = await productService.getRecommendationProducts(limit)
-            console.log(products)
             return res.json(products);
         } catch (e) {
             next(e)
