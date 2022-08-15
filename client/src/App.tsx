@@ -9,6 +9,7 @@ import {AppRoutes} from "./routes/AppRoutes";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import userStore from "./store/UserStore";
+import {Basket} from "./components/Basket/Basket";
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <Navbar />
             <AppRoutes />
+            <Basket />
             <BottomBar />
         </ThemeProvider>
         </BrowserRouter>

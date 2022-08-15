@@ -150,7 +150,7 @@ export const Product = () => {
     }
 
     const addProductToBasket = async () => {
-        basketStore.setBasketProducts(basketStore.basketProducts + count)
+        basketStore.setBasketProductsCount(basketStore.basketProductsCount + count)
         const response = await addToBasket(product.id, count, userStore.user.email)
         setCount(1)
         const currentProductCount = response.data

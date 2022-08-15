@@ -9,7 +9,7 @@ class ProductsStore {
     selectedNavbarProduct:string = ''
     minProductPrice:number = -1
     maxProductPrice:number = -1
-    drawerIsOpen:boolean = false
+    isDrawerOpen:boolean = false
     itemsLimit:number = 10
     itemsOffset:number = 0
     productsNames: string[] = []
@@ -58,8 +58,8 @@ class ProductsStore {
         this.maxProductPrice = maxProductPrice
     }
 
-    setDrawerIsOpen(open:boolean){
-        this.drawerIsOpen = open
+    setIsDrawerOpen(open:boolean){
+        this.isDrawerOpen = open
     }
 
     setItemsLimit(itemsLimit:number){

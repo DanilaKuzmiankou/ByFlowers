@@ -7,6 +7,7 @@ import {buyButtonDefaultStyle, buyButtonHoverStyle, catalogProductItem, productS
 import {useNavigate} from "react-router-dom";
 import {IProduct} from "../../models/IProduct";
 import basketStore from "../../store/BasketStore";
+import useHoverStyle from "../../utils/useHoverStyle";
 
 
 interface ProductProps {
@@ -18,31 +19,13 @@ export const ProductItem:FC<ProductProps> = ({product}) => {
     const theme = useTheme();
     const greaterThanLarge = useMediaQuery(theme.breakpoints.up("lg"));
     const navigate = useNavigate()
-
-    const buyButtonOverElementsStyle = {
-        position: "absolute",
-        bottom: "10px",
-        left: "20px",
-        right: "20px",
-    } as React.CSSProperties
-
-    const [buttonStyle, setButtonStyle] = useState<React.CSSProperties>(buyButtonDefaultStyle)
-
-
-    const onItemHover = (event: React.MouseEvent<HTMLDivElement>) => {
-        setButtonStyle({...buyButtonHoverStyle, ...buyButtonOverElementsStyle})
-    }
-
-    const onItemNotHover = (event: React.MouseEvent<HTMLDivElement>) => {
-        setButtonStyle({...buyButtonDefaultStyle, ...buyButtonOverElementsStyle})
-    }
+    const {buttonStyle, onItemHover, onItemNotHover} = useHoverStyle()
 
     const goToItemPage = () => {
         navigate('../product', { state: {
             productJson: JSON.stringify(product)
         } })
     }
-
 
     return (
 
