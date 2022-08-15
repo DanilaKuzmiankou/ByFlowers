@@ -104,6 +104,10 @@ export const Navbar = observer(() => {
         padding: 0
     }
 
+    const changeBasketState = () => {
+        basketStore.setIsBasketOpen(!basketStore.isBasketOpen)
+    }
+
     return (
         <>
             <div style={{position: "static", height: '35px', backgroundColor: '#2c2b39', display: 'flex', justifyContent: 'end', alignItems: 'center', padding: '0 3%'}}>
@@ -119,8 +123,8 @@ export const Navbar = observer(() => {
                         Login
                     </Button>
                 }
-                <IconButton sx={upperNavbarButtonsStyle} aria-label="cart">
-                    <StyledBadge badgeContent={basketStore.basketProducts} color="success">
+                <IconButton sx={upperNavbarButtonsStyle} onClick={changeBasketState} aria-label="cart">
+                    <StyledBadge badgeContent={basketStore.basketProductsCount} color="success">
                         <IconContext.Provider value={{ color: 'white', size: '23'}}>
                             <RiShoppingBasket2Line  />
                         </IconContext.Provider>

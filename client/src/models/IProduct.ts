@@ -13,7 +13,12 @@ export interface IPicture {
     picture: string
 }
 
+export interface IBasketProduct {
+    count: number,
+    product: IProduct
+}
+
 export interface ProductsResponse {
-    products: IProduct[],
     count: number
+    products: IProduct[],
 }

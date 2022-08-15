@@ -15,6 +15,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProductsFilter";
+import {Basket} from "../../components/Basket/Basket";
 
 export const Plants = observer(() => {
 
@@ -31,7 +32,7 @@ export const Plants = observer(() => {
     }, [])
 
     const openDrawer = () => {
-        productsStore.setDrawerIsOpen(true)
+        productsStore.setIsDrawerOpen(true)
     }
 
     const getItemsCountPerPage = () => {

@@ -9,14 +9,13 @@ import {AppRoutes} from "./routes/AppRoutes";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import userStore from "./store/UserStore";
+import {Basket} from "./components/Basket/Basket";
 
 
 const App = () => {
 
     useEffect(() => {
         if(localStorage.getItem('token')){
-            console.log('aha')
-            console.log('hi')
             userStore.checkIsUserAuth()
         }
     }, [])
@@ -27,6 +26,7 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <Navbar />
             <AppRoutes />
+            <Basket />
             <BottomBar />
         </ThemeProvider>
         </BrowserRouter>

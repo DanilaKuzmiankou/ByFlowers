@@ -12,6 +12,9 @@ import Button from "@mui/material/Button";
 import {getRecommendationProducts} from "../../api/store/Product";
 import {ProductItem} from "../../components/ProductItem/ProductItem";
 import basketStore from "../../store/BasketStore";
+import {addToBasket, getBasketProductCount} from "../../api/store/Basket";
+import userStore from "../../store/UserStore";
+import {toJS} from "mobx";
 
 
 interface LocationState {
@@ -26,18 +29,56 @@ export const Product = () => {
 
     const navigate = useNavigate()
     const [count, setCount] = useState<number>(1)
+    const [totalCount, setTotalCount] = useState<number>(product.count)
     const [recommendationsProducts, setRecommendationsProducts] = useState<IProduct[]>()
 
-    useEffect(() => {
-        console.log('id', product)
 
+    const defaultContainerStyle = {
+        position: 'relative',
+        minHeight: '100vh',
+        width: 'content',
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '30px 0'
+    } as React.CSSProperties
+
+    const defaultEmptyContainerStyle = {
+        textAlign: 'center',
+        position: 'absolute',
+        top: '25%',
+        left: 0,
+        right: 0,
+        margin: '0 auto',
+        display: 'none',
+        justifyContent: 'center',
+        alignItems: 'center'
+    } as React.CSSProperties
+
+    const [containerStyle, setContainerStyle] = useState<React.CSSProperties>(defaultContainerStyle)
+    const [emptyContainerStyle, setEmptyContainerStyle] = useState<React.CSSProperties>(defaultEmptyContainerStyle)
+
+
+
+    useEffect(() => {
+        async function fetch(){
+            console.log('user:', toJS(userStore.user))
+            if(userStore.user.email) {
+                const response = await getBasketProductCount(product.id, userStore.user.email)
+                const basketCount = response.data
+                setTotalCount(product.count - basketCount)
+            }
+        }
+        fetch()
         fetchRecommendationsProducts()
-    }, [])
+    }, [userStore.user])
+
+    useEffect(() => {
+        checkForPresence()
+    }, [totalCount])
 
     async function fetchRecommendationsProducts() {
         const recommendationsProductsFromApi = await getRecommendationProducts(3)
         setRecommendationsProducts(recommendationsProductsFromApi.data)
-        console.log('rec', recommendationsProductsFromApi)
     }
 
     const addToCartButtonStyle = {
@@ -84,7 +125,7 @@ export const Product = () => {
     }
 
     const increaseCount = () => {
-        if (count < product.count) setCount(count + 1)
+        if (count < totalCount) setCount(count + 1)
     }
     const decreaseCount = () => {
         if (count > 1) setCount(count - 1)
@@ -94,7 +135,7 @@ export const Product = () => {
         const currentCount = Number(event.target.value)
         if (!isNaN(currentCount)) {
             if (currentCount === 0) setCount(1)
-            else if (currentCount > product.count) setCount(product.count)
+            else if (currentCount > totalCount) setCount(totalCount)
             else setCount(currentCount)
         }
     }
@@ -108,21 +149,40 @@ export const Product = () => {
         window.scrollTo(0, 0)
     }
 
-    const addProductsToBasket = () =>{
-        basketStore.setBasketProducts(basketStore.basketProducts + count)
+    const addProductToBasket = async () => {
+        basketStore.setBasketProductsCount(basketStore.basketProductsCount + count)
+        const response = await addToBasket(product.id, count, userStore.user.email)
+        setCount(1)
+        const currentProductCount = response.data
+        product.count = currentProductCount
+        setTotalCount(currentProductCount)
     }
+
+    const checkForPresence = () => {
+        if(totalCount<=0) {
+            const newDefaultNoItemsContainerStyle = {...defaultEmptyContainerStyle}
+            newDefaultNoItemsContainerStyle.display = 'flex'
+            console.log('res:', defaultEmptyContainerStyle)
+            setContainerStyle({...defaultContainerStyle, ...{
+                    opacity: 0.5,
+                    pointerEvents: 'none'
+            }})
+            setEmptyContainerStyle({...emptyContainerStyle, ...{display: 'flex'}})
+        }
+    }
+
 
     return (
         <>
             {product ?
-                <>
-                    <Grid container sx={{
-                        minHeight: '100vh',
-                        width: 'content',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        padding: '30px 0'
-                    }}>
+                <div style={{ position: 'relative' }}>
+                    <Box sx={emptyContainerStyle}>
+                        <Typography
+                            sx={{...productStyles.customBoldFont, ...productStyles.headerTypographyStyle, ...{zIndex: 300}}}>
+                            There is no more {product.name} in storage!
+                        </Typography>
+                    </Box>
+                    <Grid container sx={containerStyle}>
                         <Grid item xs={'auto'} sx={{display: 'flex', justifyContent: 'flex-end'}}>
                             <Box>
                                 <Typography
@@ -197,10 +257,10 @@ export const Product = () => {
                                 </Box>
                                 <Typography
                                     sx={additionalText}>
-                                    Total count: {product.count}
+                                    Total count: {totalCount}
                                 </Typography>
                                 <Button
-                                    onClick={addProductsToBasket}
+                                    onClick={addProductToBasket}
                                     sx={{...buyButtonHoverStyle, ...addToCartButtonStyle}}
                                 >
                                     Add to cart!
@@ -223,7 +283,7 @@ export const Product = () => {
                             ))}
                         </Box>
                     </Box>
-                </>
+                </div>
                 : null}
         </>
     );

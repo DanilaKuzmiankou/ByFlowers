@@ -9,7 +9,7 @@ class ProductsStore {
     selectedNavbarProduct:string = ''
     minProductPrice:number = -1
     maxProductPrice:number = -1
-    drawerIsOpen:boolean = false
+    isDrawerOpen:boolean = false
     itemsLimit:number = 10
     itemsOffset:number = 0
     productsNames: string[] = []
@@ -25,14 +25,13 @@ class ProductsStore {
     }
 
     async fetchProducts() {
-        const response = await getProducts(this.productsNames, this.minProductPrice,
+            const response = await getProducts(this.productsNames, this.minProductPrice,
             this.maxProductPrice, this.itemsLimit, this.itemsOffset)
-        const products = response.data.products
-        console.log('prod:', response)
-        this.productsCount = response.data.count
-        runInAction(() => {
-            this.products = products
-        })
+            const products = response.data.products
+            this.productsCount = response.data.count
+            runInAction(() => {
+                this.products = products
+            })
     }
 
     async fetchSameProducts() {
@@ -59,8 +58,8 @@ class ProductsStore {
         this.maxProductPrice = maxProductPrice
     }
 
-    setDrawerIsOpen(open:boolean){
-        this.drawerIsOpen = open
+    setIsDrawerOpen(open:boolean){
+        this.isDrawerOpen = open
     }
 
     setItemsLimit(itemsLimit:number){
