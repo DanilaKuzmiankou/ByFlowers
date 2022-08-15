@@ -69,8 +69,7 @@ class UserService {
         return {...tokens, user: userDto}
     }
 
-    async getUser(email)
-    {
+    async getUser(email) {
         return await User.findOne({ where: {email} })
     }
 
