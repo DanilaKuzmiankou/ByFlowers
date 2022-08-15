@@ -1,4 +1,4 @@
-const {Basket, BasketProduct} = require("../models/Models");
+const {Basket, BasketProduct, Product, ProductPicture} = require("../models/Models");
 const ApiError = require("../error/ApiError");
 const userService = require('./UserService')
 const productService = require('./ProductService')
@@ -46,6 +46,32 @@ class BasketService {
             }
         })
         return result.count
+    }
+
+
+    async getBasketProductss(email) {
+        const user = await userService.getUser(email)
+        const products = await BasketProduct.findAll({
+            where: {
+                userId: user.id
+            },
+            attributes: ['count'],
+            include: [
+                {
+                    model: Product,
+                    as: "product",
+                    include: [
+                        {
+                            model: ProductPicture,
+                            as: 'pictures',
+                            attributes: ['picture']
+                        }
+                    ]
+                }
+            ]
+        })
+        return products
+        //const products = await user.getBasketProduct()
     }
 
 }

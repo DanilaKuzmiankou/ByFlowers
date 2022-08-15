@@ -30,6 +30,16 @@ class BasketController {
         }
     }
 
+    async getBasketProducts(req, res, next){
+        try {
+            const {email} = req.query
+            const products = await basketService.getBasketProductss(email)
+            return res.json(products)
+        } catch (e) {
+            next(e)
+        }
+    }
+
 
 }
 
