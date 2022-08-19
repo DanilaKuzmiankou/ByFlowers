@@ -15,7 +15,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProductsFilter";
-import {Basket} from "../../components/Basket/Basket";
+import {BasketContainer} from "../../components/Basket/BasketContainer";
 
 export const Plants = observer(() => {
 

@@ -21,7 +21,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export const Basket = observer(() => {
+export const BasketContainer = observer(() => {
 
     useEffect(() => {
         if(userStore.user.email) {
@@ -35,7 +35,7 @@ export const Basket = observer(() => {
             <SwipeableDrawer
                 sx={{
                     '& .MuiDrawer-paper': {
-                        width: '35%',
+                        width: '30%',
                         boxSizing: 'border-box',
                     }
                 }}
@@ -54,10 +54,9 @@ export const Basket = observer(() => {
                 <Divider />
                 <Box sx={{padding: '0 10px', position: 'relative'}}>
                     {basketStore.basketProducts.map(basketProduct => (
-                        <BasketItem key={basketProduct.product.id} basketProduct={basketProduct}/>
+                        <BasketItem key={basketProduct.product.id} basketProduct={basketProduct} />
                     ))}
                     <Button
-                        sx={{...buyButtonHoverStyle, ...{position: 'absolute', right: '5px', marginTop: '10px'}}}
                     >
                         Buy!
                     </Button>

@@ -33,7 +33,17 @@ class BasketController {
     async getBasketProducts(req, res, next){
         try {
             const {email} = req.query
-            const products = await basketService.getBasketProductss(email)
+            const products = await basketService.getBasketProducts(email)
+            return res.json(products)
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    async deleteProduct(req, res, next){
+        try {
+            const {email, id} = req.query
+            const products = await  basketService.deleteProduct(email, id)
             return res.json(products)
         } catch (e) {
             next(e)

@@ -2,6 +2,7 @@ const {Basket, BasketProduct, Product, ProductPicture} = require("../models/Mode
 const ApiError = require("../error/ApiError");
 const userService = require('./UserService')
 const productService = require('./ProductService')
+const {getBasketProducts} = require("../client/src/api/BasketApi");
 
 
 let basketService = this;
@@ -38,18 +39,22 @@ class BasketService {
 
     async getBasketProductCount(productId, email) {
         const user = await userService.getUser(email)
-        const result = await BasketProduct.findOne({
-            attributes: ['count'],
-            where: {
-                userId: user.id,
-                productId
-            }
-        })
+        if(!user || !productId) {
+            throw ApiError.badRequest('Uhandled exception')
+        }
+            const result = await BasketProduct.findOne({
+                attributes: ['count'],
+                where: {
+                    userId: user.id,
+                    productId
+                }
+            })
+        if(!result) return 0
         return result.count
     }
 
 
-    async getBasketProductss(email) {
+    async getBasketProducts(email) {
         const user = await userService.getUser(email)
         const products = await BasketProduct.findAll({
             where: {
@@ -70,8 +75,21 @@ class BasketService {
                 }
             ]
         })
+        console.log('serv: ', products)
         return products
         //const products = await user.getBasketProduct()
+    }
+
+    async deleteProduct(email, productId) {
+        const user = await userService.getUser(email)
+        await BasketProduct.destroy( {
+            where:
+                {
+                    userId: user.id,
+                    productId
+                }
+        })
+        return getBasketProducts(email)
     }
 
 }

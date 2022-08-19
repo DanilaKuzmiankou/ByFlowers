@@ -5,8 +5,6 @@ import {checkForOne, getCheckedItems} from "../../utils/Utils";
 import {productStyles} from "../../themes";
 import {observer} from "mobx-react-lite";
 import productsStore from "../../store/ProductsStore";
-import CircleChecked from '@mui/icons-material//CheckCircleOutline';
-import CircleUnchecked from '@mui/icons-material/RadioButtonUnchecked';
 
 export interface ProductsProps {
     productsList: string[],

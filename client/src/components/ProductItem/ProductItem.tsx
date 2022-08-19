@@ -8,6 +8,9 @@ import {useNavigate} from "react-router-dom";
 import {IProduct} from "../../models/IProduct";
 import basketStore from "../../store/BasketStore";
 import useHoverStyle from "../../utils/useHoverStyle";
+import {IconContext} from "react-icons";
+import {RiDeleteBin6Line} from "react-icons/ri";
+import IconButton from "@mui/material/IconButton";
 
 
 interface ProductProps {
@@ -26,6 +29,7 @@ export const ProductItem:FC<ProductProps> = ({product}) => {
             productJson: JSON.stringify(product)
         } })
     }
+
 
     return (
 

@@ -14,6 +14,7 @@ class ProductsStore {
     itemsOffset:number = 0
     productsNames: string[] = []
     productsCount: number = 0
+    currentProductCount: number = 1
 
     constructor() {
         makeAutoObservable(this)
@@ -70,6 +71,9 @@ class ProductsStore {
         this.itemsOffset = itemsOffset
     }
 
+    setCurrentProductCount(count: number){
+        this.currentProductCount = count
+    }
 
 }
 

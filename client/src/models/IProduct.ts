@@ -22,3 +22,8 @@ export interface ProductsResponse {
     count: number
     products: IProduct[],
 }
+
+export interface CountInputProps {
+    counterGetCount: () => number,
+    counterSetCount: (count: number) => void
+}

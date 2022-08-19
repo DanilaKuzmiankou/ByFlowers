@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {getBasketProducts} from "../api/store/Basket";
+import {deleteBasketProduct, getBasketProducts} from "../api/store/Basket";
 import {IBasketProduct} from "../models/IProduct";
 
 class BasketStore {
@@ -16,7 +16,11 @@ class BasketStore {
     async updateBasket(email:string){
         const response = await getBasketProducts(email)
         this.setBasketProducts(response.data)
-        console.log('res[: ', response)
+    }
+
+    async deleteProduct(email:string, id: number) {
+        const response = await deleteBasketProduct(email, id)
+        this.setBasketProducts(response.data)
     }
 
     setBasketProductsCount(basketProduct:number){
@@ -24,12 +28,13 @@ class BasketStore {
     }
 
     setBasketProducts(basketProducts:IBasketProduct[]){
+        this.basketProducts = []
         this.basketProducts = basketProducts
     }
 
     setIsBasketOpen(isBasketOpen:boolean){
-        console.log('basket:', isBasketOpen)
         this.isBasketOpen = isBasketOpen
+
     }
 
 }

@@ -15,11 +15,12 @@ import productsStore from "../../store/ProductsStore";
 import userStore from "../../store/UserStore";
 import {observer} from "mobx-react-lite";
 import { IconContext } from 'react-icons';
-import {Badge, BadgeProps} from "@mui/material";
+import {Badge, BadgeProps, CssBaseline, Slide, useScrollTrigger} from "@mui/material";
 import {RiShoppingBasket2Line} from "react-icons/ri";
 import {styled} from "@mui/material/styles";
 import basketStore from "../../store/BasketStore";
 import {CustomClickMenu} from "../CustomMenu/CustomClickMenu";
+import {HideOnScroll} from "../HideOnScroll/HideOnScroll";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
@@ -109,7 +110,8 @@ export const Navbar = observer(() => {
     }
 
     return (
-        <>
+        <HideOnScroll>
+        <div style={{ position: 'sticky', top:0, zIndex: 10 }}>
             <div style={{position: "static", height: '35px', backgroundColor: '#2c2b39', display: 'flex', justifyContent: 'end', alignItems: 'center', padding: '0 3%'}}>
                 {userStore.isAuth ?
                         <CustomClickMenu buttonStyle={upperNavbarButtonsStyle} />
@@ -126,7 +128,7 @@ export const Navbar = observer(() => {
                 <IconButton sx={upperNavbarButtonsStyle} onClick={changeBasketState} aria-label="cart">
                     <StyledBadge badgeContent={basketStore.basketProductsCount} color="success">
                         <IconContext.Provider value={{ color: 'white', size: '23'}}>
-                            <RiShoppingBasket2Line  />
+                            <RiShoppingBasket2Line id='openMenuButton'  />
                         </IconContext.Provider>
                     </StyledBadge>
                 </IconButton>
@@ -261,7 +263,9 @@ export const Navbar = observer(() => {
                 </Toolbar>
             </Container>
         </AppBar>
-        </>
+        </div>
+</HideOnScroll>
 
-    );
+
+);
 });

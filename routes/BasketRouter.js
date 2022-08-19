@@ -6,5 +6,6 @@ const basketController = require("../controllers/BasketController");
 router.post("/add", basketController.addProduct)
 router.get("/count", basketController.getBasketProductCount)
 router.get("/products", basketController.getBasketProducts)
+router.delete('/product', basketController.deleteProduct)
 
 module.exports = router;

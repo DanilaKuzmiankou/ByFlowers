@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import React, {useEffect, useState} from "react";
-import {IProduct} from "../../models/IProduct";
+import React, {useEffect, useRef, useState} from "react";
+import {CountInputProps, IProduct} from "../../models/IProduct";
 import {Grid, TextField, Typography} from "@mui/material";
 import {buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
 import productsStore from "../../store/ProductsStore";
@@ -15,11 +15,13 @@ import basketStore from "../../store/BasketStore";
 import {addToBasket, getBasketProductCount} from "../../api/store/Basket";
 import userStore from "../../store/UserStore";
 import {toJS} from "mobx";
+import {ProductCounterInput} from "../../components/ProductCounterInput/ProductCounterInput";
 
 
 interface LocationState {
     productJson: string
 }
+
 
 export const Product = () => {
 
@@ -27,11 +29,10 @@ export const Product = () => {
     let {productJson} = location.state as LocationState;
     let product = JSON.parse(productJson) as IProduct
 
+    const countInputRef = useRef<CountInputProps>(null)
     const navigate = useNavigate()
-    const [count, setCount] = useState<number>(1)
     const [totalCount, setTotalCount] = useState<number>(product.count)
     const [recommendationsProducts, setRecommendationsProducts] = useState<IProduct[]>()
-
 
     const defaultContainerStyle = {
         position: 'relative',
@@ -57,11 +58,8 @@ export const Product = () => {
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>(defaultContainerStyle)
     const [emptyContainerStyle, setEmptyContainerStyle] = useState<React.CSSProperties>(defaultEmptyContainerStyle)
 
-
-
     useEffect(() => {
         async function fetch(){
-            console.log('user:', toJS(userStore.user))
             if(userStore.user.email) {
                 const response = await getBasketProductCount(product.id, userStore.user.email)
                 const basketCount = response.data
@@ -84,15 +82,6 @@ export const Product = () => {
     const addToCartButtonStyle = {
         width: '350px',
         display: 'block'
-    }
-
-    const counterButtonsStyle = {
-        padding: 0,
-        fontSize: '2rem',
-        display: 'block',
-        height: '35px',
-        width: '35px',
-        minWidth: '35px',
     }
 
     const additionalText = {
@@ -124,23 +113,6 @@ export const Product = () => {
         padding: '20px'
     }
 
-    const increaseCount = () => {
-        if (count < totalCount) setCount(count + 1)
-    }
-    const decreaseCount = () => {
-        if (count > 1) setCount(count - 1)
-    }
-
-    const setNewCount = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const currentCount = Number(event.target.value)
-        if (!isNaN(currentCount)) {
-            if (currentCount === 0) setCount(1)
-            else if (currentCount > totalCount) setCount(totalCount)
-            else setCount(currentCount)
-        }
-    }
-
-
     const goToItemPage = (product: IProduct) => {
         navigate('../product', { state: {
                 productJson: JSON.stringify(product)
@@ -150,19 +122,23 @@ export const Product = () => {
     }
 
     const addProductToBasket = async () => {
-        basketStore.setBasketProductsCount(basketStore.basketProductsCount + count)
-        const response = await addToBasket(product.id, count, userStore.user.email)
-        setCount(1)
-        const currentProductCount = response.data
-        product.count = currentProductCount
-        setTotalCount(currentProductCount)
+        const countRef = countInputRef.current
+        console.log('countRef', countRef)
+        if(countRef) {
+            basketStore.setBasketProductsCount(basketStore.basketProductsCount + countRef.counterGetCount())
+            const response = await addToBasket(product.id, countRef.counterGetCount(), userStore.user.email)
+            countRef.counterSetCount(1)
+            const currentProductCount = response.data
+            product.count = currentProductCount
+            setTotalCount(currentProductCount)
+            // basketStore.updateBasket(userStore.user.email)
+        }
     }
 
     const checkForPresence = () => {
         if(totalCount<=0) {
             const newDefaultNoItemsContainerStyle = {...defaultEmptyContainerStyle}
             newDefaultNoItemsContainerStyle.display = 'flex'
-            console.log('res:', defaultEmptyContainerStyle)
             setContainerStyle({...defaultContainerStyle, ...{
                     opacity: 0.5,
                     pointerEvents: 'none'
@@ -171,14 +147,13 @@ export const Product = () => {
         }
     }
 
-
     return (
         <>
             {product ?
                 <div style={{ position: 'relative' }}>
                     <Box sx={emptyContainerStyle}>
                         <Typography
-                            sx={{...productStyles.customBoldFont, ...productStyles.headerTypographyStyle, ...{zIndex: 300}}}>
+                            sx={{...productStyles.customBoldFont, ...productStyles.headerTypographyStyle, ...{zIndex: 30}}}>
                             There is no more {product.name} in storage!
                         </Typography>
                     </Box>
@@ -227,34 +202,9 @@ export const Product = () => {
                                         {product.price}$
                                     </Typography>
                                 </Box>
-                                <Box sx={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    margin: '15px 0',
-                                    alignItems: 'center'
-                                }}>
-                                    <Button
-                                        color="success"
-                                        sx={counterButtonsStyle}
-                                        onClick={decreaseCount}
-                                    >
-                                        -
-                                    </Button>
-                                    <TextField
-                                        color="success"
-                                        sx={{...productStyles.customNormalFont, ...{display: 'inline-block'}}}
-                                        inputProps={{style: {textAlign: 'center', fontSize: '1.2rem'}}}
-                                        value={count}
-                                        onChange={setNewCount}
-                                    />
-                                    <Button
-                                        color="success"
-                                        sx={counterButtonsStyle}
-                                        onClick={increaseCount}
-                                    >
-                                        +
-                                    </Button>
-                                </Box>
+
+                                <ProductCounterInput ref={countInputRef} totalCount={totalCount} />
+
                                 <Typography
                                     sx={additionalText}>
                                     Total count: {totalCount}
@@ -277,7 +227,7 @@ export const Product = () => {
                         </Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                             {recommendationsProducts?.map((product) => (
-                                <Box sx={recommendationsBoxItem} onClick={() => goToItemPage(product)}>
+                                <Box key={product.id} sx={recommendationsBoxItem} onClick={() => goToItemPage(product)}>
                                     <ProductItem product={product}/>
                                 </Box>
                             ))}

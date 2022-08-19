@@ -16,7 +16,7 @@ declare module '@mui/material/styles' {
     interface Theme {
         status: {
             danger: React.CSSProperties['color'];
-        };
+        }
     }
 
     interface Palette {
@@ -44,11 +44,12 @@ declare module '@mui/material/styles' {
             danger: React.CSSProperties['color'];
         };
     }
+
 }
 
 declare module '@mui/material/styles' {
     interface BreakpointOverrides {
-        xs: true; // removes the `xs` breakpoint
+        xs: true;
         sm: true;
         md: true;
         lg: true;
@@ -118,7 +119,7 @@ export const buyButtonHoverStyle = {
     color: "#fff",
     textTransform: "uppercase",
     textDecoration: "none",
-    backgroundColor: '#d23139',
+    background: 'rgba(210,49,57,1)',
     border: "0",
     WebkitBoxShadow: "inset 0 -3px 0 0 #b42c32",
     boxShadow: "inset 0 -3px 0 0 #b42c32",
