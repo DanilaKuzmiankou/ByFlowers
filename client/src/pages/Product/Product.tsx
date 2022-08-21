@@ -3,9 +3,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {CountInputProps, IProduct} from "../../models/IProduct";
 import {Grid, TextField, Typography} from "@mui/material";
 import {buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
-import productsStore from "../../store/ProductsStore";
 import Box from "@mui/material/Box";
-
 import './Product.css'
 import {ProductGallery} from "../../components/ProductGallery/ProductGallery";
 import Button from "@mui/material/Button";
@@ -14,8 +12,8 @@ import {ProductItem} from "../../components/ProductItem/ProductItem";
 import basketStore from "../../store/BasketStore";
 import {addToBasket, getBasketProductCount} from "../../api/store/Basket";
 import userStore from "../../store/UserStore";
-import {toJS} from "mobx";
 import {ProductCounterInput} from "../../components/ProductCounterInput/ProductCounterInput";
+import {observer} from "mobx-react-lite";
 
 
 interface LocationState {
@@ -23,7 +21,7 @@ interface LocationState {
 }
 
 
-export const Product = () => {
+export const Product = observer(() => {
 
     const location = useLocation();
     let {productJson} = location.state as LocationState;
@@ -67,12 +65,15 @@ export const Product = () => {
             }
         }
         fetch()
-        fetchRecommendationsProducts()
-    }, [userStore.user])
+    }, [userStore.user, basketStore.basketProducts])
 
     useEffect(() => {
         checkForPresence()
     }, [totalCount])
+
+    useEffect(() => {
+        fetchRecommendationsProducts()
+    }, [])
 
     async function fetchRecommendationsProducts() {
         const recommendationsProductsFromApi = await getRecommendationProducts(3)
@@ -123,15 +124,13 @@ export const Product = () => {
 
     const addProductToBasket = async () => {
         const countRef = countInputRef.current
-        console.log('countRef', countRef)
         if(countRef) {
-            basketStore.setBasketProductsCount(basketStore.basketProductsCount + countRef.counterGetCount())
             const response = await addToBasket(product.id, countRef.counterGetCount(), userStore.user.email)
             countRef.counterSetCount(1)
             const currentProductCount = response.data
             product.count = currentProductCount
             setTotalCount(currentProductCount)
-            // basketStore.updateBasket(userStore.user.email)
+            basketStore.updateBasket(userStore.user.email)
         }
     }
 
@@ -144,6 +143,9 @@ export const Product = () => {
                     pointerEvents: 'none'
             }})
             setEmptyContainerStyle({...emptyContainerStyle, ...{display: 'flex'}})
+        } else {
+            setContainerStyle(defaultContainerStyle)
+            setEmptyContainerStyle(defaultEmptyContainerStyle)
         }
     }
 
@@ -237,4 +239,4 @@ export const Product = () => {
                 : null}
         </>
     );
-};
+});

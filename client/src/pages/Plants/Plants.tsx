@@ -47,7 +47,7 @@ export const Plants = observer(() => {
 
     const handleChangePage = (event: ChangeEvent<unknown>, page: number) => {
         productsStore.setItemsOffset(page * productsStore.itemsLimit - productsStore.itemsLimit)
-        productsStore.fetchSameProducts()
+        productsStore.fetchProducts()
     }
 
     return (

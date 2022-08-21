@@ -1,17 +1,18 @@
+import { AxiosResponse } from "axios";
 import {makeAutoObservable, runInAction} from "mobx";
 import {getProducts} from "../api/store/Product";
-import {IProduct} from "../models/IProduct";
+import {IProduct, ProductsResponse} from "../models/IProduct";
 
 class ProductsStore {
 
-    products:IProduct[] = []
-    selectedProductsName:string = ''
-    selectedNavbarProduct:string = ''
-    minProductPrice:number = -1
-    maxProductPrice:number = -1
-    isDrawerOpen:boolean = false
-    itemsLimit:number = 10
-    itemsOffset:number = 0
+    products: IProduct[] = []
+    selectedProductsName: string = ''
+    selectedNavbarProduct: string = ''
+    minProductPrice: number = -1
+    maxProductPrice: number = -1
+    isDrawerOpen: boolean = false
+    itemsLimit: number = 10
+    itemsOffset: number = 0
     productsNames: string[] = []
     productsCount: number = 0
     currentProductCount: number = 1
@@ -20,23 +21,24 @@ class ProductsStore {
         makeAutoObservable(this)
     }
 
-    async fetchNewProducts(productsNames:string[]) {
+    async fetchNewProducts(productsNames: string[]) {
         this.productsNames = productsNames
-       await this.fetchProducts()
+        await this.fetchProducts()
     }
 
     async fetchProducts() {
-            const response = await getProducts(this.productsNames, this.minProductPrice,
+        let response: AxiosResponse<ProductsResponse>
+        try {
+            response = await getProducts(this.productsNames, this.minProductPrice,
             this.maxProductPrice, this.itemsLimit, this.itemsOffset)
             const products = response.data.products
-            this.productsCount = response.data.count
             runInAction(() => {
                 this.products = products
+                this.productsCount = response.data.count
             })
-    }
-
-    async fetchSameProducts() {
-       await this.fetchProducts()
+        } catch (e: any) {
+            console.log(e.response?.data?.message)
+        }
     }
 
     setProducts(products:IProduct[]){

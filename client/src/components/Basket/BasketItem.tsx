@@ -59,7 +59,7 @@ export const BasketItem: FC<BasketItemProps> = ({basketProduct}) => {
             />
             <Box sx={{display: 'flex', flexDirection: 'column', width: '100%', paddingLeft: '5px'}}>
                 <Box
-                    sx={{display: 'flex', flexDirection: 'row'}}
+                    sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
                 >
                 <Typography
                     variant="h6"

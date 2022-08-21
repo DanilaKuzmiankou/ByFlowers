@@ -2,7 +2,6 @@ const {Basket, BasketProduct, Product, ProductPicture} = require("../models/Mode
 const ApiError = require("../error/ApiError");
 const userService = require('./UserService')
 const productService = require('./ProductService')
-const {getBasketProducts} = require("../client/src/api/BasketApi");
 
 
 let basketService = this;
@@ -89,7 +88,7 @@ class BasketService {
                     productId
                 }
         })
-        return getBasketProducts(email)
+        return basketService.getBasketProducts(email)
     }
 
 }

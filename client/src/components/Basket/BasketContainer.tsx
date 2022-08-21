@@ -47,19 +47,31 @@ export const BasketContainer = observer(() => {
                     keepMounted: true,
                 }}
             >
-
                 <DrawerHeader sx={{textAlign: 'start', display:'flex', justifyContent: 'start'}}>
                     Basket
                 </DrawerHeader>
                 <Divider />
-                <Box sx={{padding: '0 10px', position: 'relative'}}>
+                <Box sx={{padding: '0 10px 10px', display: 'flex', flexDirection: 'column', position: 'relative', height: "100%"}}>
                     {basketStore.basketProducts.map(basketProduct => (
                         <BasketItem key={basketProduct.product.id} basketProduct={basketProduct} />
                     ))}
-                    <Button
-                    >
-                        Buy!
-                    </Button>
+                    <Box sx={{ marginTop: 'auto', display: 'flex', flexDirection: 'column' }}>
+                        <Box>
+                        <Typography
+                            sx={{...productStyles.customBoldFont, ...{display: 'inline-block'}}}>
+                            Order Total
+                        </Typography>
+                        <Typography
+                            sx={{...productStyles.customBoldFont, ...{display: 'inline-block', marginLeft: 'auto'}}}>
+                            Order Total
+                        </Typography>
+                        </Box>
+                        <Button
+                            sx={{...buyButtonHoverStyle, ...{width: "100%"}}}
+                        >
+                            Buy!
+                        </Button>
+                    </Box>
                 </Box>
             </SwipeableDrawer>
         </Box>

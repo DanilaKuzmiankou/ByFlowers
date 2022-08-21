@@ -7,7 +7,7 @@ import {CountInputProps} from "../../models/IProduct";
 
 const counterButtonsStyle = {
     padding: 0,
-    fontSize: '2rem',
+    fontSize: '2.5rem',
     display: 'block',
     maxHeight: '35px',
     maxWidth: '35px',
@@ -63,7 +63,6 @@ export const ProductCounterInput = React.forwardRef<CountInputProps, ProductCoun
                 display: 'flex',
                 justifyContent: 'space-between',
                 margin: '15px 0',
-                alignItems: 'center'
         }}>
             <Button
                 color="success"
