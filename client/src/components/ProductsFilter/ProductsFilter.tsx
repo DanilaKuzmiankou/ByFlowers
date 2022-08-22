@@ -104,7 +104,6 @@ export const ProductsFilter = observer<ProductsProps>(({
     const calcPlaceHolderFontSize = ():string => {
         if(greaterThanXXL) return '2.2rem'
         if(greaterThanXL) return '1.6rem'
-
         return '1.3rem'
     }
 

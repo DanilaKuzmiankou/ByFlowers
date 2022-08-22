@@ -15,6 +15,7 @@ import basketStore from "../../store/BasketStore";
 
 interface BasketItemProps {
     basketProduct: IBasketProduct,
+    productNumber: number,
 }
 
 const basketItemStyle = {
@@ -27,11 +28,13 @@ const basketItemStyle = {
     }
 }
 
-export const BasketItem: FC<BasketItemProps> = ({basketProduct}) => {
+export const BasketItem: FC<BasketItemProps> = ({basketProduct, productNumber}) => {
 
     const countInputRef = useRef<CountInputProps>(null)
 
     const [itemCount, setItemCount] = useState<number>(basketProduct.count)
+
+
 
 
     useEffect(() => {
@@ -39,6 +42,10 @@ export const BasketItem: FC<BasketItemProps> = ({basketProduct}) => {
             countInputRef.current.counterSetCount(basketProduct.count)
         }
     }, [basketProduct])
+
+    useEffect(() => {
+        basketStore.setBasketProductsCost(productNumber, itemCount*basketProduct.product.price)
+    }, [itemCount])
 
 
     const deleteItemFromBasket = () => {

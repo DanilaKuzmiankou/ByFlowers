@@ -209,13 +209,13 @@ export const Product = observer(() => {
 
                                 <Typography
                                     sx={additionalText}>
-                                    Total count: {totalCount}
+                                    Total amount: {totalCount}
                                 </Typography>
                                 <Button
                                     onClick={addProductToBasket}
                                     sx={{...buyButtonHoverStyle, ...addToCartButtonStyle}}
                                 >
-                                    Add to cart!
+                                    Add to cart
                                 </Button>
 
                             </Box>

@@ -32,6 +32,7 @@ class ProductsStore {
             response = await getProducts(this.productsNames, this.minProductPrice,
             this.maxProductPrice, this.itemsLimit, this.itemsOffset)
             const products = response.data.products
+            console.log('pr', products)
             runInAction(() => {
                 this.products = products
                 this.productsCount = response.data.count
@@ -66,6 +67,7 @@ class ProductsStore {
     }
 
     setItemsLimit(itemsLimit:number){
+        console.log('new lim', itemsLimit)
         this.itemsLimit = itemsLimit
     }
 

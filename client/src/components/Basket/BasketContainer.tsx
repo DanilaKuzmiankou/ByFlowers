@@ -8,7 +8,7 @@ import * as React from "react";
 import {buyButtonHoverStyle, productStyles} from "../../themes";
 import productsStore from "../../store/ProductsStore";
 import {ProductsFilter} from "../ProductsFilter/ProductsFilter";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import userStore from "../../store/UserStore";
 import {BasketItem} from "./BasketItem";
 import Button from "@mui/material/Button";
@@ -23,12 +23,19 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export const BasketContainer = observer(() => {
 
+    const [orderTotal, setOrderTotal] = useState<number>(0)
+
     useEffect(() => {
         if(userStore.user.email) {
             basketStore.updateBasket(userStore.user.email)
         }
     }, [userStore.user.email])
 
+
+    useEffect(() => {
+        const newOrderTotal = basketStore.basketProductsCost.reduce((partialSum, a) => partialSum + a, 0)
+        setOrderTotal(newOrderTotal)
+    }, [basketStore.basketProductsCost])
 
     return (
         <Box sx={{display: Boolean(basketStore.isBasketOpen) ? 'fixed' : 'none'}}>
@@ -52,18 +59,18 @@ export const BasketContainer = observer(() => {
                 </DrawerHeader>
                 <Divider />
                 <Box sx={{padding: '0 10px 10px', display: 'flex', flexDirection: 'column', position: 'relative', height: "100%"}}>
-                    {basketStore.basketProducts.map(basketProduct => (
-                        <BasketItem key={basketProduct.product.id} basketProduct={basketProduct} />
+                    {basketStore.basketProducts.map((basketProduct, index) => (
+                        <BasketItem key={basketProduct.product.id} basketProduct={basketProduct} productNumber={index} />
                     ))}
                     <Box sx={{ marginTop: 'auto', display: 'flex', flexDirection: 'column' }}>
                         <Box>
                         <Typography
                             sx={{...productStyles.customBoldFont, ...{display: 'inline-block'}}}>
-                            Order Total
+                            Order Total_
                         </Typography>
                         <Typography
                             sx={{...productStyles.customBoldFont, ...{display: 'inline-block', marginLeft: 'auto'}}}>
-                            Order Total
+                            {orderTotal}$
                         </Typography>
                         </Box>
                         <Button

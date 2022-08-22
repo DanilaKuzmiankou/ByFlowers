@@ -1,11 +1,12 @@
-import {makeAutoObservable, runInAction} from "mobx";
+import {makeAutoObservable, runInAction, toJS} from "mobx";
 import {deleteBasketProduct, getBasketProducts} from "../api/store/Basket";
 import {IBasketProduct} from "../models/IProduct";
 import {AxiosResponse} from "axios";
 
 class BasketStore {
 
-    basketProductsCount:number = 0
+    basketProductsTypesCount:number = 0
+    basketProductsCost:number[] = []
     basketProducts = [] as IBasketProduct[]
     isBasketOpen:boolean = false
 
@@ -18,7 +19,7 @@ class BasketStore {
         try {
         response = await getBasketProducts(email)
         runInAction(() => {
-            this.setBasketProducts(response.data)
+            this.setBasketProductsTypes(response.data)
         })
         } catch (e: any) {
             console.log(e.response?.data?.message)
@@ -30,20 +31,26 @@ class BasketStore {
         try {
         response = await deleteBasketProduct(email, id)
         runInAction(() => {
-            this.setBasketProducts(response.data)
+            this.setBasketProductsTypes(response.data)
         })
         } catch (e: any) {
             console.log(e.response?.data?.message)
         }
     }
 
-    setBasketProducts(basketProducts:IBasketProduct[]){
+    setBasketProductsTypes(basketProducts:IBasketProduct[]){
         this.basketProducts = basketProducts
-        this.basketProductsCount = basketProducts.length
+        this.basketProductsTypesCount = basketProducts.length
     }
 
     setIsBasketOpen(isBasketOpen:boolean){
         this.isBasketOpen = isBasketOpen
+    }
+
+    setBasketProductsCost(index: number, cost: number) {
+        const newBasketProductsCost = [...this.basketProductsCost]
+        newBasketProductsCost[index] = cost
+        this.basketProductsCost = newBasketProductsCost
     }
 }
 

@@ -37,7 +37,7 @@ const navbarButtonsStyle = {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: '999px',
-    backgroundColor: 'hsla(0, 0%, 100%, 0.06)',
+    backgroundColor: 'inherit',
     transition: 'background-color 200ms ease',
     color: '#fff',
     fontSize: '1.70rem',
@@ -126,7 +126,7 @@ export const Navbar = observer(() => {
                     </Button>
                 }
                 <IconButton sx={upperNavbarButtonsStyle} onClick={changeBasketState} aria-label="cart">
-                    <StyledBadge badgeContent={basketStore.basketProductsCount} color="success">
+                    <StyledBadge badgeContent={basketStore.basketProductsTypesCount} color="success">
                         <IconContext.Provider value={{ color: 'white', size: '23'}}>
                             <RiShoppingBasket2Line id='openMenuButton'  />
                         </IconContext.Provider>

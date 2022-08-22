@@ -74,7 +74,6 @@ class BasketService {
                 }
             ]
         })
-        console.log('serv: ', products)
         return products
         //const products = await user.getBasketProduct()
     }
