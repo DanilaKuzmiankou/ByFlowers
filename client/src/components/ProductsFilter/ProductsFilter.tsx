@@ -1,6 +1,6 @@
 import {Checkbox, FormControlLabel, FormGroup, TextField, Typography, useMediaQuery, useTheme} from '@mui/material';
 import './ProductsFilter.css'
-import {ChangeEvent, FC, useEffect, useState} from "react";
+import React, {ChangeEvent, FC, useEffect, useState} from "react";
 import {checkForOne, getCheckedItems} from "../../utils/Utils";
 import {productStyles} from "../../themes";
 import {observer} from "mobx-react-lite";
@@ -25,6 +25,8 @@ export const ProductsFilter = observer<ProductsProps>(({
     const [subCheckboxes, setSubCheckboxes] = useState<boolean[]>([]);
     const [mainCheckbox, setMainCheckbox] = useState<boolean[]>([false, false]);
 
+    const [currentMinPrice, setCurrentMinPrice] = useState<number>(0)
+    const [currentMaxPrice, setCurrentMaxPrice] = useState<number>(0)
 
 
     useEffect(() => {
@@ -85,15 +87,6 @@ export const ProductsFilter = observer<ProductsProps>(({
 
     }
 
-    const updateProductsPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const price = Number(event.target.value)
-        event.target.id === 'minPrice'
-            ?
-            productsStore.setMinProductPrice(price)
-            :
-            productsStore.setMaxProductPrice(price)
-        updateProducts(subCheckboxes)
-    }
 
     const calcInputFontSize = ():string => {
         if(greaterThanXXL) return '2.3rem'
@@ -105,6 +98,35 @@ export const ProductsFilter = observer<ProductsProps>(({
         if(greaterThanXXL) return '2.2rem'
         if(greaterThanXL) return '1.6rem'
         return '1.3rem'
+    }
+
+    const updateMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const price = validateInput(event)
+        if(price !== -1) {
+            productsStore.setMinProductPrice(price)
+            updateProducts(subCheckboxes)
+            setCurrentMinPrice(price)
+        }
+    }
+
+
+    const updateMaxPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const price = validateInput(event)
+        if(price !== -1) {
+            productsStore.setMaxProductPrice(price)
+            updateProducts(subCheckboxes)
+            setCurrentMaxPrice(price)
+        }
+    }
+
+    const validateInput = (event: React.ChangeEvent<HTMLInputElement>):number => {
+        const mathSymbols = ['+', '-', '*', '/']
+        const rawValue = event.target.value
+        if(!mathSymbols.includes(rawValue)) {
+            const value = Number(rawValue)
+            if(value > 0) return value
+        }
+        return -1
     }
 
     return (
@@ -120,6 +142,11 @@ export const ProductsFilter = observer<ProductsProps>(({
                         sx={{
                             "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
                                 borderRadius: '7% 0 0 7%'
+                            },
+                            '& .MuiOutlinedInput-input': {
+                                '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+                                    'WebkitAppearance': 'none',
+                                }
                             }
                         }}
                         size={greaterThanXXL ? 'medium' : 'small'}
@@ -128,7 +155,8 @@ export const ProductsFilter = observer<ProductsProps>(({
                         type='number'
                         label="from"
                         variant="outlined"
-                        onChange={updateProductsPrice}
+                        value={currentMinPrice}
+                        onChange={updateMinPrice}
                     />
                     <TextField
                         id='maxPrice'
@@ -136,6 +164,11 @@ export const ProductsFilter = observer<ProductsProps>(({
                         sx={{
                             "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
                                 borderRadius: '0 7% 7% 0'
+                            },
+                            '& .MuiOutlinedInput-input': {
+                                '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+                                    'WebkitAppearance': 'none',
+                                }
                             }
                         }}
                         size={greaterThanXXL ? 'medium' : 'small'}
@@ -144,7 +177,8 @@ export const ProductsFilter = observer<ProductsProps>(({
                         type='number'
                         label="to"
                         variant="outlined"
-                        onChange={updateProductsPrice}/>
+                        value={currentMaxPrice}
+                        onChange={updateMaxPrice}/>
                 </div>
                 <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersHeaderTypography}}>
                     Type

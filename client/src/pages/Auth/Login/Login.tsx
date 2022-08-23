@@ -61,7 +61,7 @@ export const Login = () => {
                                 color='#3A9AB9'
                             />
                             <Field
-                                placeholder='Enter your email'
+                                placeholder='Email'
                                 name='email'
                                 type='email'
                                 className={`${touched.email && errors.email ? 'error-field' : null} formik-field`}
@@ -84,7 +84,7 @@ export const Login = () => {
                                             <input
                                                 {...field}
                                                 type={`${passwordIsVisible ? 'text' : 'password'}`}
-                                                placeholder='Enter your password'
+                                                placeholder='Password'
                                                 className={`${meta.touched && meta.error ? 'error-field' : null} password-input`}
                                             />
                                             <FontAwesomeIcon

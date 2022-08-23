@@ -26,28 +26,38 @@ const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
 const pagesLinks = ['blog', 'aboutUs', 'flowers', 'plants'];
 const pages2 = ['Blog', 'About us'];
-const plants = ['Cactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
+const plants = ['Cactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema', 'Mini Jade Plant', 'Asparagus Fern']
 const flowers = ['Anutina eyes', 'Orchidea', 'Roses', 'Lilies']
 
 const navbarButtonsStyle = {
-    my: 2,
-    mx:0.5,
     fontFamily: 'IntroCondBlack',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '999px',
+    minWidth: '0',
     backgroundColor: 'inherit',
-    transition: 'background-color 200ms ease',
     color: '#fff',
     fontSize: '1.70rem',
     lineHeight: 1,
     fontWeight: 700,
-    paddingTop: '14px',
-    paddingBottom: '14px',
-    paddingRight: '13px',
-    paddingLeft: '13px'
+    margin: '24px 0 24px 33px',
+    padding: '0 0 10px',
+    '&:hover': {
+        backgroundColor: 'inherit',
+        "&:after": {
+            opacity: 1
+        }
+    },
+    "&:after": {
+        opacity: 0,
+        position : 'absolute',
+        width : '100%',
+        height : '1px',
+        bottom: 0,
+        left: '0px',
+        content: '""',
+        borderTop: '2px solid #FFFFFF',
+        transition: 'opacity 1000ms ease'
+    }
 }
+
 
 const navbarLoginButtonStyle = {
     my: 2,
@@ -237,7 +247,7 @@ export const Navbar = observer(() => {
                         {siteLogo}
                     </Typography>
                     <Box/>
-                    <Box  sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'end' }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'end' }}>
                         {pages2.map((page, id) => (
                             <Button
                                 key={page}

@@ -79,7 +79,7 @@ export const Signin = () => {
                                     color='#3A9AB9'
                                 />
                                 <Field
-                                    placeholder='Enter your name'
+                                    placeholder='Name'
                                     name='name'
                                     type='text'
                                     className={`${touched.name && errors.name ? 'error-field' : null} formik-field`}
@@ -101,7 +101,7 @@ export const Signin = () => {
                                             {...field}
                                             mask="+375 99 999-99-99"
                                             maskPlaceholder="_"
-                                            placeholder='Enter your phone'
+                                            placeholder='Phone'
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             className={`${touched.phone && errors.phone ? 'error-field' : null} formik-field`}
@@ -118,7 +118,7 @@ export const Signin = () => {
                                 color='#3A9AB9'
                             />
                             <Field
-                                placeholder='Enter your email'
+                                placeholder='Email'
                                 name='email'
                                 type='email'
                                 className={`${touched.email && errors.email ? 'error-field' : null} formik-field`}
@@ -141,7 +141,7 @@ export const Signin = () => {
                                             <input
                                                 {...field}
                                                 type={`${passwordIsVisible ? 'text' : 'password'}`}
-                                                placeholder='Enter your password'
+                                                placeholder='Password'
                                                 className={`${meta.touched && meta.error ? 'error-field' : null} password-input`}
                                             />
                                             <FontAwesomeIcon

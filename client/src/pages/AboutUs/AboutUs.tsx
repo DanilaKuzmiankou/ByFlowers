@@ -96,6 +96,7 @@ export const AboutUs = () => {
                                     I just bought 3 bouquets of roses and u now? I liked them! I will buy flowers
                                     only in this shop for the rest of my goddamn life man
                                 </p>
+
                                 <p>
                                     Kelly Leveaue
                                 </p>
