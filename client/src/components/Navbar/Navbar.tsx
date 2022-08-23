@@ -38,7 +38,7 @@ const navbarButtonsStyle = {
     lineHeight: 1,
     fontWeight: 700,
     margin: '24px 0 24px 33px',
-    padding: '0 0 10px',
+    padding: '5px 0 5px',
     '&:hover': {
         backgroundColor: 'inherit',
         "&:after": {
@@ -66,7 +66,7 @@ const navbarLoginButtonStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '999px',
+    borderRadius: '8px',
     transition: 'background-color 200ms ease',
     color: '#fff',
     fontSize: '1.20rem',
@@ -122,27 +122,6 @@ export const Navbar = observer(() => {
     return (
         <HideOnScroll>
         <div style={{ position: 'sticky', top:0, zIndex: 10 }}>
-            <div style={{position: "static", height: '35px', backgroundColor: '#2c2b39', display: 'flex', justifyContent: 'end', alignItems: 'center', padding: '0 3%'}}>
-                {userStore.isAuth ?
-                        <CustomClickMenu buttonStyle={upperNavbarButtonsStyle} />
-                    :
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        sx={navbarLoginButtonStyle}
-                        onClick={() => switchPage('login')}
-                    >
-                        Login
-                    </Button>
-                }
-                <IconButton sx={upperNavbarButtonsStyle} onClick={changeBasketState} aria-label="cart">
-                    <StyledBadge badgeContent={basketStore.basketProductsTypesCount} color="success">
-                        <IconContext.Provider value={{ color: 'white', size: '23'}}>
-                            <RiShoppingBasket2Line id='openMenuButton'  />
-                        </IconContext.Provider>
-                    </StyledBadge>
-                </IconButton>
-            </div>
         <AppBar sx={{p:0, m:0}} position="static" color='neutral' >
             <Container sx={{zIndex: 10}} maxWidth="xl" className='navbar'>
                 <Toolbar disableGutters>
@@ -247,7 +226,7 @@ export const Navbar = observer(() => {
                         {siteLogo}
                     </Typography>
                     <Box/>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'end' }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'end', alignItems:'center' }}>
                         {pages2.map((page, id) => (
                             <Button
                                 key={page}
@@ -269,6 +248,27 @@ export const Navbar = observer(() => {
                             menuItemsNames={flowers}
                             onMenuItemClick={(flowerName:string) => switchPage('flowers', flowerName)}
                         />
+                        <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '3%'}}>
+                            {userStore.isAuth ?
+                                <CustomClickMenu buttonStyle={upperNavbarButtonsStyle} />
+                                :
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    sx={navbarLoginButtonStyle}
+                                    onClick={() => switchPage('login')}
+                                >
+                                    Login
+                                </Button>
+                            }
+                            <IconButton sx={upperNavbarButtonsStyle} onClick={changeBasketState} aria-label="cart">
+                                <StyledBadge badgeContent={basketStore.basketProductsTypesCount} color="success">
+                                    <IconContext.Provider value={{ color: 'white', size: '23'}}>
+                                        <RiShoppingBasket2Line id='openMenuButton'  />
+                                    </IconContext.Provider>
+                                </StyledBadge>
+                            </IconButton>
+                        </div>
                     </Box>
                 </Toolbar>
             </Container>

@@ -16,6 +16,7 @@ import userStore from "../../../store/UserStore";
 import Button from "@mui/material/Button";
 import {Link, useNavigate} from "react-router-dom";
 import {IUser} from "../../../models/IUser";
+import PasswordStrengthBar from "react-password-strength-bar";
 
 YupPassword(Yup);
 
@@ -28,7 +29,7 @@ const userSchema = Yup.object({
         .minLowercase(1, 'password must contain at least 1 lower case letter')
         .minUppercase(1, 'password must contain at least 1 upper case letter')
         .minNumbers(1, 'password must contain at least 1 number')
-        .minSymbols(1, 'password must contain at least 1 special character'),
+        .min(8, 'password must contain at least 8 characters'),
     phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('required')
 })
 
@@ -70,7 +71,7 @@ export const Signin = () => {
                         setErrors( { [response.errors.field]: response.message })
                     }}
                 >
-                    {({errors, touched, handleBlur, handleChange}) => (
+                    {({values, errors, touched, handleBlur, handleChange}) => (
                         <Form className='loginForm'>
                             <div className={`${touched.name && errors.name ? 'error-icon' : null} formik-field-container`}>
                                 <FontAwesomeIcon
@@ -152,10 +153,15 @@ export const Signin = () => {
                                                 color='#446244'
                                             />
                                         </div>
-
                                     )}
                                 </Field>
                             </div>
+                            {touched.password && !errors.password ?
+                                <div style={{ width: '100%'}}>
+                                    <PasswordStrengthBar password={values.password} minLength={8} barColors={ ['#aca9a9', '#ef4836', '#f6b44d', '#2b90ef', '#25c281']}/>
+                                </div>
+                                : null
+                            }
                             <ErrorMessage component='div' className='custom-error-message' name='password'/>
                             <Button
                                 type="submit"

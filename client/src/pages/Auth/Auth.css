@@ -8,15 +8,8 @@
     justify-content:center;
     height:100vh;
     width:100%;
-    /* Created with https://www.css-gradient.com */
-    /* Created with https://www.css-gradient.com */
-    /* Created with https://www.css-gradient.com */
-    /* Created with https://www.css-gradient.com */
-    /* Created with https://www.css-gradient.com */
-    /* Created with https://www.css-gradient.com */
-    background: #6BB273;
-
-    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSI+CjxyZWN0IHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgZmlsbD0iIzRmNjM4ZCI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAxNUw3LjUgMEwxNSAxNVoiIGZpbGw9IiMzMDMzNTUiPjwvcGF0aD4KPC9zdmc+");
+    background: rgb(20,175,203);
+    background: linear-gradient(90deg, rgba(20,175,203,1) 0%, rgba(71,67,226,1) 100%);
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -105,7 +98,6 @@ input:focus {
 
 .password-container {
     width: 100%;
-    position: relative;
 }
 
 .password-image {
