@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProductsFilter";
 import {CustomSelect} from "../../components/CustomSelect/CustomSelect";
+import {NoItemsPlug} from "../../components/NoItemsPlug/NoItemsPlug";
 
 export const Plants = observer(() => {
 
@@ -115,22 +116,25 @@ export const Plants = observer(() => {
                             productsList={plants}
                             mainCheckboxName='Plants'
                         />
-                        <div>
-                            <Grid container spacing={{xs: 3, sm: 3}}
-                                  sx={{padding: {sm: '20px', xs: '0 7px'}, width: '100%'}}>
-                                {productsStore.products.map((product) => (
-                                    <Grid item xs={12} sm={6} md={4} lg={4} xl={3} xxxl={2} key={product.id}
-                                          data-aos="zoom-in"
-                                          sx={{display: 'flex', justifyContent: 'center'}}
-                                    >
+                            {productsStore.products && productsStore.products.length > 0
+                                ?
+                                <Grid container spacing={{xs: 3, sm: 3}}
+                                      sx={{padding: {sm: '20px', xs: '0 7px'}, width: '100%'}}>
+                                    {productsStore.products.map((product) => (
+                                        <Grid item xs={12} sm={6} md={4} lg={4} xl={3} xxxl={2} key={product.id}
+                                              data-aos="zoom-in"
+                                              sx={{display: 'flex', justifyContent: 'center'}}
+                                        >
 
-                                        <ProductItem
-                                            product={product}
-                                        />
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </div>
+                                            <ProductItem
+                                                product={product}
+                                            />
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                                :
+                                <NoItemsPlug text='Sadly, we have no this items in the storage' pictureHeight='250px' pictureWidth='250px' />
+                            }
                     </div>
                 </Grid>
             </Grid>

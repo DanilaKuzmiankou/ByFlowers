@@ -1,4 +1,5 @@
 .products-container {
+    height: 100%;
     font-family: Avenir, sans-serif;
     font-weight: 1000;
     display: inline-block;

@@ -10,6 +10,7 @@ import {buyButtonHoverStyle, productStyles} from "../../themes";
 import userStore from "../../store/UserStore";
 import {BasketItem} from "./BasketItem";
 import Button from "@mui/material/Button";
+import {NoItemsPlug} from "../NoItemsPlug/NoItemsPlug";
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -42,6 +43,7 @@ export const BasketContainer = observer(() => {
                     '& .MuiDrawer-paper': {
                         width: '30%',
                         boxSizing: 'border-box',
+                        height: '100%'
                     }
                 }}
                 anchor='right'
@@ -82,18 +84,7 @@ export const BasketContainer = observer(() => {
                     </Box>
                 </Box>
                     :
-                    <Box sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
-                        <Box
-                            component="img"
-                            sx={{ height: '100px', width: '100px', display: 'block'}}
-                            alt="The crying cactus."
-                            src={require("../../assets/images/cryingCactus.png")}
-                        />
-                        <Typography
-                            sx={{...productStyles.customBoldFont, ...{display: 'block'}}}>
-                            Sadly, you have no items in the basket
-                        </Typography>
-                    </Box>
+                        <NoItemsPlug text='Sadly, you have no items in the basket' pictureHeight='100px' pictureWidth='100px' />
                     }
             </SwipeableDrawer>
         </Box>
