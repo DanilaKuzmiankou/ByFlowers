@@ -35,7 +35,6 @@ const Product = sequelize.define(
         description: { type: DataTypes.TEXT, allowNull: false },
         count: { type: DataTypes.SMALLINT, allowNull: false },
         price: { type: DataTypes.SMALLINT, allowNull: false },
-        isFlower: { type: DataTypes.BOOLEAN, allowNull: false }
     },
     {
         timestamps: true,
@@ -45,7 +44,8 @@ const Product = sequelize.define(
 
 const ProductType = sequelize.define("product_type", {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        name: { type: DataTypes.STRING, allowNull: false, unique: true }
+        name: { type: DataTypes.STRING, allowNull: false, unique: true },
+        isFlower: { type: DataTypes.BOOLEAN, allowNull: false }
     },
     {
         timestamps: false,

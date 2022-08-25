@@ -12,6 +12,7 @@ import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProductsFilter";
 import {CustomSelect} from "../../components/CustomSelect/CustomSelect";
 import {NoItemsPlug} from "../../components/NoItemsPlug/NoItemsPlug";
+import {getProductsTypesByCategory} from "../../api/store/Product";
 
 export const Plants = observer(() => {
 
@@ -25,6 +26,11 @@ export const Plants = observer(() => {
 
 
     useEffect(() => {
+        async function fetch() {
+            const resp = await getProductsTypesByCategory(true)
+            console.log('fet', resp.data)
+        }
+        fetch()
         getItemsCountPerPage()
     }, [])
 

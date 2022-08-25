@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {IProduct, ProductsResponse} from "../../models/IProduct";
+import {bool} from "yup";
 
 
 export async function getProducts(types:string[], minPrice:number, maxPrice:number, limit:number, offset:number, orderExpression?: string[]):Promise<AxiosResponse<ProductsResponse>> {
@@ -28,6 +29,14 @@ export async function getProduct(id:number):Promise<AxiosResponse<IProduct>> {
     return axios.get<IProduct>(`${process.env.REACT_APP_SERVER_URL}/product/product`, {
         params: {
             id
+        }
+    })
+}
+
+export async function getProductsTypesByCategory(isFlower:boolean):Promise<AxiosResponse<string[]>> {
+    return axios.get<string[]>(`${process.env.REACT_APP_SERVER_URL}/product/types`, {
+        params: {
+            isFlower
         }
     })
 }

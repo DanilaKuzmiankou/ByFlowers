@@ -6,6 +6,7 @@ import {IProduct, ProductsResponse} from "../models/IProduct";
 class ProductsStore {
 
     products: IProduct[] = []
+    isFlowers: boolean = false
     selectedProductsName: string = ''
     selectedNavbarProduct: string = ''
     minProductPrice: number = -1

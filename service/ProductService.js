@@ -15,12 +15,12 @@ class ProductService {
         let createdProduct
         let productTypeDb
         try {
-            createdProduct = await Product.create({name, description, count, price, isFlower});
+            createdProduct = await Product.create({name, description, count, price});
         } catch (e) {
             throw ApiError.badRequest("This product is already created!");
         }
         productTypeDb = await ProductType.findOne({where: {name: productType}})
-        if (!productTypeDb) productTypeDb = await ProductType.create({name: productType})
+        if (!productTypeDb) productTypeDb = await ProductType.create({name: productType, isFlower})
         const picturesDB = [];
         for (let picture of pictures) {
             if (picture) {
@@ -92,7 +92,6 @@ class ProductService {
         )
     }
 
-
     async getProducts(whereExpression, includeExpression, orderExpression, limit, offset) {
         const products = await Product.findAll({
             where: whereExpression,
@@ -106,24 +105,17 @@ class ProductService {
     }
 
     async getProductsTypes(isFlower) {
-        const productsTypes = await ProductType.findAll({
+        return ProductType.findAll({
             attributes: ['name'],
-            include: [
-                {
-                    model: Product,
-                    as: "product",
-                    attributes: [],
-                    where: {isFlower}
-                }
-            ]
-        });
-        return productsTypes
-    }
+            where: { isFlower },
+            raw: true
+        }).then((types) => {
+            return types.map(type => type.name) })
+        }
 
     async getProductById(id) {
         return await Product.findOne({ where: {id} })
     }
-
 
 }
 

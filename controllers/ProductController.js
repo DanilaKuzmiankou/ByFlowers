@@ -3,6 +3,7 @@ const productService = require("../service/ProductService");
 let productController = this;
 
 class ProductController {
+
     constructor() {
         productController = this;
     }
