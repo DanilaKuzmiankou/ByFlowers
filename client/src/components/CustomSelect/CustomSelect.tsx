@@ -31,7 +31,6 @@ export const CustomSelect = () => {
             autoWidth
             color='success'
             variant="outlined"
-            MenuProps={{ disableScrollLock: true }}
             sx={{ minHeight: '25px', height: '35px' }}
         >
             {filterOptions.map((option, index) => (

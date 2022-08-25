@@ -48,9 +48,10 @@ export const BasketContainer = observer(() => {
                 open={Boolean(basketStore.isBasketOpen)}
                 onClose={() => basketStore.setIsBasketOpen(false)}
                 onOpen={() => basketStore.setIsBasketOpen(true)}
+
                 ModalProps={{
                     keepMounted: true,
-                }}
+                    }}
             >
                 <DrawerHeader sx={{textAlign: 'start', display:'flex', justifyContent: 'start'}}>
                     Basket

@@ -40,12 +40,12 @@ html{
     min-height:100%;/* make sure it is at least as tall as the viewport */
     position:relative;
     font-size: 10px;
+
 }
 
 body{
     height:100%; /* force the BODY element to match the height of the HTML element */
     margin: 0 !important;
-    padding: 0 !important;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -53,7 +53,7 @@ body{
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
-
+    overflow: scroll /* this line fixed bug with moving page while hiding scrollbar  */
 }
 
 
