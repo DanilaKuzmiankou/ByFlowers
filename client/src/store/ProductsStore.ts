@@ -15,7 +15,7 @@ class ProductsStore {
     itemsOffset: number = 0
     productsNames: string[] = []
     productsCount: number = 0
-    currentProductCount: number = 1
+    sortOptions: string[] = [] // format: ['price', 'ASC']
 
     constructor() {
         makeAutoObservable(this)
@@ -30,7 +30,7 @@ class ProductsStore {
         let response: AxiosResponse<ProductsResponse>
         try {
             response = await getProducts(this.productsNames, this.minProductPrice,
-            this.maxProductPrice, this.itemsLimit, this.itemsOffset)
+            this.maxProductPrice, this.itemsLimit, this.itemsOffset, this.sortOptions)
             const products = response.data.products
             runInAction(() => {
                 this.products = products
@@ -73,8 +73,8 @@ class ProductsStore {
         this.itemsOffset = itemsOffset
     }
 
-    setCurrentProductCount(count: number){
-        this.currentProductCount = count
+    setSortOptions(sortOptions:string[]){
+        this.sortOptions = sortOptions
     }
 
 }

@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import {IProduct, ProductsResponse} from "../../models/IProduct";
 
 
-export async function getProducts(types:string[], minPrice:number, maxPrice:number, limit:number, offset:number):Promise<AxiosResponse<ProductsResponse>> {
+export async function getProducts(types:string[], minPrice:number, maxPrice:number, limit:number, offset:number, orderExpression?: string[]):Promise<AxiosResponse<ProductsResponse>> {
     const typesStr = types.join(',')
     return axios.get<ProductsResponse>(`${process.env.REACT_APP_SERVER_URL}/product/products`, {
         params: {
@@ -10,7 +10,8 @@ export async function getProducts(types:string[], minPrice:number, maxPrice:numb
             minPrice,
             maxPrice,
             limit,
-            offset
+            offset,
+            orderExpression
         }
     })
 }

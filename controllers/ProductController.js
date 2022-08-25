@@ -19,13 +19,13 @@ class ProductController {
 
 async getProductsWithType(req, res, next) {
         try {
-            let {types, minPrice, maxPrice, limit, offset} = req.query
+            let {types, minPrice, maxPrice, limit, offset, orderExpression} = req.query
             minPrice = Number(minPrice)
             maxPrice = Number(maxPrice)
             limit = Number(limit)
             offset = Number(offset)
             types = types.split(',')
-            const products = await productService.getProductsWithType(types, minPrice, maxPrice, limit, offset)
+            const products = await productService.getProductsWithType(types, minPrice, maxPrice, limit, offset, orderExpression)
             return res.json(products);
         } catch (e) {
             next(e)

@@ -40,6 +40,10 @@ export const ProductsFilter = observer<ProductsProps>(({
         initCheckboxes()
     }, [productsStore.selectedNavbarProduct])
 
+    useEffect(() => {
+        productsStore.fetchProducts()
+    }, [productsStore.sortOptions])
+
 
     const initCheckboxes = () => {
         let productsCheckboxes:boolean[]
@@ -156,6 +160,7 @@ export const ProductsFilter = observer<ProductsProps>(({
                         type='number'
                         label="from"
                         variant="outlined"
+                        color='success'
                         value={currentMinPrice ?? ''}
                         onChange={updateMinPrice}
                     />
@@ -178,6 +183,7 @@ export const ProductsFilter = observer<ProductsProps>(({
                         type='number'
                         label="to"
                         variant="outlined"
+                        color='success'
                         value={currentMaxPrice ?? ''}
                         onChange={updateMaxPrice}/>
                 </div>

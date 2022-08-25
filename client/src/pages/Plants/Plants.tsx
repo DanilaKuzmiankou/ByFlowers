@@ -1,4 +1,4 @@
-import {Grid, Pagination, Typography, useMediaQuery, useTheme} from '@mui/material';
+import {Grid, MenuItem, Pagination, Select, Typography, useMediaQuery, useTheme} from '@mui/material';
 import './Plants.css'
 import {ChangeEvent, useEffect} from "react";
 import {ProductsFilter} from "../../components/ProductsFilter/ProductsFilter";
@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProductsFilter";
+import {CustomSelect} from "../../components/CustomSelect/CustomSelect";
 
 export const Plants = observer(() => {
 
@@ -20,6 +21,7 @@ export const Plants = observer(() => {
     const md = useMediaQuery(theme.breakpoints.between("sm", "lg"));
     const lgAndXl = useMediaQuery(theme.breakpoints.between("md", "xxxl"));
     const xxxl = useMediaQuery(theme.breakpoints.up("xxl"))
+
 
     useEffect(() => {
         getItemsCountPerPage()
@@ -74,8 +76,10 @@ export const Plants = observer(() => {
                       xl={13}>
                     <div className='products-container'>
                         <Box sx={{
+                            display: 'flex',
                             position: 'relative',
                             alignItems: 'start',
+                            flexFlow: { xs: 'row wrap', sm: 'initial'},
                             justifyContent: 'start',
                             padding: {
                                 sm: '20px',
@@ -86,15 +90,24 @@ export const Plants = observer(() => {
                                 sx={{...productStyles.customBoldFont, ...productStyles.headerTypographyStyle }}>
                                 {productsStore.selectedProductsName}
                             </Typography>
+                            <Box sx={{ display : 'flex', width: '100%', mt: '5px'}}>
                             <Box
                                 onClick={openDrawer}
                                 sx={{
                                     display: {xs: 'inline-block', sm: 'none'}
                                 }}
                             >
-                                <IconButton sx={{position: 'absolute', right: { xs: 0, md: '10px'}, top: { xs:0, md: '3px'}}}>
+                                <IconButton >
                                     <TuneTwoToneIcon fontSize={'large'}/>
                                 </IconButton>
+                            </Box>
+                            <Box sx={{ pr: { xs: '5px', md: '50px'}, alignItems: 'center', display: 'flex', width: '100%'}}>
+                                <Typography
+                                    sx={{...productStyles.customBoldFont, ...{marginLeft: 'auto', mr: '10px', whiteSpace: 'no-wrap' }}}>
+                                    Sort by
+                                </Typography>
+                                <CustomSelect />
+                            </Box>
                             </Box>
                         </Box>
 

@@ -119,17 +119,19 @@ export const buyButtonHoverStyle = {
     color: "#fff",
     textTransform: "uppercase",
     textDecoration: "none",
-    background: 'rgba(210,49,57,1)',
     border: "0",
     WebkitBoxShadow: "inset 0 -3px 0 0 #b42c32",
     boxShadow: "inset 0 -3px 0 0 #b42c32",
+
+    backgroundColor: 'rgba(210,49,57,1)',
+
+    background: 'linear-gradient(to left, rgba(210,49,57,1) 50%, #b42c32 50%) right',
+    backgroundSize: '200%',
+    transition: '.3s ease-out',
+
+
     '&:hover': {
-        animationDuration: "4s",
-        animationFillMode: "forwards",
-        animationIterationCount: "infinite",
-        animationName: `${slidebg}`,
-        animationTimingFunction: "linear",
-        background: "linear-gradient(30deg, rgba(210,49,57,0.9990371148459384) 26%, rgba(228,66,83,0.8281687675070029) 35%, rgba(255,99,122,1) 58%, rgba(210,49,57,1) 70%)",
+        backgroundPosition: 'left'
     }
 
 } as React.CSSProperties

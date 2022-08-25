@@ -35,7 +35,7 @@ class ProductService {
 
 
 
-    async getProductsWithType(types, minPrice, maxPrice, limit, offset) {
+    async getProductsWithType(types, minPrice, maxPrice, limit, offset, customOrderExpression) {
         const whereExpression = {
             price: {
                 [Op.gte]: minPrice !== -1 ? minPrice : 0,
@@ -61,11 +61,12 @@ class ProductService {
             if (types[0] === type) filterExpression += `name='${type}'`
             filterExpression += `, "productType".name='${type}'`
         }
-        const orderExpression =
+        let orderExpression =
             [
                 [{model: ProductType, as: 'productType'}, Sequelize.literal(filterExpression)],
                 ['updatedAt', 'ASC']
             ]
+        if(customOrderExpression) orderExpression.push( orderExpression = [customOrderExpression] )
         const count = await Product.count({
             where: whereExpression,
             include: includeExpression
