@@ -4,10 +4,7 @@ import Typography from "@mui/material/Typography";
 import "./CustomMenu.css"
 import {ControlledMenu, MenuItem, useMenuState} from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/core.css';
-import basketStore from "../../store/BasketStore";
 import {IconContext} from "react-icons";
-import {RiShoppingBasket2Line} from "react-icons/ri";
-import IconButton from "@mui/material/IconButton";
 import {IoIosArrowDown} from "react-icons/io";
 import Box from "@mui/material/Box";
 
@@ -36,7 +33,7 @@ export const CustomHoverMenu:FC<MenuProps> = ({menuName, buttonStyle,
                 {menuName}
 
             </Button>
-            <Box sx={{display: 'inline-block', margin: '0 0 6px 5px', padding: '0'}} aria-label="arrow" >
+            <Box sx={{display: 'inline-block', margin: '4px 0 0 5px', padding: '0'}} aria-label="arrow" >
                         <IconContext.Provider value={{ color: 'white', size: '23'}}>
                             <IoIosArrowDown   />
                         </IconContext.Provider>

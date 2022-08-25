@@ -2,20 +2,22 @@ import React, {useState} from 'react';
 import '../Auth.css'
 import InputMask from "react-input-mask";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleUser, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {faUser} from '@fortawesome/free-solid-svg-icons';
-import {faPhone} from '@fortawesome/free-solid-svg-icons';
-import {faAt} from '@fortawesome/free-solid-svg-icons';
-import {faLock} from '@fortawesome/free-solid-svg-icons';
-import {faEye} from '@fortawesome/free-solid-svg-icons';
-import {faEyeSlash} from '@fortawesome/free-solid-svg-icons';
-import {ErrorMessage, Field, Form, Formik, FieldProps} from "formik";
+import {
+    faAt,
+    faCircleUser,
+    faEye,
+    faEyeSlash,
+    faLock,
+    faPhone,
+    faUser,
+    IconDefinition
+} from '@fortawesome/free-solid-svg-icons';
+import {ErrorMessage, Field, FieldProps, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import YupPassword from 'yup-password';
 import userStore from "../../../store/UserStore";
 import Button from "@mui/material/Button";
 import {Link, useNavigate} from "react-router-dom";
-import {IUser} from "../../../models/IUser";
 import PasswordStrengthBar from "react-password-strength-bar";
 
 YupPassword(Yup);

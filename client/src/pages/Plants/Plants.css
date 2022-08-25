@@ -3,6 +3,7 @@
     font-weight: 1000;
     display: inline-block;
     width: 100%;
+    padding: 0 10px;
 }
 
 .pagination-container{
@@ -14,10 +15,10 @@
 .filters-container {
     display: flex;
     justify-content: center;
-    box-sizing: border-box;
+    box-sizing: initial;
     font-family: Avenir, sans-serif;
     min-height: 100vh;
     height: 100%;
     width: 100%;
-    padding: 30px 20px 20px;
+    margin: 30px 10px 0;
 }

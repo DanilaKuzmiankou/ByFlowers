@@ -12,8 +12,9 @@ class BasketController {
             let {id, email, count} = req.body;
             id = Number(id)
             count = Number(count)
-            const newCount = await basketService.addProduct(id, count, email);
-            return res.json(newCount);
+            const result = await basketService.addProduct(id, count, email);
+            const newCount = result.count
+            return res.json({count: newCount, message: result?.message});
         } catch (e) {
             next(e)
         }

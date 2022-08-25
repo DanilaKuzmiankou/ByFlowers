@@ -19,7 +19,7 @@ export const ProductGallery:FC<ProductGalleryProps> = ({pictures}) => {
     return (
         <>
             <Swiper
-                loop={true}
+                loop={pictures.length > 1}
                 spaceBetween={10}
                 navigation={true}
                 thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}

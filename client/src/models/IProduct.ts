@@ -18,6 +18,11 @@ export interface IBasketProduct {
     product: IProduct
 }
 
+export interface IBasketActualProduct {
+    id: number,
+    count: number,
+}
+
 export interface ProductsResponse {
     count: number
     products: IProduct[],
@@ -26,4 +31,9 @@ export interface ProductsResponse {
 export interface CountInputProps {
     counterGetCount: () => number,
     counterSetCount: (count: number) => void
+}
+
+export interface AddToBasketResponse {
+    count: number,
+    message?: string
 }

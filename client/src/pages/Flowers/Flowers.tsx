@@ -1,10 +1,5 @@
-import {Checkbox, FormControlLabel, FormGroup, TextField, Typography} from '@mui/material';
 import './Flowers.css'
-import {ChangeEvent, useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
-import {getProducts} from "../../api/store/Product";
-import {checkForOne, getCheckedItems} from "../../utils/Utils";
-import {productStyles} from "../../themes";
+import {useEffect} from "react";
 import {ProductsFilter} from "../../components/ProductsFilter/ProductsFilter";
 
 interface LocationState {

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {ThemeProvider} from "@mui/material";
-import {Navbar, BottomBar} from "./components/index.components";
+import {BottomBar, Navbar} from "./components/index.components";
 import {theme} from "./themes";
 import './App.css'
 import {BrowserRouter} from "react-router-dom";

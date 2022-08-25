@@ -1,7 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {IUser} from "../models/IUser";
-import {registration, login, logout, checkAuth} from "../api/store/User";
-import {response} from "express";
+import {checkAuth, login, logout, registration} from "../api/store/User";
 
 
 class UserStore {

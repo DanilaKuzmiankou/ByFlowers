@@ -1,15 +1,12 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
-import {CountInputProps, IBasketProduct, IProduct} from "../../models/IProduct";
+import {CountInputProps, IBasketProduct} from "../../models/IProduct";
 import Typography from "@mui/material/Typography";
-import {buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
+import {productStyles} from "../../themes";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import {ProductCounterInput} from "../ProductCounterInput/ProductCounterInput";
-import {toJS} from "mobx";
 import IconButton from "@mui/material/IconButton";
 import {IconContext} from "react-icons";
 import {RiDeleteBin6Line} from "react-icons/ri";
-import {deleteBasketProduct} from "../../api/store/Basket";
 import userStore from "../../store/UserStore";
 import basketStore from "../../store/BasketStore";
 
@@ -31,15 +28,12 @@ const basketItemStyle = {
 export const BasketItem: FC<BasketItemProps> = ({basketProduct, productNumber}) => {
 
     const countInputRef = useRef<CountInputProps>(null)
-
     const [itemCount, setItemCount] = useState<number>(basketProduct.count)
-
-
-
 
     useEffect(() => {
         if (countInputRef.current) {
             countInputRef.current.counterSetCount(basketProduct.count)
+            basketStore.setBasketProductsCost(productNumber, itemCount*basketProduct.product.price)
         }
     }, [basketProduct])
 
@@ -49,9 +43,17 @@ export const BasketItem: FC<BasketItemProps> = ({basketProduct, productNumber}) 
 
 
     const deleteItemFromBasket = () => {
-        basketStore.deleteProduct(userStore.user.email, basketProduct.product.id)
+        basketStore.deleteProduct(userStore.user.email, basketProduct.product.id, productNumber)
     }
 
+    const updateCount = (count: number) => {
+        basketStore.changeBasketProductsActual(basketProduct.product.id, count)
+        if(count > 0) {
+            setItemCount(count)
+            console.log('new')
+        }
+        else deleteItemFromBasket()
+    }
 
     return (
         <Box sx={basketItemStyle}>
@@ -96,14 +98,15 @@ export const BasketItem: FC<BasketItemProps> = ({basketProduct, productNumber}) 
                 >
 
                     <Box sx={{
-                        width: '80px'
+                        width: '110px'
                     }}
                     >
                         <ProductCounterInput
                             ref={countInputRef}
-                            setItemCount={setItemCount}
+                            setItemCount={updateCount}
                             totalCount={basketProduct.product.count}
                             startCount={basketProduct.count}
+                            minCount={0}
                         />
                     </Box>
                     <Typography

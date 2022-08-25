@@ -1,5 +1,3 @@
-
-
 .filters-input {
     width: 50%;
 }
@@ -12,6 +10,7 @@
     width: 100%;
 }
 
+/*noinspection ALL*/
 .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline #maxPrice{
     border-radius: 30% !important;
 }

@@ -1,6 +1,6 @@
 import $api from '../index.network';
 import {AuthResponse} from "../../models/AuthResponse";
-import axios, {AxiosResponse} from  "axios"
+import axios, {AxiosResponse} from "axios"
 
 export async function registration(email:string, password:string, phone: string, name: string): Promise<AxiosResponse<AuthResponse>> {
     return $api.post<AuthResponse>('/user/registration', {email, password, phone, name})

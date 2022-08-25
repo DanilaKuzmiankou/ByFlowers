@@ -5,10 +5,8 @@ import basketStore from "../../store/BasketStore";
 import {SwipeableDrawer, Typography} from "@mui/material";
 import Divider from "@mui/material/Divider";
 import * as React from "react";
-import {buyButtonHoverStyle, productStyles} from "../../themes";
-import productsStore from "../../store/ProductsStore";
-import {ProductsFilter} from "../ProductsFilter/ProductsFilter";
 import {useEffect, useState} from "react";
+import {buyButtonHoverStyle, productStyles} from "../../themes";
 import userStore from "../../store/UserStore";
 import {BasketItem} from "./BasketItem";
 import Button from "@mui/material/Button";
@@ -58,15 +56,17 @@ export const BasketContainer = observer(() => {
                     Basket
                 </DrawerHeader>
                 <Divider />
+                {basketStore.basketProducts && basketStore.basketProducts.length > 0
+                    ?
                 <Box sx={{padding: '0 10px 10px', display: 'flex', flexDirection: 'column', position: 'relative', height: "100%"}}>
                     {basketStore.basketProducts.map((basketProduct, index) => (
                         <BasketItem key={basketProduct.product.id} basketProduct={basketProduct} productNumber={index} />
                     ))}
                     <Box sx={{ marginTop: 'auto', display: 'flex', flexDirection: 'column' }}>
-                        <Box>
+                        <Box sx={{ display: 'flex', margin: '5px 0'}}>
                         <Typography
                             sx={{...productStyles.customBoldFont, ...{display: 'inline-block'}}}>
-                            Order Total_
+                            Order Total
                         </Typography>
                         <Typography
                             sx={{...productStyles.customBoldFont, ...{display: 'inline-block', marginLeft: 'auto'}}}>
@@ -80,6 +80,20 @@ export const BasketContainer = observer(() => {
                         </Button>
                     </Box>
                 </Box>
+                    :
+                    <Box sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+                        <Box
+                            component="img"
+                            sx={{ height: '100px', width: '100px', display: 'block'}}
+                            alt="The crying cactus."
+                            src={require("../../assets/images/cryingCactus.png")}
+                        />
+                        <Typography
+                            sx={{...productStyles.customBoldFont, ...{display: 'block'}}}>
+                            Sadly, you have no items in the basket
+                        </Typography>
+                    </Box>
+                    }
             </SwipeableDrawer>
         </Box>
     );

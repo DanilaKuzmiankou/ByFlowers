@@ -52,6 +52,16 @@ async getProductsWithType(req, res, next) {
         }
     }
 
+    async getProductById(req, res, next) {
+        try {
+            const {id} = req.query
+            const product = await productService.getProductById(id)
+            return res.json(product)
+        } catch (e) {
+            next(e)
+        }
+    }
+
 
 }
 

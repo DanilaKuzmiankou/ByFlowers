@@ -1,10 +1,9 @@
 import $api from '../index.network';
-import {AuthResponse} from "../../models/AuthResponse";
-import axios, {AxiosResponse} from  "axios"
-import {IBasketProduct, IProduct} from "../../models/IProduct";
+import {AxiosResponse} from "axios"
+import {AddToBasketResponse, IBasketProduct} from "../../models/IProduct";
 
-export async function addToBasket(id:number, count:number, email:string): Promise<AxiosResponse<number>> {
-    return $api.post<number>('/basket/add', {id, count, email})
+export async function addToBasket(id:number, count:number, email:string): Promise<AxiosResponse<AddToBasketResponse>> {
+    return $api.post<AddToBasketResponse>('/basket/add', {id, count, email})
 }
 
 export async function getBasketProductCount(id:number, email:string): Promise<AxiosResponse<number>> {

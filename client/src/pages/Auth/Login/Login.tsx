@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import '../Auth.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEyeSlash, faEye, faLock, faAt, faCircleUser, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {ErrorMessage, Field, Form, Formik, FieldProps} from "formik";
+import {faAt, faCircleUser, faEye, faEyeSlash, faLock, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import {ErrorMessage, Field, FieldProps, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import userStore from "../../../store/UserStore";
 import Button from "@mui/material/Button";
 import {Link, useNavigate} from "react-router-dom";
-import {IUser} from "../../../models/IUser";
 
 
 const userSchema = Yup.object({

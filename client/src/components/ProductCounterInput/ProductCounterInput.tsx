@@ -6,21 +6,23 @@ import Box from "@mui/material/Box";
 import {CountInputProps} from "../../models/IProduct";
 
 const counterButtonsStyle = {
-    padding: 0,
     fontSize: '2.5rem',
-    display: 'block',
+    justifyContent: 'center',
+    display: 'flex',
     maxHeight: '35px',
     maxWidth: '35px',
-    minWidth: '10px',
+    minWidth: '25px',
 }
 
 interface ProductCounterInputProps {
     startCount?: number,
     setItemCount?: (count: number) => void,
     totalCount: number,
+    minCount?: number
 }
 
-export const ProductCounterInput = React.forwardRef<CountInputProps, ProductCounterInputProps>(({totalCount, startCount= 1, setItemCount}, _ref) => {
+export const ProductCounterInput = React.forwardRef<CountInputProps, ProductCounterInputProps>(({totalCount, startCount= 1,
+                                                                                                    setItemCount, minCount = 1}, _ref) => {
 
     const [count, setCount] = useState<number>(startCount)
 
@@ -36,7 +38,7 @@ export const ProductCounterInput = React.forwardRef<CountInputProps, ProductCoun
     const setNewCount = (event: React.ChangeEvent<HTMLInputElement>) => {
         const currentCount = Number(event.target.value)
         if (!isNaN(currentCount)) {
-            if (currentCount === 0) updateCount(1)
+            if (currentCount < minCount) updateCount(minCount)
             else if (currentCount > totalCount) updateCount(totalCount)
             else updateCount(currentCount)
         }
@@ -54,7 +56,7 @@ export const ProductCounterInput = React.forwardRef<CountInputProps, ProductCoun
     }
 
     const decreaseCount = () => {
-        if (count > 1) updateCount(count - 1)
+        if (count > minCount) updateCount(count - 1)
     }
 
     return (

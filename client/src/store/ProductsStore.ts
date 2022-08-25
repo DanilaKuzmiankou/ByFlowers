@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import {AxiosResponse} from "axios";
 import {makeAutoObservable, runInAction} from "mobx";
 import {getProducts} from "../api/store/Product";
 import {IProduct, ProductsResponse} from "../models/IProduct";

@@ -1,9 +1,4 @@
-import {
-    Grid,
-    Pagination,
-    Typography,
-    useMediaQuery, useTheme
-} from '@mui/material';
+import {Grid, Pagination, Typography, useMediaQuery, useTheme} from '@mui/material';
 import './Plants.css'
 import {ChangeEvent, useEffect} from "react";
 import {ProductsFilter} from "../../components/ProductsFilter/ProductsFilter";
@@ -15,7 +10,6 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProductsFilter";
-import {BasketContainer} from "../../components/Basket/BasketContainer";
 
 export const Plants = observer(() => {
 
@@ -52,7 +46,7 @@ export const Plants = observer(() => {
 
     return (
         <>
-            <Grid columns={16} container style={{width: '100%', minHeight: '100vh'}}>
+            <Grid columns={16} container style={{width: '100%', minHeight: '100vh', padding: '10px'}}>
                 <Grid item
                       xs={0}
                       sm={4}
@@ -60,7 +54,7 @@ export const Plants = observer(() => {
                       lg={2}
                       xl={3}
                       sx={{
-                          display: {xs: 'none', sm: 'initial'},
+                          display: {xs: 'none', sm: 'inline-block'},
                           alignSelf: 'start',
                           position: 'sticky',
                           top: 0
@@ -112,7 +106,7 @@ export const Plants = observer(() => {
                             <Grid container spacing={{xs: 3, sm: 3}}
                                   sx={{padding: {sm: '20px', xs: '0 7px'}, width: '100%'}}>
                                 {productsStore.products.map((product) => (
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} xxxl={2} key={product.id}
+                                    <Grid item xs={12} sm={6} md={4} lg={4} xl={3} xxxl={2} key={product.id}
                                           data-aos="zoom-in"
                                           sx={{display: 'flex', justifyContent: 'center'}}
                                     >

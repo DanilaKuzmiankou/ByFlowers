@@ -1,16 +1,12 @@
-import React, {ChangeEvent, FC, useEffect, useState} from 'react';
+import React, {FC} from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useMediaQuery, useTheme} from "@mui/material";
-import {buyButtonDefaultStyle, buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
+import {catalogProductItem} from "../../themes";
 import {useNavigate} from "react-router-dom";
 import {IProduct} from "../../models/IProduct";
-import basketStore from "../../store/BasketStore";
 import useHoverStyle from "../../utils/useHoverStyle";
-import {IconContext} from "react-icons";
-import {RiDeleteBin6Line} from "react-icons/ri";
-import IconButton from "@mui/material/IconButton";
 
 
 interface ProductProps {

@@ -14,6 +14,7 @@ class BasketService {
 
 
     async addProduct(productId, count, email) {
+        let message = ''
         const user = await userService.getUser(email)
         const product = await productService.getProductById(productId)
         if(!user || !product){
@@ -25,15 +26,20 @@ class BasketService {
                 userId: user.id
             }
         })
+        if(count > product.count)
+        {
+            count = product.count
+            message = `Avaliable count of ${product.name} is ${product.count} items.`
+        }
         if(!basketProduct) {
             basketProduct = await BasketProduct.create({count, userId: user.id, productId: product.id})
-            return product.count - basketProduct.count
+            return { count: product.count - basketProduct.count, message: message}
         }
         basketProduct.set({
             count: basketProduct.count+count
         })
         await basketProduct.save()
-        return product.count - basketProduct.count
+        return { count: product.count - basketProduct.count, message: message}
     }
 
     async getBasketProductCount(productId, email) {

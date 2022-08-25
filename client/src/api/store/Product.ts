@@ -22,3 +22,11 @@ export async function getRecommendationProducts(limit:number):Promise<AxiosRespo
         }
     })
 }
+
+export async function getProduct(id:number):Promise<AxiosResponse<IProduct>> {
+    return axios.get<IProduct>(`${process.env.REACT_APP_SERVER_URL}/product/product`, {
+        params: {
+            id
+        }
+    })
+}

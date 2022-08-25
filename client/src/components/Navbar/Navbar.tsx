@@ -14,8 +14,8 @@ import {CustomHoverMenu} from "../index.components";
 import productsStore from "../../store/ProductsStore";
 import userStore from "../../store/UserStore";
 import {observer} from "mobx-react-lite";
-import { IconContext } from 'react-icons';
-import {Badge, BadgeProps, CssBaseline, Slide, useScrollTrigger} from "@mui/material";
+import {IconContext} from 'react-icons';
+import {Badge, BadgeProps, Link} from "@mui/material";
 import {RiShoppingBasket2Line} from "react-icons/ri";
 import {styled} from "@mui/material/styles";
 import basketStore from "../../store/BasketStore";
@@ -133,10 +133,9 @@ export const Navbar = observer(() => {
                         alt="The house from the offer."
                         src={require("../../assets/images/flowersEmblem3.png")}
                     />
-                    <Typography
+                    <Link
                         variant="h6"
                         noWrap
-                        component="a"
                         onClick={() => switchPage(pagesLinks[1])}
                         sx={{
                             mr: 2,
@@ -152,8 +151,8 @@ export const Navbar = observer(() => {
                         }}
                     >
                         {siteLogo}
-                    </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent:'flex-end'}}>
+                    </Link>
+                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -200,22 +199,21 @@ export const Navbar = observer(() => {
                         </Menu>
                     </Box>
                     {/*Mobile Logo image*/}
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexGrow: 1 }}>
                     <Box
                         component="img"
-                        sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, height: 30,
-                            width: 42}}
+                        sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, height: 30, width: 42}}
                         alt="The house from the offer."
                         src={require("../../assets/images/flowersEmblem3.png")}
                     />
                     {/*Mobile Logo*/}
-                    <Typography
+                    <Link
                         noWrap
-                        component="a"
-                        href=""
+                        onClick={() => switchPage(pagesLinks[1])}
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
+                            flexGrow: 0,
                             fontWeight: 700,
                             fontSize: '1.9rem',
                             letterSpacing: '.1rem',
@@ -224,9 +222,12 @@ export const Navbar = observer(() => {
                         }}
                     >
                         {siteLogo}
-                    </Typography>
+                    </Link>
                     <Box/>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'end', alignItems:'center' }}>
+                    </Box>
+
+                    <Box sx={{ flexGrow: { md: 1, xs: 0}, display: 'flex', justifyContent: 'end', alignItems:'center' }}>
+                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         {pages2.map((page, id) => (
                             <Button
                                 key={page}
@@ -248,6 +249,7 @@ export const Navbar = observer(() => {
                             menuItemsNames={flowers}
                             onMenuItemClick={(flowerName:string) => switchPage('flowers', flowerName)}
                         />
+                        </Box>
                         <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '3%'}}>
                             {userStore.isAuth ?
                                 <CustomClickMenu buttonStyle={upperNavbarButtonsStyle} />

@@ -1,13 +1,13 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import React, {useEffect, useRef, useState} from "react";
 import {CountInputProps, IProduct} from "../../models/IProduct";
-import {Grid, TextField, Typography} from "@mui/material";
-import {buyButtonHoverStyle, catalogProductItem, productStyles} from "../../themes";
+import {Grid, Typography} from "@mui/material";
+import {buyButtonHoverStyle, productStyles} from "../../themes";
 import Box from "@mui/material/Box";
 import './Product.css'
 import {ProductGallery} from "../../components/ProductGallery/ProductGallery";
 import Button from "@mui/material/Button";
-import {getRecommendationProducts} from "../../api/store/Product";
+import {getProduct, getRecommendationProducts} from "../../api/store/Product";
 import {ProductItem} from "../../components/ProductItem/ProductItem";
 import basketStore from "../../store/BasketStore";
 import {addToBasket, getBasketProductCount} from "../../api/store/Basket";
@@ -15,11 +15,65 @@ import userStore from "../../store/UserStore";
 import {ProductCounterInput} from "../../components/ProductCounterInput/ProductCounterInput";
 import {observer} from "mobx-react-lite";
 
-
 interface LocationState {
     productJson: string
 }
 
+
+const addToCartButtonStyle = {
+    width: '350px',
+    display: 'block'
+}
+
+const additionalText = {
+    color: '#9F9F9F',
+    fontSize: '1.1rem',
+    lineHeight: '0.8',
+    width: '100%',
+    textAlign: 'center',
+    margin: '0 0 10px'
+}
+
+const recommendationsBox = {
+    padding: '20px 0',
+    backgroundColor: '#38403D',
+    color: 'white',
+    minHeight: '500px'
+}
+
+const recommendationsBoxName = {
+    display: 'block',
+    fontSize: '3.5rem',
+    textAlign: 'center',
+    padding: '30px 0'
+}
+
+const recommendationsBoxItem = {
+    display: 'inline-block',
+    width: '350px',
+    padding: '20px'
+}
+
+const defaultContainerStyle = {
+    position: 'relative',
+    minHeight: '100vh',
+    width: 'content',
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '30px 0'
+} as React.CSSProperties
+
+const defaultEmptyContainerStyle = {
+    textAlign: 'center',
+    position: 'absolute',
+    top: '25%',
+    left: 0,
+    right: 0,
+    margin: '0 auto',
+    display: 'none',
+    justifyContent: 'center',
+    alignItems: 'center'
+} as React.CSSProperties
 
 export const Product = observer(() => {
 
@@ -31,33 +85,12 @@ export const Product = observer(() => {
     const navigate = useNavigate()
     const [totalCount, setTotalCount] = useState<number>(product.count)
     const [recommendationsProducts, setRecommendationsProducts] = useState<IProduct[]>()
-
-    const defaultContainerStyle = {
-        position: 'relative',
-        minHeight: '100vh',
-        width: 'content',
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '30px 0'
-    } as React.CSSProperties
-
-    const defaultEmptyContainerStyle = {
-        textAlign: 'center',
-        position: 'absolute',
-        top: '25%',
-        left: 0,
-        right: 0,
-        margin: '0 auto',
-        display: 'none',
-        justifyContent: 'center',
-        alignItems: 'center'
-    } as React.CSSProperties
-
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>(defaultContainerStyle)
     const [emptyContainerStyle, setEmptyContainerStyle] = useState<React.CSSProperties>(defaultEmptyContainerStyle)
+    const [message, setMessage] = useState<string>('')
 
     useEffect(() => {
-        async function fetch(){
+        async function fetch() {
             if(userStore.user.email) {
                 const response = await getBasketProductCount(product.id, userStore.user.email)
                 const basketCount = response.data
@@ -65,53 +98,50 @@ export const Product = observer(() => {
             }
         }
         fetch()
-    }, [userStore.user, basketStore.basketProducts])
+    }, [userStore.user])
 
     useEffect(() => {
-        checkForPresence()
-    }, [totalCount])
+        const basketProduct = basketStore.basketProductsActual.filter(basketProduct => basketProduct.id === product.id)[0]
+        if(basketProduct) {
+            setTotalCount(product.count - basketProduct.count)
+            updateTotalAmount(basketProduct.count)
+        }
+    }, [basketStore.basketProductsActual])
 
     useEffect(() => {
         fetchRecommendationsProducts()
     }, [])
 
+    useEffect(() => {
+        checkForPresence()
+    }, [totalCount])
+
+    const checkForPresence = () => {
+        if(totalCount<=0) {
+            const newDefaultNoItemsContainerStyle = {...defaultEmptyContainerStyle}
+            newDefaultNoItemsContainerStyle.display = 'flex'
+            setContainerStyle({...defaultContainerStyle, ...{
+                    opacity: 0.5,
+                    pointerEvents: 'none'
+                }})
+            setEmptyContainerStyle({...emptyContainerStyle, ...{display: 'flex'}})
+        } else {
+            setContainerStyle(defaultContainerStyle)
+            setEmptyContainerStyle(defaultEmptyContainerStyle)
+            setMessage('')
+        }
+    }
+
+    const updateTotalAmount = (basketProductCount: number) => {
+        getProduct(product.id)
+            .then(response => {
+                if(basketProductCount!==-1) setTotalCount(response.data.count - basketProductCount)
+            })
+    }
+
     async function fetchRecommendationsProducts() {
         const recommendationsProductsFromApi = await getRecommendationProducts(3)
         setRecommendationsProducts(recommendationsProductsFromApi.data)
-    }
-
-    const addToCartButtonStyle = {
-        width: '350px',
-        display: 'block'
-    }
-
-    const additionalText = {
-        color: '#9F9F9F',
-        fontSize: '1.1rem',
-        lineHeight: '0.8',
-        width: '100%',
-        textAlign: 'center',
-        margin: '0 0 10px'
-    }
-
-    const recommendationsBox = {
-        padding: '20px 0',
-        backgroundColor: '#38403D',
-        color: 'white',
-        minHeight: '500px'
-    }
-
-    const recommendationsBoxName = {
-        display: 'block',
-        fontSize: '3.5rem',
-        textAlign: 'center',
-        padding: '30px 0'
-    }
-
-    const recommendationsBoxItem = {
-        display: 'inline-block',
-        width: '350px',
-        padding: '20px'
     }
 
     const goToItemPage = (product: IProduct) => {
@@ -127,25 +157,14 @@ export const Product = observer(() => {
         if(countRef) {
             const response = await addToBasket(product.id, countRef.counterGetCount(), userStore.user.email)
             countRef.counterSetCount(1)
-            const currentProductCount = response.data
+            const currentProductCount = response.data.count
             product.count = currentProductCount
             setTotalCount(currentProductCount)
             basketStore.updateBasket(userStore.user.email)
-        }
-    }
-
-    const checkForPresence = () => {
-        if(totalCount<=0) {
-            const newDefaultNoItemsContainerStyle = {...defaultEmptyContainerStyle}
-            newDefaultNoItemsContainerStyle.display = 'flex'
-            setContainerStyle({...defaultContainerStyle, ...{
-                    opacity: 0.5,
-                    pointerEvents: 'none'
-            }})
-            setEmptyContainerStyle({...emptyContainerStyle, ...{display: 'flex'}})
-        } else {
-            setContainerStyle(defaultContainerStyle)
-            setEmptyContainerStyle(defaultEmptyContainerStyle)
+            basketStore.changeBasketProductsActual(product.id, currentProductCount)
+            if(response.data.message){
+                setMessage(response.data.message)
+            }
         }
     }
 
@@ -217,7 +236,7 @@ export const Product = observer(() => {
                                 >
                                     Add to cart
                                 </Button>
-
+                                {message ? <div className='custom-error-message'>{message}</div> : null }
                             </Box>
 
                         </Grid>

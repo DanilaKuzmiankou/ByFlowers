@@ -123,6 +123,7 @@ class ProductService {
         return await Product.findOne({ where: {id} })
     }
 
+
 }
 
 module.exports = new ProductService()

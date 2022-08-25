@@ -1,6 +1,6 @@
 import {Checkbox, FormControlLabel, FormGroup, TextField, Typography, useMediaQuery, useTheme} from '@mui/material';
 import './ProductsFilter.css'
-import React, {ChangeEvent, FC, useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {checkForOne, getCheckedItems} from "../../utils/Utils";
 import {productStyles} from "../../themes";
 import {observer} from "mobx-react-lite";
@@ -25,8 +25,8 @@ export const ProductsFilter = observer<ProductsProps>(({
     const [subCheckboxes, setSubCheckboxes] = useState<boolean[]>([]);
     const [mainCheckbox, setMainCheckbox] = useState<boolean[]>([false, false]);
 
-    const [currentMinPrice, setCurrentMinPrice] = useState<number>(0)
-    const [currentMaxPrice, setCurrentMaxPrice] = useState<number>(0)
+    const [currentMinPrice, setCurrentMinPrice] = useState<number|null>(null)
+    const [currentMaxPrice, setCurrentMaxPrice] = useState<number|null>(null)
 
 
     useEffect(() => {
@@ -105,7 +105,7 @@ export const ProductsFilter = observer<ProductsProps>(({
         if(price !== -1) {
             productsStore.setMinProductPrice(price)
             updateProducts(subCheckboxes)
-            setCurrentMinPrice(price)
+            setCurrentMinPrice(price !==0 ? price : null)
         }
     }
 
@@ -115,7 +115,7 @@ export const ProductsFilter = observer<ProductsProps>(({
         if(price !== -1) {
             productsStore.setMaxProductPrice(price)
             updateProducts(subCheckboxes)
-            setCurrentMaxPrice(price)
+            setCurrentMaxPrice(price !==0 ? price : null)
         }
     }
 
@@ -125,6 +125,7 @@ export const ProductsFilter = observer<ProductsProps>(({
         if(!mathSymbols.includes(rawValue)) {
             const value = Number(rawValue)
             if(value > 0) return value
+            return 0
         }
         return -1
     }
@@ -155,7 +156,7 @@ export const ProductsFilter = observer<ProductsProps>(({
                         type='number'
                         label="from"
                         variant="outlined"
-                        value={currentMinPrice}
+                        value={currentMinPrice ?? ''}
                         onChange={updateMinPrice}
                     />
                     <TextField
@@ -177,10 +178,10 @@ export const ProductsFilter = observer<ProductsProps>(({
                         type='number'
                         label="to"
                         variant="outlined"
-                        value={currentMaxPrice}
+                        value={currentMaxPrice ?? ''}
                         onChange={updateMaxPrice}/>
                 </div>
-                <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersHeaderTypography}}>
+                <Typography sx={{...productStyles.customBoldFont, ...productStyles.filtersHeaderTypography, ...{marginTop: '15px'}}}>
                     Type
                 </Typography>
                 <FormControlLabel

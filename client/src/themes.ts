@@ -188,7 +188,7 @@ export const productStyles = {
             sm: '1.5rem',
             xs: '1.7rem'
         },
-        margin: '5px 0'
+        margin: '10px 0'
     },
     checkboxGroup: {
         marginLeft: '10px'

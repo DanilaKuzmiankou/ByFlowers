@@ -10,17 +10,20 @@
     padding: 10px 0;
 }
 
+/*noinspection ALL*/
 .swiper-button-next::after, .swiper-button-prev::after {
     color: black;
 }
 
 
+/*noinspection ALL*/
 .mySwiper .swiper-slide {
     width: 25%;
     height: 100%;
     opacity: 0.4;
 }
 
+/*noinspection ALL*/
 .mySwiper .swiper-slide-thumb-active {
     opacity: 1;
 }
