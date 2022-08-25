@@ -123,7 +123,7 @@ export const Navbar = observer(() => {
         <HideOnScroll>
         <div style={{ position: 'sticky', top:0, zIndex: 10 }}>
         <AppBar sx={{p:0, m:0}} position="static" color='neutral' >
-            <Container sx={{zIndex: 10}} maxWidth="xl" className='navbar'>
+            <Container sx={{zIndex: 10, p: { xs: '0 2px', md: '0 24px'} }} maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box
                         component="img"

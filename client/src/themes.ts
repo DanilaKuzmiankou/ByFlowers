@@ -169,7 +169,7 @@ export const productStyles = {
             md: '2rem',
             sm: '2rem',
             xl: '3rem',
-            xs: '1.9rem'
+            xs: '1.8rem'
         },
         display: {
             xs: 'inline-block',
@@ -248,7 +248,7 @@ export const catalogProductItem = {
             lg: '400px',
             md: '300px',
             sm: '300px',
-            xs: '400px'
+            xs: '350px'
         },
         width: "100%",
         display: "flex",

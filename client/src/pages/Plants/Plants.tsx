@@ -46,7 +46,7 @@ export const Plants = observer(() => {
 
     return (
         <>
-            <Grid columns={16} container style={{width: '100%', minHeight: '100vh', padding: '10px'}}>
+            <Grid columns={16} container sx={{width: '100%', minHeight: '100vh', padding: {xs: '3px', md: '10px'}}}>
                 <Grid item
                       xs={0}
                       sm={4}
@@ -79,11 +79,11 @@ export const Plants = observer(() => {
                             justifyContent: 'start',
                             padding: {
                                 sm: '20px',
-                                xs: '10px 6px'
+                                xs: '7px 3px'
                             }
                         }}>
                             <Typography
-                                sx={{...productStyles.customBoldFont, ...productStyles.headerTypographyStyle}}>
+                                sx={{...productStyles.customBoldFont, ...productStyles.headerTypographyStyle }}>
                                 {productsStore.selectedProductsName}
                             </Typography>
                             <Box
@@ -92,7 +92,7 @@ export const Plants = observer(() => {
                                     display: {xs: 'inline-block', sm: 'none'}
                                 }}
                             >
-                                <IconButton sx={{position: 'absolute', right: '10px', top: '3px'}}>
+                                <IconButton sx={{position: 'absolute', right: { xs: 0, md: '10px'}, top: { xs:0, md: '3px'}}}>
                                     <TuneTwoToneIcon fontSize={'large'}/>
                                 </IconButton>
                             </Box>

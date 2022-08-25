@@ -43,6 +43,7 @@ export const BasketItem: FC<BasketItemProps> = ({basketProduct, productNumber}) 
 
 
     const deleteItemFromBasket = () => {
+        basketStore.changeBasketProductsActual(basketProduct.product.id, 0)
         basketStore.deleteProduct(userStore.user.email, basketProduct.product.id, productNumber)
     }
 
