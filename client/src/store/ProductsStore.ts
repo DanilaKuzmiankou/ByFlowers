@@ -7,6 +7,8 @@ class ProductsStore {
 
     products: IProduct[] = []
     isFlowers: boolean = false
+    plants: string[] = []
+    flowers: string[] = []
     selectedProductsName: string = ''
     selectedNavbarProduct: string = ''
     minProductPrice: number = -1
@@ -40,6 +42,10 @@ class ProductsStore {
         } catch (e: any) {
             console.log(e.response?.data?.message)
         }
+    }
+
+    setIsFlowers(isFlowers: boolean){
+        this.isFlowers = isFlowers
     }
 
     setProducts(products:IProduct[]){
@@ -78,6 +84,13 @@ class ProductsStore {
         this.sortOptions = sortOptions
     }
 
+    setFlowers(flowers:string[]){
+        this.flowers = flowers
+    }
+
+    setPlants(plants:string[]){
+        this.plants = plants
+    }
 }
 
 export default new ProductsStore()

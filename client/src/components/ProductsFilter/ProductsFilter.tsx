@@ -5,6 +5,7 @@ import {checkForOne, getCheckedItems} from "../../utils/Utils";
 import {productStyles} from "../../themes";
 import {observer} from "mobx-react-lite";
 import productsStore from "../../store/ProductsStore";
+import {toJS} from "mobx";
 
 export interface ProductsProps {
     productsList: string[],
@@ -37,8 +38,9 @@ export const ProductsFilter = observer<ProductsProps>(({
     }, [])
 
     useEffect(() => {
+        console.log('render', toJS(productsStore.selectedNavbarProduct))
         initCheckboxes()
-    }, [productsStore.selectedNavbarProduct])
+    }, [productsStore.selectedNavbarProduct, productsList])
 
     useEffect(() => {
         productsStore.fetchProducts()
@@ -47,9 +49,12 @@ export const ProductsFilter = observer<ProductsProps>(({
 
     const initCheckboxes = () => {
         let productsCheckboxes:boolean[]
+        console.log('match', productsList)
+
         if (productsStore.selectedNavbarProduct) {
             productsCheckboxes = productsList.map((element) => {
                 if (element === productsStore.selectedNavbarProduct) {
+                    console.log('match 2', productsStore.selectedNavbarProduct)
                     setMainCheckbox([false, true])
                     return true
                 }
@@ -60,6 +65,8 @@ export const ProductsFilter = observer<ProductsProps>(({
             productsCheckboxes = productsList.map(() => true)
             setMainCheckbox([true, false])
         }
+        console.log('prod', productsList)
+        console.log('pr', productsCheckboxes)
         setSubCheckboxes(productsCheckboxes)
         updateProducts(productsCheckboxes)
     }

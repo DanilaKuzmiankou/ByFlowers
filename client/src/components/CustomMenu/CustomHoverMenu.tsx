@@ -29,6 +29,7 @@ export const CustomHoverMenu:FC<MenuProps> = ({menuName, buttonStyle,
                 ref={ref}
                 onMouseEnter={() => setOpen(true)}
                 sx={buttonStyle}
+                disableRipple
             >
                 {menuName}
 

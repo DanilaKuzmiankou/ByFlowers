@@ -33,7 +33,7 @@ export async function getProduct(id:number):Promise<AxiosResponse<IProduct>> {
     })
 }
 
-export async function getProductsTypesByCategory(isFlower:boolean):Promise<AxiosResponse<string[]>> {
+export async function getProductsTypes(isFlower:boolean):Promise<AxiosResponse<string[]>> {
     return axios.get<string[]>(`${process.env.REACT_APP_SERVER_URL}/product/types`, {
         params: {
             isFlower

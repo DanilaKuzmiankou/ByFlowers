@@ -1,6 +1,6 @@
 import {Grid, MenuItem, Pagination, Select, Typography, useMediaQuery, useTheme} from '@mui/material';
-import './Plants.css'
-import {ChangeEvent, useEffect} from "react";
+import './Products.css'
+import {ChangeEvent, useEffect, useState} from "react";
 import {ProductsFilter} from "../../components/ProductsFilter/ProductsFilter";
 import {observer} from "mobx-react-lite";
 import productsStore from "../../store/ProductsStore";
@@ -12,27 +12,24 @@ import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProductsFilter";
 import {CustomSelect} from "../../components/CustomSelect/CustomSelect";
 import {NoItemsPlug} from "../../components/NoItemsPlug/NoItemsPlug";
-import {getProductsTypesByCategory} from "../../api/store/Product";
+import {getProductsTypes} from "../../api/store/Product";
 
-export const Plants = observer(() => {
+export const Products = observer(() => {
 
     const theme = useTheme();
-
-    const plants = ['Cactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema Chinese Evergreen', 'Mini Jade Plant', 'Asparagus Fern']
 
     const md = useMediaQuery(theme.breakpoints.between("sm", "lg"));
     const lgAndXl = useMediaQuery(theme.breakpoints.between("md", "xxxl"));
     const xxxl = useMediaQuery(theme.breakpoints.up("xxl"))
 
+    const [types, setTypes] = useState<string[]>([])
 
     useEffect(() => {
-        async function fetch() {
-            const resp = await getProductsTypesByCategory(true)
-            console.log('fet', resp.data)
-        }
-        fetch()
+        console.log('change')
+        setTypes(productsStore.isFlowers ? productsStore.flowers : productsStore.plants)
+        console.log('new', productsStore.isFlowers ? productsStore.flowers : productsStore.plants)
         getItemsCountPerPage()
-    }, [])
+    }, [productsStore.isFlowers])
 
     const openDrawer = () => {
         productsStore.setIsDrawerOpen(true)
@@ -68,12 +65,16 @@ export const Plants = observer(() => {
                           position: 'sticky',
                           top: 0
                       }}>
-                    <div className='filters-container'>
-                        <ProductsFilter
-                            productsList={plants}
-                            mainCheckboxName='Plants'
-                        />
-                    </div>
+                    {types && types.length > 0
+                        ?
+                        <div className='filters-container'>
+                            <ProductsFilter
+                                productsList={types}
+                                mainCheckboxName={productsStore.isFlowers ? 'Flowers' : 'Plants'}
+                            />
+                        </div>
+                        : null
+                    }
                 </Grid>
                 <Grid item
                       xs={16}
@@ -118,10 +119,15 @@ export const Plants = observer(() => {
                             </Box>
                         </Box>
 
-                        <MobileProductsFilter
-                            productsList={plants}
-                            mainCheckboxName='Plants'
-                        />
+                        {types && types.length > 0
+                            ?
+                            <MobileProductsFilter
+                                productsList={types}
+                                mainCheckboxName={productsStore.isFlowers ? 'Flowers' : 'Plants'}
+                            />
+                            : null
+                        }
+
                             {productsStore.products && productsStore.products.length > 0
                                 ?
                                 <Grid container spacing={{xs: 3, sm: 3}}

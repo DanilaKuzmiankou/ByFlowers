@@ -21,13 +21,15 @@ import {styled} from "@mui/material/styles";
 import basketStore from "../../store/BasketStore";
 import {CustomClickMenu} from "../CustomMenu/CustomClickMenu";
 import {HideOnScroll} from "../HideOnScroll/HideOnScroll";
+import {useEffect, useState} from "react";
+import {getProductsTypes} from "../../api/store/Product";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
 const pagesLinks = ['blog', 'aboutUs', 'flowers', 'plants'];
 const pages2 = ['Blog', 'About us'];
-const plants = ['Cactus', 'Begonia', 'Paddle Plant', 'Lady Palm', 'Peperomia', 'Pothos', 'Agloenema', 'Mini Jade Plant', 'Asparagus Fern']
-const flowers = ['Anutina eyes', 'Orchidea', 'Roses', 'Lilies']
+
+
 
 const navbarButtonsStyle = {
     fontFamily: 'IntroCondBlack',
@@ -79,6 +81,20 @@ const navbarLoginButtonStyle = {
 }
 
 export const Navbar = observer(() => {
+
+
+
+    useEffect(() => {
+        async function fetch(){
+            const flowersTypesResponse = await getProductsTypes(true)
+            const plantsTypesResponse = await getProductsTypes(false)
+            productsStore.setFlowers(flowersTypesResponse.data)
+            productsStore.setPlants(plantsTypesResponse.data)
+        }
+        fetch()
+    }, [])
+
+
     const navigate = useNavigate();
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -91,10 +107,11 @@ export const Navbar = observer(() => {
         setAnchorElNav(null);
     };
 
-    const switchPage = (linkName:string, productType?:string):void => {
+    const switchPage = (linkName:string, productType?:string, isFlowers?:boolean):void => {
         handleCloseNavMenu()
         if(productType) {
             productsStore.setSelectedNavbarProduct(productType)
+            if(isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
         }
         navigate(linkName)
     }
@@ -233,6 +250,7 @@ export const Navbar = observer(() => {
                                 key={page}
                                 onClick={() => switchPage(pagesLinks[id])}
                                 sx={navbarButtonsStyle}
+                                disableRipple
                             >
                                 {page}
                             </Button>
@@ -240,14 +258,14 @@ export const Navbar = observer(() => {
                         <CustomHoverMenu
                             menuName='Plants'
                             buttonStyle={navbarButtonsStyle}
-                            menuItemsNames={plants}
-                            onMenuItemClick={(plantName:string) => switchPage('plants', plantName)}
+                            menuItemsNames={productsStore.plants}
+                            onMenuItemClick={(plantName:string) => switchPage('products', plantName, false)}
                         />
                         <CustomHoverMenu
                             menuName='Flowers'
                             buttonStyle={navbarButtonsStyle}
-                            menuItemsNames={flowers}
-                            onMenuItemClick={(flowerName:string) => switchPage('flowers', flowerName)}
+                            menuItemsNames={productsStore.flowers}
+                            onMenuItemClick={(flowerName:string) => switchPage('products', flowerName, true)}
                         />
                         </Box>
                         <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '3%'}}>
