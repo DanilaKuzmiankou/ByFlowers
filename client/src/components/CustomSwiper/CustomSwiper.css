@@ -1,0 +1,33 @@
+
+.swiper {
+    width: 100%;
+    height: 80vh;
+    --swiper-navigation-color: #fff;
+    --swiper-pagination-color: #fff;
+}
+
+.swiper-slide {
+
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    color: #fff;
+}
+
+.parallax-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.swiper-slide .text {
+    font-family: YouthTouch, serif;
+    font-size: 7.5rem;
+    line-height: 1.5;
+}

@@ -151,20 +151,6 @@ export const productStyles = {
         fontWeight: '600 !important',
         letterSpacing: '0 !important',
     },
-    customNormalFont: {
-        color: 'black',
-        fontFamily: 'Avenir, sans-serif',
-        fontSize: {
-            xl: '1.8rem',
-            xxl: '1.8rem',
-            xxxl: '2.7rem',
-            sm: '1.3rem',
-            xs: '1.8rem',
-            lg: '1.8rem'
-        },
-        fontWeight: '0 !important',
-        letterSpacing: '0 !important',
-    },
     headerTypographyStyle: {
         fontSize: {
             lg: '2.5rem',
@@ -194,6 +180,37 @@ export const productStyles = {
     },
     checkboxGroup: {
         marginLeft: '10px'
+    },
+    customNormalFont: {
+        color: 'black',
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: {
+            xl: '1.8rem',
+            xxl: '1.8rem',
+            xxxl: '2.7rem',
+            sm: '1.3rem',
+            xs: '1.8rem',
+            lg: '1.8rem'
+        },
+        fontWeight: '0 !important',
+        letterSpacing: '0 !important',
+    },
+    customSmallFont: {
+        color: 'black',
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: {
+            xl: '1.6rem',
+            xxl: '1.6rem',
+            xxxl: '2.1rem',
+            sm: '1.3rem',
+            xs: '1.3rem',
+            lg: '1.3rem'
+        },
+        whiteSpace: 'normal',
+        fontWeight: '0 !important',
+        letterSpacing: '0 !important',
+        textAlign: 'center !important',
+        maxWidth: '250px'
     }
 }
 

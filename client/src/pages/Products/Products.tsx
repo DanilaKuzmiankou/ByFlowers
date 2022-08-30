@@ -25,9 +25,7 @@ export const Products = observer(() => {
     const [types, setTypes] = useState<string[]>([])
 
     useEffect(() => {
-        console.log('change')
         setTypes(productsStore.isFlowers ? productsStore.flowers : productsStore.plants)
-        console.log('new', productsStore.isFlowers ? productsStore.flowers : productsStore.plants)
         getItemsCountPerPage()
     }, [productsStore.isFlowers])
 
