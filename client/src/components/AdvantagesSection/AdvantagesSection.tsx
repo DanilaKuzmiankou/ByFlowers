@@ -23,12 +23,13 @@ export const AdvantagesSection = () => {
                             <RiPlantLine />
                         </IconContext.Provider>
                         <Typography
-                            sx={{...productStyles.customBoldFont}}>
+                            sx={productStyles.customBoldFont}>
                             Quality assurance
                         </Typography>
                         <Typography
                             sx={productStyles.customSmallFont}>
-                            We guarantee you the appearance and description of colors in the store and reality.
+                            We guarantee you the appearance and description of colors in the store and reality. <br />
+                            In case the delivered bouquet does not look fresh or looks different from the declared one on the site, we will promptly exchange it or give a refund.
                         </Typography>
                     </div>
                 </Grid>
@@ -38,7 +39,7 @@ export const AdvantagesSection = () => {
                             <FiTruck />
                         </IconContext.Provider>
                         <Typography
-                            sx={{...productStyles.customBoldFont}}>
+                            sx={productStyles.customBoldFont}>
                             Reliable suppliers
                         </Typography>
                         <Typography
@@ -53,12 +54,12 @@ export const AdvantagesSection = () => {
                             <BsCoin />
                         </IconContext.Provider>
                         <Typography
-                            sx={{...productStyles.customBoldFont}}>
+                            sx={productStyles.customBoldFont}>
                             Low prices
                         </Typography>
                         <Typography
                             sx={productStyles.customSmallFont}>
-                            We work directly with major suppliers and can offer prices lower than in most retail stores.
+                            We colloborate directly with major suppliers and can offer lower prices than most retail stores.
                         </Typography>
                     </div>
                 </Grid>

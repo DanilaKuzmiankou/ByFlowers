@@ -1,7 +1,6 @@
 
-
 .comments {
-    background: #ffefe9;
+    background: #fff1eb;
     display: flex;
     align-items: center;
     padding: 10px 10px 50px;
@@ -9,7 +8,7 @@
 
 @media screen and (min-height: 1024px){
     .comments {
-        min-height: 80vh;
+        min-height: 40vh;
     }
 }
 @media screen and (min-width: 768px){
@@ -18,23 +17,17 @@
     }
 }
 .comment{
-    height: 85%;
-    font-family: MabryPro, sans-serif;
-    background-color: #ffd3dc;
+    background-color: #fddce3;
     text-align: center;
-    color: #3f0791;
     display: flex;
     flex-direction: column;
 }
 
-.comment p:first-of-type {
-    min-height: 375px;
-    padding: 100px 40px;
+.comment p {
+
 }
 
 .comment p {
-    font-size: 2rem;
-
 }
 
 .comment p:first-child::before {

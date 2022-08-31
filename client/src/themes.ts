@@ -210,7 +210,7 @@ export const productStyles = {
         fontWeight: '0 !important',
         letterSpacing: '0 !important',
         textAlign: 'center !important',
-        maxWidth: '250px'
+        maxWidth: '320px'
     }
 }
 
