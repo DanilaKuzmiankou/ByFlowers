@@ -15,6 +15,7 @@ export const CustomSwiper = () => {
             slidesPerView={1}
             navigation={true}
             loop={true}
+            touchStartPreventDefault={false}
             pagination={{
                 clickable: true,
             }}

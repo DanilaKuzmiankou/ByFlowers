@@ -1,0 +1,31 @@
+.comments {
+    background: #fff1eb;
+    display: flex;
+    align-items: center;
+    padding: 20px 20px 100px;
+}
+
+@media screen and (min-height: 1024px){
+    .comments {
+        min-height: 40vh;
+    }
+}
+@media screen and (min-width: 768px){
+    .comments {
+        padding: 90px 90px 200px;
+    }
+}
+
+.comment{
+    background-color: #fddce3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+    position: relative;
+    height: 100%;
+}
+
+.comment-description {
+    height: 100%;
+}
