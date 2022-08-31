@@ -4,7 +4,9 @@
     height: 80vh;
     --swiper-navigation-color: #fff;
     --swiper-pagination-color: #fff;
+    --swiper-theme-color: #fff;
 }
+
 
 .swiper-slide {
 

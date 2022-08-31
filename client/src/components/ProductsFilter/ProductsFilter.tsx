@@ -38,7 +38,6 @@ export const ProductsFilter = observer<ProductsProps>(({
     }, [])
 
     useEffect(() => {
-        console.log('render', toJS(productsStore.selectedNavbarProduct))
         initCheckboxes()
     }, [productsStore.selectedNavbarProduct, productsList])
 
@@ -49,8 +48,6 @@ export const ProductsFilter = observer<ProductsProps>(({
 
     const initCheckboxes = () => {
         let productsCheckboxes:boolean[]
-        console.log('match', productsList)
-
         if (productsStore.selectedNavbarProduct) {
             productsCheckboxes = productsList.map((element) => {
                 if (element === productsStore.selectedNavbarProduct) {
@@ -65,8 +62,6 @@ export const ProductsFilter = observer<ProductsProps>(({
             productsCheckboxes = productsList.map(() => true)
             setMainCheckbox([true, false])
         }
-        console.log('prod', productsList)
-        console.log('pr', productsCheckboxes)
         setSubCheckboxes(productsCheckboxes)
         updateProducts(productsCheckboxes)
     }

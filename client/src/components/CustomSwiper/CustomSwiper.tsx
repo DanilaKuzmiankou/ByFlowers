@@ -13,12 +13,12 @@ export const CustomSwiper = () => {
             spaceBetween={0}
             effect='fade'
             slidesPerView={1}
-            navigation={true}
             loop={true}
             touchStartPreventDefault={false}
             pagination={{
                 clickable: true,
             }}
+            navigation
             autoplay={{
                 delay: 3500,
                 disableOnInteraction: false,
@@ -35,7 +35,7 @@ export const CustomSwiper = () => {
                 >
                     <div className="text">
                         <p>
-                            Best shop ever
+                            Shop the season’s freshest flowers
                         </p>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ export const CustomSwiper = () => {
                 >
                     <div className="text">
                         <p>
-                            Cool text
+                            The most beautiful flowers
                         </p>
                     </div>
                 </div>
@@ -63,7 +63,7 @@ export const CustomSwiper = () => {
                 >
                     <div className="text">
                         <p>
-                            Another interesting text
+                            Best gift for loved ones
                         </p>
                     </div>
                 </div>
@@ -77,7 +77,7 @@ export const CustomSwiper = () => {
                 >
                     <div className="text">
                         <p>
-                            And another one
+                            Quick application processing
                         </p>
                     </div>
                 </div>

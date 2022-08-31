@@ -9,14 +9,19 @@ export const BottomBar = () => {
                 <div className='bottom-brand'>
                     FlowersMarket
                 </div>
+                    <div className='bottom-rights'>
+                        Сайт, а  также вся информация предоставленная на сайте, носит исключительно <br />  информационный характер, и ни при каких условиях не является публичной офертой.
+                    </div>
+                    <div className='bottom-rights'>
+                        Регистрация необходима для использования корзины.
+                        Мы никогда и ни при каких условиях не разглашаем личные данные клиентов. <br />
+                        Контактная информация будет использована только для оформления заказов
+                    </div>
                 <div className='bottom-rights'>
                     &copy; All rights reserved
                 </div>
                 <div className='bottom-rights'>
                     2020-2022
-                </div>
-                <div className='bottom-rights'>
-                    Сайт, а  также вся информация предоставленная на сайте, носит исключительно <br />  информационный характер, и ни при каких условиях не является публичной офертой.
                 </div>
             </div>
             <div className='bottom-icons'>

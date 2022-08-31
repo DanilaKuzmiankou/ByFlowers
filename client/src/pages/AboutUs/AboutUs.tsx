@@ -8,6 +8,8 @@ import {BsTelephone} from "react-icons/bs";
 import {AdvantagesSection} from "../../components/AdvantagesSection/AdvantagesSection";
 import {CommentsSection} from "../../components/CommentsSection/CommentsSection";
 import Button from "@mui/material/Button";
+import productsStore from "../../store/ProductsStore";
+import {useNavigate} from "react-router-dom";
 
 const buttonStyle = {
     width: '250px',
@@ -48,9 +50,14 @@ const startShoppingPictureContainer = {
 
 export const AboutUs = () => {
 
-    const startShopping = () => {
+    const navigate = useNavigate();
 
-}
+    const startShopping = () => {
+        productsStore.setSelectedNavbarProduct('')
+        productsStore.setIsFlowers(true)
+        navigate('/products')
+        window.scrollTo(0, 0)
+    }
 
     return (
         <>

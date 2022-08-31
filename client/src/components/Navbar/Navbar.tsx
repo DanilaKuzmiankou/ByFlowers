@@ -260,12 +260,14 @@ export const Navbar = observer(() => {
                             buttonStyle={navbarButtonsStyle}
                             menuItemsNames={productsStore.plants}
                             onMenuItemClick={(plantName:string) => switchPage('products', plantName, false)}
+                            isFlowers={false}
                         />
                         <CustomHoverMenu
                             menuName='Flowers'
                             buttonStyle={navbarButtonsStyle}
                             menuItemsNames={productsStore.flowers}
                             onMenuItemClick={(flowerName:string) => switchPage('products', flowerName, true)}
+                            isFlowers={true}
                         />
                         </Box>
                         <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '3%'}}>

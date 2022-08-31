@@ -2,9 +2,9 @@
 .bottom-bar {
     display: flex;
     align-items: center;
-    height: 15vh;
     background-color: #282727;
     color: white;
+    padding: 10px 0;
 }
 
 .bottom-trademarks {

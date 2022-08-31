@@ -1,6 +1,9 @@
 .mySwiper2 {
     height: 550px;
     width: 500px;
+    --swiper-navigation-color: black;
+    --swiper-pagination-color: black;
+    --swiper-theme-color: black;
 }
 
 .mySwiper {
@@ -11,9 +14,7 @@
 }
 
 /*noinspection ALL*/
-.swiper-button-next::after, .swiper-button-prev::after {
-    color: black;
-}
+
 
 
 /*noinspection ALL*/

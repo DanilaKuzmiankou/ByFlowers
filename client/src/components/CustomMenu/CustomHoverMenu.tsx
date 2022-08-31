@@ -7,21 +7,29 @@ import '@szhsin/react-menu/dist/core.css';
 import {IconContext} from "react-icons";
 import {IoIosArrowDown} from "react-icons/io";
 import Box from "@mui/material/Box";
+import productsStore from "../../store/ProductsStore";
 
 interface MenuProps {
     menuName: string,
     buttonStyle: Object,
     menuItemsNames: string[],
     onMenuItemClick: Function,
+    isFlowers: boolean
 }
 
 
 export const CustomHoverMenu:FC<MenuProps> = ({menuName, buttonStyle,
-                                                  menuItemsNames, onMenuItemClick}) => {
+                                                  menuItemsNames, onMenuItemClick, isFlowers}) => {
 
     const ref = useRef(null);
     const [isOpen, setOpen] = useState<boolean>();
     const [menuProps, toggleMenu] = useMenuState({ transition: true });
+
+    const switchCategory = () => {
+        productsStore.setSelectedNavbarProduct('')
+        productsStore.setIsFlowers(isFlowers)
+        onMenuItemClick('')
+    }
 
     return (
         <div  onMouseLeave={() => setOpen(false)} style={{display: 'flex', alignItems: 'center'}}>
@@ -30,6 +38,7 @@ export const CustomHoverMenu:FC<MenuProps> = ({menuName, buttonStyle,
                 onMouseEnter={() => setOpen(true)}
                 sx={buttonStyle}
                 disableRipple
+                onClick={switchCategory}
             >
                 {menuName}
 
