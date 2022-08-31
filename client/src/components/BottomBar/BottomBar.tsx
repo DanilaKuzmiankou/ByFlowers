@@ -15,6 +15,9 @@ export const BottomBar = () => {
                 <div className='bottom-rights'>
                     2020-2022
                 </div>
+                <div className='bottom-rights'>
+                    Сайт, а  также вся информация предоставленная на сайте, носит исключительно <br />  информационный характер, и ни при каких условиях не является публичной офертой.
+                </div>
             </div>
             <div className='bottom-icons'>
                 <Box

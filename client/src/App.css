@@ -46,7 +46,6 @@ html{
 body{
     height:100%; /* force the BODY element to match the height of the HTML element */
     margin: 0 !important;
-
     overflow-y: scroll /* this line fixed bug with moving page while hiding scrollbar  */
 }
 

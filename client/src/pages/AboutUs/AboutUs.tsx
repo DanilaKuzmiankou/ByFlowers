@@ -1,12 +1,18 @@
 import Box from "@mui/material/Box";
 import './AboutUs.css'
-import {Grid, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import {CustomSwiper} from "../../components/CustomSwiper/CustomSwiper";
-import {productStyles} from "../../themes";
+import {buyButtonHoverStyle, productStyles} from "../../themes";
 import {IconContext} from "react-icons";
 import {BsTelephone} from "react-icons/bs";
 import {AdvantagesSection} from "../../components/AdvantagesSection/AdvantagesSection";
 import {CommentsSection} from "../../components/CommentsSection/CommentsSection";
+import Button from "@mui/material/Button";
+
+const buttonStyle = {
+    width: '250px',
+    marginTop: '35px'
+}
 
 const callUs = {
     display: "flex",
@@ -17,10 +23,34 @@ const callUs = {
     },
     justifyContent: "center",
     padding: "20px 0",
+    marginBottom: '50px',
     backgroundColor: "#e3f1e5"
 }
 
+const startShoppingContainer = {
+    backgroundColor: '#f3f3ef',
+    height: '820px',
+    padding: '160px 90px',
+}
+
+const startShoppingPictureContainer = {
+    backgroundImage: 'url(' + require("../../assets/images/startShoppingPicture.jpg") + ')',
+    height: '100%',
+    backgroundSize:'fill',
+    backgroundRepeat:'no-repeat',
+    backgroundPosition: 'center',
+    position: 'relative',
+    padding: '90px 100px',
+    fontFamily: "Avenir, serif",
+    color: 'white',
+}
+
+
 export const AboutUs = () => {
+
+    const startShopping = () => {
+
+}
 
     return (
         <>
@@ -45,7 +75,24 @@ export const AboutUs = () => {
                 </Box>
             </Box>
             <CommentsSection />
-
+            <Box sx={startShoppingContainer}>
+                <Box sx={startShoppingPictureContainer}>
+                    <Typography
+                        sx={{ fontSize: "7rem" }}>
+                        Ready to start your journey?
+                    </Typography>
+                    <Typography
+                        sx={{ fontSize: "2.5rem", marginTop: '20px'}}>
+                    Choose from a variety of options exactly what suits you
+                    </Typography>
+                    <Button
+                        onClick={startShopping}
+                        sx={{...buyButtonHoverStyle, ...buttonStyle}}
+                    >
+                        Start shopping!
+                    </Button>
+                </Box>
+            </Box>
         </>
 
     );
