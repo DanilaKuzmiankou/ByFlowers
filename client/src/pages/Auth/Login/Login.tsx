@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import '../Auth.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAt, faCircleUser, faEye, faEyeSlash, faLock, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {ErrorMessage, Field, FieldProps, Form, Formik} from "formik";
+import {faAt, faCircleUser, faEye, faEyeSlash, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import userStore from "../../../store/UserStore";
 import Button from "@mui/material/Button";
 import {Link, useNavigate} from "react-router-dom";
+import {PasswordField} from "../../../components/Form/PasswordField";
+import {EmailField} from "../../../components/Form/EmailField";
 
 
 const userSchema = Yup.object({
@@ -53,52 +55,17 @@ export const Login = () => {
                 >
                     {({errors, touched}) => (
                         <Form className='loginForm'>
-                            <div className={`${touched.email && errors.email ? 'error-icon' : null} formik-field-container`}>
-                            <FontAwesomeIcon
-                                width='40px'
-                                icon={faAt}
-                                color='#3A9AB9'
-                            />
-                            <Field
-                                placeholder='Email'
-                                name='email'
-                                type='email'
-                                className={`${touched.email && errors.email ? 'error-field' : null} formik-field`}
-                            />
-                            </div>
-                            <ErrorMessage component='div' className='custom-error-message' name='email'/>
 
-                            <div className={`${touched.password && errors.password ? 'error-icon' : null} formik-field-container`}>
-                                <FontAwesomeIcon
-                                    width='40px'
-                                    icon={faLock}
-                                    color='#3A9AB9'
-                                />
-                                <Field
-                                    name='password'
-                                    className={`${touched.password && errors.password ? 'error-field' : null} formik-field`}
-                                >
-                                    {({ field, meta }:FieldProps) => (
-                                        <div className='password-container'>
-                                            <input
-                                                {...field}
-                                                type={`${passwordIsVisible ? 'text' : 'password'}`}
-                                                placeholder='Password'
-                                                className={`${meta.touched && meta.error ? 'error-field' : null} password-input`}
-                                            />
-                                            <FontAwesomeIcon
-                                                onClick={changePasswordVisibility}
-                                                className='password-image'
-                                                width='15px'
-                                                icon={currentIcon}
-                                                color='#446244'
-                                            />
-                                        </div>
+                            <EmailField isEmailFieldTouched={touched.email} emailFieldErrors={errors.email} />
 
-                                    )}
-                                </Field>
-                            </div>
-                            <ErrorMessage component='div' className='custom-error-message' name='password'/>
+                            <PasswordField
+                                isPasswordFieldTouched={touched.password}
+                                passwordFieldErrors={errors.password}
+                                passwordIsVisible={passwordIsVisible}
+                                changePasswordVisibility={changePasswordVisibility}
+                                currentIcon={currentIcon}
+                            />
+
                             <Button
                                 type="submit"
                                 variant="contained"

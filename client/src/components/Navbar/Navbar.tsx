@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -21,7 +22,6 @@ import {styled} from "@mui/material/styles";
 import basketStore from "../../store/BasketStore";
 import {CustomClickMenu} from "../CustomMenu/CustomClickMenu";
 import {HideOnScroll} from "../HideOnScroll/HideOnScroll";
-import {useEffect, useState} from "react";
 import {getProductsTypes} from "../../api/store/Product";
 
 const siteLogo = 'FlowersDelivery'

@@ -103,8 +103,9 @@ export const Product = observer(() => {
     useEffect(() => {
         const basketProduct = basketStore.basketProductsActual.filter(basketProduct => basketProduct.id === product.id)[0]
         if(basketProduct) {
-            setTotalCount(product.count - basketProduct.count)
             updateTotalAmount(basketProduct.count)
+        } else {
+            setTotalCount(product.count)
         }
     }, [basketStore.basketProductsActual])
 
@@ -152,18 +153,31 @@ export const Product = observer(() => {
         window.scrollTo(0, 0)
     }
 
+
+
     const addProductToBasket = async () => {
+        if(!userStore.isAuth) {
+            navigate('../login')
+            return ;
+        }
         const countRef = countInputRef.current
         if(countRef) {
-            const response = await addToBasket(product.id, countRef.counterGetCount(), userStore.user.email)
-            countRef.counterSetCount(1)
-            const currentProductCount = response.data.count
-            product.count = currentProductCount
-            setTotalCount(currentProductCount)
-            basketStore.updateBasket(userStore.user.email)
-            basketStore.changeBasketProductsActual(product.id, currentProductCount)
-            if(response.data.message){
-                setMessage(response.data.message)
+            try {
+                const response = await addToBasket(product.id, countRef.counterGetCount(), userStore.user.email)
+                countRef.counterSetCount(1)
+                const currentProductCount = response.data.count
+                product.count = currentProductCount
+                setTotalCount(currentProductCount)
+                basketStore.updateBasket(userStore.user.email)
+                basketStore.changeBasketProductsActual(product.id, currentProductCount)
+                if(response.data.message){
+                    setMessage(response.data.message)
+                }
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    setMessage( e?.message)
+                }
             }
         }
     }
@@ -236,7 +250,7 @@ export const Product = observer(() => {
                                 >
                                     Add to cart
                                 </Button>
-                                {message ? <div className='custom-error-message'>{message}</div> : null }
+                                {message ? <div className='custom-product-error-message'>{message}</div> : null }
                             </Box>
 
                         </Grid>

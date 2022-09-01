@@ -1,4 +1,4 @@
-import {Grid, MenuItem, Pagination, Select, Typography, useMediaQuery, useTheme} from '@mui/material';
+import {Grid, Pagination, Typography, useMediaQuery, useTheme} from '@mui/material';
 import './Products.css'
 import {ChangeEvent, useEffect, useState} from "react";
 import {ProductsFilter} from "../../components/ProductsFilter/ProductsFilter";
@@ -12,7 +12,6 @@ import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import {MobileProductsFilter} from "../../components/ProductsFilter/MobileProductsFilter";
 import {CustomSelect} from "../../components/CustomSelect/CustomSelect";
 import {NoItemsPlug} from "../../components/NoItemsPlug/NoItemsPlug";
-import {getProductsTypes} from "../../api/store/Product";
 
 export const Products = observer(() => {
 

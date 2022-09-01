@@ -10,6 +10,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import userStore from "./store/UserStore";
 import {BasketContainer} from "./components/Basket/BasketContainer";
+import {CompleteOrder} from "./components/CompleteOrder/CompleteOrder";
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
             <Navbar />
             <AppRoutes />
             <BasketContainer />
+            <CompleteOrder />
             <BottomBar />
         </ThemeProvider>
         </BrowserRouter>

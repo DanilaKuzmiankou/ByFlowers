@@ -36,6 +36,10 @@ export const BasketContainer = observer(() => {
         setOrderTotal(newOrderTotal)
     }, [basketStore.basketProductsCost])
 
+    const openCompleteOrder = () => {
+        basketStore.setIsCompleteOrderOpen(true)
+    }
+
     return (
         <Box sx={{display: Boolean(basketStore.isBasketOpen) ? 'fixed' : 'none'}}>
             <SwipeableDrawer
@@ -52,7 +56,7 @@ export const BasketContainer = observer(() => {
                 onOpen={() => basketStore.setIsBasketOpen(true)}
 
                 ModalProps={{
-                    keepMounted: true,
+                    keepMounted: false,
                     }}
             >
                 <DrawerHeader sx={{textAlign: 'start', display:'flex', justifyContent: 'start'}}>
@@ -77,6 +81,7 @@ export const BasketContainer = observer(() => {
                         </Typography>
                         </Box>
                         <Button
+                            onClick={openCompleteOrder}
                             sx={{...buyButtonHoverStyle, ...{width: "100%"}}}
                         >
                             Buy!

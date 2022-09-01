@@ -1,6 +1,5 @@
 import axios, {AxiosResponse} from "axios";
 import {IProduct, ProductsResponse} from "../../models/IProduct";
-import {bool} from "yup";
 
 
 export async function getProducts(types:string[], minPrice:number, maxPrice:number, limit:number, offset:number, orderExpression?: string[]):Promise<AxiosResponse<ProductsResponse>> {

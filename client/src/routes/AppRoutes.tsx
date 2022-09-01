@@ -1,5 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
-import {AboutUs, BestChoice, Blog, Login, NotFound, Products, Product, Signin} from '../pages/index.pages';
+import {AboutUs, BestChoice, Blog, Login, NotFound, Product, Products, Signin} from '../pages/index.pages';
 import React from 'react';
 
 export const AppRoutes = () => (

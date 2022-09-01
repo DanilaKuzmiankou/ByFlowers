@@ -1,6 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {IUser} from "../models/IUser";
 import {checkAuth, login, logout, registration} from "../api/store/User";
+import basketStore from "./BasketStore";
 
 
 class UserStore {
@@ -55,6 +56,8 @@ class UserStore {
             localStorage.removeItem('token')
             this.setIsAuth(false)
             this.setUser({} as IUser)
+            basketStore.setBasketProductsTypes([])
+            basketStore.setBasketProductsActual([])
         } catch (e:any) {
             console.log(e.response?.data?.message)
         }

@@ -5,7 +5,6 @@ import {checkForOne, getCheckedItems} from "../../utils/Utils";
 import {productStyles} from "../../themes";
 import {observer} from "mobx-react-lite";
 import productsStore from "../../store/ProductsStore";
-import {toJS} from "mobx";
 
 export interface ProductsProps {
     productsList: string[],

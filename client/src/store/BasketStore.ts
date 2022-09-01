@@ -1,6 +1,6 @@
-import {makeAutoObservable, runInAction, toJS} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import {deleteBasketProduct, getBasketProducts} from "../api/store/Basket";
-import {IBasketActualProduct, IBasketProduct, IProduct} from "../models/IProduct";
+import {IBasketActualProduct, IBasketProduct} from "../models/IProduct";
 import {AxiosResponse} from "axios";
 
 class BasketStore {
@@ -9,6 +9,7 @@ class BasketStore {
     basketProductsCost:number[] = []
     basketProducts = [] as IBasketProduct[]
     isBasketOpen:boolean = false
+    isCompleteOrderOpen: boolean = false
     basketProductsActual: IBasketActualProduct[] = []
 
     constructor() {
@@ -70,6 +71,10 @@ class BasketStore {
             if(product.id === id) product.count = count
         })
         this.basketProductsActual = newBasketProductsActual
+    }
+
+    setIsCompleteOrderOpen(isCompleteOrderOpen:boolean) {
+        this.isCompleteOrderOpen = isCompleteOrderOpen
     }
 
 }

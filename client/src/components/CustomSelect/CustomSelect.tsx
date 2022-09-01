@@ -1,5 +1,5 @@
 import {MenuItem, Select, SelectChangeEvent} from "@mui/material";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import productsStore from "../../store/ProductsStore";
 
 

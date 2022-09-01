@@ -1,24 +1,17 @@
 import React, {useState} from 'react';
 import '../Auth.css'
-import InputMask from "react-input-mask";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-    faAt,
-    faCircleUser,
-    faEye,
-    faEyeSlash,
-    faLock,
-    faPhone,
-    faUser,
-    IconDefinition
-} from '@fortawesome/free-solid-svg-icons';
-import {ErrorMessage, Field, FieldProps, Form, Formik} from "formik";
+import {faCircleUser, faEye, faEyeSlash, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import {Form, Formik} from "formik";
 import * as Yup from 'yup';
 import YupPassword from 'yup-password';
 import userStore from "../../../store/UserStore";
 import Button from "@mui/material/Button";
 import {Link, useNavigate} from "react-router-dom";
-import PasswordStrengthBar from "react-password-strength-bar";
+import {PasswordField} from "../../../components/Form/PasswordField";
+import {NameField} from "../../../components/Form/NameField";
+import {PhoneField} from "../../../components/Form/PhoneField";
+import {EmailField} from "../../../components/Form/EmailField";
 
 YupPassword(Yup);
 
@@ -75,96 +68,28 @@ export const Signin = () => {
                 >
                     {({values, errors, touched, handleBlur, handleChange}) => (
                         <Form className='loginForm'>
-                            <div className={`${touched.name && errors.name ? 'error-icon' : null} formik-field-container`}>
-                                <FontAwesomeIcon
-                                    width='40px'
-                                    icon={faUser}
-                                    color='#3A9AB9'
-                                />
-                                <Field
-                                    placeholder='Name'
-                                    name='name'
-                                    type='text'
-                                    className={`${touched.name && errors.name ? 'error-field' : null} formik-field`}
-                                />
-                            </div>
-                            <ErrorMessage component='div' className='custom-error-message' name='name'/>
 
-                            <div className={`${touched.phone && errors.phone ? 'error-icon' : null} formik-field-container`}>
-                                <FontAwesomeIcon
-                                    width='40px'
-                                    icon={faPhone}
-                                    color='#3A9AB9'
-                                />
-                                <Field
-                                    name='phone'
-                                >
-                                    {({ field }:FieldProps) => (
-                                        <InputMask
-                                            {...field}
-                                            mask="+375 99 999-99-99"
-                                            maskPlaceholder="_"
-                                            placeholder='Phone'
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            className={`${touched.phone && errors.phone ? 'error-field' : null} formik-field`}
-                                        />
-                                        )}
-                                </Field>
-                            </div>
-                            <ErrorMessage component='div' className='custom-error-message' name='phone'/>
+                            <NameField isNameFieldTouched={touched.name} nameFieldErrors={errors.name} />
 
-                            <div className={`${touched.email && errors.email ? 'error-icon' : null} formik-field-container`}>
-                            <FontAwesomeIcon
-                                width='40px'
-                                icon={faAt}
-                                color='#3A9AB9'
+                            <PhoneField
+                                isPhoneFieldTouched={touched.phone}
+                                phoneFieldErrors={errors.phone}
+                                handleChange={handleChange}
+                                handleBlur={handleBlur}
                             />
-                            <Field
-                                placeholder='Email'
-                                name='email'
-                                type='email'
-                                className={`${touched.email && errors.email ? 'error-field' : null} formik-field`}
-                            />
-                            </div>
-                            <ErrorMessage component='div' className='custom-error-message' name='email'/>
 
-                            <div className={`${touched.password && errors.password ? 'error-icon' : null} formik-field-container`}>
-                                <FontAwesomeIcon
-                                    width='40px'
-                                    icon={faLock}
-                                    color='#3A9AB9'
-                                />
-                                <Field
-                                    name='password'
-                                    className={`${touched.password && errors.password ? 'error-field' : null} formik-field`}
-                                >
-                                    {({ field, meta }:FieldProps) => (
-                                        <div className='password-container'>
-                                            <input
-                                                {...field}
-                                                type={`${passwordIsVisible ? 'text' : 'password'}`}
-                                                placeholder='Password'
-                                                className={`${meta.touched && meta.error ? 'error-field' : null} password-input`}
-                                            />
-                                            <FontAwesomeIcon
-                                                onClick={changePasswordVisibility}
-                                                className='password-image'
-                                                width='15px'
-                                                icon={currentIcon}
-                                                color='#446244'
-                                            />
-                                        </div>
-                                    )}
-                                </Field>
-                            </div>
-                            {touched.password && !errors.password ?
-                                <div style={{ width: '100%'}}>
-                                    <PasswordStrengthBar password={values.password} minLength={8} barColors={ ['#aca9a9', '#ef4836', '#f6b44d', '#2b90ef', '#25c281']}/>
-                                </div>
-                                : null
-                            }
-                            <ErrorMessage component='div' className='custom-error-message' name='password'/>
+                            <EmailField isEmailFieldTouched={touched.email} emailFieldErrors={errors.email} />
+
+                            <PasswordField
+                                isPasswordFieldTouched={touched.password}
+                                passwordFieldErrors={errors.password}
+                                passwordIsVisible={passwordIsVisible}
+                                changePasswordVisibility={changePasswordVisibility}
+                                currentIcon={currentIcon}
+                                showStrengthBar
+                                password={values.password}
+                            />
+
                             <Button
                                 type="submit"
                                 variant="contained"
