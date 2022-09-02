@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLock, IconDefinition} from "@fortawesome/free-solid-svg-icons";
 import {ErrorMessage, Field, FieldProps} from "formik";
 import PasswordStrengthBar from "react-password-strength-bar";
+import './Form.css'
 
 interface PasswordField {
     isPasswordFieldTouched: boolean|undefined,
@@ -22,6 +23,7 @@ export const PasswordField:FC<PasswordField> = ({ isPasswordFieldTouched, passwo
         <>
         <div className={`${isPasswordFieldTouched && passwordFieldErrors ? 'error-icon' : null} formik-field-container`}>
             <FontAwesomeIcon
+                className='icon'
                 width='40px'
                 icon={faLock}
                 color='#3A9AB9'

@@ -33,6 +33,11 @@ export interface CountInputProps {
     counterSetCount: (count: number) => void
 }
 
+export interface CityAutocompleteProps {
+    getCity: () => string|undefined
+    setFieldIsRequired: () => void
+}
+
 export interface AddToBasketResponse {
     count: number,
     message?: string

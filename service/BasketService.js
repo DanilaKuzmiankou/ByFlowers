@@ -96,6 +96,16 @@ class BasketService {
         return basketService.getBasketProducts(email)
     }
 
+    async clearBasket(email) {
+        const user = await userService.getUser(email)
+        return BasketProduct.destroy( {
+            where:
+                {
+                    userId: user.id
+                }
+        })
+    }
+
 }
 
 module.exports = new BasketService()

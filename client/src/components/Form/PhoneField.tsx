@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPhone} from "@fortawesome/free-solid-svg-icons";
 import {ErrorMessage, Field, FieldProps} from "formik";
 import InputMask from "react-input-mask";
+import './Form.css'
 
 interface PhoneField {
     isPhoneFieldTouched: boolean|undefined,
@@ -16,6 +17,7 @@ export const PhoneField:FC<PhoneField> = ({ isPhoneFieldTouched, phoneFieldError
         <>
             <div className={`${isPhoneFieldTouched && phoneFieldErrors ? 'error-icon' : null} formik-field-container`}>
                 <FontAwesomeIcon
+                    className='icon'
                     width='40px'
                     icon={faPhone}
                     color='#3A9AB9'

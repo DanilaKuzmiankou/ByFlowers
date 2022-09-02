@@ -12,4 +12,7 @@ export const getCheckedItems = (checkedItems:boolean[], itemsNames:string[], las
 
 export const checkForOne = (array: boolean[]):boolean => (new Set(array)).size === 1
 
+export const phoneRegExp = /^[^\d\n]*(?:\d[^\d\n]*){12}$/
+
+
 

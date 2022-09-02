@@ -12,10 +12,10 @@ import {PasswordField} from "../../../components/Form/PasswordField";
 import {NameField} from "../../../components/Form/NameField";
 import {PhoneField} from "../../../components/Form/PhoneField";
 import {EmailField} from "../../../components/Form/EmailField";
+import {phoneRegExp} from "../../../utils/Utils";
 
 YupPassword(Yup);
 
-const phoneRegExp = /^[^\d\n]*(?:\d[^\d\n]*){12}$/
 
 const userSchema = Yup.object({
     name: Yup.string().max(100, 'must_be_100_characters_or_less').required('required'),

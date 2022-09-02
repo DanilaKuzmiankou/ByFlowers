@@ -11,6 +11,7 @@ class BasketStore {
     isBasketOpen:boolean = false
     isCompleteOrderOpen: boolean = false
     basketProductsActual: IBasketActualProduct[] = []
+    basketOrderTotal: number = 0
 
     constructor() {
         makeAutoObservable(this)
@@ -55,6 +56,7 @@ class BasketStore {
         const newBasketProductsCost = [...this.basketProductsCost]
         newBasketProductsCost[index] = cost
         this.basketProductsCost = newBasketProductsCost
+        this.basketOrderTotal = this.basketProductsCost.reduce((partialSum, a) => partialSum + a, 0)
     }
 
     setBasketProductsActual(basketProducts: IBasketProduct[]){

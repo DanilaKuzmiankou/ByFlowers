@@ -95,15 +95,9 @@ export const theme = createTheme({
             main: '#C8A2C8'
         }
     },
+
 });
 
-const slidebg = keyframes`
-  0% {
-    background-position: -30vw 0
-  }
-  100% {
-    background-position: 55vw 0
-  }`
 
 export const buyButtonDefaultStyle = {
     display: 'none'

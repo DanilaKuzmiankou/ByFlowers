@@ -2,6 +2,7 @@ import {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser,} from "@fortawesome/free-solid-svg-icons";
 import {ErrorMessage, Field} from "formik";
+import './Form.css'
 
 interface NameField {
     isNameFieldTouched: boolean|undefined,
@@ -13,6 +14,7 @@ export const NameField:FC<NameField> = ({ isNameFieldTouched, nameFieldErrors })
         <>
             <div className={`${isNameFieldTouched && nameFieldErrors ? 'error-icon' : null} formik-field-container`}>
                 <FontAwesomeIcon
+                    className='icon'
                     width='40px'
                     icon={faUser}
                     color='#3A9AB9'

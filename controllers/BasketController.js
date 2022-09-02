@@ -51,6 +51,17 @@ class BasketController {
         }
     }
 
+    async completeOrder(req, res, next) {
+        try {
+            let {email, phone, city} = req.body;
+            const result = await basketService.clearBasket(email);
+
+            return res.json({ message: 'Success!' });
+        } catch (e) {
+            next(e)
+        }
+    }
+
 
 }
 

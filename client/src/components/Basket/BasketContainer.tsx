@@ -22,7 +22,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export const BasketContainer = observer(() => {
 
-    const [orderTotal, setOrderTotal] = useState<number>(0)
 
     useEffect(() => {
         if(userStore.user.email) {
@@ -31,10 +30,7 @@ export const BasketContainer = observer(() => {
     }, [userStore.user.email])
 
 
-    useEffect(() => {
-        const newOrderTotal = basketStore.basketProductsCost.reduce((partialSum, a) => partialSum + a, 0)
-        setOrderTotal(newOrderTotal)
-    }, [basketStore.basketProductsCost])
+
 
     const openCompleteOrder = () => {
         basketStore.setIsCompleteOrderOpen(true)
@@ -77,7 +73,7 @@ export const BasketContainer = observer(() => {
                         </Typography>
                         <Typography
                             sx={{...productStyles.customBoldFont, ...{display: 'inline-block', marginLeft: 'auto'}}}>
-                            {orderTotal}$
+                            {basketStore.basketOrderTotal}$
                         </Typography>
                         </Box>
                         <Button

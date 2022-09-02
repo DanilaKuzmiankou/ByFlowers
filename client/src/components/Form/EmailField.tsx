@@ -2,6 +2,7 @@ import {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAt} from "@fortawesome/free-solid-svg-icons";
 import {ErrorMessage, Field} from "formik";
+import './Form.css'
 
 interface EmailField {
     isEmailFieldTouched: boolean|undefined,
@@ -13,6 +14,7 @@ export const EmailField:FC<EmailField> = ({ isEmailFieldTouched, emailFieldError
         <>
             <div className={`${isEmailFieldTouched && emailFieldErrors ? 'error-icon' : null} formik-field-container`}>
                 <FontAwesomeIcon
+                    className='icon'
                     width='40px'
                     icon={faAt}
                     color='#3A9AB9'
