@@ -9,7 +9,7 @@ import {Form, Formik} from "formik";
 import {NameField} from "../Form/NameField";
 import {PhoneField} from "../Form/PhoneField";
 import {RefObject, useEffect, useRef, useState} from "react";
-import {getRussianCities} from "../../api/store/Basket";
+import {completeOrder, getRussianCities} from "../../api/store/Basket";
 import {CityAutocomplete} from "../Form/CityAutocomplete";
 import {RussianCity} from "../../models/GetRussianCitiesResponse";
 import {buyButtonHoverStyle, productStyles} from "../../themes";
@@ -107,7 +107,8 @@ export const CompleteOrder = observer(() => {
                         if (cityAutocompleteRef.current) {
                             const city = cityAutocompleteRef.current.getCity()
                             if(city) {
-                                
+                                const response = await completeOrder(userStore.user.email, values.name, values.phone, city)
+                                if(response.status===200) basketStore.clearBasket()
                             }
                             else {
                                 cityAutocompleteRef.current.setFieldIsRequired()

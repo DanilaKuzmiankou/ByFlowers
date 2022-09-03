@@ -79,6 +79,13 @@ class BasketStore {
         this.isCompleteOrderOpen = isCompleteOrderOpen
     }
 
+    clearBasket() {
+        this.basketOrderTotal = 0
+        this.basketProducts = []
+        this.basketProductsActual = []
+        this.basketProductsTypesCount = 0
+    }
+
 }
 
 export default new BasketStore()

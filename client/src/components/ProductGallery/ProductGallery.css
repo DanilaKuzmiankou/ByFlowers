@@ -1,6 +1,6 @@
 .mySwiper2 {
     height: 550px;
-    width: 500px;
+    max-width: 500px;
     --swiper-navigation-color: black;
     --swiper-pagination-color: black;
     --swiper-theme-color: black;
@@ -8,9 +8,20 @@
 
 .mySwiper {
     height: 250px;
-    width: 500px;
+    max-width: 500px;
     box-sizing: border-box;
     padding: 10px 0;
+}
+
+@media screen and (max-width: 899px) {
+    .mySwiper2  {
+        width: 300px;
+        height: 350px;
+    }
+    .mySwiper  {
+        width: 300px;
+        height: 100px;
+    }
 }
 
 /*noinspection ALL*/

@@ -26,7 +26,8 @@ import {getProductsTypes} from "../../api/store/Product";
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
-const pagesLinks = ['blog', 'aboutUs', 'flowers', 'plants'];
+const pagesLinks = ['blog', 'aboutUs', 'products', 'products'];
+const isFlowers = [undefined, undefined, true, false];
 const pages2 = ['Blog', 'About us'];
 
 
@@ -111,8 +112,8 @@ export const Navbar = observer(() => {
         handleCloseNavMenu()
         if(productType) {
             productsStore.setSelectedNavbarProduct(productType)
-            if(isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
         }
+        if(isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
         navigate(linkName)
     }
 
@@ -147,7 +148,7 @@ export const Navbar = observer(() => {
                         onClick={() => switchPage(pagesLinks[1])}
                         sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, height: 55,
                             width: 75}}
-                        alt="The house from the offer."
+                        alt="Logo"
                         src={require("../../assets/images/flowersEmblem3.png")}
                     />
                     <Link
@@ -201,7 +202,7 @@ export const Navbar = observer(() => {
                             }}
                         >
                             {pages.map((page, id) => (
-                                <MenuItem key={page}  onClick={() => switchPage(pagesLinks[id])}>
+                                <MenuItem key={page} onClick={() => switchPage(pagesLinks[id], '', isFlowers[id])}>
                                     <Typography
                                         sx={{
                                         fontWeight: 500,
@@ -220,7 +221,7 @@ export const Navbar = observer(() => {
                     <Box
                         component="img"
                         sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, height: 30, width: 42}}
-                        alt="The house from the offer."
+                        alt="Logo"
                         src={require("../../assets/images/flowersEmblem3.png")}
                     />
                     {/*Mobile Logo*/}
@@ -232,7 +233,7 @@ export const Navbar = observer(() => {
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 0,
                             fontWeight: 700,
-                            fontSize: '1.9rem',
+                            fontSize: '1.4rem',
                             letterSpacing: '.1rem',
                             color: 'inherit',
                             textDecoration: 'none',

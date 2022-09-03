@@ -6,6 +6,11 @@ import {ProductsFilter, ProductsProps} from "./ProductsFilter";
 import productsStore from "../../store/ProductsStore";
 import {observer} from "mobx-react-lite";
 import {SwipeableDrawer} from "@mui/material";
+import basketStore from "../../store/BasketStore";
+import {IconContext} from "react-icons";
+import {GrClose} from "react-icons/gr";
+import IconButton from "@mui/material/IconButton";
+import {CloseButton} from "../CloseButton/CloseButton";
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -36,6 +41,7 @@ export const MobileProductsFilter = observer<ProductsProps>(({ productsList, mai
 
                 <DrawerHeader sx={{textAlign: 'start', display:'flex', justifyContent: 'start'}}>
                     Filters
+                    <CloseButton closeFunction={() => productsStore.setIsDrawerOpen(false)} />
                 </DrawerHeader>
                 <Divider />
                 <Box sx={{padding: '0 10px'}}>

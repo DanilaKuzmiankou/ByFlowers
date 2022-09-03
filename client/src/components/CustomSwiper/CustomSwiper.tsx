@@ -33,11 +33,9 @@ export const CustomSwiper = () => {
                         backgroundImage: 'url(' + require("../../assets/images/carouselFlowers.jpg") + ')'
                     }}
                 >
-                    <div className="text">
-                        <p>
+                        <p className="text">
                             Shop the season’s freshest flowers
                         </p>
-                    </div>
                 </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -47,11 +45,9 @@ export const CustomSwiper = () => {
                         backgroundImage: 'url(' + require("../../assets/images/carouselFlowers2.jpg") + ')'
                     }}
                 >
-                    <div className="text">
-                        <p>
-                            The most beautiful flowers
+                        <p className='text'>
+                            The gorgeous flowers in country
                         </p>
-                    </div>
                 </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -61,11 +57,9 @@ export const CustomSwiper = () => {
                         backgroundImage: 'url(' + require("../../assets/images/carouselFlowers3.jpg") + ')'
                     }}
                 >
-                    <div className="text">
-                        <p>
+                        <p  className="text">
                             Best gift for loved ones
                         </p>
-                    </div>
                 </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -75,11 +69,9 @@ export const CustomSwiper = () => {
                         backgroundImage: 'url(' + require("../../assets/images/carouselFlowers4.jpg") + ')'
                     }}
                 >
-                    <div className="text">
-                        <p>
+                        <p className="text">
                             Quick application processing
                         </p>
-                    </div>
                 </div>
             </SwiperSlide>
         </Swiper>

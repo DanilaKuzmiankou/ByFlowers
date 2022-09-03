@@ -11,6 +11,11 @@ import userStore from "../../store/UserStore";
 import {BasketItem} from "./BasketItem";
 import Button from "@mui/material/Button";
 import {NoItemsPlug} from "../NoItemsPlug/NoItemsPlug";
+import productsStore from "../../store/ProductsStore";
+import {IconContext} from "react-icons";
+import {GrClose} from "react-icons/gr";
+import IconButton from "@mui/material/IconButton";
+import {CloseButton} from "../CloseButton/CloseButton";
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -29,9 +34,6 @@ export const BasketContainer = observer(() => {
         }
     }, [userStore.user.email])
 
-
-
-
     const openCompleteOrder = () => {
         basketStore.setIsCompleteOrderOpen(true)
     }
@@ -41,7 +43,12 @@ export const BasketContainer = observer(() => {
             <SwipeableDrawer
                 sx={{
                     '& .MuiDrawer-paper': {
-                        width: '30%',
+                        width: {
+                            xs: '100%',
+                            sm: '400px',
+                            lg: '500px',
+                            xl: '30%'
+                        },
                         boxSizing: 'border-box',
                         height: '100%'
                     }
@@ -57,6 +64,7 @@ export const BasketContainer = observer(() => {
             >
                 <DrawerHeader sx={{textAlign: 'start', display:'flex', justifyContent: 'start'}}>
                     Basket
+                    <CloseButton closeFunction={() => basketStore.setIsBasketOpen(false)} />
                 </DrawerHeader>
                 <Divider />
                 {basketStore.basketProducts && basketStore.basketProducts.length > 0

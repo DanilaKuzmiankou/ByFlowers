@@ -21,8 +21,12 @@ interface LocationState {
 
 
 const addToCartButtonStyle = {
-    width: '350px',
-    display: 'block'
+    width: {
+        xs: '200px',
+        sm: '350px'
+    },
+    display: 'block',
+    alignSelf: 'center'
 }
 
 const additionalText = {
@@ -48,20 +52,17 @@ const recommendationsBoxName = {
     padding: '30px 0'
 }
 
-const recommendationsBoxItem = {
-    display: 'inline-block',
-    width: '350px',
-    padding: '20px'
-}
 
 const defaultContainerStyle = {
     position: 'relative',
-    minHeight: '100vh',
-    width: 'content',
+    width: {
+        xs: '100%',
+        sm: 'content'
+    },
     display: 'flex',
     justifyContent: 'center',
-    padding: '30px 0'
-} as React.CSSProperties
+    padding: '10px 30px'
+}
 
 const defaultEmptyContainerStyle = {
     textAlign: 'center',
@@ -75,6 +76,15 @@ const defaultEmptyContainerStyle = {
     alignItems: 'center'
 } as React.CSSProperties
 
+const addToCartBox = {
+    margin: {
+        xs: '0 0 10px 0',
+        lg: '40px 0 0 30px'
+    },
+    display: 'flex',
+    flexDirection: 'column'
+}
+
 export const Product = observer(() => {
 
     const location = useLocation();
@@ -85,7 +95,7 @@ export const Product = observer(() => {
     const navigate = useNavigate()
     const [totalCount, setTotalCount] = useState<number>(product.count)
     const [recommendationsProducts, setRecommendationsProducts] = useState<IProduct[]>()
-    const [containerStyle, setContainerStyle] = useState<React.CSSProperties>(defaultContainerStyle)
+    const [containerStyle, setContainerStyle] = useState(defaultContainerStyle)
     const [emptyContainerStyle, setEmptyContainerStyle] = useState<React.CSSProperties>(defaultEmptyContainerStyle)
     const [message, setMessage] = useState<string>('')
 
@@ -154,7 +164,6 @@ export const Product = observer(() => {
     }
 
 
-
     const addProductToBasket = async () => {
         if(!userStore.isAuth) {
             navigate('../login')
@@ -199,8 +208,10 @@ export const Product = observer(() => {
                                     sx={{...productStyles.customBoldFont, ...productStyles.headerTypographyStyle}}>
                                     {product.name}
                                 </Typography>
+
                                 <ProductGallery pictures={product.pictures}/>
-                                <Box>
+
+                                <Box sx={{ width: '100%', margin: '20px 0'}}>
                                     <Typography
                                         sx={{...productStyles.customBoldFont, ...productStyles.headerTypographyStyle}}>
                                         Description
@@ -210,7 +221,10 @@ export const Product = observer(() => {
                                         sx={{
                                             ...productStyles.customNormalFont, ...{
                                                 whiteSpace: 'normal',
-                                                width: '550px'
+                                                width: {
+                                                    xs: '300px',
+                                                    md: '450px'
+                                                }
                                             }
                                         }}>
                                         {product.description}
@@ -226,7 +240,7 @@ export const Product = observer(() => {
                                 position: 'sticky',
                                 top: '0px'
                             }}>
-                            <Box sx={{marginLeft: '30px', marginTop: "40px", display: 'flex', flexDirection: 'column'}}>
+                            <Box sx={addToCartBox}>
                                 <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                                     <Typography
                                         sx={{...productStyles.customBoldFont, ...{display: 'inline-block'}}}>
@@ -260,13 +274,14 @@ export const Product = observer(() => {
                             sx={{...productStyles.customBoldFont, ...recommendationsBoxName}}>
                             You may also like
                         </Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                            {recommendationsProducts?.map((product) => (
-                                <Box key={product.id} sx={recommendationsBoxItem} onClick={() => goToItemPage(product)}>
-                                    <ProductItem product={product}/>
-                                </Box>
+                        <Grid container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+
+                        {recommendationsProducts?.map((product) => (
+                                    <Grid item xs={12} sm={4} key={product.id} onClick={() => goToItemPage(product)} style={{ padding: '20px', maxWidth:'350px'}}>
+                                        <ProductItem product={product}/>
+                                    </Grid>
                             ))}
-                        </Box>
+                        </Grid>
                     </Box>
                 </div>
                 : null}

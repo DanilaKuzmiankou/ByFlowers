@@ -98,7 +98,7 @@ class BasketService {
 
     async clearBasket(email) {
         const user = await userService.getUser(email)
-        return BasketProduct.destroy( {
+        return await BasketProduct.destroy( {
             where:
                 {
                     userId: user.id

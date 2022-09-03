@@ -33,6 +33,10 @@ export async function deleteBasketProduct(email:string, id:number): Promise<Axio
     })
 }
 
+export async function completeOrder(email:string, name: string, phone:string, city:string): Promise<AxiosResponse<AddToBasketResponse>> {
+    return $api.post<AddToBasketResponse>('/basket/order', {email, name, phone, city})
+}
+
 export async function getRussianCities(): Promise<AxiosResponse<GetRussianCitiesResponse>> {
     return axios.get<GetRussianCitiesResponse>('https://parseapi.back4app.com/classes/Russia_City?limit=9999&order=name&keys=name', {
         headers: {

@@ -13,6 +13,28 @@ interface ProductGalleryProps {
     pictures: IPicture[]
 }
 
+const mainPicture = {
+    height: {
+        xs: '350px',
+        md: '550px'
+    },
+    width: {
+        xs: '300px',
+        md: '500px'
+    },
+}
+
+const additionalPicture = {
+    height: {
+        xs: '100px',
+        md: '200px'
+    },
+    width: {
+        xs: '90px',
+        md: '190px'
+    }
+}
+
 export const ProductGallery:FC<ProductGalleryProps> = ({pictures}) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
@@ -29,7 +51,7 @@ export const ProductGallery:FC<ProductGalleryProps> = ({pictures}) => {
                 {pictures.map((picture, index) => (
                     <SwiperSlide key={index} style={{height: '100%'}}>
                         <Box
-                            sx={{ height: '550px', width: '500px'}}
+                            sx={mainPicture}
                             component="img"
                             src={picture.picture}
                         />
@@ -48,7 +70,7 @@ export const ProductGallery:FC<ProductGalleryProps> = ({pictures}) => {
                 {pictures.map((picture, index) => (
                     <SwiperSlide key={index+200} >
                         <Box
-                            sx={{ height: '200px', width: '190px'}}
+                            sx={additionalPicture}
                             component="img"
                             src={picture.picture}
                         />

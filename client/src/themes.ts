@@ -116,14 +116,10 @@ export const buyButtonHoverStyle = {
     border: "0",
     WebkitBoxShadow: "inset 0 -3px 0 0 #b42c32",
     boxShadow: "inset 0 -3px 0 0 #b42c32",
-
     backgroundColor: 'rgba(210,49,57,1)',
-
     background: 'linear-gradient(to left, rgba(210,49,57,1) 50%, #b42c32 50%) right',
     backgroundSize: '200%',
     transition: '.3s ease-out',
-
-
     '&:hover': {
         backgroundPosition: 'left'
     }

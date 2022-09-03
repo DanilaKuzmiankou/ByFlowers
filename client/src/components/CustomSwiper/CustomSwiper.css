@@ -1,4 +1,3 @@
-
 .swiper {
     width: 100%;
     height: 80vh;
@@ -7,6 +6,11 @@
     --swiper-theme-color: #fff;
 }
 
+@media screen and (max-width: 767px) {
+    .swiper {
+        height: 60vh;
+    }
+}
 
 .swiper-slide {
 
@@ -27,9 +31,33 @@
     background-position: center;
 }
 
-
 .swiper-slide .text {
     font-family: YouthTouch, serif;
-    font-size: 7.5rem;
+    font-size: 10.5rem;
     line-height: 1.5;
+}
+
+@media screen and (max-width: 1023px) {
+    .swiper-slide .text {
+        font-size: 7.5rem;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .swiper-slide .text {
+        font-size: 4.5rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .swiper-slide .text {
+        font-size: 3.5rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .swiper-slide .text {
+        margin-bottom: 150px;
+        font-size: 3.5rem;
+    }
 }

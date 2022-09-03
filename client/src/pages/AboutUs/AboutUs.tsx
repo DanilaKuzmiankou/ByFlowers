@@ -31,8 +31,16 @@ const callUs = {
 
 const startShoppingContainer = {
     backgroundColor: '#f3f3ef',
-    height: '820px',
-    padding: '160px 90px',
+    height: {
+        xs: '500px',
+        sm: '550px',
+        lg: '820px'
+    },
+    padding: {
+        xs: '10px 0',
+        sm: '60px 65px',
+        lg: '160px 90px'
+    },
 }
 
 const startShoppingPictureContainer = {
@@ -42,11 +50,31 @@ const startShoppingPictureContainer = {
     backgroundRepeat:'no-repeat',
     backgroundPosition: 'center',
     position: 'relative',
-    padding: '90px 100px',
+    padding: {
+        xs: '100px 10px',
+        sm: '120px 55px',
+        lg: '90px 100px'
+    },
     fontFamily: "Avenir, serif",
     color: 'white',
 }
 
+const shoppingTitleTypography = {
+    fontSize: {
+        xs: '2.3rem',
+        sm: '3.5rem',
+        lg: "6.4rem"
+    }
+}
+
+const shoppingDescriptionTypography = {
+    fontSize: {
+        xs: '2rem',
+        sm: '2.5rem',
+        lg: "2.5rem"
+    },
+    marginTop: '20px'
+}
 
 export const AboutUs = () => {
 
@@ -85,11 +113,11 @@ export const AboutUs = () => {
             <Box sx={startShoppingContainer}>
                 <Box sx={startShoppingPictureContainer}>
                     <Typography
-                        sx={{ fontSize: "7rem" }}>
+                        sx={shoppingTitleTypography}>
                         Ready to start your journey?
                     </Typography>
                     <Typography
-                        sx={{ fontSize: "2.5rem", marginTop: '20px'}}>
+                        sx={shoppingDescriptionTypography}>
                     Choose from a variety of options exactly what suits you
                     </Typography>
                     <Button

@@ -1,4 +1,5 @@
 const basketService = require("../service/BasketService")
+const mailService = require("../service/MailService")
 
 let basketController = this;
 
@@ -53,8 +54,9 @@ class BasketController {
 
     async completeOrder(req, res, next) {
         try {
-            let {email, phone, city} = req.body;
-            const result = await basketService.clearBasket(email);
+            let {email, name, phone, city} = req.body;
+            await mailService.sendOrderDoneMail(name, email, phone, city)
+            await basketService.clearBasket(email);
 
             return res.json({ message: 'Success!' });
         } catch (e) {
