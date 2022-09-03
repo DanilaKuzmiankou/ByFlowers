@@ -257,7 +257,7 @@ export const catalogProductItem = {
             lg: '400px',
             md: '300px',
             sm: '300px',
-            xs: '350px'
+            xs: '400px'
         },
         width: "100%",
         display: "flex",
@@ -265,7 +265,6 @@ export const catalogProductItem = {
         cursor: "pointer",
         position: "relative",
         //border: "1px solid #cddfe0"
-        border: {xs: "0.01em solid #000000", sm: 'none'},
         '&:hover': {
             border: "0.01em solid",
             borderColor: 'inherit',

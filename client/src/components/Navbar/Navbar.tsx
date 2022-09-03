@@ -25,10 +25,10 @@ import {HideOnScroll} from "../HideOnScroll/HideOnScroll";
 import {getProductsTypes} from "../../api/store/Product";
 
 const siteLogo = 'FlowersDelivery'
-const pages = ['Blog', 'About us', 'Flowers', 'Plants'];
-const pagesLinks = ['blog', 'aboutUs', 'products', 'products'];
+const pages = ['About us', 'Flowers', 'Plants'];
+const pagesLinks = ['aboutUs', 'products', 'products'];
 const isFlowers = [undefined, undefined, true, false];
-const pages2 = ['Blog', 'About us'];
+const pages2 = ['About us'];
 
 
 

@@ -45,6 +45,7 @@ export const CityAutocomplete = React.forwardRef<CityAutocompleteProps, CityAuto
             options={cities}
             autoHighlight
             getOptionLabel={(city) => city.name}
+            isOptionEqualToValue={(option, value) => option.name === value.name}
             renderOption={(props, city) => (
                 <Box
                     component="li"

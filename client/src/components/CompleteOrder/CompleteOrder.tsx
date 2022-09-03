@@ -5,7 +5,7 @@ import {observer} from "mobx-react-lite";
 import * as Yup from "yup";
 import {phoneRegExp} from "../../utils/Utils";
 import userStore from "../../store/UserStore";
-import {Form, Formik} from "formik";
+import {Form, Formik, FormikState, FormikValues} from "formik";
 import {NameField} from "../Form/NameField";
 import {PhoneField} from "../Form/PhoneField";
 import {RefObject, useEffect, useRef, useState} from "react";
@@ -47,8 +47,25 @@ const navbarLoginButtonStyle = {
     '&:hover': {
         backgroundPosition: 'left'
     }
+}
 
+const orderButton = {
+    width: "90px",
+    mr: '20px',
+    height: '35px',
+    fontSize: '1.2rem',
+    fontWeight: 700
+}
 
+const completedOrderContainer = {
+    minHeight: '350px',
+    backgroundColor: '#edf4ec',
+    color: '#2ecc71',
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
 }
 
 export const CompleteOrder = observer(() => {
@@ -57,6 +74,7 @@ export const CompleteOrder = observer(() => {
     const cityAutocompleteRef = useRef<CityAutocompleteProps>(null)
 
     const [cities, setCities] = useState<RussianCity[]>([])
+    const [isOrderCompleted, setIsOrderCompleted] = useState<boolean>(false)
 
     const handleClose = () => {
         basketStore.setIsCompleteOrderOpen(false)
@@ -65,8 +83,16 @@ export const CompleteOrder = observer(() => {
         }, 100)
     }
 
-    const submitForm = () => {
+    const startOnSubmit = () => {
         formikRef?.current?.handleSubmit()
+    }
+
+    const closeCompleteOrderWindow = () => {
+        setTimeout(() => {
+            setIsOrderCompleted(false)
+        }, 100)
+        basketStore.setIsCompleteOrderOpen(false)
+
     }
 
     useEffect(() => {
@@ -74,8 +100,25 @@ export const CompleteOrder = observer(() => {
             const response = await getRussianCities()
             setCities(response?.data?.results)
         }
+
         fetch()
     }, [])
+
+    const submitForm = async (values: FormikValues) => {
+        if (cityAutocompleteRef.current) {
+            const city = cityAutocompleteRef.current.getCity()
+            if (city) {
+                const response = await completeOrder(userStore.user.email, values.name, values.phone, city)
+                if (response.status === 200) {
+                    basketStore.setIsBasketOpen(false)
+                    basketStore.clearBasket()
+                    setIsOrderCompleted(true)
+                }
+            } else {
+                cityAutocompleteRef.current.setFieldIsRequired()
+            }
+        }
+    }
 
     return (
         <Dialog
@@ -89,76 +132,100 @@ export const CompleteOrder = observer(() => {
                 textAlign: 'center',
                 fontFamily: 'inherit',
                 fontSize: '2.0rem'
-        }}
+            }}
             >
                 Confirm order
             </DialogTitle>
             <DialogContent>
+                {isOrderCompleted ?
+                    <Box sx={completedOrderContainer}>
+                        <Box
+                            component="img"
+                            sx={{ height: '70px', width: '70px', display: 'block'}}
+                            alt="Confirmed Check Mark."
+                            src={require("../../assets/images/orderConfirmedCheckMark.png")}
+                        />
+                        <Typography
+                            sx={{...productStyles.customNormalFont, ...{display: 'inline-block', color: 'inherit'}}}>
+                            Thank you for your order! <br />
+                            Our manager will call you as soon as possible
+                        </Typography>
 
-                <Formik
-                    innerRef={formikRef}
-                    enableReinitialize
-                    initialValues={{
-                        name: userStore.user.name || '',
-                        phone: userStore.user.phone || ''
-                    }}
-                    validationSchema={deliverySchema}
-                    onSubmit={async (values, {resetForm, setErrors}) => {
-                        if (cityAutocompleteRef.current) {
-                            const city = cityAutocompleteRef.current.getCity()
-                            if(city) {
-                                const response = await completeOrder(userStore.user.email, values.name, values.phone, city)
-                                if(response.status===200) basketStore.clearBasket()
-                            }
-                            else {
-                                cityAutocompleteRef.current.setFieldIsRequired()
-                            }
-                        }
-                        // let cities:string[] = []
-                        // response.data.results.map((city) => {
-                        //     cities.push(city.name)
-                        // })
-                        // console.log('res', cities)
-                        // const response = await userStore.login(values.email, values.password)
-                        // if(!response.message) {
-                        //     resetForm()
-                        //     navigate(-1)
-                        // }
-                        // setErrors( { [response.errors.field]: response.message })
-                    }}
-                >
-                    {({values, errors, touched, handleBlur, handleChange}) => (
-                        <Form>
+                    </Box>
+                    :
+                    <>
+                        <Formik
+                            innerRef={formikRef}
+                            enableReinitialize
+                            initialValues={{
+                                name: userStore.user.name || '',
+                                phone: userStore.user.phone || ''
+                            }}
+                            validationSchema={deliverySchema}
+                            onSubmit={async (values, {resetForm, setErrors}) => {
+                                submitForm(values)
+                            }}
+                        >
+                            {({values, errors, touched, handleBlur, handleChange}) => (
+                                <Form>
 
-                            <NameField isNameFieldTouched={touched.name} nameFieldErrors={errors.name} />
+                                    <NameField isNameFieldTouched={touched.name} nameFieldErrors={errors.name}/>
 
-                            <PhoneField
-                                isPhoneFieldTouched={touched.phone}
-                                phoneFieldErrors={errors.phone}
-                                handleChange={handleChange}
-                                handleBlur={handleBlur}
-                                />
+                                    <PhoneField
+                                        isPhoneFieldTouched={touched.phone}
+                                        phoneFieldErrors={errors.phone}
+                                        handleChange={handleChange}
+                                        handleBlur={handleBlur}
+                                    />
 
-                            <CityAutocomplete ref={cityAutocompleteRef} cities={cities} />
+                                    <CityAutocomplete ref={cityAutocompleteRef} cities={cities}/>
 
-                        </Form>
-                    )}
-                </Formik>
-                <Box sx={{ display: 'flex', mt: '10px'}}>
-                <Typography
-                    sx={{...productStyles.customBoldFont, ...{display: 'inline-block'}}}>
-                    Order Total
-                </Typography>
-                <Typography
-                    sx={{...productStyles.customBoldFont, ...{display: 'inline-block', marginLeft: 'auto'}}}>
-                    {basketStore.basketOrderTotal}$
-                </Typography>
-                </Box>
+                                </Form>
+                            )}
+                        </Formik>
+                        <Box sx={{display: 'flex', mt: '10px'}}>
+                            <Typography
+                                sx={{...productStyles.customBoldFont, ...{display: 'inline-block'}}}>
+                                Order Total
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    ...productStyles.customBoldFont, ...{
+                                        display: 'inline-block',
+                                        marginLeft: 'auto'
+                                    }
+                                }}>
+                                {basketStore.basketOrderTotal}$
+                            </Typography>
+                        </Box>
+                    </>
+                }
             </DialogContent>
-            <DialogActions>
-                <Button variant="contained"
-                        sx={navbarLoginButtonStyle} onClick={handleClose}>Cancel</Button>
-                <Button sx={{...buyButtonHoverStyle, ...{width: "90px", mr: '20px', height: '35px', fontSize: '1.2rem', fontWeight: 700}}} onClick={submitForm}>Order</Button>
+            <DialogActions sx={{ justifyContent: `${isOrderCompleted ? 'center' : ''}`}}>
+                {isOrderCompleted ?
+                    <Button
+                        sx={{...buyButtonHoverStyle, ...orderButton, ...{mr: 0}}}
+                        onClick={closeCompleteOrderWindow}
+                    >
+                        Ok
+                    </Button>
+                    :
+                    <>
+                        <Button
+                            variant="contained"
+                            sx={navbarLoginButtonStyle}
+                            onClick={handleClose}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            sx={{...buyButtonHoverStyle, ...orderButton}}
+                            onClick={startOnSubmit}
+                        >
+                            Order
+                        </Button>
+                    </>
+                }
             </DialogActions>
         </Dialog>
     );
