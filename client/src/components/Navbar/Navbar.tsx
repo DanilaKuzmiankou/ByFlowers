@@ -147,7 +147,7 @@ export const Navbar = observer(() => {
             <Toolbar disableGutters>
               <Box
                 component="img"
-                onClick={() => switchPage(pagesLinks[1])}
+                onClick={() => switchPage(pagesLinks[0])}
                 sx={{
                   display: { xs: 'none', md: 'flex' },
                   mr: 1,
@@ -160,7 +160,7 @@ export const Navbar = observer(() => {
               <Link
                 variant="h6"
                 noWrap
-                onClick={() => switchPage(pagesLinks[1])}
+                onClick={() => switchPage(pagesLinks[0])}
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
