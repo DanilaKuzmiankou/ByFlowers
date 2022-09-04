@@ -1,5 +1,15 @@
-import React from 'react'
+import Box from '@mui/material/Box'
 
 export const NotFound = () => {
-  return <div>Page #404</div>
+  return (
+    <Box
+      sx={{
+        backgroundImage: `url(${require('../../assets/images/error404Background.jpg')})`,
+        minHeight: '100vh',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+      }}
+    />
+  )
 }

@@ -21,23 +21,35 @@ export const BottomBar = () => {
         <div className="bottom-rights">&copy;2021 All rights reserved</div>
       </div>
       <div className="bottom-icons">
-        <Box
-          component="img"
-          sx={{
-            height: 45,
-            width: 45,
-            marginRight: '7px',
-          }}
-          src={require('../../assets/images/instagramIcon.png')}
-        />
-        <Box
-          component="img"
-          sx={{
-            height: 45,
-            width: 45,
-          }}
-          src={require('../../assets/images/facebookIcon.png')}
-        />
+        <a
+          target="_blank"
+          href="https://www.instagram.com/flower-bel/"
+          rel="noopener noreferrer"
+        >
+          <Box
+            component="img"
+            sx={{
+              height: 45,
+              width: 45,
+              marginRight: '7px',
+            }}
+            src={require('../../assets/images/instagramIcon.png')}
+          />
+        </a>
+        <a
+          target="_blank"
+          href="https://www.facebook.com/groups/12688897134534643062353"
+          rel="noopener noreferrer"
+        >
+          <Box
+            component="img"
+            sx={{
+              height: 45,
+              width: 45,
+            }}
+            src={require('../../assets/images/facebookIcon.png')}
+          />
+        </a>
       </div>
     </div>
   )

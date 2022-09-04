@@ -153,6 +153,7 @@ export const Navbar = observer(() => {
                   mr: 1,
                   height: 55,
                   width: 75,
+                  cursor: 'pointer',
                 }}
                 alt="Logo"
                 src={require('../../assets/images/flowersEmblem.png')}
@@ -172,6 +173,7 @@ export const Navbar = observer(() => {
                   letterSpacing: '.3rem',
                   color: 'inherit',
                   textDecoration: 'none',
+                  cursor: 'pointer',
                 }}
               >
                 {siteLogo}
