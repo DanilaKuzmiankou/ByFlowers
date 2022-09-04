@@ -54,7 +54,6 @@ export const ProductsFilter = observer<ProductsProps>(
       if (productsStore.selectedNavbarProduct) {
         productsCheckboxes = productsList.map((element) => {
           if (element === productsStore.selectedNavbarProduct) {
-            console.log('match 2', productsStore.selectedNavbarProduct)
             setMainCheckbox([false, true])
             return true
           }

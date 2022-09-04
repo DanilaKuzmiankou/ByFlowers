@@ -44,7 +44,12 @@ export const Products = observer(() => {
     )
     getItemsCountPerPage()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productsStore.isFlowers, getItemsCountPerPage])
+  }, [
+    productsStore.isFlowers,
+    productsStore.flowers,
+    productsStore.plants,
+    getItemsCountPerPage,
+  ])
 
   const openDrawer = () => {
     productsStore.setIsDrawerOpen(true)

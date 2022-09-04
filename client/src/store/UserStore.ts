@@ -71,7 +71,6 @@ class UserStore {
       const response = await checkAuth()
       localStorage.setItem('token', response.data.accessToken)
       this.setIsAuth(true)
-      console.log('user', response.data.user)
       this.setUser(response.data.user)
     } catch (e: any) {
       console.log(e.response?.data?.message)

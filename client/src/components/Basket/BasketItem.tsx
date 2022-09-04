@@ -65,7 +65,6 @@ export const BasketItem: FC<BasketItemProps> = ({
     basketStore.changeBasketProductsActual(basketProduct.product.id, count)
     if (count > 0) {
       setItemCount(count)
-      console.log('new')
     } else deleteItemFromBasket()
   }
 
