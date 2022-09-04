@@ -286,24 +286,6 @@ export const Navbar = observer(() => {
                       {page}
                     </Button>
                   ))}
-                  <CustomHoverMenu
-                    menuName="Plants"
-                    buttonStyle={navbarButtonsStyle}
-                    menuItemsNames={productsStore.plants}
-                    onMenuItemClick={(plantName: string) =>
-                      switchPage('products', plantName, false)
-                    }
-                    isFlowers={false}
-                  />
-                  <CustomHoverMenu
-                    menuName="Flowers"
-                    buttonStyle={navbarButtonsStyle}
-                    menuItemsNames={productsStore.flowers}
-                    onMenuItemClick={(flowerName: string) =>
-                      switchPage('products', flowerName, true)
-                    }
-                    isFlowers
-                  />
                 </Box>
                 <div
                   style={{
