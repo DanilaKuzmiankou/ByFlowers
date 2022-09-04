@@ -72,7 +72,7 @@ export const CustomHoverMenu: FC<MenuProps> = ({
         transition={{ open: true, close: true }}
         transitionTimeout={900}
       >
-        {menuItemsNames.map((itemName) => (
+        {menuItemsNames?.map((itemName) => (
           <MenuItem
             className="custom-menu-item"
             key={itemName}
