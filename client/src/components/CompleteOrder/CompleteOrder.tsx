@@ -174,8 +174,8 @@ export const CompleteOrder = observer(() => {
               innerRef={formikRef}
               enableReinitialize
               initialValues={{
-                name: userStore.user.name || '',
-                phone: userStore.user.phone || '',
+                name: userStore.user?.name || '',
+                phone: userStore.user?.phone || '',
               }}
               validationSchema={deliverySchema}
               onSubmit={async (values) => {

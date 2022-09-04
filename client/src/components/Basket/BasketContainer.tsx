@@ -23,7 +23,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export const BasketContainer = observer(() => {
   useEffect(() => {
-    if (userStore.user.email) {
+    if (userStore.user?.email) {
       basketStore.updateBasket(userStore.user.email)
     }
   }, [userStore.user.email])
