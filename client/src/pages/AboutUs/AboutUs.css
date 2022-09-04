@@ -1,10 +1,9 @@
-.text p{
-    font-size: 5rem;
+.text p {
+  font-size: 5rem;
 }
 
 @media screen and (min-width: 768px) {
-    .text p{
-        font-size: 12rem;
-    }
+  .text p {
+    font-size: 12rem;
+  }
 }
-

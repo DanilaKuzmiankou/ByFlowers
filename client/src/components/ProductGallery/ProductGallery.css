@@ -1,41 +1,40 @@
 .mySwiper2 {
-    height: 550px;
-    max-width: 500px;
-    --swiper-navigation-color: black;
-    --swiper-pagination-color: black;
-    --swiper-theme-color: black;
+  height: 550px;
+  max-width: 500px;
+  --swiper-navigation-color: black;
+  --swiper-pagination-color: black;
+  --swiper-theme-color: black;
 }
 
 .mySwiper {
-    height: 250px;
-    max-width: 500px;
-    box-sizing: border-box;
-    padding: 10px 0;
+  height: 250px;
+  max-width: 500px;
+  box-sizing: border-box;
+  padding: 10px 0;
 }
 
 @media screen and (max-width: 899px) {
-    .mySwiper2  {
-        width: 300px;
-        height: 350px;
-    }
-    .mySwiper  {
-        width: 300px;
-        height: 100px;
-    }
+  .mySwiper2 {
+    width: 300px;
+    height: 350px;
+  }
+
+  .mySwiper {
+    width: 300px;
+    height: 100px;
+  }
 }
 
 /*noinspection ALL*/
 
-
-
 /*noinspection ALL*/
 .mySwiper .swiper-slide {
-    width: 25%;
-    height: 100%;
-    opacity: 0.4;
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
 }
 
 /*noinspection ALL*/
 .mySwiper .swiper-slide-thumb-active {
-    opacity: 1;
+  opacity: 1;
 }

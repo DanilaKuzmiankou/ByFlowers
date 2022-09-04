@@ -1,21 +1,21 @@
-const basketService = require("../service/BasketService")
-const mailService = require("../service/MailService")
+const basketService = require('../service/BasketService')
+const mailService = require('../service/MailService')
 
-let basketController = this;
+let basketController = this
 
 class BasketController {
     constructor() {
-        basketController = this;
+        basketController = this
     }
 
     async addProduct(req, res, next) {
         try {
-            let {id, email, count} = req.body;
+            let {id, email, count} = req.body
             id = Number(id)
             count = Number(count)
-            const result = await basketService.addProduct(id, count, email);
+            const result = await basketService.addProduct(id, count, email)
             const newCount = result.count
-            return res.json({count: newCount, message: result?.message});
+            return res.json({count: newCount, message: result?.message})
         } catch (e) {
             next(e)
         }
@@ -23,16 +23,16 @@ class BasketController {
 
     async getBasketProductCount(req, res, next) {
         try {
-            let {id, email} = req.query;
+            let {id, email} = req.query
             id = Number(id)
-            const count = await basketService.getBasketProductCount(id, email);
-            return res.json(count);
+            const count = await basketService.getBasketProductCount(id, email)
+            return res.json(count)
         } catch (e) {
             next(e)
         }
     }
 
-    async getBasketProducts(req, res, next){
+    async getBasketProducts(req, res, next) {
         try {
             const {email} = req.query
             const products = await basketService.getBasketProducts(email)
@@ -42,10 +42,10 @@ class BasketController {
         }
     }
 
-    async deleteProduct(req, res, next){
+    async deleteProduct(req, res, next) {
         try {
             const {email, id} = req.query
-            const products = await  basketService.deleteProduct(email, id)
+            const products = await basketService.deleteProduct(email, id)
             return res.json(products)
         } catch (e) {
             next(e)
@@ -54,17 +54,15 @@ class BasketController {
 
     async completeOrder(req, res, next) {
         try {
-            let {email, name, phone, city} = req.body;
+            let {email, name, phone, city} = req.body
             await mailService.sendOrderDoneMail(name, email, phone, city)
-            await basketService.clearBasket(email);
+            await basketService.clearBasket(email)
 
-            return res.json({ message: 'Success!' });
+            return res.json({message: 'Success!'})
         } catch (e) {
             next(e)
         }
     }
-
-
 }
 
 module.exports = new BasketController();

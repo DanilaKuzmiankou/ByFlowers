@@ -1,13 +1,13 @@
-.custom-product-error-message{
-    width: 100%;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    text-align: center;
-    color: #FF6565;
-    font-size: 1.3rem;
-    background-color: #ffe0e0;
-    margin-top: 5px;
+.custom-product-error-message {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: #ff6565;
+  font-size: 1.3rem;
+  background-color: #ffe0e0;
+  margin-top: 5px;
 }

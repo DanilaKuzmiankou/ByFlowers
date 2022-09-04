@@ -1,10 +1,10 @@
 export interface GetRussianCitiesResponse {
-    results: RussianCity[]
+  results: RussianCity[]
 }
 
 export interface RussianCity {
-    objectId: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string
+  objectId: string
+  name: string
+  createdAt: string
+  updatedAt: string
 }

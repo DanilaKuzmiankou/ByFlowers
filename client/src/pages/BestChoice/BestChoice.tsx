@@ -1,9 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export const BestChoice = () => {
-    return (
-        <div>
-            Best Choice
-        </div>
-    );
-};
+  return <div>Best Choice</div>
+}

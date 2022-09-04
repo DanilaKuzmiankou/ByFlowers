@@ -1,19 +1,19 @@
 .advantages {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 60px 0 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 0 100px;
 }
 
 .advantages-header {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .advantages-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

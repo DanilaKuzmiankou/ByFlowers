@@ -1,114 +1,120 @@
-const sequelize = require("../DB");
-const { DataTypes } = require("sequelize");
+const sequelize = require('../DB')
+const {DataTypes} = require('sequelize')
 
 const User = sequelize.define(
-    "user",
+    'user',
     {
-        id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        name: { type: DataTypes.STRING, allowNull: false },
-        email: { type: DataTypes.STRING, allowNull: false },
-        password: { type: DataTypes.STRING, allowNull: false },
-        phone: { type: DataTypes.STRING, allowNull: false },
-        role: { type: DataTypes.STRING, defaultValue: "user" }
+        id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+        name: {type: DataTypes.STRING, allowNull: false},
+        email: {type: DataTypes.STRING, allowNull: false},
+        password: {type: DataTypes.STRING, allowNull: false},
+        phone: {type: DataTypes.STRING, allowNull: false},
+        role: {type: DataTypes.STRING, defaultValue: 'user'},
     },
     {
         timestamps: true,
-        freezeTableName: true
-    }
-);
+        freezeTableName: true,
+    },
+)
 
-const BasketProduct = sequelize.define("basket_product", {
-        id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        count: { type: DataTypes.SMALLINT, allowNull: false }
+const BasketProduct = sequelize.define(
+    'basket_product',
+    {
+        id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+        count: {type: DataTypes.SMALLINT, allowNull: false},
     },
     {
         timestamps: false,
-        freezeTableName: true
-    }
-);
+        freezeTableName: true,
+    },
+)
 
 const Product = sequelize.define(
-    "product",
+    'product',
     {
-        id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        name: { type: DataTypes.STRING, allowNull: false, unique: true },
-        description: { type: DataTypes.TEXT, allowNull: false },
-        count: { type: DataTypes.SMALLINT, allowNull: false },
-        price: { type: DataTypes.SMALLINT, allowNull: false },
+        id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+        name: {type: DataTypes.STRING, allowNull: false, unique: true},
+        description: {type: DataTypes.TEXT, allowNull: false},
+        count: {type: DataTypes.SMALLINT, allowNull: false},
+        price: {type: DataTypes.SMALLINT, allowNull: false},
     },
     {
         timestamps: true,
-        freezeTableName: true
-    }
-);
+        freezeTableName: true,
+    },
+)
 
-const ProductType = sequelize.define("product_type", {
-        id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        name: { type: DataTypes.STRING, allowNull: false, unique: true },
-        isFlower: { type: DataTypes.BOOLEAN, allowNull: false }
+const ProductType = sequelize.define(
+    'product_type',
+    {
+        id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+        name: {type: DataTypes.STRING, allowNull: false, unique: true},
+        isFlower: {type: DataTypes.BOOLEAN, allowNull: false},
     },
     {
         timestamps: false,
-        freezeTableName: true
-    }
-);
+        freezeTableName: true,
+    },
+)
 
-const ProductPicture = sequelize.define("product_picture", {
-        id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        picture: { type: DataTypes.TEXT, allowNull: false }
+const ProductPicture = sequelize.define(
+    'product_picture',
+    {
+        id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+        picture: {type: DataTypes.TEXT, allowNull: false},
     },
     {
         timestamps: false,
-        freezeTableName: true
-    }
-);
+        freezeTableName: true,
+    },
+)
 
-const RefreshToken = sequelize.define("refresh_token", {
-        id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        refreshToken: { type: DataTypes.TEXT, allowNull: false, required: true }
+const RefreshToken = sequelize.define(
+    'refresh_token',
+    {
+        id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+        refreshToken: {type: DataTypes.TEXT, allowNull: false, required: true},
     },
     {
         timestamps: false,
-        freezeTableName: true
-    }
-);
+        freezeTableName: true,
+    },
+)
 
 RefreshToken.hasOne(User)
 User.belongsTo(RefreshToken, {
-    as: "refreshToken",
-    onDelete: "CASCADE",
+    as: 'refreshToken',
+    onDelete: 'CASCADE',
 })
 
 User.hasMany(BasketProduct, {
-    as: "basketProduct",
-    onDelete: "CASCADE",
-});
+    as: 'basketProduct',
+    onDelete: 'CASCADE',
+})
 BasketProduct.belongsTo(User, {
-    as: "user",
-    onDelete: "CASCADE",
-});
+    as: 'user',
+    onDelete: 'CASCADE',
+})
 
 BasketProduct.hasOne(Product, {
-    as: 'product'
+    as: 'product',
 })
 Product.belongsTo(BasketProduct)
 
 Product.hasMany(BasketProduct)
-BasketProduct.belongsTo(Product);
+BasketProduct.belongsTo(Product)
 
 Product.hasMany(ProductPicture, {
-    as: { singular: "picture", plural: "pictures" },
-    onDelete: "CASCADE",
+    as: {singular: 'picture', plural: 'pictures'},
+    onDelete: 'CASCADE',
 })
 ProductPicture.belongsTo(Product)
 
 ProductType.hasOne(Product)
 Product.belongsTo(ProductType, {
-    as: "productType",
-    onDelete: "CASCADE",
+    as: 'productType',
+    onDelete: 'CASCADE',
 })
-
-
 
 module.exports = {
     User,
@@ -116,5 +122,5 @@ module.exports = {
     BasketProduct,
     Product,
     ProductType,
-    ProductPicture
-};
+    ProductPicture,
+}

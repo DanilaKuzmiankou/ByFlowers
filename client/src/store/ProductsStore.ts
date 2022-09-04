@@ -1,96 +1,114 @@
-import {AxiosResponse} from "axios";
-import {makeAutoObservable, runInAction} from "mobx";
-import {getProducts} from "../api/store/Product";
-import {IProduct, ProductsResponse} from "../models/IProduct";
+import { AxiosResponse } from 'axios'
+import { makeAutoObservable, runInAction } from 'mobx'
+import { getProducts } from '../api/store/Product'
+import { IProduct, ProductsResponse } from '../models/IProduct'
 
 class ProductsStore {
+  products: IProduct[] = []
 
-    products: IProduct[] = []
-    isFlowers: boolean = false
-    plants: string[] = []
-    flowers: string[] = []
-    selectedProductsName: string = ''
-    selectedNavbarProduct: string = ''
-    minProductPrice: number = -1
-    maxProductPrice: number = -1
-    isDrawerOpen: boolean = false
-    itemsLimit: number = 10
-    itemsOffset: number = 0
-    productsNames: string[] = []
-    productsCount: number = 0
-    sortOptions: string[] = [] // format: ['price', 'ASC']
+  isFlowers: boolean = false
 
-    constructor() {
-        makeAutoObservable(this)
-    }
+  plants: string[] = []
 
-    async fetchNewProducts(productsNames: string[]) {
-        this.productsNames = productsNames
-        await this.fetchProducts()
-    }
+  flowers: string[] = []
 
-    async fetchProducts() {
-        let response: AxiosResponse<ProductsResponse>
-        try {
-            response = await getProducts(this.productsNames, this.minProductPrice,
-            this.maxProductPrice, this.itemsLimit, this.itemsOffset, this.sortOptions)
-            const products = response.data.products
-            runInAction(() => {
-                this.products = products
-                this.productsCount = response.data.count
-            })
-        } catch (e: any) {
-            console.log(e.response?.data?.message)
-        }
-    }
+  selectedProductsName: string = ''
 
-    setIsFlowers(isFlowers: boolean){
-        this.isFlowers = isFlowers
-    }
+  selectedNavbarProduct: string = ''
 
-    setProducts(products:IProduct[]){
+  minProductPrice: number = -1
+
+  maxProductPrice: number = -1
+
+  isDrawerOpen: boolean = false
+
+  itemsLimit: number = 10
+
+  itemsOffset: number = 0
+
+  productsNames: string[] = []
+
+  productsCount: number = 0
+
+  sortOptions: string[] = [] // format: ['price', 'ASC']
+
+  constructor() {
+    makeAutoObservable(this)
+  }
+
+  async fetchNewProducts(productsNames: string[]) {
+    this.productsNames = productsNames
+    await this.fetchProducts()
+  }
+
+  async fetchProducts() {
+    let response: AxiosResponse<ProductsResponse>
+    try {
+      response = await getProducts(
+        this.productsNames,
+        this.minProductPrice,
+        this.maxProductPrice,
+        this.itemsLimit,
+        this.itemsOffset,
+        this.sortOptions,
+      )
+      const { products } = response.data
+      runInAction(() => {
         this.products = products
+        this.productsCount = response.data.count
+      })
+    } catch (e: any) {
+      console.log(e.response?.data?.message)
     }
+  }
 
-    setSelectedProductsName(selectedProductsName:string) {
-        this.selectedProductsName = selectedProductsName
-    }
+  setIsFlowers(isFlowers: boolean) {
+    this.isFlowers = isFlowers
+  }
 
-    setSelectedNavbarProduct(selectedNavbarProduct:string) {
-        this.selectedNavbarProduct = selectedNavbarProduct
-    }
+  setProducts(products: IProduct[]) {
+    this.products = products
+  }
 
-    setMinProductPrice(minProductPrice:number){
-        this.minProductPrice = minProductPrice
-    }
+  setSelectedProductsName(selectedProductsName: string) {
+    this.selectedProductsName = selectedProductsName
+  }
 
-    setMaxProductPrice(maxProductPrice:number){
-        this.maxProductPrice = maxProductPrice
-    }
+  setSelectedNavbarProduct(selectedNavbarProduct: string) {
+    this.selectedNavbarProduct = selectedNavbarProduct
+  }
 
-    setIsDrawerOpen(open:boolean){
-        this.isDrawerOpen = open
-    }
+  setMinProductPrice(minProductPrice: number) {
+    this.minProductPrice = minProductPrice
+  }
 
-    setItemsLimit(itemsLimit:number){
-        this.itemsLimit = itemsLimit
-    }
+  setMaxProductPrice(maxProductPrice: number) {
+    this.maxProductPrice = maxProductPrice
+  }
 
-    setItemsOffset(itemsOffset:number){
-        this.itemsOffset = itemsOffset
-    }
+  setIsDrawerOpen(open: boolean) {
+    this.isDrawerOpen = open
+  }
 
-    setSortOptions(sortOptions:string[]){
-        this.sortOptions = sortOptions
-    }
+  setItemsLimit(itemsLimit: number) {
+    this.itemsLimit = itemsLimit
+  }
 
-    setFlowers(flowers:string[]){
-        this.flowers = flowers
-    }
+  setItemsOffset(itemsOffset: number) {
+    this.itemsOffset = itemsOffset
+  }
 
-    setPlants(plants:string[]){
-        this.plants = plants
-    }
+  setSortOptions(sortOptions: string[]) {
+    this.sortOptions = sortOptions
+  }
+
+  setFlowers(flowers: string[]) {
+    this.flowers = flowers
+  }
+
+  setPlants(plants: string[]) {
+    this.plants = plants
+  }
 }
 
 export default new ProductsStore()

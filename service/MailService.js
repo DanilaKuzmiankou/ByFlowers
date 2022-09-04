@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer')
 
 class MailService {
-
     constructor() {
         this.transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
@@ -9,19 +8,18 @@ class MailService {
             secure: false,
             auth: {
                 user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASSWORD
-            }
+                pass: process.env.SMTP_PASSWORD,
+            },
         })
     }
 
     async sendOrderDoneMail(name, email, phone, city) {
         await this.transporter.sendMail({
-            from:process.env.SMTP_USER,
-            to:process.env.OWNER,
+            from: process.env.SMTP_USER,
+            to: process.env.OWNER,
             subject: `New order on ${process.env.API_URL}`,
             text: '',
-            html:
-                `
+            html: `
                     <div>
                         <h1>New order from user ${name}</h1>
                         <p>
@@ -32,7 +30,7 @@ class MailService {
                         City: ${city}
                          </p>
                     </div>
-                `
+                `,
         })
     }
 }

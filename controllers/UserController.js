@@ -1,29 +1,40 @@
-const userService = require("../service/UserService")
+const userService = require('../service/UserService')
 
-let userController = this;
+let userController = this
 
 class UserController {
     constructor() {
-        userController = this;
+        userController = this
     }
 
-    async registration(req, res, next){
+    async registration(req, res, next) {
         try {
-            const {name, email, password, phone} = req.body;
-            const userData = await userService.registration(name, email, password, phone);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge:30*24*60*60*1000, httpOnly:true })
-            return res.json(userData);
+            const {name, email, password, phone} = req.body
+            const userData = await userService.registration(
+                name,
+                email,
+                password,
+                phone,
+            )
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+            })
+            return res.json(userData)
         } catch (e) {
             next(e)
         }
     }
 
-    async login(req, res, next){
+    async login(req, res, next) {
         try {
-            const {email, password } = req.body;
-            const userData = await userService.login(email, password);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge:30*24*60*60*1000, httpOnly:true })
-            return res.json(userData);
+            const {email, password} = req.body
+            const userData = await userService.login(email, password)
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+            })
+            return res.json(userData)
         } catch (e) {
             next(e)
         }
@@ -43,17 +54,16 @@ class UserController {
     async refresh(req, res, next) {
         try {
             const {refreshToken} = req.cookies
-            const userData = await userService.refresh(refreshToken);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge:30*24*60*60*1000, httpOnly:true })
-            return res.json(userData);
+            const userData = await userService.refresh(refreshToken)
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+            })
+            return res.json(userData)
         } catch (e) {
             next(e)
         }
     }
-
-
-
-
 }
 
 

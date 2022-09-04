@@ -1,31 +1,29 @@
-
 .bottom-bar {
-    display: flex;
-    align-items: center;
-    background-color: #282727;
-    color: white;
-    padding: 10px 0;
+  display: flex;
+  align-items: center;
+  background-color: #282727;
+  color: white;
+  padding: 10px 0;
 }
 
 .bottom-trademarks {
-    display: inline-block;
-    text-align: left;
-    padding-left: 7%;
+  display: inline-block;
+  text-align: left;
+  padding-left: 7%;
 }
 
 .bottom-rights {
-    font-size: 1.5rem;
-    margin-top: 5px;
+  font-size: 1.5rem;
+  margin-top: 5px;
 }
 
 .bottom-brand {
-    font-size: 2.2rem;
-    font-family: IntroCondBlack, sans-serif;
+  font-size: 2.2rem;
+  font-family: IntroCondBlack, sans-serif;
 }
 
-
 .bottom-icons {
-    margin-left: auto;
-    display: inline-block;
-    padding-right: 7%;
+  margin-left: auto;
+  display: inline-block;
+  padding-right: 7%;
 }

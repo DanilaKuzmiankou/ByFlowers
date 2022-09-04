@@ -1,11 +1,10 @@
-const productService = require("../service/ProductService");
+const productService = require('../service/ProductService')
 
-let productController = this;
+let productController = this
 
 class ProductController {
-
     constructor() {
-        productController = this;
+        productController = this
     }
 
     async getProductsTypes(req, res, next) {
@@ -18,16 +17,24 @@ class ProductController {
         }
     }
 
-async getProductsWithType(req, res, next) {
+    async getProductsWithType(req, res, next) {
         try {
-            let {types, minPrice, maxPrice, limit, offset, orderExpression} = req.query
+            let {types, minPrice, maxPrice, limit, offset, orderExpression} =
+                req.query
             minPrice = Number(minPrice)
             maxPrice = Number(maxPrice)
             limit = Number(limit)
             offset = Number(offset)
             types = types.split(',')
-            const products = await productService.getProductsWithType(types, minPrice, maxPrice, limit, offset, orderExpression)
-            return res.json(products);
+            const products = await productService.getProductsWithType(
+                types,
+                minPrice,
+                maxPrice,
+                limit,
+                offset,
+                orderExpression,
+            )
+            return res.json(products)
         } catch (e) {
             next(e)
         }
@@ -37,7 +44,7 @@ async getProductsWithType(req, res, next) {
         try {
             const {limit} = req.query
             const products = await productService.getRecommendationProducts(limit)
-            return res.json(products);
+            return res.json(products)
         } catch (e) {
             next(e)
         }
@@ -45,8 +52,24 @@ async getProductsWithType(req, res, next) {
 
     async createProduct(req, res, next) {
         try {
-            const {name, description, productType, count, price, pictures, isFlower} = req.body
-            const product = await productService.createProduct(name, description, productType, count, price, pictures, isFlower)
+            const {
+                name,
+                description,
+                productType,
+                count,
+                price,
+                pictures,
+                isFlower,
+            } = req.body
+            const product = await productService.createProduct(
+                name,
+                description,
+                productType,
+                count,
+                price,
+                pictures,
+                isFlower,
+            )
             return res.json(product)
         } catch (e) {
             next(e)
@@ -62,8 +85,6 @@ async getProductsWithType(req, res, next) {
             next(e)
         }
     }
-
-
 }
 
 module.exports = new ProductController();

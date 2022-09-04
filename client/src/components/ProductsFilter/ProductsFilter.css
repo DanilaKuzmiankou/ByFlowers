@@ -1,16 +1,16 @@
 .filters-input {
-    width: 50%;
+  width: 50%;
 }
 
 .filters-input:first-of-type {
-    padding-left: 5px;
+  padding-left: 5px;
 }
 
-.filters-inputs-container{
-    width: 100%;
+.filters-inputs-container {
+  width: 100%;
 }
 
 /*noinspection ALL*/
-.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline #maxPrice{
-    border-radius: 30% !important;
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline #maxPrice {
+  border-radius: 30% !important;
 }
