@@ -72,25 +72,27 @@ export const CustomHoverMenu: FC<MenuProps> = ({
         transition={{ open: true, close: true }}
         transitionTimeout={900}
       >
-        {menuItemsNames && menuItemsNames.length> 0 && menuItemsNames?.map((itemName) => (
-          <MenuItem
-            className="custom-menu-item"
-            key={itemName}
-            onClick={() => onMenuItemClick(itemName)}
-          >
-            <Typography
-              sx={{
-                color: 'black',
-                fontWeight: 500,
-                fontSize: '1.4rem',
-                marginLeft: '4px',
-              }}
-              textAlign="center"
+        {menuItemsNames &&
+          menuItemsNames.length > 0 &&
+          menuItemsNames?.map((itemName) => (
+            <MenuItem
+              className="custom-menu-item"
+              key={itemName}
+              onClick={() => onMenuItemClick(itemName)}
             >
-              {itemName}
-            </Typography>
-          </MenuItem>
-        ))}
+              <Typography
+                sx={{
+                  color: 'black',
+                  fontWeight: 500,
+                  fontSize: '1.4rem',
+                  marginLeft: '4px',
+                }}
+                textAlign="center"
+              >
+                {itemName}
+              </Typography>
+            </MenuItem>
+          ))}
       </ControlledMenu>
     </div>
   )
