@@ -12,6 +12,17 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
+
+const corsOptions = {
+    origin: process.env.CLIENT_URL,
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+}
+app.use(cors(corsOptions))
+app.use(express.json())
+app.use(cookieParser())
+app.use('/api', router)
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
     app.get('/*', (req, res) => {
@@ -22,15 +33,6 @@ if (process.env.NODE_ENV === 'production') {
         })
     })
 }
-const corsOptions = {
-    origin: process.env.CLIENT_URL,
-    credentials: true, //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
-}
-app.use(cors(corsOptions))
-app.use(express.json())
-app.use(cookieParser())
-app.use('/api', router)
 
 app.use(errorMiddleware)
 
