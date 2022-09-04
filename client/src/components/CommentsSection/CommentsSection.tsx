@@ -56,7 +56,7 @@ export const CommentsSection = () => {
               <Typography
                 sx={{ ...commentTypographyStyle, ...commentDescriptionStyle }}
               >
-                Kelly Leveaue
+                Manuel Sanchez
               </Typography>
               <Box
                 component="img"
@@ -71,17 +71,17 @@ export const CommentsSection = () => {
             <Typography
               sx={{ ...commentTypographyStyle, ...commentHeaderStyle }}
             >
-              Спасибо большое за Ваши услуги. Это был мой первый опыт, я
-              переживала. Букет оказался очень красивым, превзошел ожидания!
-              Теперь буду пользоваться Вашими услугами чаще и радовать своих
-              родных на растоянии! Фотоотчет поднял мое настроение с утра!
-              Молодцы, ребята! Так держать!
+              Thank you very much for your services. This was my first
+              experience and I am very worried. The bouquet was very beautiful,
+              exceeded my expectations! Now I will use your services more often
+              and please my friends. relatives at a distance! The photo report
+              lifted my spirits in the morning! Well done boys! Keep it up!
             </Typography>
             <div data-aos="fade-up" className="comment-description">
               <Typography
                 sx={{ ...commentTypographyStyle, ...commentDescriptionStyle }}
               >
-                Vin Diesel
+                Isabel Perez
               </Typography>
               <Box
                 component="img"
@@ -96,17 +96,17 @@ export const CommentsSection = () => {
             <Typography
               sx={{ ...commentTypographyStyle, ...commentHeaderStyle }}
             >
-              Ребята, спасибо большое!!! Все супер организовано. Большой выбор
-              стран, огромный выбор букетов, приемлемые цены, удобный интерфейс
-              сайта, вежливые операторы, смс и фото отчёт о доставке,
-              возможность в день оформления заказа выбрать ещё и время доставки
-              в тот же день. И спасибо за промо код на следующий заказ!!!
+              Thank you for your store, it always helped me out when choosing a
+              gift. Large selection of countries, a huge selection of bouquets,
+              reasonable prices, user-friendly interface of the site, polite
+              operators, personal approach to client. Special thanks for the
+              promo code for the next order! &#9786;
             </Typography>
             <div data-aos="fade-up" className="comment-description">
               <Typography
                 sx={{ ...commentTypographyStyle, ...commentDescriptionStyle }}
               >
-                Arnold Schwarzenegger
+                Johanna Lehtonen
               </Typography>
               <Box
                 component="img"

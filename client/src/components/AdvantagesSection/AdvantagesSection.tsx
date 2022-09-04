@@ -33,10 +33,7 @@ export const AdvantagesSection = () => {
             </Typography>
             <Typography sx={productStyles.customSmallFont}>
               We guarantee you the appearance and description of colors in the
-              store and reality. <br />
-              In case the delivered bouquet does not look fresh or looks
-              different from the declared one on the site, we will promptly
-              exchange it or give a refund.
+              store and reality, or we will promptly give a refund. <br />
             </Typography>
           </div>
         </Grid>
