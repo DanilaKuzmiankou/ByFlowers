@@ -98,6 +98,19 @@ export const buyButtonDefaultStyle = {
   display: 'none',
 } as React.CSSProperties
 
+export const linkButtonStyle = {
+  backgroundColor: 'transparent',
+  fontFamily: 'inherit',
+  textDecoration: 'none',
+  textTransform: 'none',
+  fontSize: '1.7rem',
+  color: '#007bff',
+  '&.MuiButtonBase-root:hover': {
+    bgcolor: 'transparent',
+    textDecoration: 'underline #007bff',
+  },
+}
+
 export const buyButtonHoverStyle = {
   height: '45px',
   zIndex: 2,

@@ -136,6 +136,11 @@ export const Navbar = observer(() => {
     basketStore.setIsBasketOpen(!basketStore.isBasketOpen)
   }
 
+  const handleLogin = () => {
+    userStore.setIsAuthDialogOpen(true)
+    userStore.setIsLoginPageOpen(true)
+  }
+
   return (
     <HideOnScroll>
       <div style={{ position: 'sticky', top: 0, zIndex: 10 }}>
@@ -321,7 +326,7 @@ export const Navbar = observer(() => {
                       variant="contained"
                       color="primary"
                       sx={navbarLoginButtonStyle}
-                      onClick={() => switchPage('login')}
+                      onClick={handleLogin}
                     >
                       Login
                     </Button>

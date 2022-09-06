@@ -6,7 +6,9 @@ import basketStore from './BasketStore'
 class UserStore {
   user = {} as IUser
 
+  isAuthDialogOpen: boolean = false
   isAuth: boolean = false
+  isLoginPageOpen: boolean = false
 
   constructor() {
     makeAutoObservable(this)
@@ -18,6 +20,14 @@ class UserStore {
 
   setUser(user: IUser) {
     this.user = user
+  }
+
+  setIsAuthDialogOpen(isAuthDialogOpen: boolean) {
+    this.isAuthDialogOpen = isAuthDialogOpen
+  }
+
+  setIsLoginPageOpen(isLoginPageOpen: boolean) {
+    this.isLoginPageOpen = isLoginPageOpen
   }
 
   async login(email: string, password: string) {

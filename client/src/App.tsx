@@ -12,6 +12,7 @@ import { BasketContainer } from './components/Basket/BasketContainer'
 import { CompleteOrder } from './components/CompleteOrder/CompleteOrder'
 import { BottomBar } from './components/BottomBar/BottomBar'
 import { Navbar } from './components/Navbar/Navbar'
+import { AuthDialog } from './components/Auth/AuthDialog'
 
 const App = () => {
   useEffect(() => {
@@ -28,6 +29,7 @@ const App = () => {
         <AppRoutes />
         <BasketContainer />
         <CompleteOrder />
+        <AuthDialog />
         <BottomBar />
       </ThemeProvider>
     </BrowserRouter>
