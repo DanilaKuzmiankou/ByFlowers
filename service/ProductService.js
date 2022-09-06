@@ -116,6 +116,22 @@ class ProductService {
         )
     }
 
+    async getNewestProducts(limit) {
+        return productService.getProducts(
+          {},
+          [
+              {
+                  model: ProductPicture,
+                  as: 'pictures',
+                  attributes: ['picture'],
+              },
+          ],
+          [['updatedAt', 'DESC']],
+          Number(limit),
+          0,
+        )
+    }
+
     async getProducts(
         whereExpression,
         includeExpression,

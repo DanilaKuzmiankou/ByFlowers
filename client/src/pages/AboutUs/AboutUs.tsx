@@ -11,6 +11,7 @@ import { buyButtonHoverStyle, productStyles } from '../../themes'
 import { AdvantagesSection } from '../../components/AdvantagesSection/AdvantagesSection'
 import { CommentsSection } from '../../components/CommentsSection/CommentsSection'
 import productsStore from '../../store/ProductsStore'
+import { NewestProducts } from '../../components/NewestProducts/Newest Products'
 
 const buttonStyle = {
   width: '250px',
@@ -115,6 +116,7 @@ export const AboutUs = () => {
         </Box>
       </Box>
       <CommentsSection />
+      <NewestProducts />
       <Box sx={startShoppingContainer}>
         <Box sx={startShoppingPictureContainer}>
           <Typography sx={shoppingTitleTypography}>

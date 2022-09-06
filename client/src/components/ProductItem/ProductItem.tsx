@@ -9,9 +9,13 @@ import useHoverStyle from '../../utils/useHoverStyle'
 
 interface ProductProps {
   product: IProduct
+  height?: string
 }
 
-export const ProductItem: FC<ProductProps> = ({ product }) => {
+export const ProductItem: FC<ProductProps> = ({
+  product,
+  height = catalogProductItem.container.height,
+}) => {
   const navigate = useNavigate()
   const { buttonStyle, onItemHover, onItemNotHover } = useHoverStyle()
 
@@ -25,7 +29,7 @@ export const ProductItem: FC<ProductProps> = ({ product }) => {
 
   return (
     <Box
-      sx={catalogProductItem.container}
+      sx={{ ...catalogProductItem.container, ...{ height } }}
       onMouseOver={onItemHover}
       onMouseLeave={onItemNotHover}
       onClick={goToItemPage}

@@ -8,7 +8,7 @@ export async function addToBasket(
   count: number,
   email: string,
 ): Promise<AxiosResponse<AddToBasketResponse>> {
-  return $api.post<AddToBasketResponse>('/basket/add', { id, count, email })
+  return $api.post<AddToBasketResponse>('/basket/product', { id, count, email })
 }
 
 export async function getBasketProductCount(

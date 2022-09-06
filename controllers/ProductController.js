@@ -50,6 +50,16 @@ class ProductController {
         }
     }
 
+    async getNewestProducts(req, res, next) {
+        try {
+            const {limit} = req.query
+            const products = await productService.getNewestProducts(limit)
+            return res.json(products)
+        } catch (e) {
+            next(e)
+        }
+    }
+
     async createProduct(req, res, next) {
         try {
             const {

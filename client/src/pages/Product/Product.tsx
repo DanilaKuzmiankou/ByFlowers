@@ -195,6 +195,7 @@ export const Product = observer(() => {
   }, [basketStore.basketProductsActual, product.id, product.count])
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     fetchRecommendationsProducts()
   }, [])
 

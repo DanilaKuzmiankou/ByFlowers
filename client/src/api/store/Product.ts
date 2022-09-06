@@ -29,7 +29,20 @@ export async function getRecommendationProducts(
   limit: number,
 ): Promise<AxiosResponse<IProduct[]>> {
   return axios.get<IProduct[]>(
-    `${process.env.REACT_APP_SERVER_URL}/product/recommendationProducts`,
+    `${process.env.REACT_APP_SERVER_URL}/product/recommended`,
+    {
+      params: {
+        limit,
+      },
+    },
+  )
+}
+
+export async function getNewestProducts(
+  limit: number,
+): Promise<AxiosResponse<IProduct[]>> {
+  return axios.get<IProduct[]>(
+    `${process.env.REACT_APP_SERVER_URL}/product/newest`,
     {
       params: {
         limit,
