@@ -56,7 +56,12 @@ export const BasketContainer = observer(() => {
         }}
       >
         <DrawerHeader
-          sx={{ textAlign: 'start', display: 'flex', justifyContent: 'start' }}
+          sx={{
+            textAlign: 'start',
+            display: 'flex',
+            justifyContent: 'start',
+            fontFamily: 'Avenir, sans-serif',
+          }}
         >
           Basket
           <CloseButton
