@@ -7,7 +7,9 @@ class UserStore {
   user = {} as IUser
 
   isAuthDialogOpen: boolean = false
+
   isAuth: boolean = false
+
   isLoginPageOpen: boolean = false
 
   constructor() {
