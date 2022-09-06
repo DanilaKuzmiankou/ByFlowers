@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Grid, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import { ProductItem } from '../ProductItem/ProductItem'
