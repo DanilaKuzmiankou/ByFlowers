@@ -230,7 +230,10 @@ export const catalogProductItem = {
       sm: '1.6rem',
       xs: '1.9rem',
     },
-    top: '0px',
+    top: {
+      xs: '10%',
+      lg: 0,
+    },
     left: '20px',
     right: '20px',
     textAlign: 'center',

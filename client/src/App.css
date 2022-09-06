@@ -57,3 +57,10 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+@media screen and (max-width: 480px) {
+  [data-aos-delay] {
+    transition-delay: 0ms !important;
+  }
+
+}

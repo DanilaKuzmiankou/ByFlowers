@@ -51,7 +51,7 @@ export const Login = () => {
           const response = await userStore.login(values.email, values.password)
           if (!response.message) {
             resetForm()
-            navigate(-1)
+            userStore.setIsAuthDialogOpen(false)
           }
           setErrors({ [response.errors.field]: response.message })
         }}

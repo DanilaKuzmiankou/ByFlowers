@@ -66,16 +66,14 @@ const navbarLoginButtonStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  borderRadius: '8px',
+  border: '.2rem solid #fff',
+  borderRadius: '7px',
+  padding: '7px',
   transition: 'background-color 200ms ease',
   color: '#fff',
   fontSize: '1.20rem',
   lineHeight: 1,
   fontWeight: 700,
-  paddingTop: '7px',
-  paddingBottom: '7px',
-  paddingRight: '8px',
-  paddingLeft: '8px',
 }
 
 export const Navbar = observer(() => {
@@ -322,12 +320,7 @@ export const Navbar = observer(() => {
                   {userStore.isAuth ? (
                     <CustomClickMenu buttonStyle={upperNavbarButtonsStyle} />
                   ) : (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      sx={navbarLoginButtonStyle}
-                      onClick={handleLogin}
-                    >
+                    <Button sx={navbarLoginButtonStyle} onClick={handleLogin}>
                       Login
                     </Button>
                   )}

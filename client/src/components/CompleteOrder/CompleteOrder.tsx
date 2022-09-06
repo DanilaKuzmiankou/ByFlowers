@@ -9,7 +9,6 @@ import Button from '@mui/material/Button'
 import { observer } from 'mobx-react-lite'
 import * as Yup from 'yup'
 import { Form, Formik, FormikValues } from 'formik'
-import * as React from 'react'
 import { RefObject, useEffect, useRef, useState } from 'react'
 import Box from '@mui/material/Box'
 import basketStore from '../../store/BasketStore'
@@ -32,7 +31,7 @@ const deliverySchema = Yup.object({
     .required('required'),
 })
 
-const navbarLoginButtonStyle = {
+const cancelButtonStyle = {
   width: '90px',
   height: '35px',
   fontSize: '1.2rem',
@@ -50,7 +49,7 @@ const navbarLoginButtonStyle = {
   alignItems: 'center',
   backgroundColor: 'rgb(200,205,208)',
   background:
-    'linear-gradient(to left, rgba(200,205,208,1) 50%, rgba(130,134,136,1) 50%) right',
+    'linear-gradient(to left, rgba(200,205,208,1) 50%, rgba(197,197,197,1) 50%) right',
   backgroundSize: '200%',
   transition: '.3s ease-out',
   '&:hover': {
@@ -62,6 +61,7 @@ const orderButton = {
   width: '90px',
   mr: '20px',
   height: '35px',
+  fontFamily: 'IntroCondBlack',
   fontSize: '1.2rem',
   fontWeight: 700,
 }
@@ -236,11 +236,7 @@ export const CompleteOrder = observer(() => {
           </Button>
         ) : (
           <>
-            <Button
-              variant="contained"
-              sx={navbarLoginButtonStyle}
-              onClick={handleClose}
-            >
+            <Button sx={cancelButtonStyle} onClick={handleClose}>
               Cancel
             </Button>
             <Button

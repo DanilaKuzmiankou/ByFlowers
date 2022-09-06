@@ -74,7 +74,7 @@ export const Signin = () => {
           )
           if (!response.message) {
             resetForm()
-            navigate(-2)
+            userStore.setIsAuthDialogOpen(false)
           }
           setErrors({ [response.errors.field]: response.message })
         }}

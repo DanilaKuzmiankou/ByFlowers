@@ -43,6 +43,7 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   border-bottom-right-radius: 7px;
   border-top-right-radius: 7px;
+  padding-left: 15px;
 }
 
 input:focus {

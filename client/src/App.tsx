@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 // @ts-ignore
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-import { ThemeProvider } from '@mui/material'
+import { ThemeProvider, useMediaQuery } from '@mui/material'
 import { theme } from './themes'
 import './App.css'
 import { AppRoutes } from './routes/AppRoutes'
@@ -21,7 +21,11 @@ const App = () => {
     }
   }, [])
 
-  Aos.init()
+  const smallerThanSm = useMediaQuery(theme.breakpoints.down('sm'))
+
+  Aos.init({
+    offset: smallerThanSm ? 10 : 120,
+  })
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
