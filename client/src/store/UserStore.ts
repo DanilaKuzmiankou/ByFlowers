@@ -10,7 +10,7 @@ class UserStore {
 
   isAuth: boolean = false
 
-  isLoginPageOpen: boolean = false
+  isLoginPageOpen: boolean = true
 
   constructor() {
     makeAutoObservable(this)

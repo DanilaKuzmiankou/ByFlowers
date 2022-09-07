@@ -141,7 +141,7 @@ export const Product = observer(() => {
 
   const addProductToBasket = async () => {
     if (!userStore.isAuth) {
-      navigate('../login')
+      userStore.setIsAuthDialogOpen(true)
       return
     }
     const countRef = countInputRef.current

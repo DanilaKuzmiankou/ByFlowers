@@ -22,7 +22,10 @@ export const AuthDialog = observer(() => {
       <DialogContent
         sx={{
           backgroundColor: '#d2e4fd',
-          padding: '10px 16px',
+          padding: {
+            xs: '7px 9px',
+            sm: '10px 16px',
+          },
           position: 'relative',
           overflow: 'clip',
         }}

@@ -1,6 +1,8 @@
 import React from 'react'
 import Box from '@mui/material/Box'
 import './BottomBar.css'
+import { Typography } from '@mui/material'
+import { productStyles } from '../../themes'
 
 export const BottomBar = () => {
   return (
@@ -20,36 +22,52 @@ export const BottomBar = () => {
         </div>
         <div className="bottom-rights">&copy;2021 All rights reserved</div>
       </div>
-      <div className="bottom-icons">
-        <a
-          target="_blank"
-          href="https://www.instagram.com/flower-bel/"
-          rel="noopener noreferrer"
-        >
-          <Box
-            component="img"
+      <div className="right-panel">
+        <div className="call-us">
+          <Typography
             sx={{
-              height: 45,
-              width: 45,
-              marginRight: '7px',
+              ...productStyles.customBoldFont,
+              ...{
+                whiteSpace: 'word',
+                textAlign: 'center',
+                userSelect: 'text',
+              },
             }}
-            src={require('../../assets/images/instagramIcon.png')}
-          />
-        </a>
-        <a
-          target="_blank"
-          href="https://www.facebook.com/groups/12688897134534643062353"
-          rel="noopener noreferrer"
-        >
-          <Box
-            component="img"
-            sx={{
-              height: 45,
-              width: 45,
-            }}
-            src={require('../../assets/images/facebookIcon.png')}
-          />
-        </a>
+          >
+            +375 29 423 74 65
+          </Typography>
+        </div>
+        <div className="bottom-icons">
+          <a
+            target="_blank"
+            href="https://www.instagram.com/flower-bel/"
+            rel="noopener noreferrer"
+          >
+            <Box
+              component="img"
+              sx={{
+                height: 45,
+                width: 45,
+                marginRight: '7px',
+              }}
+              src={require('../../assets/images/instagramIcon.png')}
+            />
+          </a>
+          <a
+            target="_blank"
+            href="https://www.facebook.com/groups/12688897134534643062353"
+            rel="noopener noreferrer"
+          >
+            <Box
+              component="img"
+              sx={{
+                height: 45,
+                width: 45,
+              }}
+              src={require('../../assets/images/facebookIcon.png')}
+            />
+          </a>
+        </div>
       </div>
     </div>
   )

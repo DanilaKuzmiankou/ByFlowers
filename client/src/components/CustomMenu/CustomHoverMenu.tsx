@@ -33,9 +33,7 @@ export const CustomHoverMenu: FC<MenuProps> = ({
   )
 
   const switchCategory = () => {
-    productsStore.setSelectedNavbarProduct('')
-    productsStore.setIsFlowers(isFlowers)
-    onMenuItemClick('')
+    onMenuItemClick('', '', isFlowers)
   }
 
   return (

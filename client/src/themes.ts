@@ -155,7 +155,7 @@ export const productStyles = {
       md: '2rem',
       sm: '2rem',
       xl: '3rem',
-      xs: '1.8rem',
+      xs: '2.1rem',
     },
     display: {
       xs: 'inline-block',
@@ -231,7 +231,7 @@ export const catalogProductItem = {
       xs: '1.9rem',
     },
     top: {
-      xs: '10%',
+      xs: '7%',
       lg: 0,
     },
     left: '20px',
@@ -258,7 +258,6 @@ export const catalogProductItem = {
     justifyContent: 'center',
     cursor: 'pointer',
     position: 'relative',
-    // border: "1px solid #cddfe0"
     '&:hover': {
       border: '0.01em solid',
       borderColor: 'inherit',

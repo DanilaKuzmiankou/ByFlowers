@@ -23,11 +23,11 @@ import { CustomClickMenu } from '../CustomMenu/CustomClickMenu'
 import { HideOnScroll } from '../HideOnScroll/HideOnScroll'
 import { getProductsTypes } from '../../api/store/Product'
 import { CustomHoverMenu } from '../CustomMenu/CustomHoverMenu'
+import { MobileNavbarElements } from './MobileNavbarElements'
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['About us', 'Flowers', 'Plants']
 const pagesLinks = ['aboutUs', 'products', 'products']
-const isFlowersValues = [undefined, undefined, true, false]
 const pages2 = ['About us']
 
 const navbarButtonsStyle = {
@@ -107,9 +107,8 @@ export const Navbar = observer(() => {
     isFlowers?: boolean,
   ): void => {
     handleCloseNavMenu()
-    if (productType) {
-      productsStore.setSelectedNavbarProduct(productType)
-    }
+    window.scrollTo(0, 0)
+    productsStore.setSelectedNavbarProduct(productType || '')
     if (isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
     navigate(linkName)
   }
@@ -181,96 +180,16 @@ export const Navbar = observer(() => {
               >
                 {siteLogo}
               </Link>
-              <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                {/* Mobile navbar links */}
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  disableScrollLock
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { xs: 'flex', md: 'none' },
-                  }}
-                >
-                  {pages.map((page, id) => (
-                    <MenuItem
-                      key={page}
-                      onClick={() =>
-                        switchPage(pagesLinks[id], '', isFlowersValues[id])
-                      }
-                    >
-                      <Typography
-                        sx={{
-                          fontWeight: 500,
-                          fontSize: '1.9rem',
-                        }}
-                        textAlign="center"
-                      >
-                        {page}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-              {/* Mobile Logo image */}
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flexGrow: 1,
-                }}
-              >
-                <Box
-                  component="img"
-                  sx={{
-                    display: { xs: 'flex', md: 'none' },
-                    mr: 1,
-                    height: 30,
-                    width: 42,
-                  }}
-                  alt="Logo"
-                  src={require('../../assets/images/flowersEmblem.png')}
-                />
-                {/* Mobile Logo */}
-                <Link
-                  noWrap
-                  onClick={() => switchPage(pagesLinks[1])}
-                  sx={{
-                    mr: 2,
-                    display: { xs: 'flex', md: 'none' },
-                    flexGrow: 0,
-                    fontWeight: 700,
-                    fontSize: '1.4rem',
-                    letterSpacing: '.1rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                  }}
-                >
-                  {siteLogo}
-                </Link>
-                <Box />
-              </Box>
+
+              <MobileNavbarElements
+                handleOpenNavMenu={handleOpenNavMenu}
+                handleCloseNavMenu={handleCloseNavMenu}
+                anchorElNav={anchorElNav}
+                pages={pages}
+                switchPage={switchPage}
+                siteLogo={siteLogo}
+                pagesLinks={pagesLinks}
+              />
 
               <Box
                 sx={{

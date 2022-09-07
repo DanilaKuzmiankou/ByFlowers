@@ -42,7 +42,7 @@ export const ProductItem: FC<ProductProps> = ({
         noWrap
         sx={{
           ...catalogProductItem.typographyStyle,
-          ...{ top: { xs: '19%', lg: '10%' }, zIndex: 3, fontWeight: 700 },
+          ...{ top: { xs: '15%', lg: '10%' }, zIndex: 3, fontWeight: 700 },
         }}
       >
         {product.price}$

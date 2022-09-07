@@ -12,16 +12,9 @@ export const NewestProducts = () => {
   const fetchNewestProducts = async () => {
     const response = await getNewestProducts(4)
     setNewestProducts(response.data)
-    console.log('resp', response.data)
   }
 
-  const productContainerHeightNumber =
-    parseInt(catalogProductItem.container.height as unknown as string, 10) - 100
-
-  const goToItemPage = (selectedProduct: IProduct) => {}
-
   useEffect(() => {
-    console.log('niw', catalogProductItem.container.height)
     fetchNewestProducts()
   }, [])
 
@@ -31,7 +24,7 @@ export const NewestProducts = () => {
         sx={{
           ...productStyles.customBoldFont,
           ...productStyles.headerTypographyStyle,
-          ...{ marginBottom: '20px', textAlign: 'center' },
+          ...{ marginBottom: '20px', textAlign: 'center', display: 'block' },
         }}
       >
         Our newest stems for you
@@ -55,7 +48,6 @@ export const NewestProducts = () => {
             xl={7}
             xxl={5}
             key={newestProduct.id}
-            onClick={() => goToItemPage(newestProduct)}
             style={{ padding: '20px' }}
           >
             <ProductItem height="400px" product={newestProduct} />
