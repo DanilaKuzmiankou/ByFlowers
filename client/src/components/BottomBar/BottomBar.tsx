@@ -28,7 +28,10 @@ export const BottomBar = () => {
             sx={{
               ...productStyles.customBoldFont,
               ...{
-                whiteSpace: 'word',
+                whiteSpace: {
+                  xs: 'word',
+                  sm: 'nowrap',
+                },
                 textAlign: 'center',
                 userSelect: 'text',
               },

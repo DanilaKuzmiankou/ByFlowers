@@ -85,7 +85,10 @@ export const MobileNavbarElements: FC<MobileNavbarElementsProps> = ({
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: {
+            xs: 'right',
+            sm: 'center',
+          },
           alignItems: 'center',
           flexGrow: 1,
         }}
