@@ -12,6 +12,8 @@ class UserStore {
 
   isLoginPageOpen: boolean = true
 
+  isNavbarMenuOpen: boolean = false
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -26,6 +28,10 @@ class UserStore {
 
   setIsAuthDialogOpen(isAuthDialogOpen: boolean) {
     this.isAuthDialogOpen = isAuthDialogOpen
+  }
+
+  setIsNavbarMenuOpen(isNavbarMenuOpen: boolean) {
+    this.isNavbarMenuOpen = isNavbarMenuOpen
   }
 
   setIsLoginPageOpen(isLoginPageOpen: boolean) {

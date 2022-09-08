@@ -24,6 +24,7 @@ import { HideOnScroll } from '../HideOnScroll/HideOnScroll'
 import { getProductsTypes } from '../../api/store/Product'
 import { CustomHoverMenu } from '../CustomMenu/CustomHoverMenu'
 import { MobileNavbarElements } from './MobileNavbarElements'
+import { CustomMobileMenu } from '../CustomMenu/CustomMobileMenu'
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['About us', 'Flowers', 'Plants']
@@ -90,23 +91,13 @@ export const Navbar = observer(() => {
 
   const navigate = useNavigate()
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const iconPropsMemoized = useMemo(() => ({ color: 'white', size: '23' }), [])
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget)
-  }
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
 
   const switchPage = (
     linkName: string,
     productType?: string,
     isFlowers?: boolean,
   ): void => {
-    handleCloseNavMenu()
     window.scrollTo(0, 0)
     productsStore.setSelectedNavbarProduct(productType || '')
     if (isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
@@ -182,10 +173,7 @@ export const Navbar = observer(() => {
               </Link>
 
               <MobileNavbarElements
-                handleOpenNavMenu={handleOpenNavMenu}
-                handleCloseNavMenu={handleCloseNavMenu}
-                anchorElNav={anchorElNav}
-                pages={pages}
+                pages={pages2}
                 switchPage={switchPage}
                 siteLogo={siteLogo}
                 pagesLinks={pagesLinks}

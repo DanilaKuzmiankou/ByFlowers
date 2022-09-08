@@ -98,6 +98,17 @@ export const buyButtonDefaultStyle = {
   display: 'none',
 } as React.CSSProperties
 
+export const listItem = {
+  display: 'block',
+  padding: 0,
+  margin: '0 0 10px',
+}
+
+export const list = {
+  padding: 0,
+  fontSize: '2rem',
+}
+
 export const linkButtonStyle = {
   backgroundColor: 'transparent',
   fontFamily: 'inherit',
