@@ -22,7 +22,7 @@ export const MobileProductsList: FC<MobileProductsListProps> = ({
   productsNames,
   isFlowers,
 }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(true)
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen)

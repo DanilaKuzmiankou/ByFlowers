@@ -101,6 +101,7 @@ export const Navbar = observer(() => {
     window.scrollTo(0, 0)
     productsStore.setSelectedNavbarProduct(productType || '')
     if (isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
+    userStore.setIsNavbarMenuOpen(false)
     navigate(linkName)
   }
 

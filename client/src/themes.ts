@@ -114,7 +114,7 @@ export const linkButtonStyle = {
   fontFamily: 'inherit',
   textDecoration: 'none',
   textTransform: 'none',
-  fontSize: '1.7rem',
+  fontSize: '1.5rem',
   color: '#007bff',
   '&.MuiButtonBase-root:hover': {
     bgcolor: 'transparent',
