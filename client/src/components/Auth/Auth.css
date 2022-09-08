@@ -7,7 +7,7 @@
   border-radius: 2%;
 }
 
-@media screen and (min-width: 500px){
+@media screen and (min-width: 500px) {
   .form-box {
     width: 380px;
     padding: 20px;

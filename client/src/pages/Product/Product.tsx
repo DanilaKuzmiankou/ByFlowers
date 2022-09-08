@@ -260,6 +260,15 @@ export const Product = observer(() => {
                   >
                     {product.description}
                   </Typography>
+                  <hr />
+                  <Typography
+                    sx={{
+                      ...productStyles.customBoldFont,
+                      ...productStyles.headerTypographyStyle,
+                    }}
+                  >
+                    Description
+                  </Typography>
                 </Box>
               </Box>
             </Grid>

@@ -41,7 +41,7 @@
   margin-left: auto;
 }
 
-@media screen and (min-width: 1080px){
+@media screen and (min-width: 1080px) {
   .right-panel {
     flex-direction: row;
   }

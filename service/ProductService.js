@@ -82,7 +82,6 @@ class ProductService {
                 {model: ProductType, as: 'productType'},
                 Sequelize.literal(filterExpression),
             ],
-            ['updatedAt', 'ASC'],
         ]
         if (customOrderExpression)
             orderExpression.push((orderExpression = [customOrderExpression]))

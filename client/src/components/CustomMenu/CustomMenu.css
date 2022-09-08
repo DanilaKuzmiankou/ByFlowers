@@ -13,7 +13,8 @@
   position: relative;
 }
 
-.szh-menu__item, .custom-menu-item:hover {
+.szh-menu__item,
+.custom-menu-item:hover {
   transition: none;
   animation: none;
   background: none !important;
