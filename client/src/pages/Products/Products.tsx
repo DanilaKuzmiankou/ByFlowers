@@ -76,7 +76,7 @@ export const Products = observer(() => {
         <Grid
           item
           xs={0}
-          sm={4}
+          sm={3}
           md={3}
           lg={2}
           xl={3}
@@ -98,7 +98,7 @@ export const Products = observer(() => {
             </div>
           ) : null}
         </Grid>
-        <Grid item xs={16} sm={12} md={13} lg={14} xl={13}>
+        <Grid item xs={16} sm={13} md={13} lg={14} xl={13}>
           <div className="products-container">
             <Box
               sx={{
@@ -177,7 +177,7 @@ export const Products = observer(() => {
                     item
                     xs={12}
                     sm={6}
-                    md={4}
+                    md={6}
                     lg={4}
                     xl={3}
                     xxxl={2}

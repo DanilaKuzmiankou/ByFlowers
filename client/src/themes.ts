@@ -1,49 +1,6 @@
 import { createTheme } from '@mui/material/styles'
 import * as React from 'react'
 
-// Update the AppBar's color prop options
-declare module '@mui/material/AppBar' {
-  interface AppBarPropsColorOverrides {
-    neutral: true
-    green: true
-    lilac: true
-  }
-}
-
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: React.CSSProperties['color']
-    }
-  }
-
-  interface Palette {
-    neutral: Palette['primary']
-    green: Palette['primary']
-    lilac: Palette['primary']
-  }
-
-  interface PaletteOptions {
-    neutral: PaletteOptions['primary']
-    green: PaletteOptions['primary']
-    lilac: PaletteOptions['primary']
-  }
-
-  interface PaletteColor {
-    darker?: string
-  }
-
-  interface SimplePaletteColorOptions {
-    darker?: string
-  }
-
-  interface ThemeOptions {
-    status: {
-      danger: React.CSSProperties['color']
-    }
-  }
-}
-
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
     xs: true
@@ -58,11 +15,6 @@ declare module '@mui/material/styles' {
 
 export const theme = createTheme({
   breakpoints: {
-    // Define custom breakpoint values.
-    // These will apply to Material-UI components that use responsive
-    // breakpoints, such as `Grid` and `Hidden`. You can also use the
-    // theme breakpoint functions `up`, `down`, and `between` to create
-    // media queries for these breakpoints
     values: {
       xs: 0,
       sm: 700,
@@ -71,25 +23,6 @@ export const theme = createTheme({
       xl: 1500,
       xxl: 2000,
       xxxl: 2300,
-    },
-  },
-  status: {
-    danger: '#e53e3e',
-  },
-  palette: {
-    primary: {
-      main: '#0971f1',
-      darker: '#053e85',
-    },
-    neutral: {
-      main: '#1B1A27',
-      contrastText: '#fff',
-    },
-    green: {
-      main: '#36ef8a',
-    },
-    lilac: {
-      main: '#C8A2C8',
     },
   },
 })
@@ -150,10 +83,7 @@ export const productStyles = {
     fontFamily: 'Avenir, sans-serif',
     fontSize: {
       xl: '2rem',
-      xxl: '2rem',
       xxxl: '2.3rem',
-      lg: '1.7rem',
-      md: '1.7rem',
       sm: '1.7rem',
       xs: '1.6rem',
     },
@@ -163,7 +93,6 @@ export const productStyles = {
   headerTypographyStyle: {
     fontSize: {
       lg: '2.5rem',
-      md: '2rem',
       sm: '2rem',
       xl: '3rem',
       xs: '2.1rem',
@@ -190,12 +119,8 @@ export const productStyles = {
     color: 'black',
     fontFamily: 'Avenir, sans-serif',
     fontSize: {
-      xl: '1.8rem',
-      xxl: '1.8rem',
       xxxl: '2.7rem',
-      sm: '1.3rem',
       xs: '1.8rem',
-      lg: '1.8rem',
     },
     fontWeight: '0 !important',
     letterSpacing: '0 !important',
@@ -205,11 +130,8 @@ export const productStyles = {
     fontFamily: 'Avenir, sans-serif',
     fontSize: {
       xl: '1.6rem',
-      xxl: '1.6rem',
       xxxl: '2.1rem',
-      sm: '1.3rem',
       xs: '1.3rem',
-      lg: '1.3rem',
     },
     whiteSpace: 'normal',
     fontWeight: '0 !important',
@@ -221,10 +143,10 @@ export const productStyles = {
 export const catalogProductItem = {
   pictureStyle: {
     position: 'absolute',
-    bottom: 0,
+    bottom: '16px',
     backgroundSize: 'cover',
-    height: '75%',
-    width: '90%',
+    height: '300px',
+    width: '280px',
   },
   typographyStyle: {
     fontFamily: 'Avenir',
@@ -251,15 +173,7 @@ export const catalogProductItem = {
   },
   container: {
     boxSizing: 'border-box',
-    height: {
-      xxxl: '400px',
-      xxl: '300px',
-      xl: '400px',
-      lg: '400px',
-      md: '300px',
-      sm: '300px',
-      xs: '400px',
-    },
+    height: '400px',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',

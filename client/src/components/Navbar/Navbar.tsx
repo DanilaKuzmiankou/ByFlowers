@@ -133,7 +133,10 @@ export const Navbar = observer(() => {
   return (
     <HideOnScroll>
       <div style={{ position: 'sticky', top: 0, zIndex: 10 }}>
-        <AppBar sx={{ p: 0, m: 0 }} position="static" color="neutral">
+        <AppBar
+          sx={{ p: 0, m: 0, backgroundColor: '#1B1A27' }}
+          position="static"
+        >
           <Container
             sx={{ zIndex: 10, p: { xs: '0 2px', md: '0 24px' } }}
             maxWidth="xl"

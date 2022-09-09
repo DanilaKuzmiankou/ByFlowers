@@ -223,109 +223,109 @@ export const Product = observer(() => {
               There is no more {product.name} in storage!
             </Typography>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-          <Grid container sx={containerStyle}>
-            <Grid
-              item
-              xs={12}
-              sm={8}
-              sx={{ display: 'flex', justifyContent: 'flex-end' }}
-            >
-              <Box>
-                <Typography
-                  sx={{
-                    ...productStyles.customBoldFont,
-                    ...productStyles.headerTypographyStyle,
-                  }}
-                >
-                  {product.name}
-                </Typography>
-
-                <ProductGallery pictures={product.pictures} />
-
-                <Box sx={{ width: '100%', margin: '20px 0' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid container sx={containerStyle}>
+              <Grid
+                item
+                xs={12}
+                sm={8}
+                sx={{ display: 'flex', justifyContent: 'flex-end' }}
+              >
+                <Box>
                   <Typography
                     sx={{
                       ...productStyles.customBoldFont,
                       ...productStyles.headerTypographyStyle,
                     }}
                   >
-                    Description
+                    {product.name}
                   </Typography>
-                  <hr />
-                  <Typography
-                    sx={{
-                      ...productStyles.customNormalFont,
-                      ...{
-                        whiteSpace: 'normal',
-                        maxWidth: {
-                          xs: '300px',
-                          md: '450px',
+
+                  <ProductGallery pictures={product.pictures} />
+
+                  <Box sx={{ width: '100%', margin: '20px 0' }}>
+                    <Typography
+                      sx={{
+                        ...productStyles.customBoldFont,
+                        ...productStyles.headerTypographyStyle,
+                      }}
+                    >
+                      Description
+                    </Typography>
+                    <hr />
+                    <Typography
+                      sx={{
+                        ...productStyles.customNormalFont,
+                        ...{
+                          whiteSpace: 'normal',
                         },
-                      },
-                    }}
-                  >
-                    {product.description}
-                  </Typography>
-                  <hr />
-                  {product.productType.isFlower ? (
-                    <FlowerCareGuide />
-                  ) : (
-                    <PlantCareGuide />
-                  )}
+                      }}
+                    >
+                      {product.description}
+                    </Typography>
+                    <hr />
+                    {product.productType.isFlower ? (
+                      <FlowerCareGuide />
+                    ) : (
+                      <PlantCareGuide />
+                    )}
+                  </Box>
                 </Box>
-              </Box>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              sx={{
-                alignSelf: 'start',
-                position: 'sticky',
-                top: '0px',
-              }}
-            >
-              <Box sx={addToCartBox}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography
-                    sx={{
-                      ...productStyles.customBoldFont,
-                      ...{ display: 'inline-block' },
-                    }}
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                sx={{
+                  alignSelf: 'start',
+                  position: 'sticky',
+                  top: '0px',
+                }}
+              >
+                <Box sx={addToCartBox}>
+                  <Box
+                    sx={{ display: 'flex', justifyContent: 'space-between' }}
                   >
-                    Price:
+                    <Typography
+                      sx={{
+                        ...productStyles.customBoldFont,
+                        ...{ display: 'inline-block' },
+                      }}
+                    >
+                      Price:
+                    </Typography>
+                    <Typography
+                      sx={{
+                        ...productStyles.customBoldFont,
+                        ...{ display: 'inline-block' },
+                      }}
+                    >
+                      {product.price}$
+                    </Typography>
+                  </Box>
+
+                  <ProductCounterInput
+                    ref={countInputRef}
+                    totalCount={totalCount}
+                  />
+
+                  <Typography sx={additionalText}>
+                    Total amount: {totalCount}
                   </Typography>
-                  <Typography
-                    sx={{
-                      ...productStyles.customBoldFont,
-                      ...{ display: 'inline-block' },
-                    }}
+                  <Button
+                    onClick={addProductToBasket}
+                    sx={{ ...buyButtonHoverStyle, ...addToCartButtonStyle }}
                   >
-                    {product.price}$
-                  </Typography>
+                    Add to cart
+                  </Button>
+                  {message ? (
+                    <div className="custom-product-error-message">
+                      {message}
+                    </div>
+                  ) : null}
                 </Box>
-
-                <ProductCounterInput
-                  ref={countInputRef}
-                  totalCount={totalCount}
-                />
-
-                <Typography sx={additionalText}>
-                  Total amount: {totalCount}
-                </Typography>
-                <Button
-                  onClick={addProductToBasket}
-                  sx={{ ...buyButtonHoverStyle, ...addToCartButtonStyle }}
-                >
-                  Add to cart
-                </Button>
-                {message ? (
-                  <div className="custom-product-error-message">{message}</div>
-                ) : null}
-              </Box>
+              </Grid>
             </Grid>
-          </Grid>
           </Box>
           <Box sx={recommendationsBox}>
             <Typography

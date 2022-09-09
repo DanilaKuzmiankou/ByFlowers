@@ -34,6 +34,7 @@
   font-family: YouthTouch, serif;
   font-size: 10.5rem;
   line-height: 1.5;
+  user-select: none;
 }
 
 @media screen and (max-width: 1023px) {

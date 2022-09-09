@@ -10,14 +10,13 @@ export const BottomBar = () => {
       <div className="bottom-trademarks">
         <div className="bottom-brand">FlowersMarket</div>
         <div className="bottom-rights">
-          The site, as well as all information provided on the site, is solely{' '}
-          <br />
+          The site, as well as all information provided on the site, is solely
           informational nature, and under no circumstances is not a public
           offer.
         </div>
         <div className="bottom-rights">
           Registration is required to use the shopping cart. We never, under any
-          circumstances, disclose the personal data of customers. <br /> Contact
+          circumstances, disclose the personal data of customers. Contact
           information will only be used to place orders.
         </div>
         <div className="bottom-rights">&copy;2021 All rights reserved</div>
@@ -28,10 +27,7 @@ export const BottomBar = () => {
             sx={{
               ...productStyles.customBoldFont,
               ...{
-                whiteSpace: {
-                  xs: 'word',
-                  sm: 'nowrap',
-                },
+                whiteSpace: 'nowrap',
                 textAlign: 'center',
                 userSelect: 'text',
               },

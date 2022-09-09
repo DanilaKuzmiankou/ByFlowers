@@ -39,7 +39,7 @@ const startShoppingContainer = {
     lg: '820px',
   },
   padding: {
-    xs: '10px 0',
+    xs: '10px 0 0',
     sm: '60px 65px',
     lg: '160px 90px',
   },

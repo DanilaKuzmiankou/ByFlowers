@@ -1,6 +1,5 @@
 .bottom-bar {
   display: flex;
-  align-items: center;
   background-color: #282727;
   color: white;
   padding: 10px 0;
@@ -9,12 +8,13 @@
 .bottom-trademarks {
   display: inline-block;
   text-align: left;
-  padding-left: 7%;
+  margin-left: 7%;
 }
 
 .bottom-rights {
   font-size: 1.5rem;
   margin-top: 5px;
+  max-width: 500px;
 }
 
 .bottom-brand {
@@ -35,14 +35,33 @@
 }
 
 .right-panel {
+  align-items: center;
   padding-right: 5%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-left: auto;
 }
 
 @media screen and (min-width: 1080px) {
   .right-panel {
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .bottom-bar {
+    flex-direction: column;
+  }
+
+  .right-panel {
     flex-direction: row;
+    margin: 10px 0 0 7%;
+  }
+
+  .bottom-rights {
+    max-width: 100%;
+  }
+
+  .bottom-icons {
+   margin-left: auto;
   }
 }
