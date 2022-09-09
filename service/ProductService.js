@@ -63,7 +63,7 @@ class ProductService {
             {
                 model: ProductType,
                 as: 'productType',
-                attributes: [],
+                attributes: ['isFlower'],
                 where: {name: types},
             },
             {
@@ -139,6 +139,7 @@ class ProductService {
         offset,
     ) {
         const products = await Product.findAll({
+            attributes: ['count', 'description', 'id', 'name', 'price'],
             where: whereExpression,
             limit: limit,
             offset: offset,

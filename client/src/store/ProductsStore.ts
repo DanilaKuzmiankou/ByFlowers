@@ -52,6 +52,7 @@ class ProductsStore {
         this.itemsOffset,
         this.sortOptions,
       )
+      console.log('resp', response.data)
       const { products } = response.data
       runInAction(() => {
         this.products = products

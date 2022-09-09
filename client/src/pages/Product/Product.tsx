@@ -14,6 +14,8 @@ import basketStore from '../../store/BasketStore'
 import { addToBasket, getBasketProductCount } from '../../api/store/Basket'
 import userStore from '../../store/UserStore'
 import { ProductCounterInput } from '../../components/ProductCounterInput/ProductCounterInput'
+import { FlowerCareGuide } from '../../components/CareGuide/FlowerCareGuide'
+import { PlantCareGuide } from '../../components/CareGuide/PlantCareGuide'
 
 interface LocationState {
   productJson: string
@@ -22,7 +24,7 @@ interface LocationState {
 const addToCartButtonStyle = {
   width: {
     xs: '200px',
-    sm: '350px',
+    sm: '100%',
   },
   display: 'block',
   alignSelf: 'center',
@@ -53,13 +55,15 @@ const recommendationsBoxName = {
 
 const defaultContainerStyle = {
   position: 'relative',
-  width: {
-    xs: '100%',
-    sm: 'content',
-  },
+  width: '100%',
+  maxWidth: '1400px',
   display: 'flex',
   justifyContent: 'center',
-  padding: '10px 30px',
+  padding: {
+    xs: '10px 10px',
+    sm: '10px 32px',
+    lg: '10px 64px',
+  },
 }
 
 const defaultEmptyContainerStyle = {
@@ -76,8 +80,9 @@ const defaultEmptyContainerStyle = {
 
 const addToCartBox = {
   margin: {
-    xs: '0 0 10px 0',
-    lg: '40px 0 0 30px',
+    xs: '0',
+    sm: '0 20px 0',
+    md: '40px 0 0 30px',
   },
   display: 'flex',
   flexDirection: 'column',
@@ -206,7 +211,7 @@ export const Product = observer(() => {
   return (
     <>
       {product ? (
-        <div style={{ position: 'relative' }}>
+        <>
           <Box sx={emptyContainerStyle}>
             <Typography
               sx={{
@@ -218,10 +223,12 @@ export const Product = observer(() => {
               There is no more {product.name} in storage!
             </Typography>
           </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'center'}}>
           <Grid container sx={containerStyle}>
             <Grid
               item
-              xs="auto"
+              xs={12}
+              sm={8}
               sx={{ display: 'flex', justifyContent: 'flex-end' }}
             >
               <Box>
@@ -251,7 +258,7 @@ export const Product = observer(() => {
                       ...productStyles.customNormalFont,
                       ...{
                         whiteSpace: 'normal',
-                        width: {
+                        maxWidth: {
                           xs: '300px',
                           md: '450px',
                         },
@@ -261,20 +268,18 @@ export const Product = observer(() => {
                     {product.description}
                   </Typography>
                   <hr />
-                  <Typography
-                    sx={{
-                      ...productStyles.customBoldFont,
-                      ...productStyles.headerTypographyStyle,
-                    }}
-                  >
-                    Description
-                  </Typography>
+                  {product.productType.isFlower ? (
+                    <FlowerCareGuide />
+                  ) : (
+                    <PlantCareGuide />
+                  )}
                 </Box>
               </Box>
             </Grid>
             <Grid
               item
-              xs="auto"
+              xs={12}
+              sm={4}
               sx={{
                 alignSelf: 'start',
                 position: 'sticky',
@@ -321,6 +326,7 @@ export const Product = observer(() => {
               </Box>
             </Grid>
           </Grid>
+          </Box>
           <Box sx={recommendationsBox}>
             <Typography
               sx={{
@@ -352,7 +358,7 @@ export const Product = observer(() => {
               ))}
             </Grid>
           </Box>
-        </div>
+        </>
       ) : null}
     </>
   )

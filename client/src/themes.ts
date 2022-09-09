@@ -170,11 +170,8 @@ export const productStyles = {
     },
     display: {
       xs: 'inline-block',
-      sm: 'block',
     },
-    padding: {
-      xs: 0,
-    },
+    padding: 0,
     whiteSpace: 'nowrap',
   },
   filtersHeaderTypography: {
@@ -218,7 +215,6 @@ export const productStyles = {
     fontWeight: '0 !important',
     letterSpacing: '0 !important',
     textAlign: 'center !important',
-    maxWidth: '320px',
   },
 }
 

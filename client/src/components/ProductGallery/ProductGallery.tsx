@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { FreeMode, Navigation, Thumbs } from 'swiper'
+import { Autoplay, EffectFade, FreeMode, Navigation, Pagination, Thumbs } from "swiper";
 import Box from '@mui/material/Box'
 import 'swiper/css'
 import 'swiper/css/free-mode'
@@ -13,26 +13,9 @@ interface ProductGalleryProps {
   pictures: IPicture[]
 }
 
-const mainPicture = {
-  height: {
-    xs: '350px',
-    md: '550px',
-  },
-  width: {
-    xs: '300px',
-    md: '500px',
-  },
-}
-
-const additionalPicture = {
-  height: {
-    xs: '100px',
-    md: '200px',
-  },
-  width: {
-    xs: '90px',
-    md: '190px',
-  },
+const pictureWrapper = {
+  height: '100%',
+  width: '100%',
 }
 
 export const ProductGallery: FC<ProductGalleryProps> = ({ pictures }) => {
@@ -47,12 +30,12 @@ export const ProductGallery: FC<ProductGalleryProps> = ({ pictures }) => {
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
-        modules={[FreeMode, Navigation, Thumbs]}
+        modules={[FreeMode, Navigation, Thumbs, Pagination]}
         className="mySwiper2"
       >
         {pictures.map((picture, index) => (
           <SwiperSlide key={index} style={{ height: '100%' }}>
-            <Box sx={mainPicture} component="img" src={picture.picture} />
+            <Box sx={pictureWrapper} component="img" src={picture.picture} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -67,7 +50,7 @@ export const ProductGallery: FC<ProductGalleryProps> = ({ pictures }) => {
       >
         {pictures.map((picture, index) => (
           <SwiperSlide key={index + 200}>
-            <Box sx={additionalPicture} component="img" src={picture.picture} />
+            <Box sx={pictureWrapper} component="img" src={picture.picture} />
           </SwiperSlide>
         ))}
       </Swiper>

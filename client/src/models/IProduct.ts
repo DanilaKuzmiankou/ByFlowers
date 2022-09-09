@@ -4,7 +4,12 @@ export interface IProduct {
   description: string
   count: number
   price: number
+  productType: IProductType
   pictures: IPicture[]
+}
+
+interface IProductType {
+  isFlower: boolean
 }
 
 export interface IPicture {
