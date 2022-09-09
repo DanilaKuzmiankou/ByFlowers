@@ -1,10 +1,7 @@
 import React, { useMemo } from 'react'
 import { Grid, Typography } from '@mui/material'
-import {
-  BsDroplet,
-  BsSun,
-} from 'react-icons/bs'
-import {GiFertilizerBag} from 'react-icons/gi'
+import { BsDroplet, BsSun } from 'react-icons/bs'
+import { GiFertilizerBag } from 'react-icons/gi'
 import { IconContext } from 'react-icons'
 import { productStyles } from '../../themes'
 
@@ -49,9 +46,10 @@ export const PlantCareGuide = () => {
           </IconContext.Provider>
           <Typography sx={headerStyle}>Light</Typography>
           <Typography sx={productStyles.customSmallFont}>
-            If you don’t know where to put a plant, put it in the window.
-            Most of plants need as much sunlight as possible.
-            Different plants come from different parts of the world and have different light requirements.
+            If you don’t know where to put a plant, put it in the window. Most
+            of plants need as much sunlight as possible. Different plants come
+            from different parts of the world and have different light
+            requirements.
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4} sx={gridColumn}>
@@ -72,8 +70,9 @@ export const PlantCareGuide = () => {
           <Typography sx={headerStyle}>Fertilizing</Typography>
           <Typography sx={productStyles.customSmallFont}>
             Most houseplants put on a growth spurt in spring and summer, so this
-            is the best time to fertilize them. It's important to avoid overfertilizing
-            your houseplants. Too much fertilizer can burn their roots and stunt their growth
+            is the best time to fertilize them. It&apos;s important to avoid
+            overfertilizing your houseplants. Too much fertilizer can burn their
+            roots and stunt their growth
           </Typography>
         </Grid>
       </Grid>

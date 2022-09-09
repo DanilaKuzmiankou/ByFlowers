@@ -1,10 +1,6 @@
 import React, { useMemo } from 'react'
 import { Grid, Typography } from '@mui/material'
-import {
-  BsDroplet,
-  BsScissors,
-  BsThermometerSun,
-} from 'react-icons/bs'
+import { BsDroplet, BsScissors, BsThermometerSun } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
 import { productStyles } from '../../themes'
 

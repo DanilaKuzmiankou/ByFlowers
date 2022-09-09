@@ -1,5 +1,12 @@
 import React, { FC, useState } from 'react'
-import { Autoplay, EffectFade, FreeMode, Navigation, Pagination, Thumbs } from "swiper";
+import {
+  Autoplay,
+  EffectFade,
+  FreeMode,
+  Navigation,
+  Pagination,
+  Thumbs,
+} from 'swiper'
 import Box from '@mui/material/Box'
 import 'swiper/css'
 import 'swiper/css/free-mode'
