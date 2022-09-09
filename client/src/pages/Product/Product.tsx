@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import React, { useEffect, useRef, useState } from 'react'
-import { Grid, Typography } from '@mui/material'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { Collapse, Grid, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import { observer } from 'mobx-react-lite'
 import Button from '@mui/material/Button'
@@ -16,6 +16,7 @@ import userStore from '../../store/UserStore'
 import { ProductCounterInput } from '../../components/ProductCounterInput/ProductCounterInput'
 import { FlowerCareGuide } from '../../components/CareGuide/FlowerCareGuide'
 import { PlantCareGuide } from '../../components/CareGuide/PlantCareGuide'
+import { ExpandButton } from '../../components/ExpandButton/ExpandButton'
 
 interface LocationState {
   productJson: string
@@ -102,6 +103,7 @@ export const Product = observer(() => {
   const [emptyContainerStyle, setEmptyContainerStyle] =
     useState<React.CSSProperties>(defaultEmptyContainerStyle)
   const [message, setMessage] = useState<string>('')
+  const [isTabOpen, setIsTabOpen] = useState<boolean>(true)
 
   const checkForPresence = () => {
     if (totalCount <= 0) {
@@ -244,25 +246,35 @@ export const Product = observer(() => {
                   <ProductGallery pictures={product.pictures} />
 
                   <Box sx={{ width: '100%', margin: '20px 0' }}>
-                    <Typography
-                      sx={{
-                        ...productStyles.customBoldFont,
-                        ...productStyles.headerTypographyStyle,
-                      }}
-                    >
-                      Description
-                    </Typography>
-                    <hr />
-                    <Typography
-                      sx={{
-                        ...productStyles.customNormalFont,
-                        ...{
-                          whiteSpace: 'normal',
-                        },
-                      }}
-                    >
-                      {product.description}
-                    </Typography>
+                    <Box sx={{ display: 'flex' }}>
+                      <Typography
+                        sx={{
+                          ...productStyles.customBoldFont,
+                          ...productStyles.headerTypographyStyle,
+                          ...{ color: isTabOpen ? '#FF0054' : '#000000' },
+                        }}
+                      >
+                        Description
+                      </Typography>
+                      <ExpandButton
+                        isTabOpen={isTabOpen}
+                        setIsTabOpen={setIsTabOpen}
+                      />
+                    </Box>
+
+                    <Collapse in={isTabOpen} timeout="auto">
+                      <Typography
+                        sx={{
+                          ...productStyles.customNormalFont,
+                          ...{
+                            whiteSpace: 'normal',
+                            mt: '10px',
+                          },
+                        }}
+                      >
+                        {product.description}
+                      </Typography>
+                    </Collapse>
                     <hr />
                     {product.productType.isFlower ? (
                       <FlowerCareGuide />
