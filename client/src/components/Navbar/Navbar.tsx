@@ -4,18 +4,15 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
-import MenuItem from '@mui/material/MenuItem'
 import { useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { IconContext } from 'react-icons'
 import { Badge, BadgeProps, Link } from '@mui/material'
 import { RiShoppingBasket2Line } from 'react-icons/ri'
 import { styled } from '@mui/material/styles'
+import { toJS } from 'mobx'
 import userStore from '../../store/UserStore'
 import productsStore from '../../store/ProductsStore'
 import basketStore from '../../store/BasketStore'
@@ -24,7 +21,6 @@ import { HideOnScroll } from '../HideOnScroll/HideOnScroll'
 import { getProductsTypes } from '../../api/store/Product'
 import { CustomHoverMenu } from '../CustomMenu/CustomHoverMenu'
 import { MobileNavbarElements } from './MobileNavbarElements'
-import { CustomMobileMenu } from '../CustomMenu/CustomMobileMenu'
 
 const siteLogo = 'FlowersDelivery'
 const pages = ['About us', 'Flowers', 'Plants']
@@ -80,10 +76,14 @@ const navbarLoginButtonStyle = {
 export const Navbar = observer(() => {
   useEffect(() => {
     async function fetch() {
-      const flowersTypesResponse = await getProductsTypes(true)
-      const plantsTypesResponse = await getProductsTypes(false)
-      productsStore.setFlowers(flowersTypesResponse.data)
-      productsStore.setPlants(plantsTypesResponse.data)
+      if (productsStore.flowers?.length === 0) {
+        const flowersTypesResponse = await getProductsTypes(true)
+        productsStore.setFlowers(flowersTypesResponse.data)
+      }
+      if (productsStore.plants?.length === 0) {
+        const plantsTypesResponse = await getProductsTypes(false)
+        productsStore.setPlants(plantsTypesResponse.data)
+      }
     }
 
     fetch()

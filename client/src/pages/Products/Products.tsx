@@ -11,6 +11,7 @@ import { observer } from 'mobx-react-lite'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone'
+import { toJS } from 'mobx'
 import { ProductsFilter } from '../../components/ProductsFilter/ProductsFilter'
 import productsStore from '../../store/ProductsStore'
 import { productStyles } from '../../themes'
@@ -50,6 +51,12 @@ export const Products = observer(() => {
     productsStore.plants,
     getItemsCountPerPage,
   ])
+
+  useEffect(() => {
+    if (productsStore.productsNames?.length > 0) {
+      productsStore.fetchProducts()
+    }
+  }, [productsStore.productsNames])
 
   const openDrawer = () => {
     productsStore.setIsDrawerOpen(true)

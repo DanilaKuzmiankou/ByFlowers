@@ -104,6 +104,11 @@ class ProductService {
             {},
             [
                 {
+                    model: ProductType,
+                    as: 'productType',
+                    attributes: ['isFlower']
+                },
+                {
                     model: ProductPicture,
                     as: 'pictures',
                     attributes: ['picture'],
@@ -119,6 +124,11 @@ class ProductService {
         return productService.getProducts(
           {},
           [
+              {
+                  model: ProductType,
+                  as: 'productType',
+                  attributes: ['isFlower']
+              },
               {
                   model: ProductPicture,
                   as: 'pictures',

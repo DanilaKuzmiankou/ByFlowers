@@ -186,5 +186,12 @@ export const catalogProductItem = {
       boxShadow:
         'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
     },
+    '.Mui-focused': {
+      border: '0.01em solid',
+      borderColor: 'inherit',
+      borderRadius: '3%',
+      boxShadow:
+        'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
+    },
   },
 }
