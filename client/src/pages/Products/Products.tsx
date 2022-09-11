@@ -11,6 +11,7 @@ import { observer } from 'mobx-react-lite'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone'
+import { toJS } from 'mobx'
 import { ProductsFilter } from '../../components/ProductsFilter/ProductsFilter'
 import productsStore from '../../store/ProductsStore'
 import { productStyles } from '../../themes'
@@ -26,6 +27,7 @@ export const Products = observer(() => {
   const lgAndXl = useMediaQuery(theme.breakpoints.between('md', 'xxxl'))
   const xxxl = useMediaQuery(theme.breakpoints.up('xxl'))
 
+  const [currentPage, setCurrentPage] = useState<number>(1)
   const [types, setTypes] = useState<string[]>([])
 
   const getItemsCountPerPage = () => {
@@ -51,11 +53,18 @@ export const Products = observer(() => {
     getItemsCountPerPage,
   ])
 
+  useEffect(() => {
+    if (productsStore.productsNames?.length > 0) {
+      productsStore.fetchProducts()
+    }
+  }, [productsStore.productsNames])
+
   const openDrawer = () => {
     productsStore.setIsDrawerOpen(true)
   }
 
   const handleChangePage = (event: ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page)
     productsStore.setItemsOffset(
       page * productsStore.itemsLimit - productsStore.itemsLimit,
     )
@@ -201,6 +210,7 @@ export const Products = observer(() => {
       </Grid>
       <div className="pagination-container">
         <Pagination
+          page={currentPage}
           sx={{ paddingBottom: '10px', fontSize: '30rem' }}
           count={Math.ceil(
             productsStore.productsCount / productsStore.itemsLimit,

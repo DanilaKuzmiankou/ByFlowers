@@ -1,4 +1,9 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import {
+  createSearchParams,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Collapse, Grid, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
@@ -17,10 +22,6 @@ import { ProductCounterInput } from '../../components/ProductCounterInput/Produc
 import { FlowerCareGuide } from '../../components/CareGuide/FlowerCareGuide'
 import { PlantCareGuide } from '../../components/CareGuide/PlantCareGuide'
 import { ExpandButton } from '../../components/ExpandButton/ExpandButton'
-
-interface LocationState {
-  productJson: string
-}
 
 const addToCartButtonStyle = {
   width: {
@@ -90,9 +91,9 @@ const addToCartBox = {
 }
 
 export const Product = observer(() => {
-  const location = useLocation()
-  const { productJson } = location.state as LocationState
-  const product = JSON.parse(productJson) as IProduct
+  const [searchParams] = useSearchParams()
+  const productJson = searchParams.get('productJson')
+  const product = JSON.parse(productJson || '') as IProduct
 
   const countInputRef = useRef<CountInputProps>(null)
   const navigate = useNavigate()
@@ -137,10 +138,11 @@ export const Product = observer(() => {
   }
 
   const goToItemPage = (selectedProduct: IProduct) => {
-    navigate('../product', {
-      state: {
+    navigate({
+      pathname: '../product',
+      search: `?${createSearchParams({
         productJson: JSON.stringify(selectedProduct),
-      },
+      })}`,
     })
     fetchRecommendationsProducts()
     window.scrollTo(0, 0)

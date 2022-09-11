@@ -10,6 +10,7 @@ import {
 import './ProductsFilter.css'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
+import { toJS } from 'mobx'
 import { checkForOne, getCheckedItems } from '../../utils/Utils'
 import { productStyles } from '../../themes'
 import productsStore from '../../store/ProductsStore'
@@ -38,7 +39,7 @@ export const ProductsFilter = observer<ProductsProps>(
         productsStore.selectedProductsName.split(', '),
       )
       if (checkedPlants) {
-        await productsStore.fetchNewProducts(checkedPlants)
+        productsStore.setProductsNames(checkedPlants)
         if (checkedPlants.length > 3) {
           productsStore.setSelectedProductsName(
             `${checkedPlants.slice(0, 3).join(', ')}...`,
@@ -143,7 +144,9 @@ export const ProductsFilter = observer<ProductsProps>(
     }, [productsStore.selectedNavbarProduct, productsList])
 
     useEffect(() => {
-      productsStore.fetchProducts()
+      if (productsStore.sortOptions?.length > 0) {
+        productsStore.fetchProducts()
+      }
     }, [productsStore.sortOptions])
 
     return (

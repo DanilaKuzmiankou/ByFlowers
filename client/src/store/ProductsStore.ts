@@ -36,9 +36,8 @@ class ProductsStore {
     makeAutoObservable(this)
   }
 
-  async fetchNewProducts(productsNames: string[]) {
+  setProductsNames(productsNames: string[]) {
     this.productsNames = productsNames
-    await this.fetchProducts()
   }
 
   async fetchProducts() {
@@ -52,7 +51,6 @@ class ProductsStore {
         this.itemsOffset,
         this.sortOptions,
       )
-      console.log('resp', response.data)
       const { products } = response.data
       runInAction(() => {
         this.products = products
