@@ -56,6 +56,8 @@ export const Products = observer(() => {
   useEffect(() => {
     if (productsStore.productsNames?.length > 0) {
       productsStore.fetchProducts()
+    } else {
+      productsStore.setProducts([])
     }
   }, [productsStore.productsNames])
 

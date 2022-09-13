@@ -9,7 +9,8 @@ class ProductController {
 
     async getProductsTypes(req, res, next) {
         try {
-            const {isFlower} = req.query
+            let {isFlower} = req.query
+            isFlower = isFlower  === 'true'
             const types = await productService.getProductsTypes(isFlower)
             return res.json(types)
         } catch (e) {
@@ -54,6 +55,11 @@ class ProductController {
         try {
             const {limit} = req.query
             const products = await productService.getNewestProducts(limit)
+           // console.log('newest', products)
+            products.map(product => {
+                //console.log('product: ', product)
+               // console.log('pics:', product.pictures)
+            })
             return res.json(products)
         } catch (e) {
             next(e)
