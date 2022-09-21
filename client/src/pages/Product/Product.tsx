@@ -1,10 +1,9 @@
 import {
   createSearchParams,
-  useLocation,
   useNavigate,
   useSearchParams,
 } from 'react-router-dom'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Collapse, Grid, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import { observer } from 'mobx-react-lite'

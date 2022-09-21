@@ -1,5 +1,6 @@
 {
   "name": "my-app",
+  "homepage": "http://byflower.iron.hostflyby.net/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

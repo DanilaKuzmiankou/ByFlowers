@@ -1,6 +1,6 @@
 const { User } = require('../models/Models')
 const ApiError = require('../error/ApiError')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const tokenService = require('./TokenService')
 const UserDto = require('../dtos/UserDto')
 

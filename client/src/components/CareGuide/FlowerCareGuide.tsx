@@ -1,11 +1,8 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Collapse, Grid, Typography } from '@mui/material'
-import { BsDroplet, BsScissors, BsSun, BsThermometerSun } from 'react-icons/bs'
-import { GiFertilizerBag } from 'react-icons/gi'
+import { BsDroplet, BsScissors, BsThermometerSun } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
 import { productStyles } from '../../themes'
 import { ExpandButton } from '../ExpandButton/ExpandButton'
 

@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, useMemo } from 'react'
+import { FC, useMemo } from 'react'
 import { IconContext } from 'react-icons'
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import IconButton from '@mui/material/IconButton'

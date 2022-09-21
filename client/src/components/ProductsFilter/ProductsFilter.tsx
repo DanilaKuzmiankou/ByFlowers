@@ -8,9 +8,8 @@ import {
   useTheme,
 } from '@mui/material'
 import './ProductsFilter.css'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { toJS } from 'mobx'
 import { checkForOne, getCheckedItems } from '../../utils/Utils'
 import { productStyles } from '../../themes'
 import productsStore from '../../store/ProductsStore'

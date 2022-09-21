@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import { ProductItem } from '../ProductItem/ProductItem'
 import { IProduct } from '../../models/IProduct'
 import { getNewestProducts } from '../../api/store/Product'
-import { catalogProductItem, productStyles } from '../../themes'
+import { productStyles } from '../../themes'
 
 export const NewestProducts = () => {
   const [newestProducts, setNewestProducts] = useState<IProduct[]>()

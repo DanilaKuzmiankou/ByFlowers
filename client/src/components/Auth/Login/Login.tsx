@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import '../Auth.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -10,7 +10,7 @@ import {
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import Button from '@mui/material/Button'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import userStore from '../../../store/UserStore'
 import { PasswordField } from '../../Form/PasswordField'
 import { EmailField } from '../../Form/EmailField'
