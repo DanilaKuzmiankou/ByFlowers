@@ -21,10 +21,9 @@ import { getProductsTypes } from '../../api/store/Product'
 import { CustomHoverMenu } from '../CustomMenu/CustomHoverMenu'
 import { MobileNavbarElements } from './MobileNavbarElements'
 
-const siteLogo = 'FlowersDelivery'
-const pages = ['About us', 'Flowers', 'Plants']
+const siteLogo = 'ByFlowers'
 const pagesLinks = ['aboutUs', 'products', 'products']
-const pages2 = ['About us']
+const pages2 = ['О нас']
 
 const navbarButtonsStyle = {
   fontFamily: 'IntroCondBlack',
@@ -202,7 +201,7 @@ export const Navbar = observer(() => {
                     </Button>
                   ))}
                   <CustomHoverMenu
-                    menuName="Plants"
+                    menuName="Растения"
                     buttonStyle={navbarButtonsStyle}
                     menuItemsNames={productsStore.plants}
                     onMenuItemClick={(plantName: string) =>
@@ -211,7 +210,7 @@ export const Navbar = observer(() => {
                     isFlowers={false}
                   />
                   <CustomHoverMenu
-                    menuName="Flowers"
+                    menuName="Цветы"
                     buttonStyle={navbarButtonsStyle}
                     menuItemsNames={productsStore.flowers}
                     onMenuItemClick={(flowerName: string) =>
@@ -231,7 +230,7 @@ export const Navbar = observer(() => {
                     <CustomClickMenu buttonStyle={upperNavbarButtonsStyle} />
                   ) : (
                     <Button sx={navbarLoginButtonStyle} onClick={handleLogin}>
-                      Login
+                      Войти
                     </Button>
                   )}
                   <IconButton

@@ -32,7 +32,7 @@ export const CustomSwiper = () => {
             backgroundImage: `url(${require('../../assets/images/carouselFlowers.jpg')})`,
           }}
         >
-          <p className="text">Shop the season’s freshest flowers</p>
+          <p className="text">Лучшие сезонные варианты</p>
         </div>
       </SwiperSlide>
       <SwiperSlide>
@@ -42,7 +42,7 @@ export const CustomSwiper = () => {
             backgroundImage: `url(${require('../../assets/images/carouselFlowers2.jpg')})`,
           }}
         >
-          <p className="text">The gorgeous flowers in country</p>
+          <p className="text">Наикрасивейшие цветы в стране</p>
         </div>
       </SwiperSlide>
       <SwiperSlide>
@@ -52,7 +52,7 @@ export const CustomSwiper = () => {
             backgroundImage: `url(${require('../../assets/images/carouselFlowers3.jpg')})`,
           }}
         >
-          <p className="text">Best gift for loved ones</p>
+          <p className="text">Отличный подарок для партнера</p>
         </div>
       </SwiperSlide>
       <SwiperSlide>
@@ -62,7 +62,7 @@ export const CustomSwiper = () => {
             backgroundImage: `url(${require('../../assets/images/carouselFlowers4.jpg')})`,
           }}
         >
-          <p className="text">Quick application processing</p>
+          <p className="text">Оперативная доставка</p>
         </div>
       </SwiperSlide>
     </Swiper>

@@ -98,7 +98,7 @@ export const Products = observer(() => {
               <ProductsFilter
                 productsList={types}
                 mainCheckboxName={
-                  productsStore.isFlowers ? 'Flowers' : 'Plants'
+                  productsStore.isFlowers ? 'Цветы' : 'Растения'
                 }
               />
             </div>
@@ -156,7 +156,7 @@ export const Products = observer(() => {
                       },
                     }}
                   >
-                    Sort by
+                    Сортировать по
                   </Typography>
                   <CustomSelect />
                 </Box>
@@ -167,7 +167,7 @@ export const Products = observer(() => {
               <MobileProductsFilter
                 productsList={types}
                 mainCheckboxName={
-                  productsStore.isFlowers ? 'Flowers' : 'Plants'
+                  productsStore.isFlowers ? 'Цветы' : 'Растения'
                 }
               />
             ) : null}

@@ -37,7 +37,7 @@ export const MobileProductsFilter = observer<ProductsProps>(
         <DrawerHeader
           sx={{ textAlign: 'start', display: 'flex', justifyContent: 'start' }}
         >
-          Filters
+          Фильтры
           <CloseButton
             closeFunction={() => productsStore.setIsDrawerOpen(false)}
           />

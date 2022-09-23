@@ -31,10 +31,11 @@ export const FlowerCareGuide = () => {
             ...productStyles.headerTypographyStyle,
             ...{
               color: isTabOpen ? '#FF0054' : '#000000',
+              whiteSpace: 'normal',
             },
           }}
         >
-          Flower care guide
+          Руководство по уходу за цветами
         </Typography>
         <ExpandButton isTabOpen={isTabOpen} setIsTabOpen={setIsTabOpen} />
       </Box>
@@ -53,35 +54,34 @@ export const FlowerCareGuide = () => {
             <IconContext.Provider value={iconPropsMemoized}>
               <BsDroplet />
             </IconContext.Provider>
-            <Typography sx={headerStyle}>Water</Typography>
-            <Typography sx={productStyles.customNormalFont}>
-              Change vase water every other day (add flower food to the new
-              water if available). All stems should be submerged. If your
-              flowers came in a basket or other container with foam, add fresh
-              water every day.
+            <Typography sx={headerStyle}>Вода</Typography>
+            <Typography sx={productStyles.productDescriptionFont}>
+              Меняйте воду в вазе через день (добавляйте подкормку для цветов в
+              новую воду, если она есть). Все стебли должны быть погружены в
+              воду. Если ваши цветы пришли в корзине или другом контейнере с
+              пеной, добавляйте свежую воду каждый день.
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4} sx={gridColumn}>
             <IconContext.Provider value={iconPropsMemoized}>
               <BsThermometerSun />
             </IconContext.Provider>
-            <Typography sx={headerStyle}>Light/Temperature</Typography>
-            <Typography sx={productStyles.customNormalFont}>
-              Display your bouquet or flower arrangement in a cool, draft-free
-              area. <br />
-              Avoid direct sunlight, which causes the flowers to die more
-              quickly.
+            <Typography sx={headerStyle}>Свет/Температура</Typography>
+            <Typography sx={productStyles.productDescriptionFont}>
+              Повесьте свой букет или цветочную композицию в прохладном месте
+              без сквозняков. Избегайте прямых солнечных лучей, от которых цветы
+              быстрее погибают.
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4} sx={gridColumn}>
             <IconContext.Provider value={iconPropsMemoized}>
               <BsScissors />
             </IconContext.Provider>
-            <Typography sx={headerStyle}>Pruning</Typography>
-            <Typography sx={productStyles.customNormalFont}>
-              Immediately remove dead or wilting leaves and stems. <br />
-              Recut your flower and foliage stems just before putting them back
-              into new water.
+            <Typography sx={headerStyle}>Подрезка</Typography>
+            <Typography sx={productStyles.productDescriptionFont}>
+              Немедленно удаляйте отмершие или увядающие листья и стебли.
+              Обрежьте стебли цветов и листвы непосредственно перед тем, как
+              положить их обратно. в новую воду.
             </Typography>
           </Grid>
         </Grid>

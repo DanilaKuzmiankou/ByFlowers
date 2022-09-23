@@ -11,7 +11,6 @@ import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import Button from '@mui/material/Button'
-import { useNavigate } from 'react-router-dom'
 import userStore from '../../../store/UserStore'
 import { PasswordField } from '../../Form/PasswordField'
 import { NameField } from '../../Form/NameField'
@@ -24,24 +23,30 @@ YupPassword(Yup)
 
 const userSchema = Yup.object({
   name: Yup.string()
-    .max(100, 'must_be_100_characters_or_less')
-    .required('required'),
-  email: Yup.string().nullable().email().required('required'),
+    .max(40, 'максимальная длина - 40 символов')
+    .required('обязательно для заполнения'),
+  email: Yup.string().nullable().email().required('обязательно для заполнения'),
   password: Yup.string()
-    .required('required')
-    .minLowercase(1, 'password must contain at least 1 lower case letter')
-    .minUppercase(1, 'password must contain at least 1 upper case letter')
-    .minNumbers(1, 'password must contain at least 1 number')
-    .min(8, 'password must contain at least 8 characters'),
+    .required('обязательно для заполнения')
+    .minLowercase(
+      1,
+      'пароль должен содержать как минимум 1 букву нижнего регистра',
+    )
+    .minUppercase(
+      1,
+      'пароль должен содержать как минимум 1 букву верхнего регистра',
+    )
+    .minNumbers(1, 'пароль должен содержать как минимум 1 цифру')
+    .min(8, 'минимальная длина - 8 символов')
+    .max(50, 'максимальная длина - 50 символов'),
   phone: Yup.string()
-    .matches(phoneRegExp, 'Phone number is not valid')
-    .required('required'),
+    .matches(phoneRegExp, 'телефонный номер некорректен')
+    .required('обязательно для заполнения'),
 })
 
 export const Signin = () => {
   const [passwordIsVisible, setPasswordIsVisible] = useState<boolean>(false)
   const [currentIcon, setCurrentIcon] = useState<IconDefinition>(faEyeSlash)
-  const navigate = useNavigate()
 
   const changePasswordVisibility = () => {
     setPasswordIsVisible(!passwordIsVisible)
@@ -113,21 +118,21 @@ export const Signin = () => {
               variant="contained"
               color="primary"
               sx={{
-                fontFamily: 'Avenir, sans-serif',
+                fontFamily: 'AvenirBold, sans-serif',
                 fontSize: '1.5rem',
                 height: '38px',
                 marginTop: '20px',
                 width: '100%',
               }}
             >
-              Sign in!
+              Зарегистрироваться!
             </Button>
           </Form>
         )}
       </Formik>
       <div className="auth-link-container">
         <Button sx={linkButtonStyle} onClick={changePage}>
-          Already have an account? Log in!
+          Уже имеете аккаунт? Войдите!
         </Button>
       </div>
     </div>

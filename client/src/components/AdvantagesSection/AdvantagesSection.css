@@ -1,7 +1,7 @@
 .advantages {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   padding: 60px 0 100px;
 }
 

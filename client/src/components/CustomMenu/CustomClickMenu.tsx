@@ -18,7 +18,7 @@ const onLogoutClick = () => {
   userStore.logout()
 }
 
-const userMenu = ['Logout']
+const userMenu = ['Выйти']
 const userMenuIcons = [<MdLogout />]
 const userMenuOnClick = [onLogoutClick]
 

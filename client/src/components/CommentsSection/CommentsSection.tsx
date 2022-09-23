@@ -46,16 +46,16 @@ export const CommentsSection = () => {
             <Typography
               sx={{ ...commentTypographyStyle, ...commentHeaderStyle }}
             >
-              Thanks for your service. For us it is priceless! Since I live very
-              far from my mother, and every time she is touched to tears by your
-              bouquets sent by her beloved daughter. So the support service
-              works perfectly quickly and sincerely. Thank you again!
+              Спасибо за ваш сервис. Для меня это бесценно! Я живу очень далеко
+              от мамы, и каждый раз, заказанные мной у вас букеты умиляют её до
+              слез. Служба поддержки работает качественно и быстро. Еще раз
+              спасибо!
             </Typography>
             <div data-aos="fade-up" className="comment-description">
               <Typography
                 sx={{ ...commentTypographyStyle, ...commentDescriptionStyle }}
               >
-                Manuel Sanchez
+                Александр Кузнецов
               </Typography>
               <Box
                 component="img"
@@ -70,17 +70,17 @@ export const CommentsSection = () => {
             <Typography
               sx={{ ...commentTypographyStyle, ...commentHeaderStyle }}
             >
-              Thank you very much for your services. This was my first
-              experience and I am very worried. The bouquet was very beautiful,
-              exceeded my expectations! Now I will use your services more often
-              and please my friends. relatives at a distance! The photo report
-              lifted my spirits in the morning! Well done boys! Keep it up!
+              Большое спасибо за ваши услуги. Это был мой первый опыт покупки
+              цветов у вас, и я очень беспокоилаь. Букет был очень красивый,
+              превзошел мои ожидания! Теперь буду чаще пользоваться вашими
+              услугами! Фото отчет поднял настроение с утра! Молодцы ребята! Так
+              держать!
             </Typography>
             <div data-aos="fade-up" className="comment-description">
               <Typography
                 sx={{ ...commentTypographyStyle, ...commentDescriptionStyle }}
               >
-                Isabel Perez
+                Дарья Вознесенская
               </Typography>
               <Box
                 component="img"
@@ -95,17 +95,17 @@ export const CommentsSection = () => {
             <Typography
               sx={{ ...commentTypographyStyle, ...commentHeaderStyle }}
             >
-              Thank you for your store, it always helped me out when choosing a
-              gift. Large selection of countries, a huge selection of bouquets,
-              reasonable prices, user-friendly interface of the site, polite
-              operators, personal approach to client. Special thanks for the
-              promo code for the next order! &#9786;
+              Спасибо за ваш магазин, всегда выручал меня при выборе подарка.
+              Большой выбор растений, огромный выбор букетов, доступные цены,
+              удобный интерфейс сайта, вежливые операторы, индивидуальный подход
+              к клиенту. Отдельное спасибо за промокод на следующий заказ!
+              &#9786;
             </Typography>
             <div data-aos="fade-up" className="comment-description">
               <Typography
                 sx={{ ...commentTypographyStyle, ...commentDescriptionStyle }}
               >
-                Johanna Lehtonen
+                Ирина Вишневская
               </Typography>
               <Box
                 component="img"

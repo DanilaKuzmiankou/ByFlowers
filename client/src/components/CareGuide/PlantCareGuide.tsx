@@ -32,10 +32,11 @@ export const PlantCareGuide = () => {
             ...productStyles.headerTypographyStyle,
             ...{
               color: isTabOpen ? '#FF0054' : '#000000',
+              whiteSpace: 'normal',
             },
           }}
         >
-          Plant care guide
+          Руководство по уходу за растениями
         </Typography>
         <ExpandButton isTabOpen={isTabOpen} setIsTabOpen={setIsTabOpen} />
       </Box>
@@ -54,36 +55,36 @@ export const PlantCareGuide = () => {
             <IconContext.Provider value={iconPropsMemoized}>
               <BsSun />
             </IconContext.Provider>
-            <Typography sx={headerStyle}>Light</Typography>
-            <Typography sx={productStyles.customNormalFont}>
-              If you don’t know where to put a plant, put it in the window. Most
-              of plants need as much sunlight as possible. Different plants come
-              from different parts of the world and have different light
-              requirements.
+            <Typography sx={headerStyle}>Свет</Typography>
+            <Typography sx={productStyles.productDescriptionFont}>
+              Если вы не знаете, куда поставить растение, поставьте его на окно.
+              Обычно растениям нужно как можно больше солнечного света. У нас
+              есть самые разные растения из разных уголков мира и они имеют
+              разный требования к свету.
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4} sx={gridColumn}>
             <IconContext.Provider value={iconPropsMemoized}>
               <BsDroplet />
             </IconContext.Provider>
-            <Typography sx={headerStyle}>Water</Typography>
-            <Typography sx={productStyles.customNormalFont}>
-              Water on an as-needed basis rather than by a set calendar
-              schedule. Plants grown in well-drained soil in an appropriate-size
-              container should be watered when the top 1/2 to 1 inch of soil
-              feels dry
+            <Typography sx={headerStyle}>Вода</Typography>
+            <Typography sx={productStyles.productDescriptionFont}>
+              Поливайте по мере необходимости, а не по расписанию. Растения,
+              выращенные в хорошо дренированной почве в соответствующем их
+              размеру контейнере следует поливать, когда верхний слой почвы
+              составляет от 1 до 2,5 сантиметров
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4} sx={gridColumn}>
             <IconContext.Provider value={iconPropsMemoized}>
               <GiFertilizerBag />
             </IconContext.Provider>
-            <Typography sx={headerStyle}>Fertilizing</Typography>
-            <Typography sx={productStyles.customNormalFont}>
-              Most houseplants put on a growth spurt in spring and summer, so
-              this is the best time to fertilize them. It&apos;s important to
-              avoid overfertilizing your houseplants. Too much fertilizer can
-              burn their roots and stunt their growth
+            <Typography sx={headerStyle}>Удобрение</Typography>
+            <Typography sx={productStyles.productDescriptionFont}>
+              Весной и летом у большинства комнатных растений происходит всплеск
+              роста, поэтому это лучшее время для их удобрения. Важно избегайте
+              чрезмерного удобрения ваших комнатных растений. Слишком много
+              удобрения может испортить их корни и остановить рост
             </Typography>
           </Grid>
         </Grid>

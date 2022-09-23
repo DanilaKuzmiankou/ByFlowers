@@ -57,7 +57,7 @@ export const ProductItem: FC<ProductProps> = ({
         src={product.pictures[0].picture}
       />
       <Button tabIndex={0} sx={buttonStyle}>
-        Buy!
+        Купить!
       </Button>
     </Box>
   )

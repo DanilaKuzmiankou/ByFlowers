@@ -147,7 +147,7 @@ export const CompleteOrder = observer(() => {
           fontSize: '2.0rem',
         }}
       >
-        Confirm order
+        Подтверждение заказа
       </DialogTitle>
       <DialogContent>
         {isOrderCompleted ? (
@@ -164,8 +164,8 @@ export const CompleteOrder = observer(() => {
                 ...{ display: 'inline-block', color: 'inherit' },
               }}
             >
-              Thank you for your order! <br />
-              Our manager will call you as soon as possible
+              Спасибо за ваш заказ! <br />
+              Наш менеджер позвонит вам в ближайшее время!
             </Typography>
           </Box>
         ) : (
@@ -207,7 +207,7 @@ export const CompleteOrder = observer(() => {
                   ...{ display: 'inline-block' },
                 }}
               >
-                Order Total
+                Общая стоимость
               </Typography>
               <Typography
                 sx={{
@@ -232,18 +232,18 @@ export const CompleteOrder = observer(() => {
             sx={{ ...buyButtonHoverStyle, ...orderButton, ...{ mr: 0 } }}
             onClick={closeCompleteOrderWindow}
           >
-            Ok
+            Ок
           </Button>
         ) : (
           <>
             <Button sx={cancelButtonStyle} onClick={handleClose}>
-              Cancel
+              Отмена
             </Button>
             <Button
               sx={{ ...buyButtonHoverStyle, ...orderButton }}
               onClick={startOnSubmit}
             >
-              Order
+              Заказать
             </Button>
           </>
         )}

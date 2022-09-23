@@ -26,7 +26,7 @@ export const NameField: FC<NameFieldProps> = ({
         color="#3A9AB9"
       />
       <Field
-        placeholder="Name"
+        placeholder="Имя"
         name="name"
         type="text"
         className={`${

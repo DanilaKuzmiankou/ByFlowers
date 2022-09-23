@@ -1,6 +1,9 @@
 import axios from 'axios'
 import { AuthResponse } from '../models/AuthResponse'
 
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = process.env
+  .REACT_APP_SERVER_URL as string
+
 const $api = axios.create({
   withCredentials: true,
   baseURL: process.env.REACT_APP_SERVER_URL,

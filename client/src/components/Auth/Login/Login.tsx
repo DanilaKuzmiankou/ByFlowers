@@ -10,22 +10,19 @@ import {
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import Button from '@mui/material/Button'
-import { useNavigate } from 'react-router-dom'
 import userStore from '../../../store/UserStore'
 import { PasswordField } from '../../Form/PasswordField'
 import { EmailField } from '../../Form/EmailField'
 import { linkButtonStyle } from '../../../themes'
 
 const userSchema = Yup.object({
-  email: Yup.string().nullable().email().required('required'),
-  password: Yup.string().required('required'),
+  email: Yup.string().nullable().email().required('обязательно для заполнения'),
+  password: Yup.string().required('обязательно для заполнения'),
 })
 
 export const Login = () => {
   const [passwordIsVisible, setPasswordIsVisible] = useState<boolean>(false)
   const [currentIcon, setCurrentIcon] = useState<IconDefinition>(faEyeSlash)
-
-  const navigate = useNavigate()
 
   const changePasswordVisibility = () => {
     setPasswordIsVisible(!passwordIsVisible)
@@ -76,21 +73,21 @@ export const Login = () => {
               variant="contained"
               color="primary"
               sx={{
-                fontFamily: 'Avenir, sans-serif',
+                fontFamily: 'AvenirBold, sans-serif',
                 fontSize: '1.5rem',
                 height: '38px',
                 marginTop: '20px',
                 width: '100%',
               }}
             >
-              Log in!
+              Войти!
             </Button>
           </Form>
         )}
       </Formik>
       <div className="auth-link-container">
         <Button sx={linkButtonStyle} onClick={changePage}>
-          Have not account yet? Sign in!
+          Пока не имеете аккаунта? Зарегистрируйтесь!
         </Button>
       </div>
     </div>

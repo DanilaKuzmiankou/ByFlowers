@@ -223,7 +223,7 @@ export const Product = observer(() => {
                 ...{ zIndex: 30 },
               }}
             >
-              There is no more {product.name} in storage!
+              Больше {product.name} нет на складе!
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -255,7 +255,7 @@ export const Product = observer(() => {
                           ...{ color: isTabOpen ? '#FF0054' : '#000000' },
                         }}
                       >
-                        Description
+                        Описание
                       </Typography>
                       <ExpandButton
                         isTabOpen={isTabOpen}
@@ -266,10 +266,11 @@ export const Product = observer(() => {
                     <Collapse in={isTabOpen} timeout="auto">
                       <Typography
                         sx={{
-                          ...productStyles.customNormalFont,
+                          ...productStyles.productDescriptionFont,
                           ...{
                             whiteSpace: 'normal',
                             mt: '10px',
+                            textAlign: 'left',
                           },
                         }}
                       >
@@ -305,7 +306,7 @@ export const Product = observer(() => {
                         ...{ display: 'inline-block' },
                       }}
                     >
-                      Price:
+                      Цена:
                     </Typography>
                     <Typography
                       sx={{
@@ -323,13 +324,13 @@ export const Product = observer(() => {
                   />
 
                   <Typography sx={additionalText}>
-                    Total amount: {totalCount}
+                    На складе: {totalCount}
                   </Typography>
                   <Button
                     onClick={addProductToBasket}
                     sx={{ ...buyButtonHoverStyle, ...addToCartButtonStyle }}
                   >
-                    Add to cart
+                    Добавить в корзину
                   </Button>
                   {message ? (
                     <div className="custom-product-error-message">
@@ -347,7 +348,7 @@ export const Product = observer(() => {
                 ...recommendationsBoxName,
               }}
             >
-              You may also like
+              Также может понравиться
             </Typography>
             <Grid
               container

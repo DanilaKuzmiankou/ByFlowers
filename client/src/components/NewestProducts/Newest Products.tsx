@@ -24,10 +24,15 @@ export const NewestProducts = () => {
         sx={{
           ...productStyles.customBoldFont,
           ...productStyles.headerTypographyStyle,
-          ...{ marginBottom: '20px', textAlign: 'center', display: 'block' },
+          ...{
+            marginBottom: '20px',
+            textAlign: 'center',
+            display: 'block',
+            whiteSpace: 'word',
+          },
         }}
       >
-        Our newest stems for you
+        Новейшие предложения для вас
       </Typography>
       <Grid
         container

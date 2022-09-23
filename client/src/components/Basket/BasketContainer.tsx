@@ -60,10 +60,10 @@ export const BasketContainer = observer(() => {
             textAlign: 'start',
             display: 'flex',
             justifyContent: 'start',
-            fontFamily: 'Avenir, sans-serif',
+            fontFamily: 'AvenirBold, sans-serif',
           }}
         >
-          Basket
+          Корзина
           <CloseButton
             closeFunction={() => basketStore.setIsBasketOpen(false)}
           />
@@ -100,7 +100,7 @@ export const BasketContainer = observer(() => {
                     ...{ display: 'inline-block' },
                   }}
                 >
-                  Order Total
+                  Общая стоимость
                 </Typography>
                 <Typography
                   sx={{
@@ -118,13 +118,13 @@ export const BasketContainer = observer(() => {
                 onClick={openCompleteOrder}
                 sx={{ ...buyButtonHoverStyle, ...{ width: '100%' } }}
               >
-                Buy!
+                Купить!
               </Button>
             </Box>
           </Box>
         ) : (
           <NoItemsPlug
-            text="Sadly, you have no items in the basket"
+            text="К сожалению, у вас нет товаров в корзине!"
             pictureHeight="100px"
             pictureWidth="100px"
           />

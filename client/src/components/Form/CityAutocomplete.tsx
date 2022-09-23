@@ -102,7 +102,7 @@ export const CityAutocomplete = React.forwardRef<
                 style: {
                   minHeight: 5,
                   height: 5,
-                  fontFamily: 'Avenir, sans-serif',
+                  fontFamily: 'AvenirBold, sans-serif',
                   fontSize: '1.5rem',
                 },
                 ...params.inputProps,

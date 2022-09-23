@@ -34,9 +34,9 @@ export const PhoneField: FC<PhoneFieldProps> = ({
         {({ field }: FieldProps) => (
           <InputMask
             {...field}
-            mask="+375 99 999-99-99"
+            mask="+7 (999) 999-99-99"
             maskPlaceholder="_"
-            placeholder="Phone"
+            placeholder="Телефон"
             onChange={handleChange}
             onBlur={handleBlur}
             className={`${

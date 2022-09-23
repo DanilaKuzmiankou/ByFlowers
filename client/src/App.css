@@ -9,8 +9,13 @@
 }
 
 @font-face {
-  font-family: 'Avenir';
-  src: local('Avenir'), url(./assets/fonts/AvenirBook.otf);
+  font-family: 'AvenirBold';
+  src: local('AvenirBold'), url(./assets/fonts/AvenirBold.ttf);
+}
+
+@font-face {
+  font-family: 'AvenirRegular';
+  src: local('Avenir'), url(./assets/fonts/AvenirRegular.ttf);
 }
 
 @font-face {
@@ -19,8 +24,8 @@
 }
 
 @font-face {
-  font-family: 'YouthTouch';
-  src: local('YouthTouch'), url(./assets/fonts/YouthTouch.ttf);
+  font-family: 'Vibes';
+  src: local('Vibes'), url(./assets/fonts/GoodVibesPro.ttf);
 }
 
 @font-face {
