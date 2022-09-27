@@ -1,3 +1,6 @@
+const logger = require("../logger");
+
+
 class ApiError extends Error {
     status
     errors
@@ -13,11 +16,18 @@ class ApiError extends Error {
     }
 
     static badRequest(message, errors) {
+        logger.error(message)
         return new ApiError(404, message, errors)
     }
 
     static forbidden(message) {
+        logger.error(message)
         return new ApiError(403, message)
+    }
+
+    static serverError(message) {
+        logger.error(message)
+        return new ApiError(500, message)
     }
 }
 

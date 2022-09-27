@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "homepage": "http://byflower.iron.hostflyby.net/",
+  "homepage": "https://byflowers.ru",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -60,7 +60,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "set HTTPS=true && set SSL_CRT_FILE=/ssl/certs/byflowers_ru_cf5b6_3c55b_1695234471_e4bd74e726562a3e3d8a6b7758f4d93d.crt && set SSL_KEY_FILE=/ssl/private/cf5b6_3c55b_ffb7e69369abed30c8e7e54cea52d9bf.key && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",

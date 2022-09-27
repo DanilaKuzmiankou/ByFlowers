@@ -49,7 +49,7 @@ export const ProductItem: FC<ProductProps> = ({
           ...{ top: { xs: '15%', lg: '10%' }, zIndex: 3, fontWeight: 700 },
         }}
       >
-        {product.price}$
+        {product.price} Р
       </Typography>
       <Box
         component="img"

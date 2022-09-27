@@ -21,20 +21,18 @@ import { NoItemsPlug } from '../../components/NoItemsPlug/NoItemsPlug'
 
 export const Products = observer(() => {
   const theme = useTheme()
-
-  const md = useMediaQuery(theme.breakpoints.between('sm', 'lg'))
-  const lgAndXl = useMediaQuery(theme.breakpoints.between('md', 'xxxl'))
-  const xxxl = useMediaQuery(theme.breakpoints.up('xxl'))
-
+  const lgAndXl = useMediaQuery(theme.breakpoints.between('md', 'xxl'))
   const [types, setTypes] = useState<string[]>([])
+  const [page, setPage] = useState<number>(
+    (productsStore.itemsOffset + productsStore.itemsLimit) /
+      productsStore.itemsLimit,
+  )
 
   const getItemsCountPerPage = () => {
-    if (md) {
-      productsStore.setItemsLimit(12)
-    } else if (lgAndXl) {
+    if (lgAndXl) {
       productsStore.setItemsLimit(16)
-    } else if (xxxl) {
-      productsStore.setItemsLimit(24)
+    } else {
+      productsStore.setItemsLimit(12)
     }
   }
 
@@ -54,18 +52,28 @@ export const Products = observer(() => {
   useEffect(() => {
     if (productsStore.productsNames?.length > 0) {
       productsStore.fetchProducts()
+    } else {
+      productsStore.setProducts([])
+      productsStore.setSelectedProductsName('')
+      productsStore.setSelectedNavbarProduct('')
     }
   }, [productsStore.productsNames])
 
   const openDrawer = () => {
     productsStore.setIsDrawerOpen(true)
   }
-
-  const handleChangePage = (event: ChangeEvent<unknown>, page: number) => {
-    productsStore.setItemsOffset(
-      page * productsStore.itemsLimit - productsStore.itemsLimit,
-    )
-    productsStore.fetchProducts()
+  const handleChangePage = async (
+    event: ChangeEvent<unknown>,
+    newPage: number,
+  ) => {
+    if (newPage !== page) {
+      productsStore.setItemsOffset(
+        newPage * productsStore.itemsLimit - productsStore.itemsLimit,
+      )
+      await productsStore.fetchProducts()
+      setPage(newPage)
+      window.scrollTo(0, 0)
+    }
   }
 
   return (
@@ -186,7 +194,6 @@ export const Products = observer(() => {
                     md={6}
                     lg={4}
                     xl={3}
-                    xxxl={2}
                     key={product.id}
                     data-aos="zoom-in"
                     sx={{ display: 'flex', justifyContent: 'center' }}
@@ -211,6 +218,7 @@ export const Products = observer(() => {
           count={Math.ceil(
             productsStore.productsCount / productsStore.itemsLimit,
           )}
+          page={page}
           variant="outlined"
           size="large"
           onChange={handleChangePage}

@@ -314,7 +314,7 @@ export const Product = observer(() => {
                         ...{ display: 'inline-block' },
                       }}
                     >
-                      {product.price}$
+                      {product.price} Р
                     </Typography>
                   </Box>
 

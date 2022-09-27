@@ -134,7 +134,7 @@ export const BasketItem: FC<BasketItemProps> = ({
               ...{ display: 'inline-block', marginLeft: 'auto' },
             }}
           >
-            {basketProduct.product.price * itemCount}$
+            {basketProduct.product.price * itemCount} Р
           </Typography>
         </Box>
       </Box>

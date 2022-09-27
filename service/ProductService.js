@@ -6,6 +6,7 @@ const {
 } = require('../models/Models')
 const ApiError = require('../error/ApiError')
 const {Op, Sequelize} = require('sequelize')
+const logger = require('winston')
 
 let productService = this
 
@@ -53,6 +54,7 @@ class ProductService {
         offset,
         customOrderExpression,
     ) {
+        logger.info('log')
         const whereExpression = {
             price: {
                 [Op.gte]: minPrice !== -1 ? minPrice : 0,

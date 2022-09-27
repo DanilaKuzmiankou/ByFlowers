@@ -140,7 +140,7 @@ export const productStyles = {
   },
   customSmallFont: {
     color: 'black',
-    fontFamily: 'AvenirBold, sans-serif',
+    fontFamily: 'AvenirRegular, sans-serif',
     fontSize: {
       xl: '1.6rem',
       xxxl: '2.1rem',
