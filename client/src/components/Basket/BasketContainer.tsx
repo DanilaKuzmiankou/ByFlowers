@@ -79,9 +79,9 @@ export const BasketContainer = observer(() => {
               height: '100%',
             }}
           >
-            {basketStore.basketProducts.map((basketProduct, index) => (
+            {basketStore.basketProducts?.map((basketProduct, index) => (
               <BasketItem
-                key={basketProduct.product.id}
+                key={basketProduct.product?.id || index}
                 basketProduct={basketProduct}
                 productNumber={index}
               />

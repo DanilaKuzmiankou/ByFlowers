@@ -26,6 +26,7 @@ class BasketStore {
     let response: AxiosResponse<IBasketProduct[]>
     try {
       response = await getBasketProducts(email)
+      console.log('resp', response.data)
       runInAction(() => {
         this.setBasketProductsTypes(response.data)
         this.setBasketProductsActual(response.data)

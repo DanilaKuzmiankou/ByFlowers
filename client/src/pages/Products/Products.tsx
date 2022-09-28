@@ -21,18 +21,21 @@ import { NoItemsPlug } from '../../components/NoItemsPlug/NoItemsPlug'
 
 export const Products = observer(() => {
   const theme = useTheme()
+  const md = useMediaQuery(theme.breakpoints.between('sm', 'lg'))
   const lgAndXl = useMediaQuery(theme.breakpoints.between('md', 'xxl'))
+  const xxxl = useMediaQuery(theme.breakpoints.up('xxl'))
   const [types, setTypes] = useState<string[]>([])
   const [page, setPage] = useState<number>(
     (productsStore.itemsOffset + productsStore.itemsLimit) /
       productsStore.itemsLimit,
   )
-
   const getItemsCountPerPage = () => {
-    if (lgAndXl) {
-      productsStore.setItemsLimit(16)
-    } else {
+    if (md) {
       productsStore.setItemsLimit(12)
+    } else if (lgAndXl) {
+      productsStore.setItemsLimit(16)
+    } else if (xxxl) {
+      productsStore.setItemsLimit(24)
     }
   }
 
@@ -194,6 +197,7 @@ export const Products = observer(() => {
                     md={6}
                     lg={4}
                     xl={3}
+                    xxl={2}
                     key={product.id}
                     data-aos="zoom-in"
                     sx={{ display: 'flex', justifyContent: 'center' }}

@@ -10,9 +10,19 @@ const User = sequelize.define(
     password: { type: DataTypes.STRING, allowNull: false },
     phone: { type: DataTypes.STRING, allowNull: false },
     role: { type: DataTypes.STRING, defaultValue: 'user' },
+    createdAt: {
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: false
+    },
+    updatedAt: {
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: false
+    }
   },
   {
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
   },
 )
@@ -33,13 +43,24 @@ const Product = sequelize.define(
   'product',
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, allowNull: false, unique: true },
+    name: { type: DataTypes.STRING, allowNull: false, unique: 'name' },
     description: { type: DataTypes.TEXT, allowNull: false },
     count: { type: DataTypes.SMALLINT, allowNull: false },
     price: { type: DataTypes.SMALLINT, allowNull: false },
+    createdAt: {
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: false
+    },
+    updatedAt: {
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: false
+    }
+
   },
   {
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
   },
 )
@@ -48,8 +69,8 @@ const ProductType = sequelize.define(
   'product_type',
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, allowNull: false, unique: true },
-    isFlower: { type: DataTypes.BOOLEAN, allowNull: false },
+    name: { type: DataTypes.STRING, allowNull: false, unique: 'name' },
+    isFlower: { type: DataTypes.TINYINT, allowNull: false },
   },
   {
     timestamps: false,
