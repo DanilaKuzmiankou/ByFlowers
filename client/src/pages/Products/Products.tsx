@@ -208,7 +208,9 @@ export const Products = observer(() => {
               </Grid>
             ) : (
               <NoItemsPlug
-                text="Sadly, we have no this items in the storage"
+                text={`К сожалению, у нас нет этих ${
+                  productsStore.isFlowers ? 'цветов' : 'растений'
+                } на складе`}
                 pictureHeight="250px"
                 pictureWidth="250px"
               />

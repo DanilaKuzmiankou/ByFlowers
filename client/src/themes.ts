@@ -174,7 +174,7 @@ export const catalogProductItem = {
       xs: '1.9rem',
     },
     top: {
-      xs: '7%',
+      xs: '3px',
       lg: 0,
     },
     left: '20px',
@@ -192,6 +192,7 @@ export const catalogProductItem = {
     display: 'flex',
     justifyContent: 'center',
     cursor: 'pointer',
+    color: 'black',
     position: 'relative',
     '&:hover': {
       border: '0.01em solid',

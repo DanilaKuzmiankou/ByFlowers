@@ -7,6 +7,7 @@ import '@szhsin/react-menu/dist/core.css'
 import { IconContext } from 'react-icons'
 import { IoIosArrowDown } from 'react-icons/io'
 import Box from '@mui/material/Box'
+import { Link } from 'react-router-dom'
 
 interface MenuProps {
   menuName: string
@@ -42,6 +43,8 @@ export const CustomHoverMenu: FC<MenuProps> = ({
     >
       <Button
         ref={ref}
+        component={Link}
+        to="/products"
         onMouseEnter={() => setOpen(true)}
         sx={buttonStyle}
         disableRipple
@@ -78,11 +81,15 @@ export const CustomHoverMenu: FC<MenuProps> = ({
               onClick={() => onMenuItemClick(itemName)}
             >
               <Typography
+                component={Link}
+                to="/products"
                 sx={{
                   color: 'black',
                   fontWeight: 500,
                   fontSize: '1.4rem',
                   marginLeft: '4px',
+                  textDecoration: 'none',
+                  userSelect: 'none',
                 }}
                 textAlign="center"
               >

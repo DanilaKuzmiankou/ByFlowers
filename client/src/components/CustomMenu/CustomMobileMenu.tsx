@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
   List,
   ListItem,
@@ -86,6 +87,8 @@ export const CustomMobileMenu = observer<CustomMobileMenuProps>(
                   <ListItemButton
                     sx={list}
                     onClick={() => onMenuItemClick('aboutUs')}
+                    component={Link}
+                    to="/aboutUs"
                   >
                     <ListItemText
                       primary={page}

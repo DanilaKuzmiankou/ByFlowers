@@ -111,7 +111,7 @@ export const BasketContainer = observer(() => {
                     },
                   }}
                 >
-                  {basketStore.basketOrderTotal} Р
+                  {basketStore.basketOrderTotal} &#8381;
                 </Typography>
               </Box>
               <Button

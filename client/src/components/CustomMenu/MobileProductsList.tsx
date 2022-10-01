@@ -6,6 +6,7 @@ import {
   ListItemText,
 } from '@mui/material'
 import { FC, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { IconContext } from 'react-icons'
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import { list, listItem } from '../../themes'
@@ -59,6 +60,8 @@ export const MobileProductsList: FC<MobileProductsListProps> = ({
               >
                 <ListItemButton
                   sx={{ pl: 3 }}
+                  component={Link}
+                  to="/products"
                   onClick={() =>
                     onMenuItemClick('products', product, isFlowers)
                   }

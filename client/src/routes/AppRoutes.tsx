@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import React from 'react'
 import {
   AboutUs,
-  Blog,
+  Contacts,
   NotFound,
   Product,
   Products,
@@ -15,7 +15,7 @@ export const AppRoutes = () => {
       <Route path="*" element={<NotFound />} />
       <Route path="/products" element={<Products />} />
       <Route path="/aboutUs" element={<AboutUs />} />
-      <Route path="/blog" element={<Blog />} />
+      <Route path="/contacts" element={<Contacts />} />
       <Route path="/product" element={<Product />} />
     </Routes>
   )

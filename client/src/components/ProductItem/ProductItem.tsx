@@ -2,7 +2,7 @@ import { FC } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { createSearchParams, useNavigate } from 'react-router-dom'
+import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { catalogProductItem } from '../../themes'
 import { IProduct } from '../../models/IProduct'
 import useHoverStyle from '../../utils/useHoverStyle'
@@ -16,26 +16,22 @@ export const ProductItem: FC<ProductProps> = ({
   product,
   height = catalogProductItem.container.height,
 }) => {
-  const navigate = useNavigate()
   const { buttonStyle, onItemHover, onItemNotHover } = useHoverStyle()
-
-  const goToItemPage = () => {
-    navigate({
-      pathname: '../product',
-      search: `?${createSearchParams({
-        productJson: JSON.stringify(product),
-      })}`,
-    })
-  }
 
   return (
     <Box
       sx={{ ...catalogProductItem.container, ...{ height } }}
+      component={Link}
+      to={{
+        pathname: '/product',
+        search: `?${createSearchParams({
+          productJson: JSON.stringify(product),
+        })}`,
+      }}
       onFocus={onItemHover}
       onBlur={onItemNotHover}
       onMouseOver={onItemHover}
       onMouseLeave={onItemNotHover}
-      onClick={goToItemPage}
       tabIndex={0}
     >
       <Typography variant="h6" noWrap sx={catalogProductItem.typographyStyle}>
@@ -46,10 +42,10 @@ export const ProductItem: FC<ProductProps> = ({
         noWrap
         sx={{
           ...catalogProductItem.typographyStyle,
-          ...{ top: { xs: '15%', lg: '10%' }, zIndex: 3, fontWeight: 700 },
+          ...{ top: { xs: '33px', lg: '10%' }, zIndex: 3, fontWeight: 700 },
         }}
       >
-        {product.price} Р
+        {product.price} &#8381;
       </Typography>
       <Box
         component="img"

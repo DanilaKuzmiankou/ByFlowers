@@ -218,7 +218,7 @@ export const CompleteOrder = observer(() => {
                   },
                 }}
               >
-                {basketStore.basketOrderTotal}$
+                {basketStore.basketOrderTotal} &#8381;
               </Typography>
             </Box>
           </>
