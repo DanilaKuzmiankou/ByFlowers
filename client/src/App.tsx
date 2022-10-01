@@ -13,6 +13,7 @@ import { CompleteOrder } from './components/CompleteOrder/CompleteOrder'
 import { BottomBar } from './components/BottomBar/BottomBar'
 import { Navbar } from './components/Navbar/Navbar'
 import { AuthDialog } from './components/Auth/AuthDialog'
+import { CustomCookieConsent } from './components/CookieConsent/CustomCookieConsent'
 
 const App = () => {
   useEffect(() => {
@@ -34,6 +35,7 @@ const App = () => {
         <BasketContainer />
         <CompleteOrder />
         <AuthDialog />
+        <CustomCookieConsent />
         <BottomBar />
       </ThemeProvider>
     </BrowserRouter>

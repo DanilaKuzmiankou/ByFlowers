@@ -41,10 +41,16 @@ const additionalText = {
 }
 
 const recommendationsBox = {
-  padding: '20px 0',
-  backgroundColor: '#38403D',
-  color: 'white',
+  backgroundColor: '#F8F8F8',
+  padding: '0 0 20px',
+  color: 'black',
   minHeight: '500px',
+}
+
+const recommendationsBoxGrid = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 }
 
 const recommendationsBoxName = {
@@ -314,7 +320,7 @@ export const Product = observer(() => {
                         ...{ display: 'inline-block' },
                       }}
                     >
-                      {product.price} Р
+                      {product.price} &#8381;
                     </Typography>
                   </Box>
 
@@ -350,14 +356,7 @@ export const Product = observer(() => {
             >
               Также может понравиться
             </Typography>
-            <Grid
-              container
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <Grid container sx={recommendationsBoxGrid}>
               {recommendationsProducts?.map((recommendationProduct) => (
                 <Grid
                   item

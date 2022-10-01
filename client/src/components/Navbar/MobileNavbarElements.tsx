@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from '@mui/material'
+import { Link as ReactRouterLink } from 'react-router-dom'
 import { FC } from 'react'
 import productsStore from '../../store/ProductsStore'
 import { CustomMobileMenu } from '../CustomMenu/CustomMobileMenu'
@@ -53,22 +54,26 @@ export const MobileNavbarElements: FC<MobileNavbarElementsProps> = ({
           flexGrow: 1,
         }}
       >
-        <Box
-          component="img"
-          sx={{
-            ml: 1,
-            display: { xs: 'flex', md: 'none' },
-            height: 30,
-            width: 42,
-            cursor: 'pointer',
-          }}
-          alt="Logo"
-          src={require('../../assets/images/flowersEmblem.png')}
-          onClick={() => switchPage(pagesLinks[0])}
-        />
+        <ReactRouterLink to="/aboutUs">
+          <Box
+            component="img"
+            sx={{
+              ml: 1,
+              display: { xs: 'flex', md: 'none' },
+              height: 30,
+              width: 42,
+              cursor: 'pointer',
+            }}
+            alt="Logo"
+            src={require('../../assets/images/flowersEmblem.png')}
+            onClick={() => switchPage(pagesLinks[0])}
+          />
+        </ReactRouterLink>
         {/* Mobile Logo */}
         <Link
           noWrap
+          component={ReactRouterLink}
+          to="/aboutUs"
           onClick={() => switchPage(pagesLinks[0])}
           sx={{
             ml: 1,

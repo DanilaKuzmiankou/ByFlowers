@@ -5,7 +5,7 @@ import { Typography } from '@mui/material'
 import { IconContext } from 'react-icons'
 import { BsTelephone } from 'react-icons/bs'
 import Button from '@mui/material/Button'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { CustomSwiper } from '../../components/CustomSwiper/CustomSwiper'
 import { buyButtonHoverStyle, productStyles } from '../../themes'
 import { AdvantagesSection } from '../../components/AdvantagesSection/AdvantagesSection'
@@ -79,12 +79,9 @@ const shoppingDescriptionTypography = {
 }
 
 export const AboutUs = () => {
-  const navigate = useNavigate()
-
   const startShopping = () => {
     productsStore.setSelectedNavbarProduct('')
     productsStore.setIsFlowers(true)
-    navigate('/products')
     window.scrollTo(0, 0)
   }
 
@@ -126,6 +123,8 @@ export const AboutUs = () => {
             Выбирайте то, что нужно именно вам
           </Typography>
           <Button
+            component={Link}
+            to="/products"
             onClick={startShopping}
             sx={{ ...buyButtonHoverStyle, ...buttonStyle }}
           >

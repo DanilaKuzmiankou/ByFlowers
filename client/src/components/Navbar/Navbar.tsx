@@ -6,10 +6,10 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
-import { useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { IconContext } from 'react-icons'
 import { Badge, BadgeProps, Link } from '@mui/material'
+import { Link as ReactRouterLink } from 'react-router-dom'
 import { RiShoppingBasket2Line } from 'react-icons/ri'
 import { styled } from '@mui/material/styles'
 import userStore from '../../store/UserStore'
@@ -87,8 +87,6 @@ export const Navbar = observer(() => {
     fetch()
   }, [])
 
-  const navigate = useNavigate()
-
   const iconPropsMemoized = useMemo(() => ({ color: 'white', size: '23' }), [])
 
   const switchPage = (
@@ -100,7 +98,6 @@ export const Navbar = observer(() => {
     productsStore.setSelectedNavbarProduct(productType || '')
     if (isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
     userStore.setIsNavbarMenuOpen(false)
-    navigate(linkName)
   }
 
   const StyledBadge = styled(Badge)<BadgeProps>(() => ({
@@ -140,22 +137,26 @@ export const Navbar = observer(() => {
             maxWidth="xl"
           >
             <Toolbar disableGutters>
-              <Box
-                component="img"
-                onClick={() => switchPage(pagesLinks[0])}
-                sx={{
-                  display: { xs: 'none', md: 'flex' },
-                  mr: 1,
-                  height: 55,
-                  width: 75,
-                  cursor: 'pointer',
-                }}
-                alt="Logo"
-                src={require('../../assets/images/flowersEmblem.png')}
-              />
+              <ReactRouterLink to="/aboutUs">
+                <Box
+                  component="img"
+                  onClick={() => switchPage(pagesLinks[0])}
+                  sx={{
+                    display: { xs: 'none', md: 'flex' },
+                    mr: 1,
+                    height: 55,
+                    width: 75,
+                    cursor: 'pointer',
+                  }}
+                  alt="Logo"
+                  src={require('../../assets/images/flowersEmblem.png')}
+                />
+              </ReactRouterLink>
               <Link
                 variant="h6"
                 noWrap
+                component={ReactRouterLink}
+                to="/aboutUs"
                 onClick={() => switchPage(pagesLinks[0])}
                 sx={{
                   mr: 2,
@@ -193,7 +194,8 @@ export const Navbar = observer(() => {
                   {pages2.map((page, id) => (
                     <Button
                       key={page}
-                      onClick={() => switchPage(pagesLinks[id])}
+                      component={ReactRouterLink}
+                      to={pagesLinks[id]}
                       sx={navbarButtonsStyle}
                       disableRipple
                     >

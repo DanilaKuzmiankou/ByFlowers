@@ -35,6 +35,18 @@ export const BottomBar = () => {
           >
             +7 996 284 74 60
           </Typography>
+          <Typography
+            sx={{
+              ...productStyles.customBoldFont,
+              ...{
+                whiteSpace: 'nowrap',
+                textAlign: 'center',
+                userSelect: 'text',
+              },
+            }}
+          >
+            byflowersru@gmail.com
+          </Typography>
         </div>
         <div className="bottom-icons">
           <a

@@ -94,7 +94,7 @@ export const BasketItem: FC<BasketItemProps> = ({
             variant="h6"
             noWrap
             sx={{
-              fontSize: '1.1rem',
+              fontSize: '1.4rem',
               fontWeight: '700',
               letterSpacing: '0 !important',
               marginTop: '3px',
@@ -134,7 +134,7 @@ export const BasketItem: FC<BasketItemProps> = ({
               ...{ display: 'inline-block', marginLeft: 'auto' },
             }}
           >
-            {basketProduct.product.price * itemCount} Р
+            {basketProduct.product.price * itemCount} &#8381;
           </Typography>
         </Box>
       </Box>

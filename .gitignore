@@ -3,3 +3,6 @@
 node_modules
 /config/
 /migrations/
+/client/build.zip
+/client/ssl/certs/byflowers_ru_cf5b6_3c55b_1695234471_e4bd74e726562a3e3d8a6b7758f4d93d.crt
+/client/ssl/private/cf5b6_3c55b_ffb7e69369abed30c8e7e54cea52d9bf.key
