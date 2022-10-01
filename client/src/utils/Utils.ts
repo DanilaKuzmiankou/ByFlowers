@@ -22,4 +22,4 @@ export const getCheckedItems = (
 export const checkForOne = (array: boolean[]): boolean =>
   new Set(array).size === 1
 
-export const phoneRegExp = /^[^\d\n]*(?:\d[^\d\n]*){12}$/
+export const phoneRegExp = /^[^\d\n]*(?:\d[^\d\n]*){11}$/

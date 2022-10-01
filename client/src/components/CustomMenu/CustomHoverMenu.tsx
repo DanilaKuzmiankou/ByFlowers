@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useRef, useState } from 'react'
+import { FC, useMemo, useRef, useState } from 'react'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import './CustomMenu.css'
@@ -7,7 +7,6 @@ import '@szhsin/react-menu/dist/core.css'
 import { IconContext } from 'react-icons'
 import { IoIosArrowDown } from 'react-icons/io'
 import Box from '@mui/material/Box'
-import productsStore from '../../store/ProductsStore'
 
 interface MenuProps {
   menuName: string

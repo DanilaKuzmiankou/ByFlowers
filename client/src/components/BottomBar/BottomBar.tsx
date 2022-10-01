@@ -1,4 +1,3 @@
-import React from 'react'
 import Box from '@mui/material/Box'
 import './BottomBar.css'
 import { Typography } from '@mui/material'
@@ -8,18 +7,19 @@ export const BottomBar = () => {
   return (
     <div className="bottom-bar">
       <div className="bottom-trademarks">
-        <div className="bottom-brand">FlowersMarket</div>
+        <div className="bottom-brand">ByFlowers.ru</div>
         <div className="bottom-rights">
-          The site, as well as all information provided on the site, is solely
-          informational nature, and under no circumstances is not a public
-          offer.
+          Сайт, а также вся информация, представленная на сайте, носит
+          исключительно информационный характер и ни при каких обстоятельствах
+          не является публичной офертой.
         </div>
         <div className="bottom-rights">
-          Registration is required to use the shopping cart. We never, under any
-          circumstances, disclose the personal data of customers. Contact
-          information will only be used to place orders.
+          Для использования корзины необходима регистрация. Мы никогда, и ни при
+          каких обстоятельствах, не раскрываем личные данные клиентов.
+          Контактная информация будет использована только для подтвержения
+          заказов.
         </div>
-        <div className="bottom-rights">&copy;2021 All rights reserved</div>
+        <div className="bottom-rights">&copy;2021 Все права защищены</div>
       </div>
       <div className="right-panel">
         <div className="call-us">
@@ -33,7 +33,7 @@ export const BottomBar = () => {
               },
             }}
           >
-            +375 29 423 74 65
+            +7 996 284 74 60
           </Typography>
         </div>
         <div className="bottom-icons">

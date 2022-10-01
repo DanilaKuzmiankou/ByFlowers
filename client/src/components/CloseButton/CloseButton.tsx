@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useMemo } from 'react'
+import { FC, MouseEventHandler, useMemo } from 'react'
 import IconButton from '@mui/material/IconButton'
 import { IconContext } from 'react-icons'
 import { GrClose } from 'react-icons/gr'

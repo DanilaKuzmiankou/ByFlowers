@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
@@ -134,7 +134,7 @@ export const BasketItem: FC<BasketItemProps> = ({
               ...{ display: 'inline-block', marginLeft: 'auto' },
             }}
           >
-            {basketProduct.product.price * itemCount}$
+            {basketProduct.product.price * itemCount} Р
           </Typography>
         </Box>
       </Box>

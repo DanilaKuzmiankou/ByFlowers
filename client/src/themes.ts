@@ -56,10 +56,10 @@ export const linkButtonStyle = {
 }
 
 export const buyButtonHoverStyle = {
-  height: '45px',
+  fontFamily: 'AvenirBold',
+  minHeight: '45px',
   zIndex: 2,
   fontSize: '1.59rem',
-  lineHeight: 2.4,
   textAlign: 'center',
   borderRadius: '3px',
   color: '#fff',
@@ -80,7 +80,7 @@ export const buyButtonHoverStyle = {
 
 export const productStyles = {
   customBoldFont: {
-    fontFamily: 'Avenir, sans-serif',
+    fontFamily: 'AvenirBold, sans-serif',
     fontSize: {
       xl: '2rem',
       xxxl: '2.3rem',
@@ -117,17 +117,30 @@ export const productStyles = {
   },
   customNormalFont: {
     color: 'black',
-    fontFamily: 'Avenir, sans-serif',
+    fontFamily: 'AvenirRegular, sans-serif',
     fontSize: {
       xxxl: '2.7rem',
+      xl: '2.3rem',
       xs: '1.8rem',
     },
     fontWeight: '0 !important',
     letterSpacing: '0 !important',
   },
+  productDescriptionFont: {
+    color: 'black',
+    fontFamily: 'AvenirRegular, sans-serif',
+    fontSize: {
+      xxxl: '2rem',
+      xl: '1.7rem',
+      xs: '1.4rem',
+    },
+    textAlign: 'center',
+    fontWeight: '0 !important',
+    letterSpacing: '0 !important',
+  },
   customSmallFont: {
     color: 'black',
-    fontFamily: 'Avenir, sans-serif',
+    fontFamily: 'AvenirRegular, sans-serif',
     fontSize: {
       xl: '1.6rem',
       xxxl: '2.1rem',
@@ -144,12 +157,13 @@ export const catalogProductItem = {
   pictureStyle: {
     position: 'absolute',
     bottom: '16px',
+    left: 'calc(50%-270px)',
     backgroundSize: 'cover',
     height: '300px',
-    width: '280px',
+    width: '270px',
   },
   typographyStyle: {
-    fontFamily: 'Avenir',
+    fontFamily: 'AvenirRegular',
     position: 'absolute',
     fontSize: {
       xxl: '2rem',

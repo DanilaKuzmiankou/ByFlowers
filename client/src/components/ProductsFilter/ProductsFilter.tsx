@@ -8,9 +8,8 @@ import {
   useTheme,
 } from '@mui/material'
 import './ProductsFilter.css'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { toJS } from 'mobx'
 import { checkForOne, getCheckedItems } from '../../utils/Utils'
 import { productStyles } from '../../themes'
 import productsStore from '../../store/ProductsStore'
@@ -23,7 +22,7 @@ export interface ProductsProps {
 export const ProductsFilter = observer<ProductsProps>(
   ({ productsList, mainCheckboxName }) => {
     const theme = useTheme()
-    const greaterThanXXL = useMediaQuery(theme.breakpoints.up('xxl'))
+    const greaterThanXXXL = useMediaQuery(theme.breakpoints.up('xxxl'))
     const greaterThanXL = useMediaQuery(theme.breakpoints.up('xl'))
 
     const [subCheckboxes, setSubCheckboxes] = useState<boolean[]>([])
@@ -88,13 +87,13 @@ export const ProductsFilter = observer<ProductsProps>(
     }
 
     const calcInputFontSize = (): string => {
-      if (greaterThanXXL) return '2.3rem'
+      if (greaterThanXXXL) return '2.3rem'
       if (greaterThanXL) return '1.6rem'
       return '1.3rem'
     }
 
     const calcPlaceHolderFontSize = (): string => {
-      if (greaterThanXXL) return '2.2rem'
+      if (greaterThanXXXL) return '2.2rem'
       if (greaterThanXL) return '1.6rem'
       return '1.3rem'
     }
@@ -157,7 +156,7 @@ export const ProductsFilter = observer<ProductsProps>(
             ...productStyles.filtersHeaderTypography,
           }}
         >
-          Price
+          Цена
         </Typography>
         <div className="filters-inputs-container">
           <TextField
@@ -173,11 +172,11 @@ export const ProductsFilter = observer<ProductsProps>(
                 },
               },
             }}
-            size={greaterThanXXL ? 'medium' : 'small'}
+            size={greaterThanXXXL ? 'medium' : 'small'}
             inputProps={{ style: { fontSize: calcInputFontSize() } }} // font size of input text
             InputLabelProps={{ style: { fontSize: calcPlaceHolderFontSize() } }} // font size of input label
             type="number"
-            label="from"
+            label="от"
             variant="outlined"
             color="success"
             value={currentMinPrice ?? ''}
@@ -196,13 +195,13 @@ export const ProductsFilter = observer<ProductsProps>(
                 },
               },
             }}
-            size={greaterThanXXL ? 'medium' : 'small'}
+            size={greaterThanXXXL ? 'medium' : 'small'}
             inputProps={{
               style: { fontSize: calcInputFontSize(), borderColor: 'red' },
-            }} // font size of input text
-            InputLabelProps={{ style: { fontSize: calcPlaceHolderFontSize() } }} // font size of input label
+            }}
+            InputLabelProps={{ style: { fontSize: calcPlaceHolderFontSize() } }}
             type="number"
-            label="to"
+            label="до"
             variant="outlined"
             color="success"
             value={currentMaxPrice ?? ''}
@@ -216,7 +215,7 @@ export const ProductsFilter = observer<ProductsProps>(
             ...{ marginTop: '15px' },
           }}
         >
-          Type
+          Категория
         </Typography>
         <FormControlLabel
           label={

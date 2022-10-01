@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import { ProductItem } from '../ProductItem/ProductItem'
 import { IProduct } from '../../models/IProduct'
 import { getNewestProducts } from '../../api/store/Product'
-import { catalogProductItem, productStyles } from '../../themes'
+import { productStyles } from '../../themes'
 
 export const NewestProducts = () => {
   const [newestProducts, setNewestProducts] = useState<IProduct[]>()
@@ -24,10 +24,15 @@ export const NewestProducts = () => {
         sx={{
           ...productStyles.customBoldFont,
           ...productStyles.headerTypographyStyle,
-          ...{ marginBottom: '20px', textAlign: 'center', display: 'block' },
+          ...{
+            marginBottom: '20px',
+            textAlign: 'center',
+            display: 'block',
+            whiteSpace: 'word',
+          },
         }}
       >
-        Our newest stems for you
+        Новейшие предложения для вас
       </Typography>
       <Grid
         container

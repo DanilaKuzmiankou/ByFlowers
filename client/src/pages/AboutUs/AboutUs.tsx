@@ -48,7 +48,7 @@ const startShoppingContainer = {
 const startShoppingPictureContainer = {
   backgroundImage: `url(${require('../../assets/images/startShoppingPicture.jpg')})`,
   height: '100%',
-  backgroundSize: 'fill',
+  backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
   position: 'relative',
@@ -57,7 +57,7 @@ const startShoppingPictureContainer = {
     sm: '120px 55px',
     lg: '90px 100px',
   },
-  fontFamily: 'Avenir, serif',
+  fontFamily: 'AvenirBold, serif',
   color: 'white',
 }
 
@@ -106,8 +106,8 @@ export const AboutUs = () => {
             },
           }}
         >
-          Want to speak to us about flower delivery in your area? Call us: +375
-          29 423 74 65
+          Хотите поговорить о доставке в ваш город? Позвоните нам: +7 996 284 74
+          60
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <IconContext.Provider value={iconPropsMemoized}>
@@ -120,16 +120,16 @@ export const AboutUs = () => {
       <Box sx={startShoppingContainer}>
         <Box sx={startShoppingPictureContainer}>
           <Typography sx={shoppingTitleTypography}>
-            Ready to start your journey?
+            Готовы начать приключение?
           </Typography>
           <Typography sx={shoppingDescriptionTypography}>
-            Choose from a variety of options exactly what suits you
+            Выбирайте то, что нужно именно вам
           </Typography>
           <Button
             onClick={startShopping}
             sx={{ ...buyButtonHoverStyle, ...buttonStyle }}
           >
-            Start shopping!
+            Начать покупки!
           </Button>
         </Box>
       </Box>

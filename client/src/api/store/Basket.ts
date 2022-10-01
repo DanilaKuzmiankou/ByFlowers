@@ -62,7 +62,8 @@ export async function completeOrder(
 export async function getRussianCities(): Promise<
   AxiosResponse<GetRussianCitiesResponse>
 > {
-  return axios.get<GetRussianCitiesResponse>(
+  delete axios.defaults.headers.common['Access-Control-Allow-Origin']
+  const response = axios.get<GetRussianCitiesResponse>(
     'https://parseapi.back4app.com/classes/Russia_City?limit=9999&order=name&keys=name',
     {
       headers: {
@@ -80,4 +81,7 @@ export async function getRussianCities(): Promise<
       },
     },
   )
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = process.env
+    .REACT_APP_SERVER_URL as string
+  return response
 }

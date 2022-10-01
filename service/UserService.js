@@ -1,6 +1,6 @@
 const { User } = require('../models/Models')
 const ApiError = require('../error/ApiError')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const tokenService = require('./TokenService')
 const UserDto = require('../dtos/UserDto')
 
@@ -14,9 +14,12 @@ class UserService {
   async registration(name, email, password, phone) {
     const candidate = await User.findOne({ where: { email } })
     if (candidate) {
-      throw ApiError.badRequest(`User with ${email} email is already exist!`, {
-        field: 'email',
-      })
+      throw ApiError.badRequest(
+        `Пользователь с почтой ${email} уже существует!`,
+        {
+          field: 'email',
+        },
+      )
     }
     const hashedPassword = await bcrypt.hash(password, 10)
     const user = await User.create({
@@ -34,13 +37,16 @@ class UserService {
   async login(email, password) {
     const candidate = await User.findOne({ where: { email } })
     if (!candidate) {
-      throw ApiError.badRequest(`User with ${email} email doesn't exist!`, {
-        field: 'email',
-      })
+      throw ApiError.badRequest(
+        `Пользователя с почтой ${email} не существует!`,
+        {
+          field: 'email',
+        },
+      )
     }
     const isPasswordsEquals = await bcrypt.compare(password, candidate.password)
     if (!isPasswordsEquals) {
-      throw ApiError.badRequest('Password is incorrect!', { field: 'password' })
+      throw ApiError.badRequest('Пароль неверен!', { field: 'password' })
     }
     const userDto = new UserDto(candidate)
     const tokens = tokenService.generateTokens({ ...userDto })

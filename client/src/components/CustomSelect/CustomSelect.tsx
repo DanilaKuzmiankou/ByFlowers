@@ -5,9 +5,9 @@ import { productStyles } from '../../themes'
 
 export const CustomSelect = () => {
   const filterOptions = [
-    'Price low to high',
-    'Price high to low',
-    'Date newest',
+    'Цене, сначала дешевые',
+    'Цене, сначала дорогие',
+    'Дате, сначала новые',
   ]
   const [filterOption, setFilterOption] = useState<string>('')
 

@@ -2,10 +2,9 @@ const {
     ProductType,
     ProductPicture,
     Product,
-    User,
 } = require('../models/Models')
 const ApiError = require('../error/ApiError')
-const {Op, Sequelize} = require('sequelize')
+const { Op, Sequelize } = require('sequelize')
 
 let productService = this
 
@@ -15,28 +14,28 @@ class ProductService {
     }
 
     async createProduct(
-        name,
-        description,
-        productType,
-        count,
-        price,
-        pictures,
-        isFlower,
+      name,
+      description,
+      productType,
+      count,
+      price,
+      pictures,
+      isFlower,
     ) {
         let createdProduct
         let productTypeDb
         try {
-            createdProduct = await Product.create({name, description, count, price})
+            createdProduct = await Product.create({ name, description, count, price })
         } catch (e) {
             throw ApiError.badRequest('This product is already created!')
         }
-        productTypeDb = await ProductType.findOne({where: {name: productType}})
+        productTypeDb = await ProductType.findOne({ where: { name: productType } })
         if (!productTypeDb)
-            productTypeDb = await ProductType.create({name: productType, isFlower})
+            productTypeDb = await ProductType.create({ name: productType, isFlower })
         const picturesDB = []
         for (let picture of pictures) {
             if (picture) {
-                let dbPicture = await ProductPicture.create({picture})
+                let dbPicture = await ProductPicture.create({ picture })
                 picturesDB.push(dbPicture)
             }
         }
@@ -46,12 +45,12 @@ class ProductService {
     }
 
     async getProductsWithType(
-        types,
-        minPrice,
-        maxPrice,
-        limit,
-        offset,
-        customOrderExpression,
+      types,
+      minPrice,
+      maxPrice,
+      limit,
+      offset,
+      customOrderExpression,
     ) {
         const whereExpression = {
             price: {
@@ -64,70 +63,73 @@ class ProductService {
                 model: ProductType,
                 as: 'productType',
                 attributes: ['isFlower'],
-                where: {name: types},
+                where: { name: types },
             },
             {
                 model: ProductPicture,
                 as: 'pictures',
                 attributes: ['picture'],
+                separate: true,
             },
         ]
         let filterExpression = ''
         for (let type of types) {
-            if (types[0] === type) filterExpression += `name='${type}'`
-            filterExpression += `, "productType".name='${type}'`
+            if (types[0] === type) {
+                filterExpression += `productType.name='${type}'`
+            } else {
+                filterExpression += `, productType.name='${type}'`
+            }
         }
-        let orderExpression = [
-            [
-                {model: ProductType, as: 'productType'},
-                Sequelize.literal(filterExpression),
-            ],
-        ]
-        if (customOrderExpression)
+        let orderExpression = [[Sequelize.literal(filterExpression)]]
+        if (customOrderExpression) {
             orderExpression.push((orderExpression = [customOrderExpression]))
+        }
         const count = await Product.count({
             where: whereExpression,
             include: includeExpression,
         })
         const products = await productService.getProducts(
-            whereExpression,
-            includeExpression,
-            orderExpression,
-            limit,
-            offset,
+          whereExpression,
+          includeExpression,
+          orderExpression,
+          limit,
+          offset,
         )
-        return {products, count}
+
+        return { products, count }
     }
 
     async getRecommendationProducts(limit) {
-        return productService.getProducts(
-            {},
-            [
-                {
-                    model: ProductType,
-                    as: 'productType',
-                    attributes: ['isFlower']
-                },
-                {
-                    model: ProductPicture,
-                    as: 'pictures',
-                    attributes: ['picture'],
-                },
-            ],
-            Sequelize.literal('random()'),
-            Number(limit),
-            0,
-        )
-    }
-
-    async getNewestProducts(limit) {
         return productService.getProducts(
           {},
           [
               {
                   model: ProductType,
                   as: 'productType',
-                  attributes: ['isFlower']
+                  attributes: ['isFlower'],
+              },
+              {
+                  model: ProductPicture,
+                  as: 'pictures',
+                  attributes: ['picture'],
+              },
+          ],
+          [[Sequelize.literal('rand()')]],
+          Number(limit),
+          0,
+          true
+        )
+    }
+
+    async getNewestProducts(limit) {
+
+        return productService.getProducts(
+          {},
+          [
+              {
+                  model: ProductType,
+                  as: 'productType',
+                  attributes: ['isFlower'],
               },
               {
                   model: ProductPicture,
@@ -138,22 +140,24 @@ class ProductService {
           [['updatedAt', 'DESC']],
           Number(limit),
           0,
+          true
         )
     }
 
     async getProducts(
-        whereExpression,
-        includeExpression,
-        orderExpression,
-        limit,
-        offset,
+      whereExpression,
+      includeExpression,
+      orderExpression,
+      limit,
+      offset,
+      subQuery
     ) {
         const products = await Product.findAll({
-            attributes: ['count', 'description', 'id', 'name', 'price'],
-            where: whereExpression,
+            attributes: ['count', 'description', 'id', 'name', 'price', 'updatedAt'],
+            where: whereExpression || '',
             limit: limit,
             offset: offset,
-            subQuery: false,
+            subQuery: subQuery || false,
             include: includeExpression,
             order: orderExpression,
         })
@@ -163,15 +167,16 @@ class ProductService {
     async getProductsTypes(isFlower) {
         return ProductType.findAll({
             attributes: ['name'],
-            where: {isFlower},
-            raw: true,
+            where: {
+                isFlower,
+            },
         }).then((types) => {
             return types.map((type) => type.name)
         })
     }
 
     async getProductById(id) {
-        return await Product.findOne({where: {id}})
+        return await Product.findOne({ where: { id } })
     }
 }
 

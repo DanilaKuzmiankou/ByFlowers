@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useRef, useState } from 'react'
+import { FC, useMemo, useRef, useState } from 'react'
 
 import Typography from '@mui/material/Typography'
 import './CustomMenu.css'
@@ -18,7 +18,7 @@ const onLogoutClick = () => {
   userStore.logout()
 }
 
-const userMenu = ['Logout']
+const userMenu = ['Выйти']
 const userMenuIcons = [<MdLogout />]
 const userMenuOnClick = [onLogoutClick]
 

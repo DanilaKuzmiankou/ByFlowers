@@ -26,7 +26,7 @@ export const EmailField: FC<EmailFieldProps> = ({
         color="#3A9AB9"
       />
       <Field
-        placeholder="Email"
+        placeholder="Почта"
         name="email"
         type="email"
         className={`${

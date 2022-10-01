@@ -11,7 +11,6 @@ import { observer } from 'mobx-react-lite'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone'
-import { toJS } from 'mobx'
 import { ProductsFilter } from '../../components/ProductsFilter/ProductsFilter'
 import productsStore from '../../store/ProductsStore'
 import { productStyles } from '../../themes'
@@ -22,14 +21,14 @@ import { NoItemsPlug } from '../../components/NoItemsPlug/NoItemsPlug'
 
 export const Products = observer(() => {
   const theme = useTheme()
-
   const md = useMediaQuery(theme.breakpoints.between('sm', 'lg'))
-  const lgAndXl = useMediaQuery(theme.breakpoints.between('md', 'xxxl'))
+  const lgAndXl = useMediaQuery(theme.breakpoints.between('md', 'xxl'))
   const xxxl = useMediaQuery(theme.breakpoints.up('xxl'))
-
-  const [currentPage, setCurrentPage] = useState<number>(1)
   const [types, setTypes] = useState<string[]>([])
-
+  const [page, setPage] = useState<number>(
+    (productsStore.itemsOffset + productsStore.itemsLimit) /
+      productsStore.itemsLimit,
+  )
   const getItemsCountPerPage = () => {
     if (md) {
       productsStore.setItemsLimit(12)
@@ -56,19 +55,28 @@ export const Products = observer(() => {
   useEffect(() => {
     if (productsStore.productsNames?.length > 0) {
       productsStore.fetchProducts()
+    } else {
+      productsStore.setProducts([])
+      productsStore.setSelectedProductsName('')
+      productsStore.setSelectedNavbarProduct('')
     }
   }, [productsStore.productsNames])
 
   const openDrawer = () => {
     productsStore.setIsDrawerOpen(true)
   }
-
-  const handleChangePage = (event: ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(page)
-    productsStore.setItemsOffset(
-      page * productsStore.itemsLimit - productsStore.itemsLimit,
-    )
-    productsStore.fetchProducts()
+  const handleChangePage = async (
+    event: ChangeEvent<unknown>,
+    newPage: number,
+  ) => {
+    if (newPage !== page) {
+      productsStore.setItemsOffset(
+        newPage * productsStore.itemsLimit - productsStore.itemsLimit,
+      )
+      await productsStore.fetchProducts()
+      setPage(newPage)
+      window.scrollTo(0, 0)
+    }
   }
 
   return (
@@ -101,7 +109,7 @@ export const Products = observer(() => {
               <ProductsFilter
                 productsList={types}
                 mainCheckboxName={
-                  productsStore.isFlowers ? 'Flowers' : 'Plants'
+                  productsStore.isFlowers ? 'Цветы' : 'Растения'
                 }
               />
             </div>
@@ -159,7 +167,7 @@ export const Products = observer(() => {
                       },
                     }}
                   >
-                    Sort by
+                    Сортировать по
                   </Typography>
                   <CustomSelect />
                 </Box>
@@ -170,7 +178,7 @@ export const Products = observer(() => {
               <MobileProductsFilter
                 productsList={types}
                 mainCheckboxName={
-                  productsStore.isFlowers ? 'Flowers' : 'Plants'
+                  productsStore.isFlowers ? 'Цветы' : 'Растения'
                 }
               />
             ) : null}
@@ -189,7 +197,7 @@ export const Products = observer(() => {
                     md={6}
                     lg={4}
                     xl={3}
-                    xxxl={2}
+                    xxl={2}
                     key={product.id}
                     data-aos="zoom-in"
                     sx={{ display: 'flex', justifyContent: 'center' }}
@@ -210,11 +218,11 @@ export const Products = observer(() => {
       </Grid>
       <div className="pagination-container">
         <Pagination
-          page={currentPage}
           sx={{ paddingBottom: '10px', fontSize: '30rem' }}
           count={Math.ceil(
             productsStore.productsCount / productsStore.itemsLimit,
           )}
+          page={page}
           variant="outlined"
           size="large"
           onChange={handleChangePage}

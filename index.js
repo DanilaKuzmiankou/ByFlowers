@@ -7,6 +7,7 @@ const models = require('./models/Models')
 const sequelize = require('./DB')
 const cookieParser = require('cookie-parser')
 const errorMiddleware = require('./middlewares/ErrorMiddleware')
+const ApiError = require("./error/ApiError");
 
 const PORT = process.env.PORT || 5000
 
@@ -41,8 +42,9 @@ const start = async () => {
         await sequelize.authenticate()
         await sequelize.sync()
         app.listen(PORT)
+        console.log('gg')
     } catch (e) {
-        console.log(e)
+        throw ApiError.serverError(e)
     }
 }
 

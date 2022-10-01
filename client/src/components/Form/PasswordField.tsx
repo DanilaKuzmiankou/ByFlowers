@@ -47,7 +47,7 @@ export const PasswordField: FC<PasswordFieldProps> = ({
             <input
               {...field}
               type={`${passwordIsVisible ? 'text' : 'password'}`}
-              placeholder="Password"
+              placeholder="Пароль"
               className={`${
                 meta.touched && meta.error ? 'error-field' : null
               } password-input`}

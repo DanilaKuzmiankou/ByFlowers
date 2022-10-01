@@ -65,7 +65,7 @@ export const CustomMobileMenu = observer<CustomMobileMenuProps>(
                 },
               }}
             >
-              Menu
+              Меню
             </Typography>
             <CloseButton
               closeFunction={() => userStore.setIsNavbarMenuOpen(false)}
@@ -96,13 +96,13 @@ export const CustomMobileMenu = observer<CustomMobileMenuProps>(
               ))}
             </List>
             <MobileProductsList
-              menuName="Plants"
+              menuName="Растения"
               onMenuItemClick={onMenuItemClick}
               productsNames={plantsNames}
               isFlowers={false}
             />
             <MobileProductsList
-              menuName="Flowers"
+              menuName="Цветы"
               onMenuItemClick={onMenuItemClick}
               productsNames={flowersNames}
               isFlowers

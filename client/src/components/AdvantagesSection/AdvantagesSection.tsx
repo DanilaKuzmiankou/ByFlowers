@@ -8,6 +8,9 @@ import { useMemo } from 'react'
 import { productStyles } from '../../themes'
 
 export const AdvantagesSection = () => {
+  const column = {
+    maxWidth: { lg: '350px' },
+  }
   const iconPropsMemoized = useMemo(() => ({ color: 'black', size: '63' }), [])
 
   return (
@@ -17,51 +20,53 @@ export const AdvantagesSection = () => {
           sx={{
             ...productStyles.customBoldFont,
             ...productStyles.headerTypographyStyle,
+            ...{ whiteSpace: 'word', textAlign: 'center' },
           }}
         >
-          Why buy flowers with FlowersBel?
+          Почему вам стоит покупать у ByFlowers?
         </Typography>
       </div>
-      <Grid container spacing={4} justifyContent="center">
-        <Grid item xs={12} sm={12} md={4}>
+      <Grid container spacing={6} justifyContent="center">
+        <Grid item xs={12} sm={12} md={4} sx={column}>
           <div className="advantages-container">
             <IconContext.Provider value={iconPropsMemoized}>
               <RiPlantLine />
             </IconContext.Provider>
             <Typography sx={productStyles.customBoldFont}>
-              Quality assurance
+              Гарантия качества
             </Typography>
             <Typography sx={productStyles.customSmallFont}>
-              We guarantee you the appearance and description of colors in the
-              store and reality, or we will promptly give a refund. <br />
+              Гарантируем, что внешний вид и описание цветов в магазине будет
+              соответстовать доставленным, либо мы оперативно вернем деньги.{' '}
+              <br />
             </Typography>
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} md={4}>
+        <Grid item xs={12} sm={12} md={4} sx={column}>
           <div className="advantages-container">
             <IconContext.Provider value={iconPropsMemoized}>
               <FiTruck />
             </IconContext.Provider>
             <Typography sx={productStyles.customBoldFont}>
-              Reliable suppliers
+              Надежные поставщики
             </Typography>
             <Typography sx={productStyles.customSmallFont}>
-              Direct supplies of plants and flowers from Europe - always a
-              varied and unique assortment.
+              Прямые доставки цветов и растений из Европы - всегда объёмный и
+              уникальный ассортимент
             </Typography>
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} md={4}>
+        <Grid item xs={12} sm={12} md={4} sx={column}>
           <div className="advantages-container">
             <IconContext.Provider value={iconPropsMemoized}>
               <BsCoin />
             </IconContext.Provider>
             <Typography sx={productStyles.customBoldFont}>
-              Low prices
+              Низкие цены
             </Typography>
             <Typography sx={productStyles.customSmallFont}>
-              We colloborate directly with major suppliers and can offer lower
-              prices than most retail stores.
+              Мы работаем напрямую с большими поставщиками и можем гарантировать
+              цены ниже, чем у локальных магазинов.
             </Typography>
           </div>
         </Grid>
