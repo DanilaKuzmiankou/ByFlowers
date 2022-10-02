@@ -22,7 +22,7 @@ import { CustomHoverMenu } from '../CustomMenu/CustomHoverMenu'
 import { MobileNavbarElements } from './MobileNavbarElements'
 
 const siteLogo = 'ByFlowers'
-const pagesLinks = ['aboutUs', 'products', 'products', 'contacts']
+const pagesLinks = ['aboutUs', 'contacts']
 const pages2 = ['О нас', 'Контакты']
 
 const navbarButtonsStyle = {
@@ -191,17 +191,15 @@ export const Navbar = observer(() => {
                 }}
               >
                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                  {pages2.map((page, id) => (
-                    <Button
-                      key={page}
-                      component={ReactRouterLink}
-                      to={pagesLinks[id]}
-                      sx={navbarButtonsStyle}
-                      disableRipple
-                    >
-                      {page}
-                    </Button>
-                  ))}
+                  <Button
+                    key="aboutUs"
+                    component={ReactRouterLink}
+                    to="/aboutUs"
+                    sx={navbarButtonsStyle}
+                    disableRipple
+                  >
+                    О нас
+                  </Button>
                   <CustomHoverMenu
                     menuName="Растения"
                     buttonStyle={navbarButtonsStyle}
@@ -220,6 +218,15 @@ export const Navbar = observer(() => {
                     }
                     isFlowers
                   />
+                  <Button
+                    key="contacts"
+                    component={ReactRouterLink}
+                    to="/contacts"
+                    sx={navbarButtonsStyle}
+                    disableRipple
+                  >
+                    Контакты
+                  </Button>
                 </Box>
                 <div
                   style={{

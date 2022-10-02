@@ -164,7 +164,7 @@ export const ProductsFilter = observer<ProductsProps>(
             className="filters-input"
             sx={{
               '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-                borderRadius: '7% 0 0 7%',
+                borderRadius: '7px 0 0 7px',
               },
               '& .MuiOutlinedInput-input': {
                 '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
@@ -187,7 +187,7 @@ export const ProductsFilter = observer<ProductsProps>(
             className="filters-input"
             sx={{
               '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-                borderRadius: '0 7% 7% 0',
+                borderRadius: '0 7px 7px 0',
               },
               '& .MuiOutlinedInput-input': {
                 '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {

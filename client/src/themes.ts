@@ -61,11 +61,10 @@ export const buyButtonHoverStyle = {
   zIndex: 2,
   fontSize: '1.59rem',
   textAlign: 'center',
-  borderRadius: '3px',
+  borderRadius: '4px',
   color: '#fff',
   textTransform: 'uppercase',
   textDecoration: 'none',
-  border: '0',
   WebkitBoxShadow: 'inset 0 -3px 0 0 #b42c32',
   boxShadow: 'inset 0 -3px 0 0 #b42c32',
   backgroundColor: 'rgba(210,49,57,1)',
@@ -160,7 +159,7 @@ export const catalogProductItem = {
     left: 'calc(50%-270px)',
     backgroundSize: 'cover',
     height: '300px',
-    width: '270px',
+    width: '250px',
   },
   typographyStyle: {
     fontFamily: 'AvenirRegular',
@@ -196,7 +195,7 @@ export const catalogProductItem = {
     position: 'relative',
     '&:hover': {
       border: '0.01em solid',
-      borderColor: 'inherit',
+      borderColor: '#bdbdbd',
       borderRadius: '3%',
       boxShadow:
         'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
