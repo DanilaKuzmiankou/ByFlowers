@@ -16,10 +16,9 @@
 .filters-container {
   display: flex;
   justify-content: center;
-  box-sizing: initial;
   font-family: Avenir, sans-serif;
   min-height: 100vh;
   height: 100%;
   width: 100%;
-  margin: 30px 10px 0;
+  padding: 30px 10px 0;
 }

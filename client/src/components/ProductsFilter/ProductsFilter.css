@@ -1,16 +1,15 @@
+:root {
+  --price-input-margin-left: 5px;
+}
+
 .filters-input {
-  width: 50%;
+  width: calc((50% - var(--price-input-margin-left) / 2) - 5px);
 }
 
 .filters-input:first-of-type {
-  padding-left: 5px;
+  padding-left: var(--price-input-margin-left);
 }
 
 .filters-inputs-container {
-  width: 100%;
-}
-
-/*noinspection ALL*/
-.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline #maxPrice {
-  border-radius: 30% !important;
+  display: inline-block;
 }
