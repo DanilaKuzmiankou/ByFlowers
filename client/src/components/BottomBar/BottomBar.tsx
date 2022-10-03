@@ -1,11 +1,20 @@
+import { useEffect, useRef } from 'react'
 import Box from '@mui/material/Box'
 import './BottomBar.css'
 import { Typography } from '@mui/material'
 import { productStyles } from '../../themes'
+import settingsStore from '../../store/SettingsStore'
 
 export const BottomBar = () => {
+  const bottomBarRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (bottomBarRef.current) {
+      settingsStore.setBottomBarHeight(bottomBarRef.current.clientHeight)
+    }
+  }, [])
   return (
-    <div className="bottom-bar">
+    <div className="bottom-bar" ref={bottomBarRef}>
       <div className="bottom-trademarks">
         <div className="bottom-brand">ByFlowers.ru</div>
         <div className="bottom-rights">

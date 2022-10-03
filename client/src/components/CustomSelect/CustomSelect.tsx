@@ -38,7 +38,11 @@ export const CustomSelect = () => {
       autoWidth
       color="success"
       variant="outlined"
-      sx={{ minHeight: '25px', height: '35px' }}
+      sx={{
+        minHeight: '25px',
+        height: { xs: '55px', sm: '35px' },
+        width: { xs: '95px', sm: 'initial' },
+      }}
     >
       {filterOptions.map((option, index) => (
         <MenuItem key={index} value={option}>

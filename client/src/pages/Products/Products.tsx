@@ -93,12 +93,12 @@ export const Products = observer(() => {
         <Grid
           item
           xs={0}
-          sm={3}
+          sm={0}
           md={3}
-          lg={2}
+          lg={3}
           xl={3}
           sx={{
-            display: { xs: 'none', sm: 'inline-block' },
+            display: { xs: 'none', md: 'inline-block' },
             alignSelf: 'start',
             position: 'sticky',
             top: 0,
@@ -115,14 +115,14 @@ export const Products = observer(() => {
             </div>
           ) : null}
         </Grid>
-        <Grid item xs={16} sm={13} md={13} lg={14} xl={13}>
+        <Grid item xs={16} sm={16} md={13} lg={13} xl={13}>
           <div className="products-container">
             <Box
               sx={{
                 display: 'flex',
                 position: 'relative',
-                alignItems: 'start',
-                flexFlow: { xs: 'row wrap', sm: 'initial' },
+                alignItems: 'center',
+                flexFlow: { xs: 'row wrap', lg: 'initial' },
                 justifyContent: 'start',
                 padding: {
                   sm: '20px',
@@ -130,22 +130,25 @@ export const Products = observer(() => {
                 },
               }}
             >
-              <Typography
-                sx={{
-                  ...productStyles.customBoldFont,
-                  ...productStyles.headerTypographyStyle,
-                }}
-              >
+              <Typography sx={productStyles.productsTypographyStyle}>
                 {productsStore.selectedProductsName}
               </Typography>
-              <Box sx={{ display: 'flex', width: '100%', mt: '5px' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  mt: '5px',
+                }}
+              >
                 <Box
                   onClick={openDrawer}
                   sx={{
-                    display: { xs: 'inline-block', sm: 'none' },
+                    display: { xs: 'flex', md: 'none' },
+                    ml: '20px',
+                    alignItems: 'center',
                   }}
                 >
-                  <IconButton>
+                  <IconButton sx={{ p: '0 5px 0' }}>
                     <TuneTwoToneIcon fontSize="large" />
                   </IconButton>
                 </Box>

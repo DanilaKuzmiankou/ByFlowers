@@ -9,20 +9,21 @@ import {
 } from '@mui/material'
 import Box from '@mui/material/Box'
 import { observer } from 'mobx-react-lite'
-import userStore from '../../store/UserStore'
 import { list, listItem, productStyles } from '../../themes'
 import { CloseButton } from '../CloseButton/CloseButton'
 import { MobileProductsList } from './MobileProductsList'
+import settingsStore from '../../store/SettingsStore'
 
 interface CustomMobileMenuProps {
   pages: string[]
+  pagesLinks: string[]
   plantsNames: string[]
   flowersNames: string[]
   onMenuItemClick: Function
 }
 
 export const CustomMobileMenu = observer<CustomMobileMenuProps>(
-  ({ pages, plantsNames, flowersNames, onMenuItemClick }) => {
+  ({ pages, pagesLinks, plantsNames, flowersNames, onMenuItemClick }) => {
     return (
       <SwipeableDrawer
         sx={{
@@ -39,9 +40,9 @@ export const CustomMobileMenu = observer<CustomMobileMenuProps>(
           },
         }}
         anchor="left"
-        open={Boolean(userStore.isNavbarMenuOpen)}
-        onClose={() => userStore.setIsNavbarMenuOpen(false)}
-        onOpen={() => userStore.setIsNavbarMenuOpen(true)}
+        open={Boolean(settingsStore.isMobileNavbarMenuOpen)}
+        onClose={() => settingsStore.setIsMobileNavbarMenuOpen(false)}
+        onOpen={() => settingsStore.setIsMobileNavbarMenuOpen(true)}
         ModalProps={{
           keepMounted: false,
         }}
@@ -69,7 +70,9 @@ export const CustomMobileMenu = observer<CustomMobileMenuProps>(
               Меню
             </Typography>
             <CloseButton
-              closeFunction={() => userStore.setIsNavbarMenuOpen(false)}
+              closeFunction={() =>
+                settingsStore.setIsMobileNavbarMenuOpen(false)
+              }
             />
           </Box>
           <Box
@@ -88,7 +91,7 @@ export const CustomMobileMenu = observer<CustomMobileMenuProps>(
                     sx={list}
                     onClick={() => onMenuItemClick('aboutUs')}
                     component={Link}
-                    to="/aboutUs"
+                    to={pagesLinks[index]}
                   >
                     <ListItemText
                       primary={page}

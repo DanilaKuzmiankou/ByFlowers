@@ -87,7 +87,7 @@ export const Login = () => {
       </Formik>
       <div className="auth-link-container">
         <Button sx={linkButtonStyle} onClick={changePage}>
-          Пока не имеете аккаунта? Зарегистрируйтесь!
+          Впервые у нас? Зарегистрироваться
         </Button>
       </div>
     </div>
