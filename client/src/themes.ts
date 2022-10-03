@@ -89,6 +89,21 @@ export const productStyles = {
     fontWeight: '600 !important',
     letterSpacing: '0 !important',
   },
+  productsTypographyStyle: {
+    fontFamily: 'AvenirBold, sans-serif',
+    fontSize: {
+      lg: '2.5rem',
+      sm: '2rem',
+      xl: '3rem',
+      xs: '1.3rem',
+    },
+    display: 'inline-block',
+    padding: 0,
+    textAlign: 'center',
+    whiteSpace: 'nowrap',
+    fontWeight: '600 !important',
+    letterSpacing: '0 !important',
+  },
   headerTypographyStyle: {
     fontSize: {
       lg: '2.5rem',
@@ -96,9 +111,7 @@ export const productStyles = {
       xl: '3rem',
       xs: '2.1rem',
     },
-    display: {
-      xs: 'inline-block',
-    },
+    display: 'inline-block',
     padding: 0,
     whiteSpace: 'nowrap',
   },
@@ -149,6 +162,15 @@ export const productStyles = {
     fontWeight: '0 !important',
     letterSpacing: '0 !important',
     textAlign: 'center !important',
+  },
+  selectFont: {
+    color: 'black',
+    fontFamily: 'AvenirRegular, sans-serif',
+    fontSize: {
+      xl: '1.6rem',
+      xxxl: '2.1rem',
+      xs: '.7rem',
+    },
   },
 }
 

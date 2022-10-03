@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -20,6 +20,7 @@ import { HideOnScroll } from '../HideOnScroll/HideOnScroll'
 import { getProductsTypes } from '../../api/store/Product'
 import { CustomHoverMenu } from '../CustomMenu/CustomHoverMenu'
 import { MobileNavbarElements } from './MobileNavbarElements'
+import settingsStore from '../../store/SettingsStore'
 
 const siteLogo = 'ByFlowers'
 const pagesLinks = ['aboutUs', 'contacts']
@@ -56,7 +57,7 @@ const navbarButtonsStyle = {
 
 const navbarLoginButtonStyle = {
   my: 2,
-  mx: 0.5,
+  mx: 1.1,
   fontFamily: 'IntroCondBlack',
   display: 'flex',
   justifyContent: 'center',
@@ -71,8 +72,27 @@ const navbarLoginButtonStyle = {
   fontWeight: 700,
 }
 
+const StyledBadge = styled(Badge)<BadgeProps>(() => ({
+  '& .MuiBadge-badge': {
+    height: '15px',
+    minWidth: '15px',
+    width: '15px',
+    right: 3,
+    top: 4,
+    padding: '0 4px',
+  },
+}))
+
+const upperNavbarButtonsStyle = {
+  padding: '6px',
+}
+
 export const Navbar = observer(() => {
+  const navbarRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
+    if (navbarRef.current) {
+      settingsStore.setNavbarHeight(navbarRef.current.clientHeight)
+    }
     async function fetch() {
       if (productsStore.flowers?.length === 0) {
         const flowersTypesResponse = await getProductsTypes(true)
@@ -97,23 +117,7 @@ export const Navbar = observer(() => {
     window.scrollTo(0, 0)
     productsStore.setSelectedNavbarProduct(productType || '')
     if (isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
-    userStore.setIsNavbarMenuOpen(false)
-  }
-
-  const StyledBadge = styled(Badge)<BadgeProps>(() => ({
-    '& .MuiBadge-badge': {
-      height: '15px',
-      minWidth: '15px',
-      width: '15px',
-      right: 3,
-      top: 4,
-      padding: '0 4px',
-    },
-  }))
-
-  const upperNavbarButtonsStyle = {
-    margin: '3px',
-    padding: 0,
+    settingsStore.setIsMobileNavbarMenuOpen(false)
   }
 
   const changeBasketState = () => {
@@ -127,7 +131,7 @@ export const Navbar = observer(() => {
 
   return (
     <HideOnScroll>
-      <div style={{ position: 'sticky', top: 0, zIndex: 10 }}>
+      <div style={{ position: 'sticky', top: 0, zIndex: 10 }} ref={navbarRef}>
         <AppBar
           sx={{ p: 0, m: 0, backgroundColor: '#1B1A27' }}
           position="static"

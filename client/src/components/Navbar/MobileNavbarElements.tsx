@@ -6,7 +6,7 @@ import { Link as ReactRouterLink } from 'react-router-dom'
 import { FC } from 'react'
 import productsStore from '../../store/ProductsStore'
 import { CustomMobileMenu } from '../CustomMenu/CustomMobileMenu'
-import userStore from '../../store/UserStore'
+import settingsStore from '../../store/SettingsStore'
 
 interface MobileNavbarElementsProps {
   pages: string[]
@@ -30,7 +30,7 @@ export const MobileNavbarElements: FC<MobileNavbarElementsProps> = ({
           aria-controls="menu-appbar"
           aria-haspopup="true"
           color="inherit"
-          onClick={() => userStore.setIsNavbarMenuOpen(true)}
+          onClick={() => settingsStore.setIsMobileNavbarMenuOpen(true)}
         >
           <MenuIcon />
         </IconButton>
@@ -38,6 +38,7 @@ export const MobileNavbarElements: FC<MobileNavbarElementsProps> = ({
 
       <CustomMobileMenu
         pages={pages}
+        pagesLinks={pagesLinks}
         plantsNames={productsStore.plants}
         flowersNames={productsStore.flowers}
         onMenuItemClick={switchPage}

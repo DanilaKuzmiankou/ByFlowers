@@ -9,7 +9,7 @@ import { productStyles } from '../../themes'
 
 export const AdvantagesSection = () => {
   const column = {
-    maxWidth: { lg: '350px' },
+    maxWidth: { sm: '350px' },
   }
   const iconPropsMemoized = useMemo(() => ({ color: 'black', size: '63' }), [])
 
@@ -27,44 +27,59 @@ export const AdvantagesSection = () => {
         </Typography>
       </div>
       <Grid container spacing={6} justifyContent="center">
-        <Grid item xs={12} sm={12} md={4} sx={column}>
+        <Grid item xs={12} sm={12} md={4}>
           <div className="advantages-container">
             <IconContext.Provider value={iconPropsMemoized}>
               <RiPlantLine />
             </IconContext.Provider>
-            <Typography sx={productStyles.customBoldFont}>
+            <Typography
+              sx={{
+                ...productStyles.customBoldFont,
+                ...{ whiteSpace: 'no-wrap' },
+              }}
+            >
               Гарантия качества
             </Typography>
-            <Typography sx={productStyles.customSmallFont}>
+            <Typography sx={{ ...productStyles.customSmallFont, ...column }}>
               Гарантируем, что внешний вид и описание цветов в магазине будет
               соответстовать доставленным, либо мы оперативно вернем деньги.{' '}
               <br />
             </Typography>
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} md={4} sx={column}>
+        <Grid item xs={12} sm={12} md={4}>
           <div className="advantages-container">
             <IconContext.Provider value={iconPropsMemoized}>
               <FiTruck />
             </IconContext.Provider>
-            <Typography sx={productStyles.customBoldFont}>
+            <Typography
+              sx={{
+                ...productStyles.customBoldFont,
+                ...{ whiteSpace: 'no-wrap' },
+              }}
+            >
               Надежные поставщики
             </Typography>
-            <Typography sx={productStyles.customSmallFont}>
+            <Typography sx={{ ...productStyles.customSmallFont, ...column }}>
               Прямые доставки цветов и растений из Европы - всегда объёмный и
               уникальный ассортимент
             </Typography>
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} md={4} sx={column}>
+        <Grid item xs={12} sm={12} md={4}>
           <div className="advantages-container">
             <IconContext.Provider value={iconPropsMemoized}>
               <BsCoin />
             </IconContext.Provider>
-            <Typography sx={productStyles.customBoldFont}>
+            <Typography
+              sx={{
+                ...productStyles.customBoldFont,
+                ...{ whiteSpace: 'no-wrap' },
+              }}
+            >
               Низкие цены
             </Typography>
-            <Typography sx={productStyles.customSmallFont}>
+            <Typography sx={{ ...productStyles.customSmallFont, ...column }}>
               Мы работаем напрямую с большими поставщиками и можем гарантировать
               цены ниже, чем у локальных магазинов.
             </Typography>

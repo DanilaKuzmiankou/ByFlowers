@@ -13,7 +13,8 @@ export const CustomCookieConsent = () => {
       expires={150}
     >
       <span style={{ fontSize: '2rem' }}>
-        Этот сайт использует куки для улучшения использования сайта.
+        Этот веб-сайт использует cookies для улучшения взаимодействия с
+        пользователем.
       </span>
     </CookieConsent>
   )
