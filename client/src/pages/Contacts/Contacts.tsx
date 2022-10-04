@@ -7,9 +7,9 @@ import { FiMail } from 'react-icons/fi'
 
 export const Contacts = () => {
   useEffect(() => {
-    document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
     return () => {
-      document.body.style.overflow = 'scroll'
+      document.body.style.position = 'static'
     }
   }, [])
 

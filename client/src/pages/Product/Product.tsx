@@ -299,7 +299,7 @@ export const Product = observer(() => {
                 sx={{
                   alignSelf: 'start',
                   position: 'sticky',
-                  top: '0px',
+                  top: '40px',
                 }}
               >
                 <Box sx={addToCartBox}>

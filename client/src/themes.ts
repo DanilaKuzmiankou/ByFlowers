@@ -192,6 +192,7 @@ export const catalogProductItem = {
     backgroundColor: 'transparent',
   },
   container: {
+    backgroundColor: '#FFFFFF',
     boxSizing: 'border-box',
     height: '400px',
     width: '100%',
@@ -200,17 +201,12 @@ export const catalogProductItem = {
     cursor: 'pointer',
     color: 'black',
     position: 'relative',
+    borderRadius: '3%',
     '&:hover': {
-      border: '0.01em solid',
-      borderColor: '#bdbdbd',
-      borderRadius: '3%',
       boxShadow:
         'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
     },
     '.Mui-focused': {
-      border: '0.01em solid',
-      borderColor: 'inherit',
-      borderRadius: '3%',
       boxShadow:
         'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
     },

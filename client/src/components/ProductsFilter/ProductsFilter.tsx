@@ -188,6 +188,7 @@ export const ProductsFilter = observer<ProductsProps>(
             className="filters-input"
             sx={{
               '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+                backgroundColor: '#FFF',
                 borderRadius: '7px 0 0 7px',
               },
               '& .MuiOutlinedInput-input': {
@@ -211,6 +212,7 @@ export const ProductsFilter = observer<ProductsProps>(
             className="filters-input"
             sx={{
               '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+                backgroundColor: '#FFF',
                 borderRadius: '0 7px 7px 0',
               },
               '& .MuiOutlinedInput-input': {

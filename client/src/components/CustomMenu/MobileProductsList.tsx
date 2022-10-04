@@ -63,7 +63,7 @@ export const MobileProductsList: FC<MobileProductsListProps> = ({
                   <ListItemText
                     primary={product}
                     primaryTypographyProps={{
-                      fontSize: '1.3rem',
+                      fontSize: '1.5rem',
                     }}
                   />
                 </ListItemButton>

@@ -25,7 +25,7 @@ const App = () => {
   const smallerThanSm = useMediaQuery(theme.breakpoints.down('sm'))
 
   Aos.init({
-    offset: smallerThanSm ? 10 : 120,
+    offset: smallerThanSm ? 10 : 160,
   })
   return (
     <BrowserRouter>

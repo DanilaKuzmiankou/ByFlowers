@@ -42,7 +42,7 @@ export const Products = observer(() => {
   }
 
   useEffect(() => {
-    document.body.style.overflow = 'auto'
+    document.body.style.position = 'static'
     getItemsCountPerPage()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -102,6 +102,7 @@ export const Products = observer(() => {
         sx={{
           width: '100%',
           minHeight: '100vh',
+          backgroundColor: '#F2F2F2',
           padding: { xs: '3px', md: '10px' },
         }}
       >

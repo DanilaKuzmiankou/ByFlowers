@@ -39,6 +39,7 @@ export const CustomSelect = () => {
       color="success"
       variant="outlined"
       sx={{
+        backgroundColor: '#FFF',
         minHeight: '25px',
         height: { xs: '55px', sm: '35px' },
         width: { xs: '95px', sm: 'initial' },
