@@ -42,7 +42,6 @@ const start = async () => {
         await sequelize.authenticate()
         await sequelize.sync()
         app.listen(PORT)
-        console.log('gg')
     } catch (e) {
         throw ApiError.serverError(e)
     }

@@ -56,16 +56,10 @@ export const MobileProductsList: FC<MobileProductsListProps> = ({
               <ListItem
                 key={product}
                 sx={list}
+                onClick={() => onMenuItemClick(product, isFlowers)}
                 divider={index !== productsNames.length - 1}
               >
-                <ListItemButton
-                  sx={{ pl: 3 }}
-                  component={Link}
-                  to="/products"
-                  onClick={() =>
-                    onMenuItemClick('products', product, isFlowers)
-                  }
-                >
+                <ListItemButton sx={{ pl: 3 }} component={Link} to="/products">
                   <ListItemText
                     primary={product}
                     primaryTypographyProps={{

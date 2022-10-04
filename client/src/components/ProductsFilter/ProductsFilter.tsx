@@ -10,81 +10,26 @@ import {
 import './ProductsFilter.css'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { checkForOne, getCheckedItems } from '../../utils/Utils'
 import { productStyles } from '../../themes'
 import productsStore from '../../store/ProductsStore'
 
 export interface ProductsProps {
-  productsList: string[]
   mainCheckboxName: string
 }
 
 export const ProductsFilter = observer<ProductsProps>(
-  ({ productsList, mainCheckboxName }) => {
+  ({ mainCheckboxName }) => {
     const theme = useTheme()
     const greaterThanXXXL = useMediaQuery(theme.breakpoints.up('xxxl'))
     const greaterThanXL = useMediaQuery(theme.breakpoints.up('xl'))
 
-    const [subCheckboxes, setSubCheckboxes] = useState<boolean[]>([])
+    const [checkedProducts, setCheckedProducts] = useState<string[]>([])
     const [mainCheckbox, setMainCheckbox] = useState<boolean[]>([false, false])
 
     const [currentMinPrice, setCurrentMinPrice] = useState<number | null>(null)
     const [currentMaxPrice, setCurrentMaxPrice] = useState<number | null>(null)
 
-    const updateProducts = async (newChecked: boolean[]) => {
-      const checkedPlants = getCheckedItems(
-        newChecked,
-        productsList,
-        productsStore.selectedProductsName.split(', '),
-      )
-      if (checkedPlants) {
-        productsStore.setProductsNames(checkedPlants)
-        if (checkedPlants.length > 3) {
-          productsStore.setSelectedProductsName(
-            `${checkedPlants.slice(0, 3).join(', ')}...`,
-          )
-        } else {
-          productsStore.setSelectedProductsName(checkedPlants.join(', '))
-        }
-      }
-    }
-
-    const initCheckboxes = () => {
-      let productsCheckboxes: boolean[]
-      if (productsStore.selectedNavbarProduct) {
-        productsCheckboxes = productsList.map((element) => {
-          if (element === productsStore.selectedNavbarProduct) {
-            setMainCheckbox([false, true])
-            return true
-          }
-          return false
-        })
-      } else {
-        productsCheckboxes = productsList.map(() => true)
-        setMainCheckbox([true, false])
-      }
-      setSubCheckboxes(productsCheckboxes)
-      updateProducts(productsCheckboxes)
-    }
-
-    const handleSubCheckboxes = (
-      event: ChangeEvent<HTMLInputElement>,
-      checkedIndex: number,
-    ) => {
-      const newChecked = [...subCheckboxes]
-      newChecked[checkedIndex] = event.target.checked
-      setSubCheckboxes(newChecked)
-      const allSame = checkForOne(newChecked)
-      setMainCheckbox([allSame && !newChecked.includes(false), !allSame])
-      updateProducts(newChecked)
-    }
-
-    const handleMainCheckbox = (event: ChangeEvent<HTMLInputElement>) => {
-      const newChecked = [...subCheckboxes].map(() => event.target.checked)
-      setSubCheckboxes(newChecked)
-      setMainCheckbox([event.target.checked, false])
-      updateProducts(newChecked)
-    }
+    const [productsCategories, setProductsCategories] = useState<string[]>([])
 
     const calcInputFontSize = (): string => {
       if (greaterThanXXXL) return '2.3rem'
@@ -98,9 +43,7 @@ export const ProductsFilter = observer<ProductsProps>(
       return '1.3rem'
     }
 
-    const validateInput = (
-      event: React.ChangeEvent<HTMLInputElement>,
-    ): number => {
+    const validateInput = (event: ChangeEvent<HTMLInputElement>): number => {
       const mathSymbols = ['+', '-', '*', '/']
       const rawValue = event.target.value
       if (!mathSymbols.includes(rawValue)) {
@@ -111,23 +54,87 @@ export const ProductsFilter = observer<ProductsProps>(
       return -1
     }
 
-    const updateMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const updateMinPrice = (event: ChangeEvent<HTMLInputElement>) => {
       const price = validateInput(event)
       if (price !== -1) {
         productsStore.setMinProductPrice(price)
-        updateProducts(subCheckboxes)
         setCurrentMinPrice(price !== 0 ? price : null)
       }
     }
 
-    const updateMaxPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const updateMaxPrice = (event: ChangeEvent<HTMLInputElement>) => {
       const price = validateInput(event)
       if (price !== -1) {
         productsStore.setMaxProductPrice(price)
-        updateProducts(subCheckboxes)
         setCurrentMaxPrice(price !== 0 ? price : null)
       }
     }
+
+    const updateProducts = async (newProducts: string[]) => {
+      productsStore.setProductsNames(newProducts)
+      if (newProducts) {
+        if (newProducts.length > 3) {
+          productsStore.setSelectedProductsName(
+            `${newProducts.slice(0, 3).join(', ')}...`,
+          )
+        } else {
+          productsStore.setSelectedProductsName(newProducts.join(', '))
+        }
+      }
+    }
+
+    const initCheckboxes = () => {
+      if (productsStore.selectedNavbarProduct) {
+        setCheckedProducts([productsStore.selectedNavbarProduct])
+        setMainCheckbox([false, true])
+      } else {
+        setCheckedProducts(productsCategories)
+        setMainCheckbox([true, false])
+      }
+    }
+
+    const handleSubCheckboxes = (
+      event: ChangeEvent<HTMLInputElement>,
+      product: string,
+    ) => {
+      if (event.target.checked) {
+        const newCheckedProducts = [...checkedProducts, product]
+        setCheckedProducts(newCheckedProducts)
+        const allCheckboxesAreChecked =
+          newCheckedProducts.length === productsCategories.length
+        setMainCheckbox([allCheckboxesAreChecked, !allCheckboxesAreChecked])
+      } else {
+        const newCheckedProducts = checkedProducts.filter(
+          (pr) => pr !== product,
+        )
+        setCheckedProducts(newCheckedProducts)
+        setMainCheckbox([
+          !(newCheckedProducts.length === 0),
+          !(newCheckedProducts.length === 0),
+        ])
+      }
+    }
+
+    const handleMainCheckbox = (event: ChangeEvent<HTMLInputElement>) => {
+      if (event.target.checked) {
+        setCheckedProducts([...productsCategories])
+      } else {
+        setCheckedProducts([])
+      }
+      setMainCheckbox([event.target.checked, false])
+    }
+
+    useEffect(() => {
+      if (productsCategories?.length === 0 && checkedProducts?.length === 0) {
+        setProductsCategories(productsStore.plants)
+        setCheckedProducts(productsStore.plants)
+        initCheckboxes()
+      }
+    }, [productsStore.plants])
+
+    useEffect(() => {
+      updateProducts(checkedProducts)
+    }, [checkedProducts])
 
     useEffect(
       () =>
@@ -139,8 +146,25 @@ export const ProductsFilter = observer<ProductsProps>(
     )
 
     useEffect(() => {
-      initCheckboxes()
-    }, [productsStore.selectedNavbarProduct, productsList])
+      if (productsCategories) {
+        initCheckboxes()
+      }
+    }, [productsCategories])
+
+    useEffect(() => {
+      if (
+        productsCategories ===
+        (productsStore.isFlowers ? productsStore.flowers : productsStore.plants)
+      ) {
+        initCheckboxes()
+      } else {
+        setProductsCategories(
+          productsStore.isFlowers
+            ? productsStore.flowers
+            : productsStore.plants,
+        )
+      }
+    }, [productsStore.selectedNavbarProduct, productsStore.isFlowers])
 
     useEffect(() => {
       if (productsStore.sortOptions?.length > 0) {
@@ -233,14 +257,14 @@ export const ProductsFilter = observer<ProductsProps>(
           }
         />
         <FormGroup>
-          {productsList.map((product, index) => (
+          {productsCategories.map((product, index) => (
             <FormControlLabel
               key={index}
               sx={productStyles.checkboxGroup}
               control={
                 <Checkbox
-                  checked={subCheckboxes[index] || false}
-                  onChange={(event) => handleSubCheckboxes(event, index)}
+                  checked={checkedProducts.includes(product)}
+                  onChange={(event) => handleSubCheckboxes(event, product)}
                   color="success"
                 />
               }
