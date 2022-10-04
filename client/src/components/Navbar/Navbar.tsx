@@ -88,11 +88,7 @@ const upperNavbarButtonsStyle = {
 }
 
 export const Navbar = observer(() => {
-  const navbarRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    if (navbarRef.current) {
-      settingsStore.setNavbarHeight(navbarRef.current.clientHeight)
-    }
     async function fetch() {
       if (productsStore.flowers?.length === 0) {
         const flowersTypesResponse = await getProductsTypes(true)
@@ -109,14 +105,10 @@ export const Navbar = observer(() => {
 
   const iconPropsMemoized = useMemo(() => ({ color: 'white', size: '23' }), [])
 
-  const switchPage = (
-    linkName: string,
-    productType?: string,
-    isFlowers?: boolean,
-  ): void => {
+  const switchPage = (productType?: string, isFlowers?: boolean): void => {
     window.scrollTo(0, 0)
-    productsStore.setSelectedNavbarProduct(productType || '')
     if (isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
+    productsStore.setSelectedNavbarProduct(productType || '')
     settingsStore.setIsMobileNavbarMenuOpen(false)
   }
 
@@ -131,7 +123,7 @@ export const Navbar = observer(() => {
 
   return (
     <HideOnScroll>
-      <div style={{ position: 'sticky', top: 0, zIndex: 10 }} ref={navbarRef}>
+      <div style={{ position: 'sticky', top: 0, zIndex: 10 }}>
         <AppBar
           sx={{ p: 0, m: 0, backgroundColor: '#1B1A27' }}
           position="static"
@@ -209,7 +201,7 @@ export const Navbar = observer(() => {
                     buttonStyle={navbarButtonsStyle}
                     menuItemsNames={productsStore.plants}
                     onMenuItemClick={(plantName: string) =>
-                      switchPage('products', plantName, false)
+                      switchPage(plantName, false)
                     }
                     isFlowers={false}
                   />
@@ -218,7 +210,7 @@ export const Navbar = observer(() => {
                     buttonStyle={navbarButtonsStyle}
                     menuItemsNames={productsStore.flowers}
                     onMenuItemClick={(flowerName: string) =>
-                      switchPage('products', flowerName, true)
+                      switchPage(flowerName, true)
                     }
                     isFlowers
                   />

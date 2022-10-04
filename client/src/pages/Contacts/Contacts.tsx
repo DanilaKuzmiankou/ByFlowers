@@ -4,28 +4,25 @@ import { Grid, Typography } from '@mui/material'
 import { IconContext } from 'react-icons'
 import { BsFacebook, BsInstagram, BsTelephone } from 'react-icons/bs'
 import { FiMail } from 'react-icons/fi'
-import settingsStore from '../../store/SettingsStore'
 
 export const Contacts = () => {
-  const [pageHeight, setPageHeight] = useState<number>(0)
-
   useEffect(() => {
-    if (settingsStore.bottomBarHeight && settingsStore.navbarHeight) {
-      setPageHeight(
-        window.innerHeight -
-          settingsStore.bottomBarHeight -
-          settingsStore.navbarHeight,
-      )
+    console.log('hidden')
+    document.body.style.overflow = 'hidden'
+    return () => {
+      console.log('scroll')
+      document.body.style.overflow = 'scroll'
+      console.log(document.body.style.overflow)
     }
-  }, [settingsStore.bottomBarHeight])
+  }, [])
 
   const mainContainer = {
     backgroundColor: '#F4F4E3',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    padding: '100px 0',
-    height: `${pageHeight ? `${pageHeight}px` : 'initial'}`,
+    height: `100vh`,
+    pt: '15px',
+    justifyContent: { sm: 'center' },
   }
 
   const itemContainer = {

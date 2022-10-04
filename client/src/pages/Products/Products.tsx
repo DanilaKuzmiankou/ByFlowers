@@ -24,7 +24,6 @@ export const Products = observer(() => {
   const md = useMediaQuery(theme.breakpoints.between('sm', 'lg'))
   const lgAndXl = useMediaQuery(theme.breakpoints.between('md', 'xxl'))
   const xxxl = useMediaQuery(theme.breakpoints.up('xxl'))
-  const [types, setTypes] = useState<string[]>([])
   const [page, setPage] = useState<number>(
     (productsStore.itemsOffset + productsStore.itemsLimit) /
       productsStore.itemsLimit,
@@ -40,9 +39,7 @@ export const Products = observer(() => {
   }
 
   useEffect(() => {
-    setTypes(
-      productsStore.isFlowers ? productsStore.flowers : productsStore.plants,
-    )
+    document.body.style.overflow = 'auto'
     getItemsCountPerPage()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -57,8 +54,6 @@ export const Products = observer(() => {
       productsStore.fetchProducts()
     } else {
       productsStore.setProducts([])
-      productsStore.setSelectedProductsName('')
-      productsStore.setSelectedNavbarProduct('')
     }
   }, [productsStore.productsNames])
 
@@ -77,6 +72,22 @@ export const Products = observer(() => {
       setPage(newPage)
       window.scrollTo(0, 0)
     }
+  }
+
+  const productsTypographyStyle = {
+    fontFamily: 'AvenirBold, sans-serif',
+    fontSize: {
+      lg: '2.5rem',
+      sm: '2rem',
+      xl: '3rem',
+      xs: `${productsStore.productsNames.length > 2 ? '1.3' : '1.8'}rem`,
+    },
+    display: 'inline-block',
+    padding: 0,
+    textAlign: 'center',
+    whiteSpace: 'nowrap',
+    fontWeight: '600 !important',
+    letterSpacing: '0 !important',
   }
 
   return (
@@ -104,16 +115,11 @@ export const Products = observer(() => {
             top: 0,
           }}
         >
-          {types && types.length > 0 ? (
-            <div className="filters-container">
-              <ProductsFilter
-                productsList={types}
-                mainCheckboxName={
-                  productsStore.isFlowers ? 'Цветы' : 'Растения'
-                }
-              />
-            </div>
-          ) : null}
+          <div className="filters-container">
+            <ProductsFilter
+              mainCheckboxName={productsStore.isFlowers ? 'Цветы' : 'Растения'}
+            />
+          </div>
         </Grid>
         <Grid item xs={16} sm={16} md={13} lg={13} xl={13}>
           <div className="products-container">
@@ -130,7 +136,7 @@ export const Products = observer(() => {
                 },
               }}
             >
-              <Typography sx={productStyles.productsTypographyStyle}>
+              <Typography sx={productsTypographyStyle}>
                 {productsStore.selectedProductsName}
               </Typography>
               <Box
@@ -144,7 +150,6 @@ export const Products = observer(() => {
                   onClick={openDrawer}
                   sx={{
                     display: { xs: 'flex', md: 'none' },
-                    ml: '20px',
                     alignItems: 'center',
                   }}
                 >
@@ -177,14 +182,9 @@ export const Products = observer(() => {
               </Box>
             </Box>
 
-            {types && types.length > 0 ? (
-              <MobileProductsFilter
-                productsList={types}
-                mainCheckboxName={
-                  productsStore.isFlowers ? 'Цветы' : 'Растения'
-                }
-              />
-            ) : null}
+            <MobileProductsFilter
+              mainCheckboxName={productsStore.isFlowers ? 'Цветы' : 'Растения'}
+            />
 
             {productsStore.products && productsStore.products.length > 0 ? (
               <Grid

@@ -17,7 +17,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }))
 
 export const MobileProductsFilter = observer<ProductsProps>(
-  ({ productsList, mainCheckboxName }) => (
+  ({ mainCheckboxName }) => (
     <Box sx={{ display: productsStore.isDrawerOpen ? 'fixed' : 'none' }}>
       <SwipeableDrawer
         sx={{
@@ -44,10 +44,7 @@ export const MobileProductsFilter = observer<ProductsProps>(
         </DrawerHeader>
         <Divider />
         <Box sx={{ padding: '0 10px' }}>
-          <ProductsFilter
-            productsList={productsList}
-            mainCheckboxName={mainCheckboxName}
-          />
+          <ProductsFilter mainCheckboxName={mainCheckboxName} />
         </Box>
       </SwipeableDrawer>
     </Box>

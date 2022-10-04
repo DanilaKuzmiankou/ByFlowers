@@ -79,10 +79,12 @@ class ProductsStore {
 
   setMinProductPrice(minProductPrice: number) {
     this.minProductPrice = minProductPrice
+    this.fetchProducts()
   }
 
   setMaxProductPrice(maxProductPrice: number) {
     this.maxProductPrice = maxProductPrice
+    this.fetchProducts()
   }
 
   setIsDrawerOpen(open: boolean) {
