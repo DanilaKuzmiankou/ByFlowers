@@ -18,8 +18,8 @@ export const Contacts = () => {
     display: 'flex',
     flexDirection: 'column',
     height: `100vh`,
-    pt: '15px',
-    justifyContent: { sm: 'center' },
+    pt: '5%',
+    justifyContent: { lg: 'center' },
   }
 
   const itemContainer = {

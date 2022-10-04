@@ -23,7 +23,7 @@ export const AdvantagesSection = () => {
             ...{ whiteSpace: 'word', textAlign: 'center' },
           }}
         >
-          Почему вам стоит покупать у ByFlowers?
+          Наши преимущества
         </Typography>
       </div>
       <Grid container spacing={6} justifyContent="center">
