@@ -110,6 +110,10 @@ class ProductsStore {
   setPlants(plants: string[]) {
     this.plants = plants
   }
+
+  setProductsCount(productsCount: number) {
+    this.productsCount = productsCount
+  }
 }
 
 export default new ProductsStore()

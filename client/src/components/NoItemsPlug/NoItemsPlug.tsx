@@ -30,7 +30,10 @@ export const NoItemsPlug: FC<NoItemsPlugProps> = ({
       src={require('../../assets/images/cryingCactus.png')}
     />
     <Typography
-      sx={{ ...productStyles.customBoldFont, ...{ display: 'block' } }}
+      sx={{
+        ...productStyles.customBoldFont,
+        ...{ display: 'block', textAlign: 'center' },
+      }}
     >
       {text}
     </Typography>

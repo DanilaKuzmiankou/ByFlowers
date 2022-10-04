@@ -21,19 +21,22 @@ import { NoItemsPlug } from '../../components/NoItemsPlug/NoItemsPlug'
 
 export const Products = observer(() => {
   const theme = useTheme()
-  const md = useMediaQuery(theme.breakpoints.between('sm', 'lg'))
-  const lgAndXl = useMediaQuery(theme.breakpoints.between('md', 'xxl'))
-  const xxxl = useMediaQuery(theme.breakpoints.up('xxl'))
+  const smToLg = useMediaQuery(theme.breakpoints.between('sm', 'lg'))
+  const lgToXl = useMediaQuery(theme.breakpoints.between('lg', 'xl'))
+  const xlToXxl = useMediaQuery(theme.breakpoints.between('xl', 'xxl'))
+  const xxlUp = useMediaQuery(theme.breakpoints.up('xxl'))
   const [page, setPage] = useState<number>(
     (productsStore.itemsOffset + productsStore.itemsLimit) /
       productsStore.itemsLimit,
   )
   const getItemsCountPerPage = () => {
-    if (md) {
+    if (smToLg) {
       productsStore.setItemsLimit(12)
-    } else if (lgAndXl) {
-      productsStore.setItemsLimit(16)
-    } else if (xxxl) {
+    } else if (lgToXl) {
+      productsStore.setItemsLimit(15)
+    } else if (xlToXxl) {
+      productsStore.setItemsLimit(20)
+    } else if (xxlUp) {
       productsStore.setItemsLimit(24)
     }
   }
@@ -54,6 +57,7 @@ export const Products = observer(() => {
       productsStore.fetchProducts()
     } else {
       productsStore.setProducts([])
+      productsStore.setProductsCount(0)
     }
   }, [productsStore.productsNames])
 

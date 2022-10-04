@@ -61,6 +61,7 @@ export const BasketContainer = observer(() => {
             display: 'flex',
             justifyContent: 'start',
             fontFamily: 'AvenirBold, sans-serif',
+            ml: '10px',
           }}
         >
           Корзина
@@ -124,7 +125,7 @@ export const BasketContainer = observer(() => {
           </Box>
         ) : (
           <NoItemsPlug
-            text="К сожалению, у вас нет товаров в корзине!"
+            text="У вас нет товаров в корзине"
             pictureHeight="100px"
             pictureWidth="100px"
           />
