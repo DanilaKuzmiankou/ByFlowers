@@ -23,14 +23,6 @@ export const ProductsFilter = observer<ProductsProps>(
     const greaterThanXXXL = useMediaQuery(theme.breakpoints.up('xxxl'))
     const greaterThanXL = useMediaQuery(theme.breakpoints.up('xl'))
 
-    const [checkedProducts, setCheckedProducts] = useState<string[]>([])
-    const [mainCheckbox, setMainCheckbox] = useState<boolean[]>([false, false])
-
-    const [currentMinPrice, setCurrentMinPrice] = useState<number | null>(null)
-    const [currentMaxPrice, setCurrentMaxPrice] = useState<number | null>(null)
-
-    const [productsCategories, setProductsCategories] = useState<string[]>([])
-
     const calcInputFontSize = (): string => {
       if (greaterThanXXXL) return '2.3rem'
       if (greaterThanXL) return '1.6rem'
@@ -43,30 +35,25 @@ export const ProductsFilter = observer<ProductsProps>(
       return '1.3rem'
     }
 
-    const validateInput = (event: ChangeEvent<HTMLInputElement>): number => {
-      const mathSymbols = ['+', '-', '*', '/']
+    const validateInput = (
+      event: ChangeEvent<HTMLInputElement>,
+    ): number | string => {
       const rawValue = event.target.value
-      if (!mathSymbols.includes(rawValue)) {
-        const value = Number(rawValue)
-        if (value > 0) return value
-        return 0
-      }
-      return -1
+      const value = Number(rawValue)
+      return value >= 0 ? value : -1
     }
 
     const updateMinPrice = (event: ChangeEvent<HTMLInputElement>) => {
       const price = validateInput(event)
       if (price !== -1) {
-        productsStore.setMinProductPrice(price)
-        setCurrentMinPrice(price !== 0 ? price : null)
+        productsStore.setMinProductPrice(price !== 0 ? price : '')
       }
     }
 
     const updateMaxPrice = (event: ChangeEvent<HTMLInputElement>) => {
       const price = validateInput(event)
       if (price !== -1) {
-        productsStore.setMaxProductPrice(price)
-        setCurrentMaxPrice(price !== 0 ? price : null)
+        productsStore.setMaxProductPrice(price !== 0 ? price : '')
       }
     }
 
@@ -83,88 +70,70 @@ export const ProductsFilter = observer<ProductsProps>(
       }
     }
 
-    const initCheckboxes = () => {
-      if (productsStore.selectedNavbarProduct) {
-        setCheckedProducts([productsStore.selectedNavbarProduct])
-        setMainCheckbox([false, true])
-      } else {
-        setCheckedProducts(productsCategories)
-        setMainCheckbox([true, false])
-      }
+    const initCheckboxes = (checked: string[]) => {
+      productsStore.setMainCheckbox([false, true])
+      updateProducts(checked)
     }
 
     const handleSubCheckboxes = (
       event: ChangeEvent<HTMLInputElement>,
       product: string,
     ) => {
+      let newCheckedProducts: string[]
       if (event.target.checked) {
-        const newCheckedProducts = [...checkedProducts, product]
-        setCheckedProducts(newCheckedProducts)
+        newCheckedProducts = [...productsStore.checkedProducts, product]
+        productsStore.setCheckedProducts(newCheckedProducts)
         const allCheckboxesAreChecked =
-          newCheckedProducts.length === productsCategories.length
-        setMainCheckbox([allCheckboxesAreChecked, !allCheckboxesAreChecked])
+          newCheckedProducts.length === productsStore.productsCategories.length
+        productsStore.setMainCheckbox([
+          allCheckboxesAreChecked,
+          !allCheckboxesAreChecked,
+        ])
       } else {
-        const newCheckedProducts = checkedProducts.filter(
+        newCheckedProducts = productsStore.checkedProducts.filter(
           (pr) => pr !== product,
         )
-        setCheckedProducts(newCheckedProducts)
-        setMainCheckbox([
+        productsStore.setCheckedProducts(newCheckedProducts)
+        productsStore.setMainCheckbox([
           !(newCheckedProducts.length === 0),
           !(newCheckedProducts.length === 0),
         ])
       }
+      updateProducts(newCheckedProducts)
     }
 
     const handleMainCheckbox = (event: ChangeEvent<HTMLInputElement>) => {
-      if (event.target.checked) {
-        setCheckedProducts([...productsCategories])
-      } else {
-        setCheckedProducts([])
-      }
-      setMainCheckbox([event.target.checked, false])
+      const newProducts = event.target.checked
+        ? productsStore.productsCategories
+        : []
+      productsStore.setCheckedProducts(newProducts)
+      updateProducts(newProducts)
+      productsStore.setMainCheckbox([event.target.checked, false])
     }
 
     useEffect(() => {
-      if (productsCategories?.length === 0 && checkedProducts?.length === 0) {
-        setProductsCategories(productsStore.plants)
-        setCheckedProducts(productsStore.plants)
-        initCheckboxes()
+      if (
+        productsStore.productsCategories?.length === 0 &&
+        productsStore.checkedProducts?.length === 0
+      ) {
+        productsStore.setProductsCategories(productsStore.plants)
+        productsStore.setCheckedProducts(productsStore.plants)
+        initCheckboxes(productsStore.plants)
       }
     }, [productsStore.plants])
 
     useEffect(() => {
-      updateProducts(checkedProducts)
-    }, [checkedProducts])
-
-    useEffect(
-      () =>
-        function cleanup() {
-          productsStore.setProducts([])
-          productsStore.setSelectedProductsName('')
-        },
-      [],
-    )
+      return () => {
+        productsStore.setProducts([])
+        productsStore.setSelectedProductsName('')
+      }
+    }, [])
 
     useEffect(() => {
-      if (productsCategories) {
-        initCheckboxes()
+      if (productsStore.isNavbarMenuWasToggled !== undefined) {
+        initCheckboxes(productsStore.checkedProducts)
       }
-    }, [productsCategories])
-
-    useEffect(() => {
-      if (
-        productsCategories ===
-        (productsStore.isFlowers ? productsStore.flowers : productsStore.plants)
-      ) {
-        initCheckboxes()
-      } else {
-        setProductsCategories(
-          productsStore.isFlowers
-            ? productsStore.flowers
-            : productsStore.plants,
-        )
-      }
-    }, [productsStore.selectedNavbarProduct, productsStore.isFlowers])
+    }, [productsStore.isNavbarMenuWasToggled])
 
     useEffect(() => {
       if (productsStore.sortOptions?.length > 0) {
@@ -188,7 +157,6 @@ export const ProductsFilter = observer<ProductsProps>(
             className="filters-input"
             sx={{
               '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-                backgroundColor: '#FFF',
                 borderRadius: '7px 0 0 7px',
               },
               '& .MuiOutlinedInput-input': {
@@ -196,15 +164,18 @@ export const ProductsFilter = observer<ProductsProps>(
                   WebkitAppearance: 'none',
                 },
               },
+              '& .MuiInputBase-root': {
+                backgroundColor: '#FFF',
+                color: 'black',
+              },
             }}
             size={greaterThanXXXL ? 'medium' : 'small'}
             inputProps={{ style: { fontSize: calcInputFontSize() } }} // font size of input text
             InputLabelProps={{ style: { fontSize: calcPlaceHolderFontSize() } }} // font size of input label
-            type="number"
             label="от"
             variant="outlined"
             color="success"
-            value={currentMinPrice ?? ''}
+            value={productsStore.minProductPrice}
             onChange={updateMinPrice}
           />
           <TextField
@@ -212,7 +183,6 @@ export const ProductsFilter = observer<ProductsProps>(
             className="filters-input"
             sx={{
               '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-                backgroundColor: '#FFF',
                 borderRadius: '0 7px 7px 0',
               },
               '& .MuiOutlinedInput-input': {
@@ -220,17 +190,20 @@ export const ProductsFilter = observer<ProductsProps>(
                   WebkitAppearance: 'none',
                 },
               },
+              '& .MuiInputBase-root': {
+                backgroundColor: '#FFF',
+                color: 'black',
+              },
             }}
             size={greaterThanXXXL ? 'medium' : 'small'}
             inputProps={{
               style: { fontSize: calcInputFontSize(), borderColor: 'red' },
             }}
             InputLabelProps={{ style: { fontSize: calcPlaceHolderFontSize() } }}
-            type="number"
             label="до"
             variant="outlined"
             color="success"
-            value={currentMaxPrice ?? ''}
+            value={productsStore.maxProductPrice}
             onChange={updateMaxPrice}
           />
         </div>
@@ -251,21 +224,21 @@ export const ProductsFilter = observer<ProductsProps>(
           }
           control={
             <Checkbox
-              checked={mainCheckbox[0]}
-              indeterminate={mainCheckbox[1]}
+              checked={productsStore.mainCheckbox[0]}
+              indeterminate={productsStore.mainCheckbox[1]}
               onChange={handleMainCheckbox}
               color="success"
             />
           }
         />
         <FormGroup>
-          {productsCategories.map((product, index) => (
+          {productsStore.productsCategories.map((product, index) => (
             <FormControlLabel
               key={index}
               sx={productStyles.checkboxGroup}
               control={
                 <Checkbox
-                  checked={checkedProducts.includes(product)}
+                  checked={productsStore.checkedProducts.includes(product)}
                   onChange={(event) => handleSubCheckboxes(event, product)}
                   color="success"
                 />

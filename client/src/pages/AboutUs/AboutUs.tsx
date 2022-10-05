@@ -80,7 +80,6 @@ const shoppingDescriptionTypography = {
 
 export const AboutUs = () => {
   const startShopping = () => {
-    productsStore.setSelectedNavbarProduct('')
     productsStore.setIsFlowers(true)
     window.scrollTo(0, 0)
   }

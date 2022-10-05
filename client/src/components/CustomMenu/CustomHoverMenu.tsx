@@ -33,7 +33,7 @@ export const CustomHoverMenu: FC<MenuProps> = ({
   )
 
   const switchCategory = () => {
-    onMenuItemClick('', '', isFlowers)
+    onMenuItemClick('', isFlowers)
   }
 
   return (

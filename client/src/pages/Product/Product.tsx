@@ -258,8 +258,12 @@ export const Product = observer(() => {
                         sx={{
                           ...productStyles.customBoldFont,
                           ...productStyles.headerTypographyStyle,
-                          ...{ color: isTabOpen ? '#FF0054' : '#000000' },
+                          ...{
+                            color: isTabOpen ? '#FF0054' : '#000000',
+                            userSelect: 'none',
+                          },
                         }}
+                        onClick={() => setIsTabOpen(!isTabOpen)}
                       >
                         Описание
                       </Typography>
