@@ -14,11 +14,9 @@ class ProductsStore {
 
   selectedProductsName: string = ''
 
-  selectedNavbarProduct: string = ''
+  minProductPrice: number | string = ''
 
-  minProductPrice: number = -1
-
-  maxProductPrice: number = -1
+  maxProductPrice: number | string = ''
 
   isDrawerOpen: boolean = false
 
@@ -32,21 +30,51 @@ class ProductsStore {
 
   sortOptions: string[] = [] // format: ['price', 'ASC']
 
+  sortOptionDescription: string = ''
+
+  checkedProducts: string[] = []
+
+  mainCheckbox: boolean[] = [false, false]
+
+  productsCategories: string[] = this.flowers
+
+  isNavbarMenuWasToggled: boolean | undefined = undefined
+
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setCheckedProducts(checkedProducts: string[]) {
+    this.checkedProducts = checkedProducts
+  }
+
+  setMainCheckbox(mainCheckbox: boolean[]) {
+    this.mainCheckbox = mainCheckbox
+  }
+
+  setProductsCategories(productsCategories: string[]) {
+    this.productsCategories = productsCategories
+  }
+
+  setSortOptionDescription(sortOptionDescription: string) {
+    this.sortOptionDescription = sortOptionDescription
   }
 
   setProductsNames(productsNames: string[]) {
     this.productsNames = productsNames
   }
 
-  async fetchProducts() {
+  async fetchProducts(productsNames?: string[]) {
     let response: AxiosResponse<ProductsResponse>
     try {
+      const minProductPrice =
+        typeof this.minProductPrice === 'number' ? this.minProductPrice : -1
+      const maxProductPrice =
+        typeof this.maxProductPrice === 'number' ? this.maxProductPrice : -1
       response = await getProducts(
-        this.productsNames,
-        this.minProductPrice,
-        this.maxProductPrice,
+        productsNames ?? this.productsNames,
+        minProductPrice,
+        maxProductPrice,
         this.itemsLimit,
         this.itemsOffset,
         this.sortOptions,
@@ -63,6 +91,7 @@ class ProductsStore {
 
   setIsFlowers(isFlowers: boolean) {
     this.isFlowers = isFlowers
+    this.productsCategories = isFlowers ? this.flowers : this.plants
   }
 
   setProducts(products: IProduct[]) {
@@ -73,16 +102,12 @@ class ProductsStore {
     this.selectedProductsName = selectedProductsName
   }
 
-  setSelectedNavbarProduct(selectedNavbarProduct: string) {
-    this.selectedNavbarProduct = selectedNavbarProduct
-  }
-
-  setMinProductPrice(minProductPrice: number) {
+  setMinProductPrice(minProductPrice: number | string) {
     this.minProductPrice = minProductPrice
     this.fetchProducts()
   }
 
-  setMaxProductPrice(maxProductPrice: number) {
+  setMaxProductPrice(maxProductPrice: number | string) {
     this.maxProductPrice = maxProductPrice
     this.fetchProducts()
   }
@@ -113,6 +138,15 @@ class ProductsStore {
 
   setProductsCount(productsCount: number) {
     this.productsCount = productsCount
+  }
+
+  setIsNavbarMenuWasToggled(isFlowers: boolean, checkedProducts: string[]) {
+    const currentProducts = isFlowers ? this.flowers : this.plants
+    this.isFlowers = isFlowers
+    this.productsCategories = currentProducts
+    this.checkedProducts =
+      checkedProducts.length > 0 ? checkedProducts : currentProducts
+    this.isNavbarMenuWasToggled = !this.isNavbarMenuWasToggled
   }
 }
 

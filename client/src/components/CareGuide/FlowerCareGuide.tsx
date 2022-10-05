@@ -32,8 +32,10 @@ export const FlowerCareGuide = () => {
             ...{
               color: isTabOpen ? '#FF0054' : '#000000',
               whiteSpace: 'normal',
+              userSelect: 'none',
             },
           }}
+          onClick={() => setIsTabOpen(!isTabOpen)}
         >
           Руководство по уходу за цветами
         </Typography>
@@ -45,7 +47,7 @@ export const FlowerCareGuide = () => {
           sx={{
             display: 'flex',
             justifyContent: 'center',
-            paddingTop: '20px',
+            marginTop: '5px',
             width: '100%',
           }}
           spacing={4}

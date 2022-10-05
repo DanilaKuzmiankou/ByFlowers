@@ -14,7 +14,7 @@ export const CustomSelect = () => {
   const handleChange = (event: SelectChangeEvent) => {
     const selected = event.target.value
     let sortOptions: string[] = []
-    setFilterOption(selected)
+    productsStore.setSortOptionDescription(selected)
     switch (selected) {
       case filterOptions[0]:
         sortOptions = ['price', 'ASC']
@@ -33,7 +33,7 @@ export const CustomSelect = () => {
 
   return (
     <Select
-      value={filterOption}
+      value={productsStore.sortOptionDescription}
       onChange={handleChange}
       autoWidth
       color="success"

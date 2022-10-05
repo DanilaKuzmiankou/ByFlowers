@@ -105,10 +105,17 @@ export const Navbar = observer(() => {
 
   const iconPropsMemoized = useMemo(() => ({ color: 'white', size: '23' }), [])
 
-  const switchPage = (productType?: string, isFlowers?: boolean): void => {
+  const switchPage = (productType: string, isFlowers: boolean): void => {
     window.scrollTo(0, 0)
-    if (isFlowers !== undefined) productsStore.setIsFlowers(isFlowers)
-    productsStore.setSelectedNavbarProduct(productType || '')
+    if (isFlowers !== undefined) {
+      let checkedProducts
+      if (productsStore.isFlowers === isFlowers && productType === '') {
+        checkedProducts = productsStore.checkedProducts
+      } else {
+        checkedProducts = productType !== '' ? [productType] : []
+      }
+      productsStore.setIsNavbarMenuWasToggled(isFlowers, checkedProducts)
+    }
     settingsStore.setIsMobileNavbarMenuOpen(false)
   }
 
@@ -136,7 +143,6 @@ export const Navbar = observer(() => {
               <ReactRouterLink to="/aboutUs">
                 <Box
                   component="img"
-                  onClick={() => switchPage(pagesLinks[0])}
                   sx={{
                     display: { xs: 'none', md: 'flex' },
                     mr: 1,
@@ -153,7 +159,6 @@ export const Navbar = observer(() => {
                 noWrap
                 component={ReactRouterLink}
                 to="/aboutUs"
-                onClick={() => switchPage(pagesLinks[0])}
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },

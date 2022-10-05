@@ -53,11 +53,11 @@ export const Products = observer(() => {
   ])
 
   useEffect(() => {
-    if (productsStore.productsNames?.length > 0) {
+    if (
+      productsStore.productsNames?.length > 0 &&
+      productsStore.products.length === 0
+    ) {
       productsStore.fetchProducts()
-    } else {
-      productsStore.setProducts([])
-      productsStore.setProductsCount(0)
     }
   }, [productsStore.productsNames])
 
@@ -101,9 +101,8 @@ export const Products = observer(() => {
         container
         sx={{
           width: '100%',
-          minHeight: '100vh',
           backgroundColor: '#F2F2F2',
-          padding: { xs: '3px', md: '10px' },
+          padding: { xs: '3px 3px 30px', md: '10px' },
         }}
       >
         <Grid
@@ -216,9 +215,7 @@ export const Products = observer(() => {
               </Grid>
             ) : (
               <NoItemsPlug
-                text={`К сожалению, у нас нет этих ${
-                  productsStore.isFlowers ? 'цветов' : 'растений'
-                } на складе`}
+                text="Упс! У нас нет таких товаров, попробуйте изменить условия поиска."
                 pictureHeight="250px"
                 pictureWidth="250px"
               />

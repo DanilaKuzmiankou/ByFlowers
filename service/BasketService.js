@@ -83,7 +83,6 @@ class BasketService {
         },
       ],
     })
-    console.log('user', JSON.stringify(user), 'prod', JSON.stringify(products))
     return products
     //const products = await user.getBasketProduct()
   }
