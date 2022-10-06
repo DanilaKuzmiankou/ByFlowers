@@ -154,7 +154,6 @@ export const ProductsFilter = observer<ProductsProps>(
         </Typography>
         <div className="filters-inputs-container">
           <TextField
-            id="minPrice"
             className="filters-input"
             sx={{
               '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
@@ -180,7 +179,6 @@ export const ProductsFilter = observer<ProductsProps>(
             onChange={updateMinPrice}
           />
           <TextField
-            id="maxPrice"
             className="filters-input"
             sx={{
               '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {

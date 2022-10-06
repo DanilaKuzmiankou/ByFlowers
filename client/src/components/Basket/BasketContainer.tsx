@@ -62,6 +62,7 @@ export const BasketContainer = observer(() => {
             justifyContent: 'start',
             fontFamily: 'AvenirBold, sans-serif',
             ml: '10px',
+            fontSize: '2rem',
           }}
         >
           Корзина

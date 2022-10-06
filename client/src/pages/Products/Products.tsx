@@ -91,7 +91,7 @@ export const Products = observer(() => {
     padding: 0,
     textAlign: 'center',
     whiteSpace: 'nowrap',
-    fontWeight: '600 !important',
+    fontWeight: '100 !important',
     letterSpacing: '0 !important',
   }
 

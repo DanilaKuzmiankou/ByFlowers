@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles'
+import { CSSProperties } from 'react'
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
@@ -28,7 +29,7 @@ export const theme = createTheme({
 
 export const buyButtonDefaultStyle = {
   display: 'none',
-} as React.CSSProperties
+} as CSSProperties
 
 export const listItem = {
   display: 'block',
@@ -74,7 +75,7 @@ export const buyButtonHoverStyle = {
   '&:hover': {
     backgroundPosition: 'left',
   },
-} as React.CSSProperties
+} as CSSProperties
 
 export const productStyles = {
   customBoldFont: {
@@ -85,7 +86,7 @@ export const productStyles = {
       sm: '1.7rem',
       xs: '1.6rem',
     },
-    fontWeight: '600 !important',
+    fontWeight: '200 !important',
     letterSpacing: '0 !important',
   },
   headerTypographyStyle: {
@@ -200,18 +201,16 @@ export const catalogProductItem = {
     cursor: 'pointer',
     color: 'black',
     position: 'relative',
+    border: '0.01em solid',
+    borderColor: '#FFFFFF',
     borderRadius: '3%',
     '&:hover': {
       boxShadow:
         'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
-      border: '0.01em solid',
       borderColor: '#bdbdbd',
-      borderRadius: '3%',
     },
     '.Mui-focused': {
-      border: '0.01em solid',
       borderColor: '#bdbdbd',
-      borderRadius: '3%',
       boxShadow:
         'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
     },

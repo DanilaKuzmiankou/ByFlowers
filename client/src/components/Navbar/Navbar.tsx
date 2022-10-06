@@ -32,7 +32,7 @@ const navbarButtonsStyle = {
   color: '#fff',
   fontSize: '1.70rem',
   lineHeight: 1,
-  fontWeight: 700,
+  fontWeight: 200,
   margin: '24px 0 24px 33px',
   padding: '5px 0 5px',
   '&:hover': {
@@ -68,7 +68,7 @@ const navbarLoginButtonStyle = {
   color: '#fff',
   fontSize: '1.20rem',
   lineHeight: 1,
-  fontWeight: 700,
+  fontWeight: 200,
 }
 
 const StyledBadge = styled(Badge)<BadgeProps>(() => ({

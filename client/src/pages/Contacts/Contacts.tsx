@@ -31,7 +31,7 @@ export const Contacts = () => {
   const typography = {
     fontFamily: 'AvenirBold, sans-serif',
     fontSize: '2.6rem',
-    fontWeight: '600 !important',
+    fontWeight: '200 !important',
     mt: '10px',
   }
 
@@ -42,7 +42,7 @@ export const Contacts = () => {
       sm: '3.6rem',
       xs: '2rem',
     },
-    fontWeight: '600 !important',
+    fontWeight: '200 !important',
     letterSpacing: '0 !important',
     whiteSpace: 'word',
     textAlign: 'center',

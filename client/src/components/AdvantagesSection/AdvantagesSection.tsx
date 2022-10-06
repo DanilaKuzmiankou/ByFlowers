@@ -42,8 +42,7 @@ export const AdvantagesSection = () => {
             </Typography>
             <Typography sx={{ ...productStyles.customSmallFont, ...column }}>
               Гарантируем, что внешний вид и описание цветов в магазине будет
-              соответстовать доставленным, либо мы оперативно вернем деньги.{' '}
-              <br />
+              соответстовать доставленным, либо мы оперативно вернем деньги.
             </Typography>
           </div>
         </Grid>

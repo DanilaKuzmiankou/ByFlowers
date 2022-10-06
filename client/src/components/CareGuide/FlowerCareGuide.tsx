@@ -83,7 +83,7 @@ export const FlowerCareGuide = () => {
             <Typography sx={productStyles.productDescriptionFont}>
               Немедленно удаляйте отмершие или увядающие листья и стебли.
               Обрежьте стебли цветов и листвы непосредственно перед тем, как
-              положить их обратно. в новую воду.
+              положить их обратно в новую воду.
             </Typography>
           </Grid>
         </Grid>

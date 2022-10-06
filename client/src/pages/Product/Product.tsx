@@ -68,9 +68,9 @@ const defaultContainerStyle = {
   display: 'flex',
   justifyContent: 'center',
   padding: {
-    xs: '10px 10px',
-    sm: '10px 32px',
-    lg: '10px 64px',
+    xs: '40px 10px 10px',
+    sm: '40px 32px 10px',
+    lg: '40px 64px 10px',
   },
 }
 
@@ -84,7 +84,7 @@ const defaultEmptyContainerStyle = {
   display: 'none',
   justifyContent: 'center',
   alignItems: 'center',
-} as React.CSSProperties
+} as CSSProperties
 
 const addToCartBox = {
   margin: {
