@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -23,8 +22,8 @@ import { MobileNavbarElements } from './MobileNavbarElements'
 import settingsStore from '../../store/SettingsStore'
 
 const siteLogo = 'ByFlowers'
-const pagesLinks = ['aboutUs', 'contacts']
-const pages2 = ['О нас', 'Контакты']
+const pagesLinks = ['aboutUs', 'contacts', 'delivery']
+const pages2 = ['О нас', 'Контакты', 'Доставка']
 
 const navbarButtonsStyle = {
   fontFamily: 'IntroCondBlack',
@@ -136,7 +135,7 @@ export const Navbar = observer(() => {
           position="static"
         >
           <Container
-            sx={{ zIndex: 10, p: { xs: '0 2px', md: '0 24px' } }}
+            sx={{ zIndex: 10, p: { xs: '0 2px', lg: '0 24px' } }}
             maxWidth="xl"
           >
             <Toolbar disableGutters>
@@ -144,7 +143,7 @@ export const Navbar = observer(() => {
                 <Box
                   component="img"
                   sx={{
-                    display: { xs: 'none', md: 'flex' },
+                    display: { xs: 'none', lg: 'flex' },
                     mr: 1,
                     height: 55,
                     width: 75,
@@ -161,7 +160,7 @@ export const Navbar = observer(() => {
                 to="/aboutUs"
                 sx={{
                   mr: 2,
-                  display: { xs: 'none', md: 'flex' },
+                  display: { xs: 'none', lg: 'flex' },
                   textAlign: 'right',
                   fontFamily: 'GilroyHeavyItalic',
                   fontWeight: 700,
@@ -185,13 +184,13 @@ export const Navbar = observer(() => {
 
               <Box
                 sx={{
-                  flexGrow: { md: 1, xs: 0 },
+                  flexGrow: { lg: 1, xs: 0 },
                   display: 'flex',
                   justifyContent: 'end',
                   alignItems: 'center',
                 }}
               >
-                <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                <Box sx={{ display: { xs: 'none', lg: 'flex' } }}>
                   <Button
                     key="aboutUs"
                     component={ReactRouterLink}
@@ -227,6 +226,15 @@ export const Navbar = observer(() => {
                     disableRipple
                   >
                     Контакты
+                  </Button>
+                  <Button
+                    key="delivery"
+                    component={ReactRouterLink}
+                    to="/delivery"
+                    sx={navbarButtonsStyle}
+                    disableRipple
+                  >
+                    Доставка
                   </Button>
                 </Box>
                 <div

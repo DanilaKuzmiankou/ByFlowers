@@ -36,7 +36,7 @@ export const CustomMobileMenu = observer<CustomMobileMenuProps>(
           },
           display: {
             xs: 'initial',
-            md: 'none',
+            lg: 'none',
           },
         }}
         anchor="left"

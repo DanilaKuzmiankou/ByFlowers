@@ -21,6 +21,7 @@ import { ProductCounterInput } from '../../components/ProductCounterInput/Produc
 import { FlowerCareGuide } from '../../components/CareGuide/FlowerCareGuide'
 import { PlantCareGuide } from '../../components/CareGuide/PlantCareGuide'
 import { ExpandButton } from '../../components/ExpandButton/ExpandButton'
+import { RUBLE_SIGN } from '../../utils/Utils'
 
 const addToCartButtonStyle = {
   width: {
@@ -324,7 +325,7 @@ export const Product = observer(() => {
                         ...{ display: 'inline-block' },
                       }}
                     >
-                      {product.price} &#8381;
+                      {product.price} {RUBLE_SIGN}
                     </Typography>
                   </Box>
 

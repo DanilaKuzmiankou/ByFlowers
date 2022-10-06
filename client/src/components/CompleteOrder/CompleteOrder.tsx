@@ -12,7 +12,7 @@ import { Form, Formik, FormikValues } from 'formik'
 import { RefObject, useEffect, useRef, useState } from 'react'
 import Box from '@mui/material/Box'
 import basketStore from '../../store/BasketStore'
-import { phoneRegExp } from '../../utils/Utils'
+import { phoneRegExp, RUBLE_SIGN } from '../../utils/Utils'
 import userStore from '../../store/UserStore'
 import { NameField } from '../Form/NameField'
 import { PhoneField } from '../Form/PhoneField'
@@ -196,7 +196,7 @@ export const CompleteOrder = observer(() => {
                     handleBlur={handleBlur}
                   />
 
-                  <CityAutocomplete ref={cityAutocompleteRef} cities={cities} />
+                  <CityAutocomplete ref={cityAutocompleteRef} />
                 </Form>
               )}
             </Formik>
@@ -218,7 +218,7 @@ export const CompleteOrder = observer(() => {
                   },
                 }}
               >
-                {basketStore.basketOrderTotal} &#8381;
+                {basketStore.basketOrderTotal} {RUBLE_SIGN}
               </Typography>
             </Box>
           </>

@@ -12,6 +12,7 @@ import { BasketItem } from './BasketItem'
 import { NoItemsPlug } from '../NoItemsPlug/NoItemsPlug'
 import basketStore from '../../store/BasketStore'
 import { CloseButton } from '../CloseButton/CloseButton'
+import { RUBLE_SIGN } from '../../utils/Utils'
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -112,7 +113,7 @@ export const BasketContainer = observer(() => {
                     },
                   }}
                 >
-                  {basketStore.basketOrderTotal} &#8381;
+                  {basketStore.basketOrderTotal} {RUBLE_SIGN}
                 </Typography>
               </Box>
               <Button

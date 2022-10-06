@@ -23,7 +23,7 @@ export const MobileNavbarElements: FC<MobileNavbarElementsProps> = ({
 }) => {
   return (
     <>
-      <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+      <Box sx={{ display: { xs: 'flex', lg: 'none' } }}>
         <IconButton
           size="large"
           aria-label="mobileMenu"
@@ -60,7 +60,7 @@ export const MobileNavbarElements: FC<MobileNavbarElementsProps> = ({
             component="img"
             sx={{
               ml: 1,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: 'flex', lg: 'none' },
               height: 30,
               width: 42,
               cursor: 'pointer',
@@ -77,11 +77,15 @@ export const MobileNavbarElements: FC<MobileNavbarElementsProps> = ({
           to="/aboutUs"
           onClick={() => switchPage(pagesLinks[0])}
           sx={{
-            ml: 1,
-            display: { xs: 'flex', md: 'none' },
+            ml: 0.5,
+            display: { xs: 'flex', lg: 'none' },
+            fontFamily: 'GilroyHeavyItalic',
             flexGrow: 0,
             fontWeight: 700,
-            fontSize: '1.4rem',
+            fontSize: {
+              xs: '1.4rem',
+              md: '1.8rem',
+            },
             letterSpacing: '.1rem',
             color: 'inherit',
             textDecoration: 'none',

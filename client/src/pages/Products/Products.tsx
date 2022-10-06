@@ -225,7 +225,11 @@ export const Products = observer(() => {
       </Grid>
       <div className="pagination-container">
         <Pagination
-          sx={{ paddingBottom: '10px', fontSize: '30rem' }}
+          sx={{
+            paddingBottom: '10px',
+            fontSize: '30rem',
+            button: { backgroundColor: 'white' },
+          }}
           count={Math.ceil(
             productsStore.productsCount / productsStore.itemsLimit,
           )}

@@ -1,21 +1,19 @@
 import { Autocomplete, TextField } from '@mui/material'
 import Box from '@mui/material/Box'
-import React, { SyntheticEvent, useImperativeHandle, useState } from 'react'
+import {
+  forwardRef,
+  SyntheticEvent,
+  useImperativeHandle,
+  useState,
+} from 'react'
 import './Form.css'
 import { faCity } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Typography from '@mui/material/Typography'
-import { RussianCity } from '../../models/GetRussianCitiesResponse'
-import { CityAutocompleteProps } from '../../models/IProduct'
+import { CITIES } from '../../utils/Utils'
 
-interface CityAutocompleteComponentProps {
-  cities: RussianCity[]
-}
-
-export const CityAutocomplete = React.forwardRef<
-  CityAutocompleteProps,
-  CityAutocompleteComponentProps
->(({ cities }, _ref) => {
+type EmptyType = {}
+export const CityAutocomplete = forwardRef((EmptyType, _ref) => {
   const [isSelectTouched, setIsSelectTouched] = useState<boolean>(false)
   const [value, setValue] = useState<string | undefined>('')
 
@@ -32,9 +30,9 @@ export const CityAutocomplete = React.forwardRef<
         className="citySelect"
         onChange={(
           event: SyntheticEvent<Element, Event>,
-          newValue: RussianCity | null,
+          newValue: string | null,
         ) => {
-          setValue(newValue?.name)
+          setValue(newValue ?? '')
         }}
         onFocus={() => {
           setIsSelectTouched(false)
@@ -45,12 +43,10 @@ export const CityAutocomplete = React.forwardRef<
         sx={{
           mt: '10px',
         }}
-        options={cities}
+        options={CITIES}
         autoHighlight
-        getOptionLabel={(city) => city.name}
-        isOptionEqualToValue={(option, objValue) =>
-          option.name === objValue.name
-        }
+        getOptionLabel={(city) => city}
+        isOptionEqualToValue={(option, objValue) => option === objValue}
         renderOption={(props, city) => (
           <Box
             component="li"
@@ -60,7 +56,7 @@ export const CityAutocomplete = React.forwardRef<
             }}
             {...props}
           >
-            {city.name}
+            {city}
           </Box>
         )}
         renderInput={(params) => (

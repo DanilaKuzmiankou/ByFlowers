@@ -6,6 +6,7 @@ import { createSearchParams, Link } from 'react-router-dom'
 import { catalogProductItem } from '../../themes'
 import { IProduct } from '../../models/IProduct'
 import useHoverStyle from '../../utils/useHoverStyle'
+import { RUBLE_SIGN } from '../../utils/Utils'
 
 interface ProductProps {
   product: IProduct
@@ -45,7 +46,7 @@ export const ProductItem: FC<ProductProps> = ({
           ...{ top: { xs: '33px', lg: '10%' }, zIndex: 3, fontWeight: 700 },
         }}
       >
-        {product.price} &#8381;
+        {product.price} {RUBLE_SIGN}
       </Typography>
       <Box
         component="img"

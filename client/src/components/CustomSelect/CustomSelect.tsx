@@ -1,5 +1,4 @@
 import { MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
-import { useState } from 'react'
 import productsStore from '../../store/ProductsStore'
 import { productStyles } from '../../themes'
 
@@ -9,7 +8,6 @@ export const CustomSelect = () => {
     'Цене, сначала дорогие',
     'Дате, сначала новые',
   ]
-  const [filterOption, setFilterOption] = useState<string>('')
 
   const handleChange = (event: SelectChangeEvent) => {
     const selected = event.target.value

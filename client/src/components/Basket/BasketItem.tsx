@@ -9,6 +9,7 @@ import { productStyles } from '../../themes'
 import { CountInputProps, IBasketProduct } from '../../models/IProduct'
 import userStore from '../../store/UserStore'
 import basketStore from '../../store/BasketStore'
+import { RUBLE_SIGN } from '../../utils/Utils'
 
 interface BasketItemProps {
   basketProduct: IBasketProduct
@@ -134,7 +135,7 @@ export const BasketItem: FC<BasketItemProps> = ({
               ...{ display: 'inline-block', marginLeft: 'auto' },
             }}
           >
-            {basketProduct.product.price * itemCount} &#8381;
+            {basketProduct.product.price * itemCount} {RUBLE_SIGN}
           </Typography>
         </Box>
       </Box>
