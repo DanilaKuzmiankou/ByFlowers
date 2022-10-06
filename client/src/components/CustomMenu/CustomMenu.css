@@ -45,13 +45,11 @@
   }
 }
 
-/*noinspection ALL*/
 .szh-menu--state-opening {
   opacity: 0;
   animation: szh-menu-show 15s ease-out;
 }
 
-/*noinspection ALL*/
 .szh-menu--state-closing {
   animation: szh-menu-hide-slide-right 15s ease-in forwards;
 }

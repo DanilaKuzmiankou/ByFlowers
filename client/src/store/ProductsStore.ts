@@ -40,8 +40,14 @@ class ProductsStore {
 
   isNavbarMenuWasToggled: boolean | undefined = undefined
 
+  newestProducts: IProduct[] = []
+
   constructor() {
     makeAutoObservable(this)
+  }
+
+  setNewestProducts(newestProducts: IProduct[]) {
+    this.newestProducts = newestProducts
   }
 
   setCheckedProducts(checkedProducts: string[]) {

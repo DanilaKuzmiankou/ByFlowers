@@ -1,7 +1,6 @@
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import $api from '../index.network'
 import { AddToBasketResponse, IBasketProduct } from '../../models/IProduct'
-import { GetRussianCitiesResponse } from '../../models/GetRussianCitiesResponse'
 
 export async function addToBasket(
   id: number,
@@ -57,31 +56,4 @@ export async function completeOrder(
     phone,
     city,
   })
-}
-
-export async function getRussianCities(): Promise<
-  AxiosResponse<GetRussianCitiesResponse>
-> {
-  delete axios.defaults.headers.common['Access-Control-Allow-Origin']
-  const response = axios.get<GetRussianCitiesResponse>(
-    'https://parseapi.back4app.com/classes/Russia_City?limit=9999&order=name&keys=name',
-    {
-      headers: {
-        'X-Parse-Application-Id': process.env
-          .REACT_APP_X_PARSE_APPLICATION_ID as string,
-        'X-Parse-REST-API-Key': process.env
-          .REACT_APP_X_PARSE_REST_API_KEY as string,
-      },
-      params: {
-        where: {
-          population: {
-            $gt: 100000,
-          },
-        },
-      },
-    },
-  )
-  axios.defaults.headers.common['Access-Control-Allow-Origin'] = process.env
-    .REACT_APP_SERVER_URL as string
-  return response
 }

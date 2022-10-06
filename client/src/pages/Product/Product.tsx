@@ -3,7 +3,7 @@ import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
 import { Collapse, Grid, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import { observer } from 'mobx-react-lite'
@@ -107,8 +107,9 @@ export const Product = observer(() => {
   const [recommendationsProducts, setRecommendationsProducts] =
     useState<IProduct[]>()
   const [containerStyle, setContainerStyle] = useState(defaultContainerStyle)
-  const [emptyContainerStyle, setEmptyContainerStyle] =
-    useState<React.CSSProperties>(defaultEmptyContainerStyle)
+  const [emptyContainerStyle, setEmptyContainerStyle] = useState<CSSProperties>(
+    defaultEmptyContainerStyle,
+  )
   const [message, setMessage] = useState<string>('')
   const [isTabOpen, setIsTabOpen] = useState<boolean>(true)
 

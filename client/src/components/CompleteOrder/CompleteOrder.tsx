@@ -9,16 +9,15 @@ import Button from '@mui/material/Button'
 import { observer } from 'mobx-react-lite'
 import * as Yup from 'yup'
 import { Form, Formik, FormikValues } from 'formik'
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import Box from '@mui/material/Box'
 import basketStore from '../../store/BasketStore'
 import { phoneRegExp, RUBLE_SIGN } from '../../utils/Utils'
 import userStore from '../../store/UserStore'
 import { NameField } from '../Form/NameField'
 import { PhoneField } from '../Form/PhoneField'
-import { completeOrder, getRussianCities } from '../../api/store/Basket'
+import { completeOrder } from '../../api/store/Basket'
 import { CityAutocomplete } from '../Form/CityAutocomplete'
-import { RussianCity } from '../../models/GetRussianCitiesResponse'
 import { buyButtonHoverStyle, productStyles } from '../../themes'
 import { CityAutocompleteProps } from '../../models/IProduct'
 
@@ -81,7 +80,6 @@ export const CompleteOrder = observer(() => {
   const formikRef = useRef() as RefObject<any>
   const cityAutocompleteRef = useRef<CityAutocompleteProps>(null)
 
-  const [cities, setCities] = useState<RussianCity[]>([])
   const [isOrderCompleted, setIsOrderCompleted] = useState<boolean>(false)
 
   const handleClose = () => {
@@ -101,15 +99,6 @@ export const CompleteOrder = observer(() => {
     }, 100)
     basketStore.setIsCompleteOrderOpen(false)
   }
-
-  useEffect(() => {
-    async function fetch() {
-      const response = await getRussianCities()
-      setCities(response?.data?.results)
-    }
-
-    fetch()
-  }, [])
 
   const submitForm = async (values: FormikValues) => {
     if (cityAutocompleteRef.current) {

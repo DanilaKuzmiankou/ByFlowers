@@ -86,8 +86,6 @@ class UserStore {
       this.setUser(response.data.user)
     } catch (e: any) {
       console.log(e.response?.data?.message)
-    } finally {
-      // this.setLoading(false)
     }
   }
 }

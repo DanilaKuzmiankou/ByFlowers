@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Grid, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
+import { observer } from 'mobx-react-lite'
 import { ProductItem } from '../ProductItem/ProductItem'
-import { IProduct } from '../../models/IProduct'
 import { getNewestProducts } from '../../api/store/Product'
 import { productStyles } from '../../themes'
+import productsStore from '../../store/ProductsStore'
 
-export const NewestProducts = () => {
-  const [newestProducts, setNewestProducts] = useState<IProduct[]>()
-
-  const fetchNewestProducts = async () => {
-    const response = await getNewestProducts(4)
-    setNewestProducts(response.data)
-  }
-
+export const NewestProducts = observer(() => {
   useEffect(() => {
+    async function fetchNewestProducts() {
+      if (productsStore.newestProducts.length === 0) {
+        const response = await getNewestProducts(4)
+        productsStore.setNewestProducts(response.data)
+      }
+    }
     fetchNewestProducts()
   }, [])
 
@@ -43,7 +43,7 @@ export const NewestProducts = () => {
           justifyContent: 'center',
         }}
       >
-        {newestProducts?.map((newestProduct) => (
+        {productsStore.newestProducts?.map((newestProduct) => (
           <Grid
             item
             xs={36}
@@ -61,4 +61,4 @@ export const NewestProducts = () => {
       </Grid>
     </Box>
   )
-}
+})

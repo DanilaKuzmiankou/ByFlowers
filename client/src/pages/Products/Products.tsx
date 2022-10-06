@@ -64,6 +64,7 @@ export const Products = observer(() => {
   const openDrawer = () => {
     productsStore.setIsDrawerOpen(true)
   }
+
   const handleChangePage = async (
     event: ChangeEvent<unknown>,
     newPage: number,

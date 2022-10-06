@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles'
-import * as React from 'react'
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {

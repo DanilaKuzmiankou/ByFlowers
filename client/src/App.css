@@ -34,13 +34,13 @@
 }
 
 html {
-  min-height: 100%; /* make sure it is at least as tall as the viewport */
+  min-height: 100%;
   position: relative;
   font-size: 10px;
 }
 
 body {
-  height: 100%; /* force the BODY element to match the height of the HTML element */
+  height: 100%;
   width: 100%;
   margin: 0 !important;
   overflow-y: scroll; /* this line fixed bug with moving page while hiding scrollbar  */

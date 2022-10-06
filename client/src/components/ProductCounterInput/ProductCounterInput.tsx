@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useState } from 'react'
+import { forwardRef, useImperativeHandle, useState } from 'react'
 import Button from '@mui/material/Button'
 import { TextField } from '@mui/material'
 import Box from '@mui/material/Box'
@@ -21,7 +21,7 @@ interface ProductCounterInputProps {
   minCount?: number
 }
 
-export const ProductCounterInput = React.forwardRef<
+export const ProductCounterInput = forwardRef<
   CountInputProps,
   ProductCounterInputProps
 >(({ totalCount, startCount = 1, setItemCount, minCount = 1 }, _ref) => {
