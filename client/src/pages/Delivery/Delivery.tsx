@@ -58,7 +58,7 @@ const pictureStyle = {
 
 const mainContainer = {
   width: '100%',
-  padding: '20px',
+  padding: { xs: '20px', md: '40px' },
   backgroundColor: '#F4F4E3',
 }
 

@@ -32,7 +32,7 @@ const deliverySchema = Yup.object({
 
 const cancelButtonStyle = {
   width: '90px',
-  height: '35px',
+  height: '45px',
   fontSize: '1.2rem',
   fontWeight: 700,
   lineHeight: 2.4,
@@ -131,8 +131,8 @@ export const CompleteOrder = observer(() => {
     >
       <DialogTitle
         sx={{
+          fontFamily: 'AvenirBold, sans-serif',
           textAlign: 'center',
-          fontFamily: 'inherit',
           fontSize: '2.0rem',
         }}
       >

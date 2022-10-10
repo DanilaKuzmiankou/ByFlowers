@@ -18,7 +18,6 @@ export const Contacts = () => {
     display: 'flex',
     flexDirection: 'column',
     height: `100vh`,
-    pt: '5%',
     justifyContent: { lg: 'center' },
   }
 

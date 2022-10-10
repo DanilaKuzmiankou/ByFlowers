@@ -247,6 +247,7 @@ export const Product = observer(() => {
                     sx={{
                       ...productStyles.customBoldFont,
                       ...productStyles.headerTypographyStyle,
+                      ...{ mb: '30px' },
                     }}
                   >
                     {product.name}
