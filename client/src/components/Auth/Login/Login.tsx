@@ -9,7 +9,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import { isFirefox } from 'react-device-detect'
 import Button from '@mui/material/Button'
 import userStore from '../../../store/UserStore'
 import { PasswordField } from '../../Form/PasswordField'
@@ -37,11 +36,7 @@ export const Login = () => {
   return (
     <div className="form-box login-box">
       <div className="header-form">
-        <FontAwesomeIcon
-          size={isFirefox ? '5x' : '5x'}
-          icon={faCircleUser}
-          color="#3A9AB9"
-        />
+        <FontAwesomeIcon size="5x" icon={faCircleUser} color="#3A9AB9" />
       </div>
       <Formik
         initialValues={{

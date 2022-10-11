@@ -23,8 +23,8 @@ const header = {
   fontWeight: '200 !important',
   letterSpacing: '0 !important',
   whiteSpace: 'word',
-  textAlign: 'center',
-  mb: '10px',
+  textAlign: 'left',
+  margin: '0 0 10px 40px',
 }
 
 const subHeader = {

@@ -68,9 +68,9 @@ const defaultContainerStyle = {
   display: 'flex',
   justifyContent: 'center',
   padding: {
-    xs: '40px 10px 10px',
-    sm: '40px 32px 10px',
-    lg: '40px 64px 10px',
+    xs: '20px 10px 10px',
+    sm: '20px 32px 10px',
+    lg: '20px 64px 10px',
   },
 }
 
@@ -247,7 +247,7 @@ export const Product = observer(() => {
                     sx={{
                       ...productStyles.customBoldFont,
                       ...productStyles.headerTypographyStyle,
-                      ...{ mb: '30px' },
+                      ...{ mb: '40px' },
                     }}
                   >
                     {product.name}

@@ -35,7 +35,7 @@ export const AdvantagesSection = () => {
             <Typography
               sx={{
                 ...productStyles.customBoldFont,
-                ...{ whiteSpace: 'no-wrap' },
+                ...{ whiteSpace: 'no-wrap', mb: '6px' },
               }}
             >
               Гарантия качества
@@ -54,7 +54,7 @@ export const AdvantagesSection = () => {
             <Typography
               sx={{
                 ...productStyles.customBoldFont,
-                ...{ whiteSpace: 'no-wrap' },
+                ...{ whiteSpace: 'no-wrap', mb: '6px' },
               }}
             >
               Надежные поставщики
@@ -73,7 +73,7 @@ export const AdvantagesSection = () => {
             <Typography
               sx={{
                 ...productStyles.customBoldFont,
-                ...{ whiteSpace: 'no-wrap' },
+                ...{ whiteSpace: 'no-wrap', mb: '6px' },
               }}
             >
               Низкие цены
